@@ -1,0 +1,81 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:nama",
+ "creation": "2024-10-01 15:59:47.827736",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "id",
+  "regency_id",
+  "nama",
+  "latitude",
+  "longitude",
+  "alt_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "nama",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Data",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Data",
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "id",
+   "fieldtype": "Int",
+   "label": "ID",
+   "non_negative": 1,
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "regency_id",
+   "fieldtype": "Link",
+   "label": "Kabupaten",
+   "options": "Kabupaten",
+   "reqd": 1
+  },
+  {
+   "fieldname": "alt_name",
+   "fieldtype": "Data",
+   "label": "Nama Alternatif"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-01 16:49:55.932191",
+ "modified_by": "Administrator",
+ "module": "Oims",
+ "name": "Kecamatan",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -4,7 +4,7 @@ app_publisher = "Wahyu Triono"
 app_description = "Orecon Integrated Management System"
 app_email = "whytrno@gmail.com"
 app_license = "mit"
-app_logo_url = "/assets/oims/images/frappe-hr-logo.svg"
+app_logo_url = "/assets/oims/images/oims-logo.png"
 app_home = "/app/hr"
 
 # Apps
@@ -16,7 +16,7 @@ app_home = "/app/hr"
 add_to_apps_screen = [
 	{
 		"name": "oims",
-		"logo": "/assets/oims/images/frappe-hr-logo.svg",
+		"logo": "/assets/oims/images/oims-logo.png",
 		"title": "Oims",
 		"route": "/app/oims",
 		# "has_permission": "oims.api.permission.has_app_permission"
@@ -24,10 +24,19 @@ add_to_apps_screen = [
 ]
 
 website_route_rules = [
-    {"from_route": "/app/oims/oims", "to_route": "oims"},
+    # {"from_route": "/app/oims/oims", "to_route": "oims"},
 	# {"from_route": "/hrms/<path:app_path>", "to_route": "hrms"},
 	# {"from_route": "/hr/<path:app_path>", "to_route": "roster"},
 ]
+
+fixtures = [
+    # export all records from the Category table
+    "Provinsi",
+    "Kabupaten",
+    "Kecamatan",
+    "Desa",
+]
+
 
 # Includes in <head>
 # ------------------
@@ -92,6 +101,7 @@ app_include_js = "/assets/oims/js/oims.js"
 
 # before_install = "oims.install.before_install"
 # after_install = "oims.install.after_install"
+after_install = "oims.setup_data.setup_data"
 
 # Uninstallation
 # ------------
