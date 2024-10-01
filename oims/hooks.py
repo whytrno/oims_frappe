@@ -101,7 +101,6 @@ app_include_js = "/assets/oims/js/oims.js"
 
 # before_install = "oims.install.before_install"
 # after_install = "oims.install.after_install"
-after_install = "oims.setup_data.setup_data"
 
 # Uninstallation
 # ------------
