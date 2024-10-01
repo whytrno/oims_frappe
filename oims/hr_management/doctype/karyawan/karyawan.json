@@ -1,0 +1,279 @@
+{
+    "actions": [],
+    "allow_rename": 1,
+    "autoname": "field:nrp",
+    "creation": "2024-09-29 10:39:44.502757",
+    "doctype": "DocType",
+    "engine": "InnoDB",
+    "field_order": [
+        "data_pribadi_tab",
+        "nama_lengkap",
+        "alamat_di_ktp",
+        "no_ktp",
+        "tempat_lahir",
+        "tanggal_lahir",
+        "domisili",
+        "beri_akses_untuk_login_oims_app",
+        "user_id",
+        "column_break_ndnr",
+        "no_hp",
+        "foto",
+        "foto_tanda_tangan",
+        "foto_ktp",
+        "agama",
+        "pendidikan_terakhir",
+        "no_rek_bca",
+        "data_karyawan_tab",
+        "nrp",
+        "no_kontrak",
+        "jabatan",
+        "column_break_hjzs",
+        "tanggal_bergabung",
+        "status_kontrak",
+        "status",
+        "kontak_darurat_tab",
+        "nama_kontak_darurat",
+        "no_kontak_darurat",
+        "hubungan_kontak_darurat",
+        "status_pernikahan_tab",
+        "sudah_menikah",
+        "nama_pasangan",
+        "sudah_memiliki_anak",
+        "jumlah_anak",
+        "data_lainnya_tab",
+        "foto_mcu",
+        "foto_vaksin"
+    ],
+    "fields": [
+        {
+            "fieldname": "data_pribadi_tab",
+            "fieldtype": "Tab Break",
+            "label": "Data Pribadi"
+        },
+        {
+            "fieldname": "nama_lengkap",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "Nama Lengkap",
+            "reqd": 1
+        },
+        {
+            "fieldname": "alamat_di_ktp",
+            "fieldtype": "Data",
+            "label": "Alamat di KTP"
+        },
+        {
+            "fieldname": "no_ktp",
+            "fieldtype": "Int",
+            "label": "No. KTP"
+        },
+        {
+            "fieldname": "tempat_lahir",
+            "fieldtype": "Data",
+            "label": "Tempat Lahir"
+        },
+        {
+            "fieldname": "tanggal_lahir",
+            "fieldtype": "Date",
+            "label": "Tanggal Lahir"
+        },
+        {
+            "fieldname": "domisili",
+            "fieldtype": "Data",
+            "label": "Domisili"
+        },
+        {
+            "fieldname": "column_break_ndnr",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "no_hp",
+            "fieldtype": "Phone",
+            "label": "No. HP"
+        },
+        {
+            "fieldname": "foto",
+            "fieldtype": "Attach Image",
+            "label": "Foto"
+        },
+        {
+            "fieldname": "foto_tanda_tangan",
+            "fieldtype": "Attach Image",
+            "label": "Foto Tanda Tangan"
+        },
+        {
+            "fieldname": "foto_ktp",
+            "fieldtype": "Attach Image",
+            "label": "Foto KTP"
+        },
+        {
+            "fieldname": "agama",
+            "fieldtype": "Select",
+            "label": "Agama",
+            "options": "Kristen\nIslam\nKatolik\nHindu\nBudha"
+        },
+        {
+            "fieldname": "pendidikan_terakhir",
+            "fieldtype": "Select",
+            "label": "Pendidikan Terakhir",
+            "options": "SD\nSMP\nSMA\nD3\nS1\nS2\nS3"
+        },
+        {
+            "fieldname": "no_rek_bca",
+            "fieldtype": "Int",
+            "label": "No. Rek. BCA"
+        },
+        {
+            "fieldname": "data_karyawan_tab",
+            "fieldtype": "Tab Break",
+            "label": "Data Karyawan"
+        },
+        {
+            "fieldname": "no_kontrak",
+            "fieldtype": "Data",
+            "label": "No. Kontrak"
+        },
+        {
+            "fieldname": "nrp",
+            "fieldtype": "Data",
+            "in_list_view": 1,
+            "label": "NRP",
+            "reqd": 1,
+            "unique": 1
+        },
+        {
+            "fieldname": "jabatan",
+            "fieldtype": "Link",
+            "label": "Jabatan",
+            "options": "Jabatan"
+        },
+        {
+            "fieldname": "column_break_hjzs",
+            "fieldtype": "Column Break"
+        },
+        {
+            "fieldname": "tanggal_bergabung",
+            "fieldtype": "Date",
+            "label": "Tanggal Bergabung"
+        },
+        {
+            "fieldname": "status_kontrak",
+            "fieldtype": "Select",
+            "label": "Status Kontrak",
+            "options": "Project Base\nKaryawan Tetap\nPKWT"
+        },
+        {
+            "fieldname": "kontak_darurat_tab",
+            "fieldtype": "Tab Break",
+            "label": "Kontak Darurat"
+        },
+        {
+            "fieldname": "nama_kontak_darurat",
+            "fieldtype": "Data",
+            "label": "Nama Kontak Darurat"
+        },
+        {
+            "fieldname": "no_kontak_darurat",
+            "fieldtype": "Phone",
+            "label": "No. Kontak Darurat"
+        },
+        {
+            "fieldname": "hubungan_kontak_darurat",
+            "fieldtype": "Data",
+            "label": "Hubungan Kontak Darurat"
+        },
+        {
+            "fieldname": "status_pernikahan_tab",
+            "fieldtype": "Tab Break",
+            "label": "Status Pernikahan"
+        },
+        {
+            "default": "0",
+            "fieldname": "sudah_menikah",
+            "fieldtype": "Check",
+            "label": "Sudah menikah?"
+        },
+        {
+            "depends_on": "sudah_menikah;",
+            "fieldname": "nama_pasangan",
+            "fieldtype": "Data",
+            "label": "Nama Pasangan"
+        },
+        {
+            "default": "0",
+            "depends_on": "sudah_menikah;",
+            "fieldname": "sudah_memiliki_anak",
+            "fieldtype": "Check",
+            "label": "Sudah memiliki anak?"
+        },
+        {
+            "depends_on": "sudah_memiliki_anak;",
+            "fieldname": "jumlah_anak",
+            "fieldtype": "Int",
+            "label": "Jumlah Anak"
+        },
+        {
+            "fieldname": "data_lainnya_tab",
+            "fieldtype": "Tab Break",
+            "label": "Data Lainnya"
+        },
+        {
+            "fieldname": "foto_mcu",
+            "fieldtype": "Attach Image",
+            "label": "Foto MCU"
+        },
+        {
+            "fieldname": "foto_vaksin",
+            "fieldtype": "Attach Image",
+            "label": "Foto Vaksin"
+        },
+        {
+            "default": "0",
+            "fieldname": "beri_akses_untuk_login_oims_app",
+            "fieldtype": "Check",
+            "label": "Beri akses untuk login OIMS App?"
+        },
+        {
+            "depends_on": "beri_akses_untuk_login_oims_app",
+            "fieldname": "user_id",
+            "fieldtype": "Link",
+            "label": "User ID",
+            "options": "User"
+        },
+        {
+            "default": "Aktif",
+            "fieldname": "status",
+            "fieldtype": "Select",
+            "label": "Status",
+            "options": "Aktif\nTidak Aktif"
+        }
+    ],
+    "image_field": "foto",
+    "index_web_pages_for_search": 1,
+    "links": [],
+    "modified": "2024-10-01 11:08:17.890499",
+    "modified_by": "Administrator",
+    "module": "Hr Management",
+    "name": "Karyawan",
+    "naming_rule": "By fieldname",
+    "owner": "Administrator",
+    "permissions": [
+        {
+            "create": 1,
+            "delete": 1,
+            "email": 1,
+            "export": 1,
+            "print": 1,
+            "read": 1,
+            "report": 1,
+            "role": "System Manager",
+            "share": 1,
+            "write": 1
+        }
+    ],
+    "quick_entry": 1,
+    "sort_field": "creation",
+    "sort_order": "DESC",
+    "states": [],
+    "title_field": "nama_lengkap"
+}

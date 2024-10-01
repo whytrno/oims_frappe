@@ -1,0 +1,130 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:no_surat",
+ "creation": "2024-09-29 11:02:31.342541",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_wqcu",
+  "surat_ke",
+  "no_surat",
+  "site",
+  "column_break_sjaa",
+  "keperluan",
+  "tanggal_berangkat",
+  "tanggal_pulang",
+  "doc_url",
+  "amended_from",
+  "section_break_kufq",
+  "karyawan"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_wqcu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Surat Tugas",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "surat_ke",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Surat Ke",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "default": "-",
+   "fieldname": "no_surat",
+   "fieldtype": "Data",
+   "label": "No. Surat",
+   "read_only": 1,
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Site",
+   "options": "Lokasi Site",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_sjaa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "keperluan",
+   "fieldtype": "Data",
+   "label": "Keperluan"
+  },
+  {
+   "fieldname": "tanggal_berangkat",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Tanggal Berangkat",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tanggal_pulang",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Tanggal Pulang"
+  },
+  {
+   "fieldname": "doc_url",
+   "fieldtype": "Data",
+   "label": "Doc Url",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_kufq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "karyawan",
+   "fieldtype": "Table",
+   "label": "Karyawan",
+   "options": "Karyawan Surat Tugas",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-09-29 11:05:52.608757",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "Surat Tugas",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "no_surat"
+}

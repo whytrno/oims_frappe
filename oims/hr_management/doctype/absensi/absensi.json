@@ -1,0 +1,100 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-09-29 11:35:24.005491",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "site",
+  "karyawan",
+  "tipe",
+  "foto",
+  "column_break_achi",
+  "waktu_absen",
+  "latitude",
+  "longitude",
+  "keterangan"
+ ],
+ "fields": [
+  {
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Site",
+   "options": "Lokasi Site",
+   "reqd": 1
+  },
+  {
+   "fieldname": "karyawan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Karyawan",
+   "options": "Karyawan",
+   "reqd": 1
+  },
+  {
+   "default": "In",
+   "fieldname": "tipe",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Tipe",
+   "options": "In\nOut\nIzin"
+  },
+  {
+   "fieldname": "foto",
+   "fieldtype": "Attach Image",
+   "label": "Foto"
+  },
+  {
+   "fieldname": "column_break_achi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Data",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Data",
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "keterangan",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Keterangan"
+  },
+  {
+   "fieldname": "waktu_absen",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Waktu Absen",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-09-29 11:39:42.752558",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "Absensi",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -4,6 +4,8 @@ app_publisher = "Wahyu Triono"
 app_description = "Orecon Integrated Management System"
 app_email = "whytrno@gmail.com"
 app_license = "mit"
+app_logo_url = "/assets/oims/images/frappe-hr-logo.svg"
+app_home = "/app/hr"
 
 # Apps
 # ------------------
@@ -11,22 +13,28 @@ app_license = "mit"
 # required_apps = []
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "oims",
-# 		"logo": "/assets/oims/logo.png",
-# 		"title": "Oims",
-# 		"route": "/oims",
-# 		"has_permission": "oims.api.permission.has_app_permission"
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "oims",
+		"logo": "/assets/oims/images/frappe-hr-logo.svg",
+		"title": "Oims",
+		"route": "/app/oims",
+		# "has_permission": "oims.api.permission.has_app_permission"
+	}
+]
+
+website_route_rules = [
+    {"from_route": "/app/oims/oims", "to_route": "oims"},
+	# {"from_route": "/hrms/<path:app_path>", "to_route": "hrms"},
+	# {"from_route": "/hr/<path:app_path>", "to_route": "roster"},
+]
 
 # Includes in <head>
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/oims/css/oims.css"
-# app_include_js = "/assets/oims/js/oims.js"
+app_include_css = "/assets/oims/css/oims.css"
+app_include_js = "/assets/oims/js/oims.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/oims/css/oims.css"
