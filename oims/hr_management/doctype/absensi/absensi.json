@@ -73,12 +73,14 @@
    "reqd": 1
   }
  ],
+ "image_field": "foto",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-29 11:39:42.752558",
+ "modified": "2024-10-02 21:34:36.291492",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Absensi",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {

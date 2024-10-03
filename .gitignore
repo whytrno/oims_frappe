@@ -4,4 +4,21 @@
 *.swp
 tags
 node_modules
-__pycache__
+oims/public/dist
+oims/public/node_modules
+oims/docs/current
+node_modules/
+dist/
+frontend/node_modules/
+__pycache__/
+
+# build/
+.vscode
+.vs
+node_modules
+*debug.log
+oims/docs/current
+oims/public/frontend
+oims/www/oims.html
+oims/public/roster
+oims/www/roster.html

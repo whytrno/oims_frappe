@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "name": "hrms",
+  "description": "Open Source HR & Payroll System powered by the Frappe Framework",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frappe/hrms.git"
+  },
+  "homepage": "https://frappehr.com",
+  "author": "Frappe Technologies Pvt. Ltd.",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/frappe/hrms/issues"
+  },
+  "workspaces": [
+    "frontend",
+    "frappe-ui"
+  ],
+  "scripts": {
+    "postinstall": "yarn install-pwa-deps",
+    "install-pwa-deps": "cd frontend && yarn install --check-files",
+    "dev-pwa": "cd frontend && yarn dev",
+    "build": "yarn build-pwa",
+    "build-pwa": "cd frontend && yarn build"
+  },
+  "dependencies": {
+    "html2canvas": "^1.4.1"
+  }
+}
