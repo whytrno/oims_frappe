@@ -23,10 +23,13 @@ add_to_apps_screen = [
 	}
 ]
 
+# website_route_rules = [
+#     # {"from_route": "/app/oims/oims", "to_route": "oims"},
+# 	# {"from_route": "/hrms/<path:app_path>", "to_route": "hrms"},
+# 	# {"from_route": "/hr/<path:app_path>", "to_route": "roster"},
+# ]
 website_route_rules = [
-    # {"from_route": "/app/oims/oims", "to_route": "oims"},
-	# {"from_route": "/hrms/<path:app_path>", "to_route": "hrms"},
-	# {"from_route": "/hr/<path:app_path>", "to_route": "roster"},
+	{"from_route": "/mobile/<path:app_path>", "to_route": "mobile"},
 ]
 
 fixtures = [
