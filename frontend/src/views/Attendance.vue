@@ -34,7 +34,7 @@
 						</p>
 					</div>
 
-					<ion-checkbox justify="space-between">Ambil Jatah Makan</ion-checkbox>
+					<ion-checkbox justify="space-between" v-model="ambilJatahMakan">Ambil Jatah Makan</ion-checkbox>
 
 					<div class="flex justify-between">
 						<p>Radius Absen</p>
@@ -85,6 +85,7 @@ const checkinTimestamp = ref(null)
 const latitude = ref(0)
 const longitude = ref(0)
 const locationStatus = ref("")
+const ambilJatahMakan = ref(false)
 let map = null;
 let marker = null;
 let circle = null;
@@ -144,7 +145,7 @@ function handleLocationSuccess(position) {
 	if (marker) {
 		const newLatLng = L.latLng(latitude.value, longitude.value);
 		marker.setLatLng(newLatLng);
-		map.setView(newLatLng, 17);
+		// map.setView(newLatLng, 17);
 	}
 }
 
@@ -232,23 +233,6 @@ const retakePhoto = () => {
 	photoPreviewUrl.value = '';
 	initializeCamera();
 };
-
-// const createFolderIfNotExists = async (folderPath) => {
-// 	const response = createResource({
-// 		method: 'POST',
-// 		url: '/api/method/oims.api.create_folders_if_not_exist',
-// 		params: {
-// 			base_path: "Home",
-// 			folder_path: folderPath,
-// 		},
-// 	});
-
-// 	try {
-// 		await response.fetch();
-// 	} catch (error) {
-// 		console.error('Error creating folder:', error);
-// 	}
-// };
 
 const uploadPhoto = async () => {
 	if (!photoBlob.value) return null;
@@ -392,6 +376,7 @@ const submitLog = async (logType) => {
 			waktu_absen: checkinTimestamp.value,
 			latitude: latitude.value,
 			longitude: longitude.value,
+			ambil_jatah_makan: ambilJatahMakan.value,
 		},
 		{
 			onSuccess() {
@@ -420,6 +405,11 @@ const submitLog = async (logType) => {
 
 const initializeMap = () => {
 	if (map === null) {
+		if (latitude.value === 0 && longitude.value === 0) {
+			latitude.value = -6.3949906486826595;
+			longitude.value = 106.9304776672312;
+		}
+
 		map = L.map('map').setView([latitude.value, longitude.value], 17);
 
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -488,6 +478,7 @@ onMounted(() => {
 			lokasiSite.reload()
 		}
 	})
+
 
 	// const action = router.query.action;
 

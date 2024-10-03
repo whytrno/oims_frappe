@@ -9,6 +9,7 @@
   "karyawan",
   "tipe",
   "foto",
+  "ambil_jatah_makan",
   "column_break_achi",
   "waktu_absen",
   "latitude",
@@ -71,12 +72,18 @@
    "in_list_view": 1,
    "label": "Waktu Absen",
    "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "ambil_jatah_makan",
+   "fieldtype": "Check",
+   "label": "Ambil Jatah Makan"
   }
  ],
  "image_field": "foto",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-02 21:34:36.291492",
+ "modified": "2024-10-03 21:40:43.540531",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Absensi",

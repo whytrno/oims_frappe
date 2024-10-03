@@ -65,15 +65,17 @@ def get_attendance_map(filters):
 		hari_absen = record.waktu_absen.day
 
 		# Jika nama_lengkap belum ada di attendance_map, tambahkan
-		if nama_lengkap not in attendance_map:
-			attendance_map[nama_lengkap] = {}
+		if karyawan not in attendance_map:
+			attendance_map[karyawan] = {}
 
 		# Jika site belum ada untuk nama_karyawan, tambahkan
-		if site not in attendance_map[nama_lengkap]:
-			attendance_map[nama_lengkap][site] = {}
+		if site not in attendance_map[karyawan]:
+			attendance_map[karyawan][site] = {}
 
 		# Tambahkan hari dan tipe absen ke dalam map
-		attendance_map[nama_lengkap][site][hari_absen] = tipe
+
+		attendance_map[karyawan][site][hari_absen] = tipe
+		attendance_map[karyawan][site]["nama_karyawan"] = nama_lengkap
 
 	return attendance_map
 
@@ -124,6 +126,13 @@ def get_columns(filters: Filters) -> list[dict]:
 				"width": 120,
 			},
 			{"label": _("Nama karyawan"), "fieldname": "nama_karyawan", "fieldtype": "Data", "width": 150},
+			{
+				"label": _("Site"),
+				"fieldname": "site",
+				"fieldtype": "Link",
+				"options": "Lokasi Site",
+				"width": 70,
+			},
 		]
 	)
 
@@ -143,7 +152,7 @@ def get_columns_for_days(filters: Filters) -> list[dict]:
 		weekday = day_abbr[getdate(date).weekday()]
 		# sets days as 1 Mon, 2 Tue, 3 Wed
 		label = f"{day} {weekday}"
-		days.append({"label": label, "fieldtype": "Data", "fieldname": day, "width": 65})
+		days.append({"label": label, "fieldtype": "Data", "fieldname": day, "width": 80})
 
 	return days
 
@@ -157,12 +166,14 @@ def get_data(filters) -> list[list]:
 
 	# Misalkan attendance_map adalah hasil dari get_attendance_map(filters)
 	attendance_map = get_attendance_map(filters)
+	print(attendance_map)
 
 	# Iterasi melalui semua karyawan dalam attendance_map
-	for nama_karyawan, site_data in attendance_map.items():
+	for karyawan, site_data in attendance_map.items():
 		for site, attendance in site_data.items():
+			nama_lengkap_karyawan = attendance["nama_karyawan"]
 			# Setiap row dimulai dengan nama karyawan dan site
-			row = [nama_karyawan, site]
+			row = [karyawan, nama_lengkap_karyawan, site]
 
 			# Untuk setiap hari dalam bulan, tambahkan "P" jika karyawan hadir, atau "A" jika absen
 			for day in range(1, total_days + 1):
@@ -190,7 +201,8 @@ def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
 	hadir = []
 
 	for day in days:
-		labels.append(day["label"])
+		date = day['label'].split(' ')[0]
+		labels.append(date)
 		total_hadir_on_day = total_izin_on_day = 0
 
 		for __, attendance_dict in attendance_map.items():

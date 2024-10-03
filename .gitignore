@@ -19,6 +19,6 @@ node_modules
 *debug.log
 oims/docs/current
 oims/public/frontend
-oims/www/oims.html
+oims/www/mobile.html
 oims/public/roster
 oims/www/roster.html
