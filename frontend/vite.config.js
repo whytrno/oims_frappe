@@ -23,8 +23,8 @@ export default defineConfig({
 			},
 			manifest: {
 				display: "standalone",
-				name: "Frappe HR",
-				short_name: "Frappe HR",
+				name: "OIMS App",
+				short_name: "OIMS App",
 				start_url: "/mobile",
 				description: "Everyday HR & Payroll operations at your fingertips",
 				theme_color: "#ffffff",

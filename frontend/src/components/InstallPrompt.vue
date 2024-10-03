@@ -2,14 +2,16 @@
 	<!-- Install PWA dialog -->
 	<Dialog v-model="showDialog">
 		<template #body-title>
-			<h2 class="text-lg font-bold">Install Frappe HR</h2>
+			<h2 class="text-lg font-bold">Install OIMS App</h2>
 		</template>
 		<template #body-content>
 			<p>Get the app on your device for easy access & a better experience!</p>
 		</template>
 		<template #actions>
 			<Button variant="solid" @click="() => install()" class="py-5 w-full">
-				<template #prefix><FeatherIcon name="download" class="w-4" /></template>
+				<template #prefix>
+					<FeatherIcon name="download" class="w-4" />
+				</template>
 				Install
 			</Button>
 		</template>
@@ -18,21 +20,14 @@
 	<!-- iOS installation info message -->
 	<Popover :show="iosInstallMessage" placement="bottom">
 		<template #body>
-			<div
-				class="mt-[calc(100vh-15rem)] flex flex-col gap-3 mx-2 rounded py-5 bg-blue-100 drop-shadow-xl"
-			>
-				<div
-					class="flex flex-row text-center items-center justify-between mb-1 px-3"
-				>
+			<div class="mt-[calc(100vh-15rem)] flex flex-col gap-3 mx-2 rounded py-5 bg-blue-100 drop-shadow-xl">
+				<div class="flex flex-row text-center items-center justify-between mb-1 px-3">
 					<span class="text-base text-gray-900 font-bold">
-						Install Frappe HR
+						Install OIMS App
 					</span>
 					<span class="inline-flex items-baseline">
-						<FeatherIcon
-							name="x"
-							class="ml-auto h-4 w-4 text-gray-700"
-							@click="iosInstallMessage = false"
-						/>
+						<FeatherIcon name="x" class="ml-auto h-4 w-4 text-gray-700"
+							@click="iosInstallMessage = false" />
 					</span>
 				</div>
 				<div class="text-xs text-gray-800 px-3">
