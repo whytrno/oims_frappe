@@ -24,6 +24,16 @@ frappe.ui.form.on("Lokasi Site", {
 			}).addTo(frm.fields_dict.peta.map);
 		}
 	},
+	gunakan_lokasi_saat_ini: function (frm) {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition((position) => {
+				frm.set_value("latitude", position.coords.latitude);
+				frm.set_value("longitude", position.coords.longitude);
+			});
+		} else {
+			frappe.msgprint("Geolocation is not supported by this browser.");
+		}
+	},
 	latitude: function (frm) {
 		update_geolocation(frm);
 	},

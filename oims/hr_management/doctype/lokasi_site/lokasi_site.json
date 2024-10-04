@@ -10,6 +10,7 @@
   "nama_singkatan",
   "nama_lengkap",
   "column_break_xysq",
+  "gunakan_lokasi_saat_ini",
   "latitude",
   "longitude",
   "radius",
@@ -66,11 +67,17 @@
   {
    "fieldname": "section_break_ibti",
    "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "gunakan_lokasi_saat_ini",
+   "fieldtype": "Check",
+   "label": "Gunakan Lokasi Saat  Ini"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-29 11:16:56.022787",
+ "modified": "2024-10-04 22:00:35.951675",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Lokasi Site",
