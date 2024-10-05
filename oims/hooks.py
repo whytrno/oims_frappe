@@ -37,7 +37,7 @@ fixtures = [
     "Provinsi",
     "Kabupaten",
     "Kecamatan",
-    "Desa",
+    "Server Script",
 ]
 
 

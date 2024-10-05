@@ -1,0 +1,21 @@
+[
+ {
+  "allow_guest": 0,
+  "api_method": null,
+  "cron_format": null,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Server Script",
+  "doctype_event": "After Insert",
+  "enable_rate_limit": 0,
+  "event_frequency": "All",
+  "modified": "2024-10-05 00:47:29.974241",
+  "module": null,
+  "name": "Set Default Password When New User Created",
+  "rate_limit_count": 5,
+  "rate_limit_seconds": 86400,
+  "reference_doctype": "User",
+  "script": "if doc.get(\"new_password\") == \"\":\n    doc.new_password = \"orecongroup123\"\n    doc.save(ignore_permissions=True)",
+  "script_type": "DocType Event"
+ }
+]

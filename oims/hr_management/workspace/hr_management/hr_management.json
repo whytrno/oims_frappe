@@ -1,0 +1,136 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"i70_pQkYg4\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Jumlah Makan Hari Ini\",\"col\":4}},{\"id\":\"Ogs07BYMaU\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Absensi Hari Ini\",\"col\":4}},{\"id\":\"gbyJS6pxa4\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Pelamar Hari Ini\",\"col\":4}},{\"id\":\"8Ea1JTMyxy\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data Karyawan</b></span>\",\"col\":12}},{\"id\":\"84c_dLQPzC\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":4}},{\"id\":\"tEVIcDuG_h\",\"type\":\"card\",\"data\":{\"card_name\":\"Lowongan Pekerjaan\",\"col\":4}},{\"id\":\"wc10ZiYKHt\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Buka Portal Lowongan Pekerjaan\",\"col\":3}},{\"id\":\"JuLxG56COB\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Penempatan Karyawan</b></span>\",\"col\":12}},{\"id\":\"oSm6LpdGbW\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Karyawan Yang Di Berangkatkan Minggu Ini\",\"col\":4}}]",
+ "creation": "2024-10-04 22:44:37.041963",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "hr",
+ "idx": 0,
+ "indicator_color": "pink",
+ "is_hidden": 0,
+ "label": "HR Management",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Quick Links",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Karyawan",
+   "link_count": 0,
+   "link_to": "Karyawan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Absensi",
+   "link_count": 0,
+   "link_to": "Absensi",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Lokasi Site",
+   "link_count": 0,
+   "link_to": "Lokasi Site",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Laporan Absensi Bulanan",
+   "link_count": 0,
+   "link_to": "Laporan Absensi Bulanan",
+   "link_type": "Report",
+   "onboard": 0,
+   "report_ref_doctype": "Absensi",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Lowongan Pekerjaan",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Lowongan Pekerjaan",
+   "link_count": 0,
+   "link_to": "Lowongan Pekerjaan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Pelamar Pekerjaan",
+   "link_count": 0,
+   "link_to": "Pelamar Pekerjaan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2024-10-05 11:53:57.850893",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "HR Management",
+ "number_cards": [
+  {
+   "label": "Jumlah Makan Hari Ini",
+   "number_card_name": "Jumlah Makan Hari Ini"
+  },
+  {
+   "label": "Total Pelamar Hari Ini",
+   "number_card_name": "Total Pelamar Hari Ini"
+  },
+  {
+   "label": "Absensi Hari Ini",
+   "number_card_name": "Jumlah Absensi Hari Ini"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [
+  {
+   "document_type": "Surat Tugas",
+   "label": "Karyawan Yang Di Berangkatkan Minggu Ini",
+   "quick_list_filter": "[[\"Surat Tugas\",\"tanggal_berangkat\",\"Timespan\",\"this week\",false]]"
+  }
+ ],
+ "roles": [],
+ "sequence_id": 1.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Buka Portal Lowongan Pekerjaan",
+   "type": "URL",
+   "url": "/jobs"
+  }
+ ],
+ "title": "HR Management"
+}

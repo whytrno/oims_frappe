@@ -1,0 +1,114 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{judul_pekerjaan}-{nama_pelamar}",
+ "creation": "2024-09-24 16:59:54.463557",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "judul_pekerjaan",
+  "nama_pelamar",
+  "email",
+  "no_hp",
+  "status",
+  "cv_atau_resume_link",
+  "ekspektasi_gaji_section",
+  "ekspektasi_gaji_terendah",
+  "column_break_dumj",
+  "eksepkati_gaji_tertinggi",
+  "section_break_rwpa",
+  "catatan"
+ ],
+ "fields": [
+  {
+   "fieldname": "judul_pekerjaan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Judul Pekerjaan",
+   "options": "Lowongan Pekerjaan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nama_pelamar",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama Pelamar",
+   "reqd": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
+  },
+  {
+   "description": "Tersambung dengan Whatsapp",
+   "fieldname": "no_hp",
+   "fieldtype": "Phone",
+   "label": "No. HP "
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Hold\nDijawab\nDiterima\nDitolak"
+  },
+  {
+   "fieldname": "cv_atau_resume_link",
+   "fieldtype": "Data",
+   "label": "CV atau Resume link "
+  },
+  {
+   "fieldname": "ekspektasi_gaji_section",
+   "fieldtype": "Section Break",
+   "label": "Ekspektasi Gaji"
+  },
+  {
+   "fieldname": "ekspektasi_gaji_terendah",
+   "fieldtype": "Int",
+   "label": "Ekspektasi Gaji Terendah"
+  },
+  {
+   "fieldname": "column_break_dumj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "eksepkati_gaji_tertinggi",
+   "fieldtype": "Int",
+   "label": "Eksepkati Gaji Tertinggi"
+  },
+  {
+   "fieldname": "section_break_rwpa",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "catatan",
+   "fieldtype": "Long Text",
+   "label": "Catatan"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-05 00:24:32.054937",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "Pelamar Pekerjaan",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,160 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:judul",
+ "creation": "2024-09-24 14:38:10.339858",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "judul",
+  "divisi",
+  "jenis_kontrak",
+  "perusahaan",
+  "publish",
+  "route",
+  "column_break_vesf",
+  "status",
+  "dibuka_pada",
+  "ditutup_pada",
+  "lokasi",
+  "section_break_rzbz",
+  "deskripsi",
+  "section_break_frng",
+  "gaji_minimal",
+  "gaji_maksimal",
+  "column_break_wdap",
+  "dibayarkan_setiap",
+  "publish_gaji"
+ ],
+ "fields": [
+  {
+   "fieldname": "divisi",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Divisi",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vesf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Dibuka",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Dibuka\nDitutup"
+  },
+  {
+   "fieldname": "dibuka_pada",
+   "fieldtype": "Datetime",
+   "label": "Dibuka Pada"
+  },
+  {
+   "fieldname": "ditutup_pada",
+   "fieldtype": "Date",
+   "label": "Ditutup Pada"
+  },
+  {
+   "fieldname": "section_break_rzbz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Detail pekerjaan, kualifikasi yang dibutuhkan, dll.",
+   "fieldname": "deskripsi",
+   "fieldtype": "Text Editor",
+   "label": "Deskripsi"
+  },
+  {
+   "fieldname": "jenis_kontrak",
+   "fieldtype": "Select",
+   "label": "Jenis Kontrak",
+   "options": "Magang\nKontrak\nFull Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "lokasi",
+   "fieldtype": "Data",
+   "label": "Lokasi"
+  },
+  {
+   "fieldname": "perusahaan",
+   "fieldtype": "Data",
+   "label": "Perusahaan"
+  },
+  {
+   "fieldname": "section_break_frng",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "gaji_minimal",
+   "fieldtype": "Int",
+   "label": "Gaji Minimal"
+  },
+  {
+   "fieldname": "gaji_maksimal",
+   "fieldtype": "Int",
+   "label": "Gaji Maksimal"
+  },
+  {
+   "fieldname": "column_break_wdap",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "dibayarkan_setiap",
+   "fieldtype": "Select",
+   "label": "Dibayarkan setiap",
+   "options": "Bulan\nProjek"
+  },
+  {
+   "default": "0",
+   "fieldname": "publish_gaji",
+   "fieldtype": "Check",
+   "label": "Publish gaji"
+  },
+  {
+   "default": "0",
+   "fieldname": "publish",
+   "fieldtype": "Check",
+   "label": "Publish ke website"
+  },
+  {
+   "fieldname": "route",
+   "fieldtype": "Data",
+   "label": "Route"
+  },
+  {
+   "fieldname": "judul",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Judul Pekerjaan",
+   "reqd": 1,
+   "unique": 1
+  }
+ ],
+ "has_web_view": 1,
+ "links": [],
+ "modified": "2024-09-24 17:21:13.656029",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "Lowongan Pekerjaan",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

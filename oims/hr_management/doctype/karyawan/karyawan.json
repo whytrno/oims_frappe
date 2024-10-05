@@ -15,7 +15,6 @@
   "beri_akses_untuk_login_oims_app",
   "user_id",
   "column_break_ndnr",
-  "email",
   "no_hp",
   "foto",
   "foto_tanda_tangan",
@@ -322,11 +321,6 @@
    "label": "Alamat KTP (Nama Jalan & RT RW)"
   },
   {
-   "fieldname": "email",
-   "fieldtype": "Data",
-   "label": "Email"
-  },
-  {
    "depends_on": "eval:doc.kecamatan_domisili;",
    "fieldname": "kelurahan_domisili",
    "fieldtype": "Data",
@@ -336,7 +330,7 @@
  "image_field": "foto",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-02 19:41:30.460077",
+ "modified": "2024-10-05 00:55:04.007585",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",
