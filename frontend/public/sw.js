@@ -59,6 +59,21 @@ try {
 	console.log("Failed to initialize Firebase", error)
 }
 
+self.addEventListener("fetch", (event) => {
+	// Only handle fetch requests for URLs that include '/mobile/'
+	if (event.request.url.includes('/mobile/')) {
+		// Proceed with normal caching behavior
+		event.respondWith(
+			caches.match(event.request).then((response) => {
+				return response || fetch(event.request)
+			})
+		)
+	} else {
+		// Ignore fetch requests outside /mobile/ path
+		return;
+	}
+})
+
 self.skipWaiting()
 clientsClaim()
 console.log("Service Worker Initialized")

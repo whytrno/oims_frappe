@@ -25,7 +25,8 @@ export default defineConfig({
 				display: "standalone",
 				name: "OIMS App",
 				short_name: "OIMS App",
-				start_url: "/mobile",
+				start_url: "/mobile/",
+				scope: "/mobile/",
 				description: "Everyday HR & Payroll operations at your fingertips",
 				theme_color: "#ffffff",
 				icons: [
@@ -54,6 +55,11 @@ export default defineConfig({
 						purpose: "maskable",
 					},
 				],
+				"url_handlers": [
+					{
+						"origin": "/mobile"
+					},
+				]
 			},
 		}),
 	],
