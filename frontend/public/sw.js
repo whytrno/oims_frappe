@@ -60,19 +60,21 @@ try {
 }
 
 self.addEventListener("fetch", (event) => {
-	// Only handle fetch requests for URLs that include '/mobile/'
-	if (event.request.url.includes('/mobile')) {
-		// Proceed with normal caching behavior
-		event.respondWith(
-			caches.match(event.request).then((response) => {
-				return response || fetch(event.request)
-			})
-		)
-	} else {
-		// Ignore fetch requests outside /mobile/ path
-		return;
-	}
-})
+    const url = new URL(event.request.url);
+
+    // Only handle requests that are under /mobile/ path
+    if (url.pathname.startsWith('/mobile/')) {
+        event.respondWith(
+            caches.match(event.request).then((response) => {
+                return response || fetch(event.request);
+            })
+        );
+    } else {
+        // Ignore requests outside /mobile/ path
+        return;
+    }
+});
+
 
 self.skipWaiting()
 clientsClaim()
