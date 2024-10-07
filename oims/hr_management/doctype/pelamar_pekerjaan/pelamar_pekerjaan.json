@@ -8,14 +8,12 @@
  "field_order": [
   "judul_pekerjaan",
   "nama_pelamar",
+  "domisili",
   "email",
   "no_hp",
   "status",
-  "cv_atau_resume_link",
-  "ekspektasi_gaji_section",
-  "ekspektasi_gaji_terendah",
-  "column_break_dumj",
-  "eksepkati_gaji_tertinggi",
+  "cv_atau_resume",
+  "dokumen_pendukung_lainnya",
   "section_break_rwpa",
   "catatan"
  ],
@@ -38,43 +36,21 @@
   {
    "fieldname": "email",
    "fieldtype": "Data",
-   "label": "Email"
+   "label": "Email",
+   "reqd": 1
   },
   {
    "description": "Tersambung dengan Whatsapp",
    "fieldname": "no_hp",
    "fieldtype": "Phone",
-   "label": "No. HP "
+   "label": "No. HP ",
+   "reqd": 1
   },
   {
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
    "options": "Hold\nDijawab\nDiterima\nDitolak"
-  },
-  {
-   "fieldname": "cv_atau_resume_link",
-   "fieldtype": "Data",
-   "label": "CV atau Resume link "
-  },
-  {
-   "fieldname": "ekspektasi_gaji_section",
-   "fieldtype": "Section Break",
-   "label": "Ekspektasi Gaji"
-  },
-  {
-   "fieldname": "ekspektasi_gaji_terendah",
-   "fieldtype": "Int",
-   "label": "Ekspektasi Gaji Terendah"
-  },
-  {
-   "fieldname": "column_break_dumj",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "eksepkati_gaji_tertinggi",
-   "fieldtype": "Int",
-   "label": "Eksepkati Gaji Tertinggi"
   },
   {
    "fieldname": "section_break_rwpa",
@@ -84,11 +60,29 @@
    "fieldname": "catatan",
    "fieldtype": "Long Text",
    "label": "Catatan"
+  },
+  {
+   "fieldname": "domisili",
+   "fieldtype": "Data",
+   "label": "Domisili",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cv_atau_resume",
+   "fieldtype": "Attach",
+   "label": "CV atau Resume",
+   "reqd": 1
+  },
+  {
+   "description": "Sertifikasi dll jika di cv belum terlampir",
+   "fieldname": "dokumen_pendukung_lainnya",
+   "fieldtype": "Attach",
+   "label": "Dokumen Pendukung Lainnya"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-05 00:24:32.054937",
+ "modified": "2024-10-07 13:14:40.715934",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Pelamar Pekerjaan",
