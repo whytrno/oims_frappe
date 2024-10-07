@@ -4,6 +4,7 @@
 import frappe
 from frappe.model.document import Document
 from docxtpl import DocxTemplate, InlineImage
+from docx.shared import Mm
 
 class SuratTugas(Document):
 	def before_submit(self):
@@ -41,12 +42,12 @@ class SuratTugas(Document):
 			keperluan = f'{self.keperluan} ke'
 
 		if len(karyawan_items) > 1:
-			template_path = frappe.get_app_path('hr_management', 'templates', 'docs', 'st_kelompok.docx')
+			template_path = frappe.get_app_path('oims', 'templates', 'docs', 'st_kelompok.docx')
 			doc = DocxTemplate(template_path)
 
 			return self.generate_kelompok_document(doc, karyawan_items, keperluan, tanggal, nama_surat)
 		else:
-			template_path = frappe.get_app_path('hr_management', 'templates', 'docs', 'st.docx')
+			template_path = frappe.get_app_path('oims', 'templates', 'docs', 'st.docx')
 			doc = DocxTemplate(template_path)
 
 			return self.generate_single_document(doc, karyawan_items, keperluan, tanggal, nama_surat)
@@ -55,7 +56,6 @@ class SuratTugas(Document):
 		# pypandoc.convert_file(docx_file_path, 'pdf', outputfile=pdf_file_path)
 
 	def generate_single_document(self, doc, karyawan_items, keperluan, tanggal, nama_surat):
-		print(karyawan_items)
 		if karyawan_items[0]['foto_ktp'] is not None:
 			foto_ktp_name = karyawan_items[0]['foto_ktp'].split('/')[-1]
 			foto_ktp_path = frappe.utils.get_site_path('private', 'files', foto_ktp_name)
