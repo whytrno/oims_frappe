@@ -61,7 +61,7 @@ try {
 
 self.addEventListener("fetch", (event) => {
 	// Only handle fetch requests for URLs that include '/mobile/'
-	if (event.request.url.includes('/mobile/')) {
+	if (event.request.url.includes('/mobile')) {
 		// Proceed with normal caching behavior
 		event.respondWith(
 			caches.match(event.request).then((response) => {
