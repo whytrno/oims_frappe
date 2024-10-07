@@ -18,7 +18,7 @@ add_to_apps_screen = [
 		"name": "oims",
 		"logo": "/assets/oims/images/oims-logo.png",
 		"title": "Oims",
-		"route": "/app/oims",
+		"route": "/app/hr-management",
 		# "has_permission": "oims.api.permission.has_app_permission"
 	}
 ]
@@ -38,6 +38,23 @@ fixtures = [
     "Kabupaten",
     "Kecamatan",
     "Server Script",
+    "Role Profile",
+    {
+        "dt": "Role", 
+        "filters": [
+			[
+				"role_name", "in", [
+					"Karyawan",
+				]
+			]
+    	]
+	},
+    {
+		"doctype": "Custom DocPerm",
+		"filters": {
+			"role": ["in","Karyawan"]
+		}
+	}
 ]
 
 

@@ -18,7 +18,6 @@ frappe.ready(function () {
 			fieldname: "nrp"
 		},
 		callback: function (response) {
-			console.log(response)
 			if (response.message) {
 				var user_nrp = response.message.nrp;
 

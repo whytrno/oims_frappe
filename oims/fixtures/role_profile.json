@@ -1,0 +1,17 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2024-10-07 08:34:45.988736",
+  "name": "Karyawan",
+  "role_profile": "Karyawan",
+  "roles": [
+   {
+    "parent": "Karyawan",
+    "parentfield": "roles",
+    "parenttype": "Role Profile",
+    "role": "Karyawan"
+   }
+  ]
+ }
+]
