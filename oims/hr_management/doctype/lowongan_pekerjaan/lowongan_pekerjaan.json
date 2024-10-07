@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_guest_to_view": 1,
  "allow_rename": 1,
  "autoname": "field:judul",
  "creation": "2024-09-24 14:38:10.339858",
@@ -134,7 +135,7 @@
  ],
  "has_web_view": 1,
  "links": [],
- "modified": "2024-09-24 17:21:13.656029",
+ "modified": "2024-10-07 11:58:22.878604",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Lowongan Pekerjaan",

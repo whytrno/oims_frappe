@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"8Ea1JTMyxy\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data Karyawan</b></span>\",\"col\":12}},{\"id\":\"84c_dLQPzC\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":4}},{\"id\":\"tEVIcDuG_h\",\"type\":\"card\",\"data\":{\"card_name\":\"Lowongan Pekerjaan\",\"col\":4}},{\"id\":\"2UKAwpu9LF\",\"type\":\"card\",\"data\":{\"card_name\":\"Laporan\",\"col\":4}},{\"id\":\"c0J-ObpaJm\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Absensi Hari Ini\",\"col\":4}},{\"id\":\"5HF7MRLnAd\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Makan Hari Ini\",\"col\":4}},{\"id\":\"SVq0iAqjjM\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Pendaftar Hari Ini\",\"col\":4}}]",
+ "content": "[{\"id\":\"8Ea1JTMyxy\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data Karyawan</b></span>\",\"col\":12}},{\"id\":\"84c_dLQPzC\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":4}},{\"id\":\"tEVIcDuG_h\",\"type\":\"card\",\"data\":{\"card_name\":\"Lowongan Pekerjaan\",\"col\":4}},{\"id\":\"2UKAwpu9LF\",\"type\":\"card\",\"data\":{\"card_name\":\"Laporan\",\"col\":4}},{\"id\":\"c0J-ObpaJm\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Absensi Hari Ini\",\"col\":4}},{\"id\":\"5HF7MRLnAd\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Makan Hari Ini\",\"col\":4}},{\"id\":\"SVq0iAqjjM\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Pendaftar Hari Ini\",\"col\":4}},{\"id\":\"_Giylsja4o\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Buka Portal Lowongan Pekerjaan\",\"col\":3}}]",
  "creation": "2024-10-04 22:44:37.041963",
  "custom_blocks": [],
  "docstatus": 0,
@@ -111,7 +111,7 @@
    "type": "Link"
   }
  ],
- "modified": "2024-10-07 11:13:21.119871",
+ "modified": "2024-10-07 11:39:53.212438",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "HR Management",
@@ -135,6 +135,14 @@
  "quick_lists": [],
  "roles": [],
  "sequence_id": 1.0,
- "shortcuts": [],
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Buka Portal Lowongan Pekerjaan",
+   "type": "URL",
+   "url": "/jobs"
+  }
+ ],
  "title": "HR Management"
 }
