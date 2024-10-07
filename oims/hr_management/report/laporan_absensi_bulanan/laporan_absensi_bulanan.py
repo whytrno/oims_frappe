@@ -50,7 +50,7 @@ def get_attendance_map(filters):
 		filters={
 			"waktu_absen": ["between", (f"{filters.year}-{filters.month}-01", f"{filters.year}-{filters.month}-{monthrange(filters.year, filters.month)[1]}")]
 		},
-		fields=["site", "karyawan", "tipe", "waktu_absen"]
+		fields=["site", "karyawan", "tipe", "waktu_absen", "ambil_jatah_makan"]
 	)
 
 	attendance_map = {}
@@ -59,6 +59,7 @@ def get_attendance_map(filters):
 		karyawan = record.karyawan
 		karyawan_doc = frappe.get_doc("Karyawan", karyawan)
 		nama_lengkap = karyawan_doc.nama_lengkap
+		ambil_jatah_makan = record.ambil_jatah_makan
 		site = record.site
 		tipe = record.tipe
 		# Ambil hanya hari dari waktu_absen (contoh: 29)
@@ -76,6 +77,7 @@ def get_attendance_map(filters):
 
 		attendance_map[karyawan][site][hari_absen] = tipe
 		attendance_map[karyawan][site]["nama_karyawan"] = nama_lengkap
+		attendance_map[karyawan][site]["ambil_jatah_makan"] = ambil_jatah_makan
 
 	return attendance_map
 
@@ -193,29 +195,35 @@ def get_data(filters) -> list[list]:
 
 	return data
 
-
 def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
 	days = get_columns_for_days(filters)
 	labels = []
 	izin = []
 	hadir = []
+	ambil_jatah_makan = []
 
 	for day in days:
 		date = day['label'].split(' ')[0]
 		labels.append(date)
-		total_hadir_on_day = total_izin_on_day = 0
+		total_hadir_on_day = total_izin_on_day = total_ambil_jatah_makan = 0
 
 		for __, attendance_dict in attendance_map.items():
 			for __, attendance in attendance_dict.items():
+				print(attendance)
 				attendance_on_day = attendance.get(cint(day["fieldname"]))
 
 				if attendance_on_day == "Izin":
 					total_izin_on_day += 1
 				elif attendance_on_day in ["In", "Work From Home"]:
 					total_hadir_on_day += 1
+	
+					ambil_jatah_makan_on_day = attendance.get("ambil_jatah_makan")
+					if ambil_jatah_makan_on_day:
+						total_ambil_jatah_makan += 1
 
 		izin.append(total_izin_on_day)
 		hadir.append(total_hadir_on_day)
+		ambil_jatah_makan.append(total_ambil_jatah_makan)
 
 	return {
 		"data": {
@@ -223,8 +231,9 @@ def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
 			"datasets": [
 				{"name": "Izin", "values": izin},
 				{"name": "Hadir", "values": hadir},
+				{"name": "Ambil Jatah Makan", "values": ambil_jatah_makan},
 			],
 		},
 		"type": "line",
-		"colors": ["red", "green"],
+		"colors": ["red", "green", "purple"],
 	}
