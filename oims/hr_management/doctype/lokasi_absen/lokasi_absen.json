@@ -9,6 +9,7 @@
   "nama",
   "projek",
   "column_break_lbnv",
+  "gunakan_lokasi_saat_ini",
   "latitude",
   "longitude",
   "radius",
@@ -29,7 +30,8 @@
    "in_list_view": 1,
    "label": "Projek",
    "options": "Projek",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "column_break_lbnv",
@@ -61,6 +63,12 @@
    "fieldname": "peta",
    "fieldtype": "Geolocation",
    "label": "Peta"
+  },
+  {
+   "default": "0",
+   "fieldname": "gunakan_lokasi_saat_ini",
+   "fieldtype": "Check",
+   "label": "Gunakan Lokasi Saat Ini"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -71,7 +79,7 @@
    "table_fieldname": "projek"
   }
  ],
- "modified": "2024-10-08 14:32:34.538453",
+ "modified": "2024-10-08 16:54:40.511609",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Lokasi Absen",
