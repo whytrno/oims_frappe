@@ -330,8 +330,18 @@
  ],
  "image_field": "foto",
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2024-10-08 09:07:27.809762",
+ "links": [
+  {
+   "link_doctype": "Absensi",
+   "link_fieldname": "karyawan"
+  },
+  {
+   "link_doctype": "User",
+   "link_fieldname": "name",
+   "table_fieldname": "Karyawan.user_id"
+  }
+ ],
+ "modified": "2024-10-08 14:20:33.963620",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",

@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"8Ea1JTMyxy\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data Karyawan</b></span>\",\"col\":12}},{\"id\":\"84c_dLQPzC\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":4}},{\"id\":\"tEVIcDuG_h\",\"type\":\"card\",\"data\":{\"card_name\":\"Lowongan Pekerjaan\",\"col\":4}},{\"id\":\"2UKAwpu9LF\",\"type\":\"card\",\"data\":{\"card_name\":\"Laporan\",\"col\":4}},{\"id\":\"c0J-ObpaJm\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Absensi Hari Ini\",\"col\":4}},{\"id\":\"5HF7MRLnAd\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Makan Hari Ini\",\"col\":4}},{\"id\":\"SVq0iAqjjM\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Pendaftar Hari Ini\",\"col\":4}},{\"id\":\"_Giylsja4o\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Buka Portal Lowongan Pekerjaan\",\"col\":3}}]",
+ "content": "[{\"id\":\"8Ea1JTMyxy\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data Karyawan</b></span>\",\"col\":12}},{\"id\":\"84c_dLQPzC\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":4}},{\"id\":\"tEVIcDuG_h\",\"type\":\"card\",\"data\":{\"card_name\":\"Lowongan Pekerjaan\",\"col\":4}},{\"id\":\"f1brW28QaI\",\"type\":\"card\",\"data\":{\"card_name\":\"Laporan\",\"col\":4}},{\"id\":\"c0J-ObpaJm\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Absensi Hari Ini\",\"col\":4}},{\"id\":\"5HF7MRLnAd\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Makan Hari Ini\",\"col\":4}},{\"id\":\"SVq0iAqjjM\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Pendaftar Hari Ini\",\"col\":4}},{\"id\":\"_Giylsja4o\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Buka Portal Lowongan Pekerjaan\",\"col\":3}}]",
  "creation": "2024-10-04 22:44:37.041963",
  "custom_blocks": [],
  "docstatus": 0,
@@ -46,7 +46,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Quick Links",
-   "link_count": 4,
+   "link_count": 5,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -54,29 +54,9 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Karyawan",
-   "link_count": 0,
-   "link_to": "Karyawan",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Absensi",
    "link_count": 0,
    "link_to": "Absensi",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Lokasi Site",
-   "link_count": 0,
-   "link_to": "Lokasi Site",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -94,6 +74,36 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Lokasi Absen",
+   "link_count": 0,
+   "link_to": "Lokasi Absen",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Karyawan",
+   "link_count": 0,
+   "link_to": "Karyawan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "User",
+   "link_count": 0,
+   "link_to": "User",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Laporan",
    "link_count": 1,
    "link_type": "DocType",
@@ -102,16 +112,17 @@
   },
   {
    "hidden": 0,
-   "is_query_report": 1,
+   "is_query_report": 0,
    "label": "Laporan Absensi Bulanan",
    "link_count": 0,
    "link_to": "Laporan Absensi Bulanan",
    "link_type": "Report",
    "onboard": 0,
+   "report_ref_doctype": "Absensi",
    "type": "Link"
   }
  ],
- "modified": "2024-10-07 16:10:56.812102",
+ "modified": "2024-10-08 14:40:12.639875",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "HR Management",

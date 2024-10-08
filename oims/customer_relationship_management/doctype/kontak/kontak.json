@@ -26,6 +26,7 @@
   {
    "fieldname": "no_telp",
    "fieldtype": "Phone",
+   "in_list_view": 1,
    "label": "No. Telp"
   },
   {
@@ -35,11 +36,13 @@
   {
    "fieldname": "email",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Email"
   },
   {
    "fieldname": "perusahaan",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Perusahaan",
    "options": "Perusahaan"
   },
@@ -51,14 +54,20 @@
   {
    "fieldname": "jabatan",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Jabatan",
    "options": "Jabatan"
   }
  ],
  "image_field": "foto",
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2024-10-07 16:38:50.300589",
+ "links": [
+  {
+   "link_doctype": "Perusahaan",
+   "link_fieldname": "name"
+  }
+ ],
+ "modified": "2024-10-08 14:11:52.358546",
  "modified_by": "Administrator",
  "module": "Customer Relationship Management",
  "name": "Kontak",

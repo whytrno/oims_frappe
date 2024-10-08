@@ -1,0 +1,69 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"4Wz4BDllPZ\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Customer Relationship Management</span>\",\"col\":12}},{\"id\":\"H4bnZ4kI80\",\"type\":\"card\",\"data\":{\"card_name\":\"Rekanan\",\"col\":4}}]",
+ "creation": "2024-10-07 16:10:49.613933",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "customer",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Customer Relationship Management",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Rekanan",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Perusahaan",
+   "link_count": 0,
+   "link_to": "Perusahaan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Kontak",
+   "link_count": 0,
+   "link_to": "Kontak",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bidang Perusahaan",
+   "link_count": 0,
+   "link_to": "Bidang Perusahaan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2024-10-08 14:45:06.018691",
+ "modified_by": "Administrator",
+ "module": "Legal",
+ "name": "Customer Relationship Management",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 1.0,
+ "shortcuts": [],
+ "title": "Customer Relationship Management"
+}

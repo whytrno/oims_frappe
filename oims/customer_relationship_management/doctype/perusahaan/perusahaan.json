@@ -27,6 +27,7 @@
   {
    "fieldname": "bidang_perusahaan",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Bidang Perusahaan",
    "options": "Bidang Perusahaan"
   },
@@ -42,11 +43,13 @@
   {
    "fieldname": "email_perusahaan",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Email Perusahaan"
   },
   {
    "fieldname": "no_telp_perusahaan",
    "fieldtype": "Phone",
+   "in_list_view": 1,
    "label": "No. Telp. Perusahaan"
   },
   {
@@ -62,8 +65,13 @@
  ],
  "image_field": "logo_perusahaan",
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2024-10-07 16:24:49.973099",
+ "links": [
+  {
+   "link_doctype": "Kontak",
+   "link_fieldname": "perusahaan"
+  }
+ ],
+ "modified": "2024-10-08 14:09:54.497888",
  "modified_by": "Administrator",
  "module": "Customer Relationship Management",
  "name": "Perusahaan",

@@ -46,12 +46,12 @@
    "label": "Longitude"
   },
   {
+   "default": "25",
    "fieldname": "radius",
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Radius (Meter)",
-   "non_negative": 1,
-   "reqd": 1
+   "non_negative": 1
   },
   {
    "fieldname": "section_break_culr",
@@ -64,8 +64,14 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2024-10-08 11:01:01.992037",
+ "links": [
+  {
+   "link_doctype": "Projek",
+   "link_fieldname": "kode_projek",
+   "table_fieldname": "projek"
+  }
+ ],
+ "modified": "2024-10-08 14:32:34.538453",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Lokasi Absen",
