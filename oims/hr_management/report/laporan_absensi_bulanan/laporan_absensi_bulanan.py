@@ -34,6 +34,9 @@ def execute(filters: Filters | None = None):
 
 	columns = get_columns(filters)
 	data = get_data(filters)
+	print(f'column2s: {data}')
+	
+	print(f'data: {data}')
 
 	if not data:
 		frappe.msgprint(_("No attendance records found for this criteria."), alert=True, indicator="orange")
@@ -50,7 +53,7 @@ def get_attendance_map(filters):
 		filters={
 			"waktu_absen": ["between", (f"{filters.year}-{filters.month}-01", f"{filters.year}-{filters.month}-{monthrange(filters.year, filters.month)[1]}")]
 		},
-		fields=["site", "karyawan", "tipe", "waktu_absen", "ambil_jatah_makan"]
+		fields=["lokasi_absen", "karyawan", "tipe", "waktu_absen", "ambil_jatah_makan"]
 	)
 
 	attendance_map = {}
@@ -60,26 +63,34 @@ def get_attendance_map(filters):
 		karyawan_doc = frappe.get_doc("Karyawan", karyawan)
 		nama_lengkap = karyawan_doc.nama_lengkap
 		ambil_jatah_makan = record.ambil_jatah_makan
-		site = record.site
+		site = record.lokasi_absen
 		tipe = record.tipe
-		# Ambil hanya hari dari waktu_absen (contoh: 29)
 		hari_absen = record.waktu_absen.day
 
-		# Jika nama_lengkap belum ada di attendance_map, tambahkan
-		if karyawan not in attendance_map:
-			attendance_map[karyawan] = {}
+		# Jika hari_absen belum ada di attendance_map, tambahkan
+		if hari_absen not in attendance_map:
+			attendance_map[hari_absen] = {}
 
-		# Jika site belum ada untuk nama_karyawan, tambahkan
-		if site not in attendance_map[karyawan]:
-			attendance_map[karyawan][site] = {}
+		# Jika site belum ada di hari_absen, tambahkan
+		if site not in attendance_map[hari_absen]:
+			attendance_map[hari_absen][site] = {}
 
-		# Tambahkan hari dan tipe absen ke dalam map
+		# Jika karyawan belum ada di site, tambahkan
+		if karyawan not in attendance_map[hari_absen][site]:
+			attendance_map[hari_absen][site][karyawan] = {
+				"nama_karyawan": nama_lengkap,
+				"data_absen": []
+			}
 
-		attendance_map[karyawan][site][hari_absen] = tipe
-		attendance_map[karyawan][site]["nama_karyawan"] = nama_lengkap
-		attendance_map[karyawan][site]["ambil_jatah_makan"] = ambil_jatah_makan
-
+		# Tambahkan data absen ke dalam 'data_absen' list
+		attendance_map[hari_absen][site][karyawan]["data_absen"].append({
+			"tipe": tipe,
+			"ambil_jatah_makan": ambil_jatah_makan
+		})
+ 
 	return attendance_map
+
+
 
 
 def get_message() -> str:
@@ -100,24 +111,6 @@ def get_message() -> str:
 def get_columns(filters: Filters) -> list[dict]:
 	columns = []
 
-	if filters.group_by:
-		options_mapping = {
-			"Branch": "Branch",
-			"Grade": "Employee Grade",
-			"Department": "Department",
-			"Designation": "Designation",
-		}
-		options = options_mapping.get(filters.group_by)
-		columns.append(
-			{
-				"label": _(filters.group_by),
-				"fieldname": frappe.scrub(filters.group_by),
-				"fieldtype": "Link",
-				"options": options,
-				"width": 120,
-			}
-		)
-
 	columns.extend(
 		[
 			{
@@ -128,13 +121,6 @@ def get_columns(filters: Filters) -> list[dict]:
 				"width": 120,
 			},
 			{"label": _("Nama karyawan"), "fieldname": "nama_karyawan", "fieldtype": "Data", "width": 150},
-			{
-				"label": _("Site"),
-				"fieldname": "site",
-				"fieldtype": "Link",
-				"options": "Lokasi Site",
-				"width": 70,
-			},
 		]
 	)
 
@@ -154,7 +140,7 @@ def get_columns_for_days(filters: Filters) -> list[dict]:
 		weekday = day_abbr[getdate(date).weekday()]
 		# sets days as 1 Mon, 2 Tue, 3 Wed
 		label = f"{day} {weekday}"
-		days.append({"label": label, "fieldtype": "Data", "fieldname": day, "width": 80})
+		days.append({"label": label, "fieldtype": "Data", "fieldname": day})
 
 	return days
 
@@ -163,77 +149,107 @@ def get_total_days_in_month(filters: Filters) -> int:
 
 
 def get_data(filters) -> list[list]:
-	total_days = get_total_days_in_month(filters)
-	data = []
+    total_days = get_total_days_in_month(filters)
+    data_map = {}
 
-	# Misalkan attendance_map adalah hasil dari get_attendance_map(filters)
-	attendance_map = get_attendance_map(filters)
-	print(attendance_map)
+    # Misalkan attendance_map adalah hasil dari get_attendance_map(filters)
+    attendance_map = get_attendance_map(filters)
 
-	# Iterasi melalui semua karyawan dalam attendance_map
-	for karyawan, site_data in attendance_map.items():
-		for site, attendance in site_data.items():
-			nama_lengkap_karyawan = attendance["nama_karyawan"]
-			# Setiap row dimulai dengan nama karyawan dan site
-			row = [karyawan, nama_lengkap_karyawan, site]
+    # Iterasi melalui semua hari dalam attendance_map
+    for day, site_data in attendance_map.items():
+        # Iterasi melalui semua site dalam hari tersebut
+        for site, karyawan_data in site_data.items():
+            # Iterasi melalui semua karyawan di site tersebut
+            for karyawan, attendance in karyawan_data.items():
+                nama_lengkap_karyawan = attendance["nama_karyawan"]
+                
+                # Jika karyawan belum ada di data_map, inisialisasi row baru
+                if karyawan not in data_map:
+                    # Inisialisasi row dengan NRP, nama karyawan, dan site
+                    row = [karyawan, nama_lengkap_karyawan] + [" "] * total_days
+                    data_map[karyawan] = row
+                else:
+                    row = data_map[karyawan]
 
-			# Untuk setiap hari dalam bulan, tambahkan "P" jika karyawan hadir, atau "A" jika absen
-			for day in range(1, total_days + 1):
-				# Jika ada data absensi untuk hari tersebut, gunakan status absensi (misalnya "Present" atau "Absent")
-				if day in attendance:
-					if attendance[day] == "In" or attendance[day] == "Out":
-						row.append("H")
-					elif attendance[day] == "Izin":
-						row.append("I")
-					else:
-						# Jika tidak ada data untuk hari itu, anggap absen (A)
-						row.append(" ")
-				else:
-					row.append(" ")
+                # Untuk hari ke-X, tambahkan status kehadiran jika ada
+                if day <= total_days:
+                    absensi_harian = attendance.get("data_absen", [])
+                    hadir = False
+                    for absensi in absensi_harian:
+                        if absensi["tipe"] == "In" or absensi["tipe"] == "Out":
+                            row[2 + day] = '<p style="color: green;">'+site+'</p>';  # Indeks 2 karena data setelah NRP dan nama
+                            hadir = True
+                            break
+                        elif absensi["tipe"] == "Izin":
+                            row[2 + day] = '<p style="color: red;">'+site+'</p>';
+                            hadir = True
+                            break
+                    if not hadir:
+                        row[2 + day] = " "
 
-			data.append(row)
+    # Convert the data_map values to a list for final output
+    return list(data_map.values())
 
-	return data
+
 
 def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
-	days = get_columns_for_days(filters)
-	labels = []
-	izin = []
-	hadir = []
-	ambil_jatah_makan = []
+    days = get_columns_for_days(filters)  # Mendapatkan kolom hari dalam bentuk list
+    labels = []
+    izin = []
+    hadir = []
+    ambil_jatah_makan = []
 
-	for day in days:
-		date = day['label'].split(' ')[0]
-		labels.append(date)
-		total_hadir_on_day = total_izin_on_day = total_ambil_jatah_makan = 0
+    # Iterasi melalui semua hari yang ada
+    for day in days:
+        date = day['label'].split(' ')[0]  # Mengambil tanggal
+        labels.append(date)
+        total_hadir_on_day = total_izin_on_day = total_ambil_jatah_makan = 0
+        day_index = cint(day["fieldname"])  # Konversi hari ke integer
 
-		for __, attendance_dict in attendance_map.items():
-			for __, attendance in attendance_dict.items():
-				print(attendance)
-				attendance_on_day = attendance.get(cint(day["fieldname"]))
+        # Iterasi melalui hari dalam attendance_map
+        for hari_absen, site_data in attendance_map.items():
+            if int(hari_absen) == day_index:  # Cocokkan hari absensi dengan hari yang sedang diolah
+                # Iterasi melalui site dalam hari tersebut
+                for site, karyawan_data in site_data.items():
+                    # Iterasi melalui karyawan di setiap site
+                    for karyawan, attendance in karyawan_data.items():
+                        # Ambil data absensi harian dari karyawan
+                        attendance_on_day = attendance.get("data_absen", [])
 
-				if attendance_on_day == "Izin":
-					total_izin_on_day += 1
-				elif attendance_on_day in ["In", "Work From Home"]:
-					total_hadir_on_day += 1
-	
-					ambil_jatah_makan_on_day = attendance.get("ambil_jatah_makan")
-					if ambil_jatah_makan_on_day:
-						total_ambil_jatah_makan += 1
+                        # Variabel untuk melacak apakah karyawan sudah dihitung
+                        sudah_hadir = False
+                        sudah_ambil_jatah_makan = False
 
-		izin.append(total_izin_on_day)
-		hadir.append(total_hadir_on_day)
-		ambil_jatah_makan.append(total_ambil_jatah_makan)
+                        # Iterasi melalui setiap entri absensi karyawan
+                        for absensi in attendance_on_day:
+                            if absensi["tipe"] == "Izin":
+                                total_izin_on_day += 1
+                            elif absensi["tipe"] in ["In", "Out", "Work From Home"]:
+                                if not sudah_hadir:  # Hanya hitung sekali per karyawan per hari
+                                    total_hadir_on_day += 1
+                                    sudah_hadir = True  # Menandai karyawan sudah dihitung
 
-	return {
-		"data": {
-			"labels": labels,
-			"datasets": [
-				{"name": "Izin", "values": izin},
-				{"name": "Hadir", "values": hadir},
-				{"name": "Ambil Jatah Makan", "values": ambil_jatah_makan},
-			],
-		},
-		"type": "line",
-		"colors": ["red", "green", "purple"],
-	}
+                                # Jika ada jatah makan diambil, tambahkan ke total
+                                if absensi["ambil_jatah_makan"] and not sudah_ambil_jatah_makan:
+                                    total_ambil_jatah_makan += 1
+                                    sudah_ambil_jatah_makan = True  # Menandai jatah makan sudah dihitung
+
+        # Tambahkan hasil perhitungan untuk hari ini ke dalam list
+        izin.append(total_izin_on_day)
+        hadir.append(total_hadir_on_day)
+        ambil_jatah_makan.append(total_ambil_jatah_makan)
+
+    # Return data dalam format yang diminta (untuk chart)
+    return {
+        "data": {
+            "labels": labels,
+            "datasets": [
+                {"name": "Izin", "values": izin},
+                {"name": "Hadir", "values": hadir},
+                {"name": "Ambil Jatah Makan", "values": ambil_jatah_makan},
+            ],
+        },
+        "type": "line",
+        "colors": ["red", "green", "purple"],
+    }
+
