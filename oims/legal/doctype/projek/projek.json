@@ -1,0 +1,105 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:kode_projek",
+ "creation": "2024-10-07 17:18:30.423466",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "nama_projek",
+  "kode_projek",
+  "jenis_projek",
+  "column_break_tlzs",
+  "lokasi_projek",
+  "status_projek",
+  "perusahaan_terkait_tab",
+  "perusahaan_terkait",
+  "karyawan_terkait_tab",
+  "karyawan_terkait"
+ ],
+ "fields": [
+  {
+   "fieldname": "nama_projek",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama Projek",
+   "unique": 1
+  },
+  {
+   "fieldname": "kode_projek",
+   "fieldtype": "Data",
+   "label": "Kode Projek",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "jenis_projek",
+   "fieldtype": "Link",
+   "label": "Jenis Projek",
+   "options": "Jenis Projek"
+  },
+  {
+   "fieldname": "column_break_tlzs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lokasi_projek",
+   "fieldtype": "Data",
+   "label": "Lokasi Projek"
+  },
+  {
+   "fieldname": "status_projek",
+   "fieldtype": "Select",
+   "label": "Status Projek",
+   "options": "Belum Berjalan\nBerjalan\nHold"
+  },
+  {
+   "fieldname": "perusahaan_terkait_tab",
+   "fieldtype": "Tab Break",
+   "label": "Perusahaan Terkait"
+  },
+  {
+   "fieldname": "perusahaan_terkait",
+   "fieldtype": "Table",
+   "label": "Perusahaan Terkait",
+   "options": "Projek Perusahaan"
+  },
+  {
+   "fieldname": "karyawan_terkait_tab",
+   "fieldtype": "Tab Break",
+   "label": "Karyawan Terkait"
+  },
+  {
+   "fieldname": "karyawan_terkait",
+   "fieldtype": "Table",
+   "label": "Karyawan Terkait",
+   "options": "Karyawan Projek"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-08 09:55:42.058112",
+ "modified_by": "Administrator",
+ "module": "Legal",
+ "name": "Projek",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

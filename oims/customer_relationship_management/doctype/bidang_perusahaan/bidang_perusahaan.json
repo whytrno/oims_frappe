@@ -20,7 +20,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-01 11:18:46.718622",
+ "modified": "2024-10-07 16:09:47.561758",
  "modified_by": "Administrator",
  "module": "Customer Relationship Management",
  "name": "Bidang Perusahaan",
@@ -40,6 +40,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],

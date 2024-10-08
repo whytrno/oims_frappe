@@ -13,5 +13,13 @@
     "role": "Karyawan"
    }
   ]
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2024-10-07 16:13:19.859329",
+  "name": "HR Management",
+  "role_profile": "HR Management",
+  "roles": []
  }
 ]

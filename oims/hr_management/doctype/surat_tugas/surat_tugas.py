@@ -7,7 +7,30 @@ from docxtpl import DocxTemplate, InlineImage
 from docx.shared import Mm
 
 class SuratTugas(Document):
-	def before_submit(self):
+	def before_save(self):
+		self.validate_karyawan_data()
+
+	def validate_karyawan_data(self):
+		errors = []
+		for row in self.karyawan:
+			if row.nrp:
+				karyawan_doc = frappe.get_doc('Karyawan', row.nrp, ['nama_lengkap', 'foto_ktp', 'nrp', 'jabatan'])
+				
+				# Check if required fields are missing
+				if not karyawan_doc.foto_ktp:
+					errors.append(f"User {karyawan_doc.nama_lengkap} belum upload foto KTP.")
+				
+				if not karyawan_doc.nrp:
+					errors.append(f"User {karyawan_doc.nama_lengkap} belum mengisi NRP.")
+				
+				if not karyawan_doc.jabatan:
+					errors.append(f"User {karyawan_doc.nama_lengkap} belum mengisi jabatan.")
+
+		# If there are errors, prevent saving and display messages
+		if errors:
+			frappe.throw("<br>".join(errors), title="Validation Failed")
+ 
+	def after_save(self):
 		karyawan_items = self.get_karyawan_data();
 
 		nama_surat = f"{self.no_surat.replace('/', '-')}.docx"

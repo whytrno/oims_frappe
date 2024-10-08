@@ -1,0 +1,91 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{projek} - {nama}",
+ "creation": "2024-10-08 10:28:06.562633",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "nama",
+  "projek",
+  "column_break_lbnv",
+  "latitude",
+  "longitude",
+  "radius",
+  "section_break_culr",
+  "peta"
+ ],
+ "fields": [
+  {
+   "fieldname": "nama",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama",
+   "reqd": 1
+  },
+  {
+   "fieldname": "projek",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Projek",
+   "options": "Projek",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_lbnv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Data",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Data",
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "radius",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Radius (Meter)",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_culr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "peta",
+   "fieldtype": "Geolocation",
+   "label": "Peta"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-08 11:01:01.992037",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "Lokasi Absen",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

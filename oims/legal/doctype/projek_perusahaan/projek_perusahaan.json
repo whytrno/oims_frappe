@@ -1,0 +1,41 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-10-07 17:17:52.475907",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "perusahaan",
+  "jenis_perusahaan"
+ ],
+ "fields": [
+  {
+   "fieldname": "perusahaan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Perusahaan",
+   "options": "Perusahaan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "jenis_perusahaan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Jenis Perusahaan",
+   "options": "Jenis Perusahaan Dalam Projek",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-10-07 17:33:18.770509",
+ "modified_by": "Administrator",
+ "module": "Legal",
+ "name": "Projek Perusahaan",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

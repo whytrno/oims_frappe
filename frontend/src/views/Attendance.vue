@@ -44,8 +44,8 @@
 					<div class="-my-2">
 						<ion-select v-model="selectedSite" label="Lokasi Site" label-placement="fixed"
 							placeholder="Pilih Lokasi Site">
-							<ion-select-option v-for="site in lokasiSite.data" :key="site.name" :value="site">
-								{{ site.name }}
+							<ion-select-option v-for="lokasi in lokasiSite.data" :key="lokasi.name" :value="lokasi">
+								{{ lokasi.name }}
 							</ion-select-option>
 						</ion-select>
 					</div>
@@ -111,7 +111,7 @@ const checkins = createListResource({
 })
 
 const lokasiSite = createListResource({
-	doctype: "Lokasi Site",
+	doctype: "Lokasi Absen",
 	fields: ["*"],
 	filters: {
 		latitude: ['is', 'set'],
@@ -121,6 +121,10 @@ const lokasiSite = createListResource({
 
 checkins.reload()
 lokasiSite.reload()
+watch(() => selectedSite.value, (newValue, oldValue) => {
+	console.log("Selected Site Changed", newValue, oldValue)
+})
+
 
 const lastLog = computed(() => {
 	if (checkins.list.loading || !checkins.data) return {}
@@ -370,7 +374,7 @@ const submitLog = async (logType) => {
 	checkins.insert.submit(
 		{
 			karyawan: employee.data.nrp,
-			site: selectedSite.value.name,
+			lokasi_absen: selectedSite.value.name,
 			foto: photoUrl,
 			tipe: logType,
 			waktu_absen: checkinTimestamp.value,

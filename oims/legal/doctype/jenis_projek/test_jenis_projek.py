@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestLokasiSite(FrappeTestCase):
+class TestJenisProjek(FrappeTestCase):
 	pass

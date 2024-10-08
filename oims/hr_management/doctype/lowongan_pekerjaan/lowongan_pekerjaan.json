@@ -69,13 +69,13 @@
    "fieldname": "jenis_kontrak",
    "fieldtype": "Select",
    "label": "Jenis Kontrak",
-   "options": "Magang\nKontrak\nFull Time",
+   "options": "Intership\nPKWT\nProject Base",
    "reqd": 1
   },
   {
    "fieldname": "lokasi",
    "fieldtype": "Data",
-   "label": "Lokasi"
+   "label": "Lokasi Penempatan"
   },
   {
    "fieldname": "section_break_frng",
@@ -129,7 +129,7 @@
  ],
  "has_web_view": 1,
  "links": [],
- "modified": "2024-10-07 13:07:49.525841",
+ "modified": "2024-10-07 15:37:41.554271",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Lowongan Pekerjaan",

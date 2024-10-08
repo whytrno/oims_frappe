@@ -1,7 +1,7 @@
 // Copyright (c) 2024, Wahyu Triono and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on("Lokasi Site", {
+frappe.ui.form.on("Lokasi Absen", {
 	refresh: function (frm) {
 		if (frm.doc.latitude && frm.doc.longitude) {
 			let latitude = frm.doc.latitude;
@@ -22,16 +22,6 @@ frappe.ui.form.on("Lokasi Site", {
 				fillOpacity: 0.2,   // Opacity of the circle fill
 				radius: frm.doc.radius || 25  // Default radius if not provided
 			}).addTo(frm.fields_dict.peta.map);
-		}
-	},
-	gunakan_lokasi_saat_ini: function (frm) {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition((position) => {
-				frm.set_value("latitude", position.coords.latitude);
-				frm.set_value("longitude", position.coords.longitude);
-			});
-		} else {
-			frappe.msgprint("Geolocation is not supported by this browser.");
 		}
 	},
 	latitude: function (frm) {

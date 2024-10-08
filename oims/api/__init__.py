@@ -663,9 +663,9 @@ def get_permitted_fields_for_write(doctype: str) -> list[str]:
 
 # Lokasi Site
 @frappe.whitelist()
-def get_all_lokasi_site() -> list[dict]:
+def get_all_lokasi_absen() -> list[dict]:
 	return frappe.get_all(
-		"Lokasi Site",
-		fields=["nama_singkatan", "latitude", "longitude", "radius"],
+		"Lokasi Absen",
+		fields=["nama", "latitude", "longitude", "radius"],
 		limit=999999,
 	)

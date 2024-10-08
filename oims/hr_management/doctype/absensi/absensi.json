@@ -5,7 +5,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "site",
+  "lokasi_absen",
   "karyawan",
   "tipe",
   "foto",
@@ -17,14 +17,6 @@
   "keterangan"
  ],
  "fields": [
-  {
-   "fieldname": "site",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Site",
-   "options": "Lokasi Site",
-   "reqd": 1
-  },
   {
    "fieldname": "karyawan",
    "fieldtype": "Link",
@@ -78,12 +70,20 @@
    "fieldname": "ambil_jatah_makan",
    "fieldtype": "Check",
    "label": "Ambil Jatah Makan"
+  },
+  {
+   "fieldname": "lokasi_absen",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Lokasi Absen",
+   "options": "Lokasi Absen",
+   "reqd": 1
   }
  ],
  "image_field": "foto",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-03 21:40:43.540531",
+ "modified": "2024-10-08 11:13:59.740183",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Absensi",

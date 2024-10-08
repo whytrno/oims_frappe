@@ -100,67 +100,6 @@ frappe.ui.form.on("Surat Tugas", {
 			frm.set_value('no_surat', no_surat);
 		}
 	},
-
-	validate: function (frm) {
-		let all_valid = true;
-		let promises = [];
-
-		// Loop through the 'karyawan' child table and check each row
-		frm.doc.karyawan.forEach(row => {
-			if (row.user_email) {
-				// Create a promise for each row validation
-				let promise = new Promise((resolve, reject) => {
-					frappe.call({
-						method: "frappe.client.get",
-						args: {
-							doctype: "User",
-							name: row.user_email
-						},
-						callback: function (r) {
-							if (r.message) {
-								let errors = [];
-
-								if (!r.message.foto_ktp) {
-									errors.push(`User ${row.user_email} belum upload foto KTP.`);
-								}
-
-								if (!r.message.nrp) {
-									errors.push(`User ${row.user_email} belum mengisi NRP.`);
-								}
-
-								if (!r.message.jabatan) {
-									errors.push(`User ${row.user_email} belum mengisi jabatan.`);
-								}
-
-								if (errors.length > 0) {
-									frappe.msgprint({
-										title: __('Error'),
-										indicator: 'red',
-										message: errors.join('<br>')
-									});
-									all_valid = false;
-								}
-							}
-							resolve();
-						}
-					});
-				});
-				promises.push(promise);
-			}
-		});
-
-		// After all validations are done, prevent save if any validation fails
-		Promise.all(promises).then(() => {
-			if (!all_valid) {
-				frappe.validated = false;  // Prevent save if there are any errors
-				frappe.msgprint({
-					title: __('Validation Failed'),
-					indicator: 'red',
-					message: __('Terdapat user yang belum melengkapi data, tidak dapat menyimpan surat.')
-				});
-			}
-		});
-	}
 });
 
 frappe.ui.form.on('Karyawan Surat Tugas', {

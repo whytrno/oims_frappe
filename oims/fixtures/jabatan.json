@@ -1,0 +1,506 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Admin Project",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Admin Project"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Safety Officer",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Safety Officer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Chief Surveyor",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Chief Surveyor"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Civil Engineer",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Civil Engineer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Direktur Operasional",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Direktur Operasional"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Direktur Utama",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Direktur Utama"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Drafter Estimator",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Drafter Estimator"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Expert",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Expert"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Finance Officer",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Finance Officer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "General Manager",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "General Manager"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Geologist",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Geologist"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Group Leader",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Group Leader"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Helper Mekanik",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Helper Mekanik"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Hr",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Hr"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Hse Officer",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Hse Officer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Humas",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Humas"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Internship Hr",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Internship Hr"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "It Officer",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "It Officer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Komisaris",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Komisaris"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Komisaris Utama",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Komisaris Utama"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Local Logistic",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Local Logistic"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Logistik",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Logistik"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Manager Engineer",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Manager Engineer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Manager Finanace And Tax",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Manager Finanace And Tax"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Manager Hcgs",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Manager Hcgs"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Manager Konstruksi",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Manager Konstruksi"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Manager Operation",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Manager Operation"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Mechanical Electrical",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Mechanical Electrical"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Mine Engineer",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Mine Engineer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Monitoring Control",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Monitoring Control"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Ob",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Ob"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Operator Aimix",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Operator Aimix"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Operator Bulldozer",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Operator Bulldozer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Operator Compact",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Operator Compact"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Operator Dump Truck",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Operator Dump Truck"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Operator Excavator",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Operator Excavator"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Operator Grader",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Operator Grader"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Pekerja Sipil",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Pekerja Sipil"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Pengawas",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Pengawas"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Project Management",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Project Management"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Senior Mekanik",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Senior Mekanik"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Site Engineer",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Site Engineer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Sr. Site Engineer",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Sr. Site Engineer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Supervisor Engineer Epc",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Supervisor Engineer Epc"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Surveyor",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Surveyor"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Tax Officer",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Tax Officer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Welder",
+  "modified": "2024-10-07 15:50:34.350077",
+  "name": "Welder"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Joko",
+  "modified": "2024-10-07 14:31:45.090157",
+  "name": "Joko"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Direktur",
+  "modified": "2024-10-08 09:17:07.402619",
+  "name": "Direktur"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Manager",
+  "modified": "2024-10-08 09:17:07.445754",
+  "name": "Manager"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Office Boy",
+  "modified": "2024-10-08 09:17:07.459274",
+  "name": "Office Boy"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Site Manager",
+  "modified": "2024-10-08 09:17:07.466324",
+  "name": "Site Manager"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "SHE",
+  "modified": "2024-10-08 09:17:07.478192",
+  "name": "SHE"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Operation",
+  "modified": "2024-10-08 09:17:07.487494",
+  "name": "Operation"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Admin",
+  "modified": "2024-10-08 09:17:07.494415",
+  "name": "Admin"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "PJO",
+  "modified": "2024-10-08 09:17:07.500928",
+  "name": "PJO"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Operator",
+  "modified": "2024-10-08 09:17:07.513174",
+  "name": "Operator"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Aristek",
+  "modified": "2024-10-08 09:17:07.525888",
+  "name": "Aristek"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Drafter",
+  "modified": "2024-10-08 09:17:07.539585",
+  "name": "Drafter"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "CSR",
+  "modified": "2024-10-08 09:17:07.546439",
+  "name": "CSR"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Driver",
+  "modified": "2024-10-08 09:17:07.559235",
+  "name": "Driver"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Deputy Site Manager",
+  "modified": "2024-10-08 09:17:07.571583",
+  "name": "Deputy Site Manager"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "MOCO",
+  "modified": "2024-10-08 09:17:07.577244",
+  "name": "MOCO"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Mechanic",
+  "modified": "2024-10-08 09:17:07.583508",
+  "name": "Mechanic"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Junior Mechanic",
+  "modified": "2024-10-08 09:17:07.590699",
+  "name": "Junior Mechanic"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Master",
+  "modified": "2024-10-08 09:17:07.597618",
+  "name": "Master"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Foreman",
+  "modified": "2024-10-08 09:17:07.603677",
+  "name": "Foreman"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Civil",
+  "modified": "2024-10-08 09:17:07.616250",
+  "name": "Civil"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Steelworker",
+  "modified": "2024-10-08 09:17:07.622482",
+  "name": "Steelworker"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Arsitek",
+  "modified": "2024-10-08 09:22:27.552790",
+  "name": "Arsitek"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Helper",
+  "modified": "2024-10-08 09:17:07.552911",
+  "name": "Helper"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan",
+  "jabatan": "Staff",
+  "modified": "2024-10-08 09:17:07.453065",
+  "name": "Staff"
+ }
+]

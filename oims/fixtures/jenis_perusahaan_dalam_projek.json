@@ -1,0 +1,16 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Jenis Perusahaan Dalam Projek",
+  "jenis_perusahaan": "Client",
+  "modified": "2024-10-07 17:33:36.093462",
+  "name": "Client"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jenis Perusahaan Dalam Projek",
+  "jenis_perusahaan": "Vendor Oli",
+  "modified": "2024-10-07 17:33:41.733312",
+  "name": "Vendor Oli"
+ }
+]

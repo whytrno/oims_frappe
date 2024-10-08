@@ -1,16 +1,18 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:nama",
+ "autoname": "format:{nama}-{perusahaan}",
  "creation": "2024-10-01 11:25:37.406466",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "nama",
   "no_telp",
+  "foto",
   "column_break_azog",
   "email",
-  "perusahaan"
+  "perusahaan",
+  "jabatan"
  ],
  "fields": [
   {
@@ -40,15 +42,27 @@
    "fieldtype": "Link",
    "label": "Perusahaan",
    "options": "Perusahaan"
+  },
+  {
+   "fieldname": "foto",
+   "fieldtype": "Attach Image",
+   "label": "Foto"
+  },
+  {
+   "fieldname": "jabatan",
+   "fieldtype": "Link",
+   "label": "Jabatan",
+   "options": "Jabatan"
   }
  ],
+ "image_field": "foto",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-01 11:26:43.388990",
+ "modified": "2024-10-07 16:38:50.300589",
  "modified_by": "Administrator",
  "module": "Customer Relationship Management",
  "name": "Kontak",
- "naming_rule": "By fieldname",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

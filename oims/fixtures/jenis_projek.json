@@ -1,0 +1,23 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Jenis Projek",
+  "jenis_projek": "Minning",
+  "modified": "2024-10-07 17:34:19.087628",
+  "name": "Minning"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jenis Projek",
+  "jenis_projek": "Engineering",
+  "modified": "2024-10-07 17:34:22.790046",
+  "name": "Engineering"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jenis Projek",
+  "jenis_projek": "Konstruksi",
+  "modified": "2024-10-07 17:34:29.753721",
+  "name": "Konstruksi"
+ }
+]

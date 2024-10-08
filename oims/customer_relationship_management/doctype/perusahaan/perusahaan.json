@@ -9,6 +9,7 @@
   "nama_perusahaan",
   "bidang_perusahaan",
   "alamat_perusahaan",
+  "logo_perusahaan",
   "column_break_emkb",
   "email_perusahaan",
   "no_telp_perusahaan",
@@ -52,11 +53,17 @@
    "fieldname": "website_perusahaan",
    "fieldtype": "Data",
    "label": "Website Perusahaan"
+  },
+  {
+   "fieldname": "logo_perusahaan",
+   "fieldtype": "Attach Image",
+   "label": "Logo Perusahaan"
   }
  ],
+ "image_field": "logo_perusahaan",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-01 11:19:33.173958",
+ "modified": "2024-10-07 16:24:49.973099",
  "modified_by": "Administrator",
  "module": "Customer Relationship Management",
  "name": "Perusahaan",
@@ -76,6 +83,7 @@
    "write": 1
   }
  ],
+ "quick_entry": 1,
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],
