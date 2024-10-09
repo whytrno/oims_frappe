@@ -30,7 +30,7 @@ class SuratTugas(Document):
 		if errors:
 			frappe.throw("<br>".join(errors), title="Validation Failed")
  
-	def after_save(self):
+	def before_save(self):
 		karyawan_items = self.get_karyawan_data();
 
 		nama_surat = f"{self.no_surat.replace('/', '-')}.docx"

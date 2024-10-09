@@ -34,15 +34,12 @@ def execute(filters: Filters | None = None):
 
 	columns = get_columns(filters)
 	data = get_data(filters)
-	print(f'column2s: {data}')
-	
-	print(f'data: {data}')
 
 	if not data:
 		frappe.msgprint(_("No attendance records found for this criteria."), alert=True, indicator="orange")
 		return columns, [], None, None
 
-	message = get_message() if not filters.summarized_view else ""
+	message = get_message() if not get_message() else ""
 	chart = get_chart_data(attendance_map, filters)
 
 	return columns, data, message, chart
@@ -51,7 +48,7 @@ def get_attendance_map(filters):
 	attendance_records = frappe.get_all(
 		"Absensi",
 		filters={
-			"waktu_absen": ["between", (f"{filters.year}-{filters.month}-01", f"{filters.year}-{filters.month}-{monthrange(filters.year, filters.month)[1]}")]
+			"waktu_absen": ["between", (f"{filters.year}-{filters.month}-01", f"{filters.year}-{filters.month}-{monthrange(int(filters.year), int(filters.month))[1]}")]
 		},
 		fields=["lokasi_absen", "karyawan", "tipe", "waktu_absen", "ambil_jatah_makan"]
 	)
@@ -90,8 +87,20 @@ def get_attendance_map(filters):
  
 	return attendance_map
 
+@frappe.whitelist()
+def get_attendance_years() -> str:
+	"""Returns all the years for which attendance records exist"""
+	Attendance = frappe.qb.DocType("Absensi")
+	year_list = (
+		frappe.qb.from_(Attendance).select(Extract("year", Attendance.waktu_absen).as_("year")).distinct()
+	).run(as_dict=True)
 
+	if year_list:
+		year_list.sort(key=lambda d: d.year, reverse=True)
+	else:
+		year_list = [frappe._dict({"year": getdate().year})]
 
+	return "\n".join(cstr(entry.year) for entry in year_list)
 
 def get_message() -> str:
 	message = ""

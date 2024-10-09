@@ -18,7 +18,7 @@
  "list_columns": [],
  "login_required": 1,
  "max_attachment_size": 0,
- "modified": "2024-10-05 11:06:59.195597",
+ "modified": "2024-10-09 08:25:02.628846",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "perbaharui-data-karyawan",
@@ -189,7 +189,7 @@
    "show_in_filter": 0
   },
   {
-   "allow_read_on_all_link_options": 0,
+   "allow_read_on_all_link_options": 1,
    "fieldname": "provinsi_domisili",
    "fieldtype": "Link",
    "hidden": 0,
@@ -204,7 +204,7 @@
    "show_in_filter": 0
   },
   {
-   "allow_read_on_all_link_options": 0,
+   "allow_read_on_all_link_options": 1,
    "default": "",
    "depends_on": "eval:doc.provinsi_domisili;",
    "fieldname": "kabupaten_domisili",
@@ -222,7 +222,7 @@
    "show_in_filter": 0
   },
   {
-   "allow_read_on_all_link_options": 0,
+   "allow_read_on_all_link_options": 1,
    "depends_on": "eval:doc.kabupaten_domisili;",
    "fieldname": "kecamatan_domisili",
    "fieldtype": "Link",
@@ -280,7 +280,7 @@
    "show_in_filter": 0
   },
   {
-   "allow_read_on_all_link_options": 0,
+   "allow_read_on_all_link_options": 1,
    "fieldname": "provinsi_ktp",
    "fieldtype": "Link",
    "hidden": 0,
@@ -294,7 +294,7 @@
    "show_in_filter": 0
   },
   {
-   "allow_read_on_all_link_options": 0,
+   "allow_read_on_all_link_options": 1,
    "depends_on": "eval:doc.provinsi_ktp;",
    "fieldname": "kabupaten_ktp",
    "fieldtype": "Link",
@@ -310,7 +310,7 @@
    "show_in_filter": 0
   },
   {
-   "allow_read_on_all_link_options": 0,
+   "allow_read_on_all_link_options": 1,
    "depends_on": "eval:doc.kabupaten_ktp;",
    "fieldname": "kecamatan_ktp",
    "fieldtype": "Link",
