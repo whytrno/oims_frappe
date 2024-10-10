@@ -18,7 +18,7 @@
  "list_columns": [],
  "login_required": 1,
  "max_attachment_size": 0,
- "modified": "2024-10-09 08:25:02.628846",
+ "modified": "2024-10-10 16:27:25.441425",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "perbaharui-data-karyawan",
@@ -622,6 +622,20 @@
    "precision": "",
    "read_only": 0,
    "reqd": 0,
+   "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
+   "description": "Di isi dengan email yang utama dan tersambung ke Handphone",
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "hidden": 0,
+   "label": "Email",
+   "max_length": 0,
+   "max_value": 0,
+   "precision": "",
+   "read_only": 0,
+   "reqd": 1,
    "show_in_filter": 0
   }
  ]

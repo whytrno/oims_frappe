@@ -1,0 +1,13 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Event",
+  "enabled": 1,
+  "modified": "2024-10-10 16:21:08.159612",
+  "module": null,
+  "name": "Check Is Doctype Data Email Is Not Null On Event Google Calendar",
+  "script": "frappe.ui.form.on('Event Participants', {\n\treference_docname: function (frm, cdt, cdn) {\n\t    let row = locals[cdt][cdn];\n\t    reference_doctype = row.reference_doctype\n\t    reference_docname = row.reference_docname\n\t    \n\t\tcheck_if_email_is_not_null(frm, reference_doctype, reference_docname);\n\t}\n});\n\nfunction check_if_email_is_not_null(frm, reference_doctype, reference_docname) {\n\tfrappe.call({\n\t\tmethod: \"frappe.client.get\",\n\t\targs: {\n\t\t\tdoctype: reference_doctype,\n\t\t\tfilters: {\n\t\t\t\tname: reference_docname\n\t\t\t}\n\t\t},\n\t\tcallback: function (r) {\n\t\t\tif (r.message) {\n\t\t\t\tlet errors = [];\n\t\t\t\t\n\t\t\t\tconsole.log(r.message)\n\n\t\t\t\tif (!r.message.email) {\n\t\t\t\t\terrors.push(`${reference_doctype} ${reference_docname} belum mengisi Email.`);\n\t\t\t\t}\n\n\t\t\t\tif (errors.length > 0) {\n\t\t\t\t\tfrappe.msgprint({\n\t\t\t\t\t\ttitle: __('Error'),\n\t\t\t\t\t\tindicator: 'red',\n\t\t\t\t\t\tmessage: errors.join('<br>')\n\t\t\t\t\t});\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t});\n}\n",
+  "view": "Form"
+ }
+]

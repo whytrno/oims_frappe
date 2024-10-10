@@ -40,6 +40,7 @@ fixtures = [
     "Kabupaten",
     "Kecamatan",
     "Server Script",
+    "Client Script",
     "Jabatan",
     "Role Profile",
     "Jenis Perusahaan Dalam Projek",

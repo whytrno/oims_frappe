@@ -16,6 +16,7 @@
   "beri_akses_untuk_login_oims_app",
   "user_id",
   "column_break_ndnr",
+  "email",
   "no_hp",
   "foto",
   "foto_tanda_tangan",
@@ -241,7 +242,7 @@
    "description": "Email yang tersambung di Handphone",
    "fieldname": "user_id",
    "fieldtype": "Link",
-   "label": "Email",
+   "label": "User ID",
    "options": "User"
   },
   {
@@ -326,6 +327,11 @@
    "fieldname": "kelurahan_domisili",
    "fieldtype": "Data",
    "label": "Kelurahan/Desa Domisili"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email"
   }
  ],
  "image_field": "foto",
@@ -341,7 +347,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2024-10-08 14:20:33.963620",
+ "modified": "2024-10-10 14:52:52.751215",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",
