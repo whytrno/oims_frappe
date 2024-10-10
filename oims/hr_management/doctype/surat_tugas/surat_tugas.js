@@ -2,6 +2,10 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Surat Tugas", {
+    before_save: async function (frm) {
+		validate_site(frm)
+    },
+	
 	onload: function (frm) {
 		frappe.call({
 			method: "frappe.client.get_list",
@@ -32,34 +36,34 @@ frappe.ui.form.on("Surat Tugas", {
 
 	refresh: function (frm) {
 		if (!frm.is_new()) {
-			frm.add_custom_button('Lihat Surat', () => {
-				const file_name_raw = frm.doc.file_url;
-				const file_name = file_name_raw.split("/").pop();
+			// frm.add_custom_button('Lihat Surat', () => {
+			// 	const file_name_raw = frm.doc.file_url;
+			// 	const file_name = file_name_raw.split("/").pop();
 
-				frappe.call({
-					method: "frappe.client.get_list",
-					args: {
-						doctype: "File",
-						filters: {
-							"file_name": ['like', file_name]
-						},
-						fields: ["name", "file_name"],
-						limit_page_length: 1
-					},
-					callback: function (r) {
-						console.log("r", r);
-						if (r.message && r.message.length > 0) {
-							let file_id = r.message[0].name;
-							console.log("file_id", file_id);
+			// 	frappe.call({
+			// 		method: "frappe.client.get_list",
+			// 		args: {
+			// 			doctype: "File",
+			// 			filters: {
+			// 				"file_name": ['like', file_name]
+			// 			},
+			// 			fields: ["name", "file_name"],
+			// 			limit_page_length: 1
+			// 		},
+			// 		callback: function (r) {
+			// 			console.log("r", r);
+			// 			if (r.message && r.message.length > 0) {
+			// 				let file_id = r.message[0].name;
+			// 				console.log("file_id", file_id);
 
-							const route = `/app/file/${file_id}`;
-							window.open(route, '_blank');
-						} else {
-							frappe.msgprint(__('File not found!'));
-						}
-					}
-				});
-			});
+			// 				const route = `/app/file/${file_id}`;
+			// 				window.open(route, '_blank');
+			// 			} else {
+			// 				frappe.msgprint(__('File not found!'));
+			// 			}
+			// 		}
+			// 	});
+			// });
 			frm.add_custom_button('Download Surat', () => {
 				const file_name_raw = frm.doc.doc_url;
 				const file_name = file_name_raw.split("/").pop();
@@ -90,17 +94,65 @@ frappe.ui.form.on("Surat Tugas", {
 
 	surat_ke: function (frm) {
 		if (frm.doc.surat_ke) {
-			let surat_ke = frm.doc.surat_ke;
-			let current_date = new Date();
-			let month_roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'][current_date.getMonth()];
-			let year = current_date.getFullYear();
-
-			let no_surat = `15-${surat_ke}-ST-OSP-${month_roman}-${year}`;
-
-			frm.set_value('no_surat', no_surat);
+			surat_ke = frm.doc.surat_ke
+			site = frm.doc.site
+			frm.set_value('no_surat', generate_no_surat(surat_ke, site));
 		}
 	},
+
+	site: function (frm) {
+        if (frm.doc.site) {
+            validate_site(frm);
+        }
+    },
 });
+
+function generate_no_surat(surat_ke){
+	let current_date = new Date();
+	let month_roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'][current_date.getMonth()];
+	let year = current_date.getFullYear();
+
+	let no_surat = `15/${surat_ke}/ST/OSP/${month_roman}/${year}`;
+
+	return no_surat
+}
+
+function validate_site(frm, throw_error = false) {
+    frappe.call({
+        method: "frappe.client.get",
+        args: {
+            doctype: "Projek",
+            name: frm.doc.site  // Menggunakan field `site` untuk mengambil data projek
+        },
+        callback: function (r) {
+            if (r.message) {
+                let projek = r.message;
+
+                let errors = [];
+                if (!projek.nama_projek) {
+                    errors.push(`Nama Projek belum diisi pada Projek ${frm.doc.site}.`);
+                }
+                if (!projek.lokasi_projek) {
+                    errors.push(`Lokasi Projek belum diisi pada Projek ${frm.doc.site}.`);
+                }
+
+                // Jika ada kesalahan, tampilkan pesan error
+                if (errors.length > 0) {
+                    frappe.msgprint({
+                        title: __('Error'),
+                        indicator: 'red',
+                        message: errors.join('<br>')
+                    });
+
+                    // Jika validasi dilakukan saat save, maka hentikan penyimpanan
+                    if (throw_error) {
+                        frappe.validated = false;
+                    }
+                }
+            }
+        }
+    });
+}
 
 frappe.ui.form.on('Karyawan Surat Tugas', {
 	nrp: function (frm, cdt, cdn) {

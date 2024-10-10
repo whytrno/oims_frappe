@@ -34,6 +34,8 @@ website_route_rules = [
 
 fixtures = [
     # export all records from the Category table
+    "Projek",
+    "Lokasi Absen",
     "Provinsi",
     "Kabupaten",
     "Kecamatan",

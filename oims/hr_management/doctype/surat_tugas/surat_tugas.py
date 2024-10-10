@@ -5,6 +5,8 @@ import frappe
 from frappe.model.document import Document
 from docxtpl import DocxTemplate, InlineImage
 from docx.shared import Mm
+import frappe
+import calendar
 
 class SuratTugas(Document):
 	def before_save(self):
@@ -33,8 +35,7 @@ class SuratTugas(Document):
 	def before_save(self):
 		karyawan_items = self.get_karyawan_data();
 
-		nama_surat = f"{self.no_surat.replace('/', '-')}.docx"
-		# file = frappe.utils.get_site_path('private', 'files', 'test.txt')
+		nama_surat = f"{self.no_surat.replace('/', '_')} - {self.site}.docx"
 
 		generated_docx = self.generate_document(nama_surat, karyawan_items)
 		self.upload_document_to_file_manager(nama_surat, generated_docx)
@@ -44,13 +45,19 @@ class SuratTugas(Document):
 
 		# Ambil data dari child table `karyawan` yang ada di DocType SuratTugas
 		for item in self.karyawan:
-			karyawan_doc = frappe.get_doc('Karyawan', item.nrp)  # asumsikan ada field karyawan_id
+			karyawan_doc = frappe.get_doc('Karyawan', item.nrp)
+			tanggal_berangkat = self.formatdate_indonesia_with_day(self.tanggal_berangkat)
+			tanggal_pulang = "Menyesuaikan kebutuhan lapangan"
+			if(self.tanggal_pulang):
+				tanggal_pulang = self.formatdate_indonesia_with_day(self.tanggal_pulang)
+   
 			karyawan_items.append({
 				'no': item.idx,
 				'nama': karyawan_doc.nama_lengkap,
 				'nrp': karyawan_doc.nrp,
 				'jabatan': karyawan_doc.jabatan,
-				'tk': self.tanggal_berangkat,
+				'tanggal_berangkat': tanggal_berangkat,
+				'tanggal_pulang': tanggal_pulang,
 				'foto_ktp': karyawan_doc.foto_ktp,
 				'foto_vaksin': karyawan_doc.foto_vaksin,
 			})
@@ -59,26 +66,30 @@ class SuratTugas(Document):
 
 	def generate_document(self, nama_surat, karyawan_items):
 		tanggal = frappe.utils.formatdate(frappe.utils.nowdate(), "dd MMMM yyyy")
-
-		keperluan = 'ke'
-		if self.keperluan:
-			keperluan = f'{self.keperluan} ke'
+   
+		lokasi_site_doc = frappe.get_doc('Projek', self.site)
+		lokasi_site_formatted = f'{lokasi_site_doc.nama_projek}'
+		if lokasi_site_doc.lokasi_projek:
+			lokasi_site_formatted += f', {lokasi_site_doc.lokasi_projek}'
+   
+		lokasi_site_formatted = lokasi_site_formatted.replace('&', '&amp;')
+		tanggal_formatted = self.formatdate_indonesia(tanggal)
 
 		if len(karyawan_items) > 1:
 			template_path = frappe.get_app_path('oims', 'templates', 'docs', 'st_kelompok.docx')
 			doc = DocxTemplate(template_path)
 
-			return self.generate_kelompok_document(doc, karyawan_items, keperluan, tanggal, nama_surat)
+			return self.generate_kelompok_document(doc, karyawan_items, tanggal_formatted, nama_surat, lokasi_site_formatted)
 		else:
 			template_path = frappe.get_app_path('oims', 'templates', 'docs', 'st.docx')
 			doc = DocxTemplate(template_path)
 
-			return self.generate_single_document(doc, karyawan_items, keperluan, tanggal, nama_surat)
+			return self.generate_single_document(doc, karyawan_items, tanggal_formatted, nama_surat, lokasi_site_formatted)
 
 		# pdf_file_path = frappe.utils.get_site_path('private', 'files', 'surat_keterangan.pdf')
 		# pypandoc.convert_file(docx_file_path, 'pdf', outputfile=pdf_file_path)
 
-	def generate_single_document(self, doc, karyawan_items, keperluan, tanggal, nama_surat):
+	def generate_single_document(self, doc, karyawan_items, tanggal, nama_surat, lokasi_site_formatted):
 		if karyawan_items[0]['foto_ktp'] is not None:
 			foto_ktp_name = karyawan_items[0]['foto_ktp'].split('/')[-1]
 			foto_ktp_path = frappe.utils.get_site_path('private', 'files', foto_ktp_name)
@@ -88,19 +99,20 @@ class SuratTugas(Document):
 			foto_vaksin_name = karyawan_items[0]['foto_vaksin'].split('/')[-1]
 			foto_vaksin_path = frappe.utils.get_site_path('private', 'files', foto_vaksin_name)
 
-		tk = frappe.utils.formatdate(karyawan_items[0]['tk'], "dd MMMM yyyy")
-
+		no_surat_formatted = self.no_surat.replace('-', '/')
+  
 		context = {
-			'no_surat': self.no_surat,
-			'keperluan': keperluan,
-			'lokasi_site': self.site,
+			'no_surat': no_surat_formatted,
+			'keperluan': self.keperluan,
+			'lokasi_site': lokasi_site_formatted,
 			'tanggal': tanggal,
 			'nama': karyawan_items[0]['nama'],
 			'nrp': karyawan_items[0]['nrp'],
 			'jabatan': karyawan_items[0]['jabatan'],
-			'tk': tk,
-			'foto_ktp': InlineImage(doc, foto_ktp_path, width=Mm(70), height=Mm(50)) if foto_ktp_path else '',
-			'foto_vaksin': InlineImage(doc, foto_ktp_path, width=Mm(70), height=Mm(50)) if foto_vaksin_path else '',
+			'tanggal_berangkat': karyawan_items[0]['tanggal_berangkat'],
+			'tanggal_pulang': karyawan_items[0]['tanggal_pulang'],
+			'foto_ktp': InlineImage(doc, foto_ktp_path, width=Mm(80), height=Mm(50)) if foto_ktp_path else '',
+			'foto_vaksin': InlineImage(doc, foto_ktp_path, width=Mm(80), height=Mm(50)) if foto_vaksin_path else '',
 		}
 
 		# Render template
@@ -112,7 +124,7 @@ class SuratTugas(Document):
 
 		return docx_file_path
 
-	def generate_kelompok_document(self, doc, karyawan_items, keperluan, tanggal, nama_surat):
+	def generate_kelompok_document(self, doc, karyawan_items, tanggal, nama_surat, lokasi_site_formatted):
 		table_context = []
 		for karyawan in karyawan_items:
 			foto_ktp_path = None
@@ -126,23 +138,28 @@ class SuratTugas(Document):
 				foto_vaksin_name = karyawan['foto_vaksin'].split('/')[-1]
 				foto_vaksin_path = frappe.utils.get_site_path('private', 'files', foto_vaksin_name)
 
-			tk = frappe.utils.formatdate(karyawan['tk'], "dd MMMM yyyy")
+			tanggal_berangkat = self.formatdate_indonesia_with_day(karyawan_items[0]['tanggal_berangkat'])
+			tanggal_pulang = self.formatdate_indonesia_with_day(karyawan_items[0]['tanggal_pulang'])
 
 			table_context.append({
 				'no': karyawan['no'],
 				'nama': karyawan['nama'],
 				'nrp': karyawan['nrp'],
 				'jabatan': karyawan['jabatan'],
-				'tk': tk,
+				'tanggal_berangkat': tanggal_berangkat,
+				'tanggal_pulang': tanggal_pulang,
 				'foto_ktp': InlineImage(doc, foto_ktp_path, width=Mm(70), height=Mm(50)) if foto_ktp_path else '',
 				'foto_vaksin': InlineImage(doc, foto_vaksin_path, width=Mm(70), height=Mm(50)) if foto_vaksin_path else '',
 			})
 
+		no_surat_formatted = self.no_surat.replace('-', '/')
+		tanggal_formatted = self.formatdate_indonesia(tanggal)
+  
 		context = {
-			'no_surat': self.no_surat,
-			'keperluan': keperluan,
-			'lokasi_site': self.site,
-			'tanggal': tanggal,
+			'no_surat': no_surat_formatted,
+			'keperluan': self.keperluan,
+			'lokasi_site': lokasi_site_formatted,
+			'tanggal': tanggal_formatted,
 			'karyawan': table_context
 		}
 
@@ -214,3 +231,51 @@ class SuratTugas(Document):
 
 		# Optionally log or debug
 		frappe.logger().info(f"File {nama_surat} saved successfully with URL {file_url}")
+
+	def formatdate_indonesia_with_day(self, date_str):
+		# Mengubah string tanggal menjadi objek tanggal
+		date_obj = frappe.utils.getdate(date_str)
+
+		# Membuat peta bulan dalam bahasa Indonesia
+		bulan = [
+			"", "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+			"Juli", "Agustus", "September", "Oktober", "November", "Desember"
+		]
+
+		# Membuat peta hari dalam bahasa Indonesia
+		hari = [
+			"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"
+		]
+
+		# Mendapatkan hari, tanggal, bulan, dan tahun
+		hari_indonesia = hari[date_obj.weekday()]  # Mendapatkan nama hari
+		tanggal = date_obj.day
+		bulan_indonesia = bulan[date_obj.month]  # Mendapatkan nama bulan
+		tahun = date_obj.year
+
+		# Mengembalikan format: "Hari, DD Bulan YYYY"
+		return f"{hari_indonesia}, {tanggal} {bulan_indonesia} {tahun}"
+
+	def formatdate_indonesia(self, date_str):
+		# Mengubah string tanggal menjadi objek tanggal
+		date_obj = frappe.utils.getdate(date_str)
+
+		# Membuat peta bulan dalam bahasa Indonesia
+		bulan = [
+			"", "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+			"Juli", "Agustus", "September", "Oktober", "November", "Desember"
+		]
+
+		# Membuat peta hari dalam bahasa Indonesia
+		hari = [
+			"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"
+		]
+
+		# Mendapatkan hari, tanggal, bulan, dan tahun
+		tanggal = date_obj.day
+		bulan_indonesia = bulan[date_obj.month]  # Mendapatkan nama bulan
+		tahun = date_obj.year
+
+		# Mengembalikan format: "Hari, DD Bulan YYYY"
+		return f"{tanggal} {bulan_indonesia} {tahun}"
+
