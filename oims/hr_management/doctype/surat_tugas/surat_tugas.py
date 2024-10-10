@@ -36,8 +36,9 @@ class SuratTugas(Document):
 		karyawan_items = self.get_karyawan_data();
 
 		nama_surat = f"{self.no_surat.replace('/', '_')} - {self.site}.docx"
+		penandatangan = frappe.get_doc('Karyawan', self.penanda_tangan)
 
-		generated_docx = self.generate_document(nama_surat, karyawan_items)
+		generated_docx = self.generate_document(nama_surat, karyawan_items, penandatangan)
 		self.upload_document_to_file_manager(nama_surat, generated_docx)
 
 	def get_karyawan_data(self):
@@ -64,7 +65,7 @@ class SuratTugas(Document):
 
 		return karyawan_items
 
-	def generate_document(self, nama_surat, karyawan_items):
+	def generate_document(self, nama_surat, karyawan_items, penandatangan):
 		tanggal = frappe.utils.formatdate(frappe.utils.nowdate(), "dd MMMM yyyy")
    
 		lokasi_site_doc = frappe.get_doc('Projek', self.site)
@@ -79,17 +80,17 @@ class SuratTugas(Document):
 			template_path = frappe.get_app_path('oims', 'templates', 'docs', 'st_kelompok.docx')
 			doc = DocxTemplate(template_path)
 
-			return self.generate_kelompok_document(doc, karyawan_items, tanggal_formatted, nama_surat, lokasi_site_formatted)
+			return self.generate_kelompok_document(doc, karyawan_items, tanggal_formatted, nama_surat, lokasi_site_formatted, penandatangan)
 		else:
 			template_path = frappe.get_app_path('oims', 'templates', 'docs', 'st.docx')
 			doc = DocxTemplate(template_path)
 
-			return self.generate_single_document(doc, karyawan_items, tanggal_formatted, nama_surat, lokasi_site_formatted)
+			return self.generate_single_document(doc, karyawan_items, tanggal_formatted, nama_surat, lokasi_site_formatted, penandatangan)
 
 		# pdf_file_path = frappe.utils.get_site_path('private', 'files', 'surat_keterangan.pdf')
 		# pypandoc.convert_file(docx_file_path, 'pdf', outputfile=pdf_file_path)
 
-	def generate_single_document(self, doc, karyawan_items, tanggal, nama_surat, lokasi_site_formatted):
+	def generate_single_document(self, doc, karyawan_items, tanggal, nama_surat, lokasi_site_formatted, penandatangan):
 		if karyawan_items[0]['foto_ktp'] is not None:
 			foto_ktp_name = karyawan_items[0]['foto_ktp'].split('/')[-1]
 			foto_ktp_path = frappe.utils.get_site_path('private', 'files', foto_ktp_name)
@@ -102,6 +103,8 @@ class SuratTugas(Document):
 		# no_surat_formatted = self.no_surat.replace('-', '/')
   
 		context = {
+			'nama_penandatangan': penandatangan.nama_lengkap,
+			'jabatan_penandatangan': penandatangan.jabatan,
 			'no_surat': self.no_surat,
 			'keperluan': self.keperluan,
 			'lokasi_site': lokasi_site_formatted,
@@ -124,7 +127,7 @@ class SuratTugas(Document):
 
 		return docx_file_path
 
-	def generate_kelompok_document(self, doc, karyawan_items, tanggal, nama_surat, lokasi_site_formatted):
+	def generate_kelompok_document(self, doc, karyawan_items, tanggal, nama_surat, lokasi_site_formatted, penandatangan):
 		table_context = []
 		for karyawan in karyawan_items:
 			foto_ktp_path = None
@@ -153,6 +156,8 @@ class SuratTugas(Document):
 		# tanggal_formatted = self.formatdate_indonesia(tanggal)
   
 		context = {
+			'nama_penandatangan': penandatangan.nama_lengkap,
+			'jabatan_penandatangan': penandatangan.jabatan,
 			'no_surat': self.no_surat,
 			'keperluan': self.keperluan,
 			'lokasi_site': lokasi_site_formatted,

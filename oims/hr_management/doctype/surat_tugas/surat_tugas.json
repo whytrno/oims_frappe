@@ -13,6 +13,10 @@
   "keperluan",
   "tanggal_berangkat",
   "doc_url",
+  "section_break_igmd",
+  "penanda_tangan",
+  "column_break_isry",
+  "nama_penanda_tangan",
   "section_break_glmr",
   "karyawan"
  ],
@@ -76,11 +80,38 @@
    "fieldtype": "Date",
    "label": "Tanggal Berangkat",
    "reqd": 1
+  },
+  {
+   "default": "8019002",
+   "fieldname": "penanda_tangan",
+   "fieldtype": "Link",
+   "label": "NRP Penanda Tangan",
+   "link_filters": "[[\"Karyawan\",\"nrp\",\"in\",[\"8019001\",\"8019002\"]]]",
+   "options": "Karyawan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_igmd",
+   "fieldtype": "Section Break",
+   "label": "Penanda Tangan"
+  },
+  {
+   "fieldname": "column_break_isry",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "-",
+   "fetch_from": "penanda_tangan.nama_lengkap",
+   "fieldname": "nama_penanda_tangan",
+   "fieldtype": "Data",
+   "label": "Nama Penanda Tangan",
+   "read_only": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-10 11:47:37.558523",
+ "modified": "2024-10-10 13:31:55.096256",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Surat Tugas",
