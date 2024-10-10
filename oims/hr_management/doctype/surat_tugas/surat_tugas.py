@@ -48,8 +48,8 @@ class SuratTugas(Document):
 			karyawan_doc = frappe.get_doc('Karyawan', item.nrp)
 			tanggal_berangkat = self.formatdate_indonesia_with_day(self.tanggal_berangkat)
 			tanggal_pulang = "Menyesuaikan kebutuhan lapangan"
-			if(self.tanggal_pulang):
-				tanggal_pulang = self.formatdate_indonesia_with_day(self.tanggal_pulang)
+			if(item.tanggal_pulang):
+				tanggal_pulang = self.formatdate_indonesia_with_day(item.tanggal_pulang)
    
 			karyawan_items.append({
 				'no': item.idx,
@@ -99,10 +99,10 @@ class SuratTugas(Document):
 			foto_vaksin_name = karyawan_items[0]['foto_vaksin'].split('/')[-1]
 			foto_vaksin_path = frappe.utils.get_site_path('private', 'files', foto_vaksin_name)
 
-		no_surat_formatted = self.no_surat.replace('-', '/')
+		# no_surat_formatted = self.no_surat.replace('-', '/')
   
 		context = {
-			'no_surat': no_surat_formatted,
+			'no_surat': self.no_surat,
 			'keperluan': self.keperluan,
 			'lokasi_site': lokasi_site_formatted,
 			'tanggal': tanggal,
@@ -138,28 +138,25 @@ class SuratTugas(Document):
 				foto_vaksin_name = karyawan['foto_vaksin'].split('/')[-1]
 				foto_vaksin_path = frappe.utils.get_site_path('private', 'files', foto_vaksin_name)
 
-			tanggal_berangkat = self.formatdate_indonesia_with_day(karyawan_items[0]['tanggal_berangkat'])
-			tanggal_pulang = self.formatdate_indonesia_with_day(karyawan_items[0]['tanggal_pulang'])
-
 			table_context.append({
 				'no': karyawan['no'],
 				'nama': karyawan['nama'],
 				'nrp': karyawan['nrp'],
 				'jabatan': karyawan['jabatan'],
-				'tanggal_berangkat': tanggal_berangkat,
-				'tanggal_pulang': tanggal_pulang,
-				'foto_ktp': InlineImage(doc, foto_ktp_path, width=Mm(70), height=Mm(50)) if foto_ktp_path else '',
-				'foto_vaksin': InlineImage(doc, foto_vaksin_path, width=Mm(70), height=Mm(50)) if foto_vaksin_path else '',
+				'tanggal_berangkat': karyawan['tanggal_berangkat'],
+				'tanggal_pulang': karyawan['tanggal_pulang'],
+				'foto_ktp': InlineImage(doc, foto_ktp_path, width=Mm(80), height=Mm(50)) if foto_ktp_path else '',
+				'foto_vaksin': InlineImage(doc, foto_vaksin_path, width=Mm(80), height=Mm(50)) if foto_vaksin_path else '',
 			})
 
-		no_surat_formatted = self.no_surat.replace('-', '/')
-		tanggal_formatted = self.formatdate_indonesia(tanggal)
+		# no_surat_formatted = self.no_surat.replace('-', '/')
+		# tanggal_formatted = self.formatdate_indonesia(tanggal)
   
 		context = {
-			'no_surat': no_surat_formatted,
+			'no_surat': self.no_surat,
 			'keperluan': self.keperluan,
 			'lokasi_site': lokasi_site_formatted,
-			'tanggal': tanggal_formatted,
+			'tanggal': tanggal,
 			'karyawan': table_context
 		}
 

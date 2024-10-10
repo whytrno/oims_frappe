@@ -8,7 +8,7 @@
  "field_order": [
   "nrp",
   "nama_karyawan",
-  "tanggal_kepulangan"
+  "tanggal_pulang"
  ],
  "fields": [
   {
@@ -29,16 +29,16 @@
    "reqd": 1
   },
   {
-   "fieldname": "tanggal_kepulangan",
+   "fieldname": "tanggal_pulang",
    "fieldtype": "Date",
-   "label": "Tanggal Kepulangan",
-   "reqd": 1
+   "in_list_view": 1,
+   "label": "Tanggal Pulang"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-10-10 10:36:12.150256",
+ "modified": "2024-10-10 11:55:30.206497",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan Surat Tugas",
