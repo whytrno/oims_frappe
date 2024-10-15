@@ -84,14 +84,9 @@
   {
    "link_doctype": "Lokasi Absen",
    "link_fieldname": "projek"
-  },
-  {
-   "link_doctype": "Perusahaan",
-   "link_fieldname": "name",
-   "table_fieldname": "perusahaan_terkait"
   }
  ],
- "modified": "2024-10-10 10:41:41.631850",
+ "modified": "2024-10-14 14:08:07.034090",
  "modified_by": "Administrator",
  "module": "Legal",
  "name": "Projek",

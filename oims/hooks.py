@@ -33,43 +33,48 @@ website_route_rules = [
 ]
 
 fixtures = [
-    # export all records from the Category table
-    "Projek",
-    "Lokasi Absen",
-    "Provinsi",
-    "Kabupaten",
-    "Kecamatan",
-    "Server Script",
-    "Client Script",
-    "Jabatan",
-    "Role Profile",
-    "Jenis Perusahaan Dalam Projek",
-    "Jenis Projek",
-    "Karyawan",
-    {
-		"dt": "User",
-		"filters": [
-			[
-				"role_profile_name", "in", [
-					"Karyawan",
-				]
-			]
-		]
-	},
-    {
-        "dt": "Role", 
-        "filters": [
-			[
-				"role_name", "in", [
-					"Karyawan",
-				]
-			]
-    	]
-	},
+    # "Projek",
+    # "Lokasi Absen",
+    # "Provinsi",
+    # "Kabupaten",
+    # "Kecamatan",
+    # "Server Script",
+    # "Client Script",
+    # "Jabatan",
+    # "Role Profile",
+    # "Jenis Perusahaan Dalam Projek",
+    # "Jenis Projek",
+    # "Karyawan",
+    # {
+	# 	"dt": "User",
+	# 	"filters": [
+	# 		[
+	# 			"role_profile_name", "in", [
+	# 				"Karyawan",
+	# 			]
+	# 		]
+	# 	]
+	# },
+    # {
+    #     "dt": "Role", 
+    #     "filters": [
+	# 		[
+	# 			"role_name", "in", [
+	# 				"Karyawan",
+	# 				"Hr Management"
+	# 			]
+	# 		]
+    # 	]
+	# },
     {
 		"doctype": "Custom DocPerm",
 		"filters": {
-			"role": ["in","Karyawan"]
+			"role": [
+       			"in",[
+       				"Karyawan", 
+					"System Manager"
+				]
+            ]
 		}
 	}
 ]

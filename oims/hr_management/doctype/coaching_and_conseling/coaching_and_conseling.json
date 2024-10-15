@@ -1,0 +1,110 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:CAC-{#######}",
+ "creation": "2024-10-11 09:37:12.391485",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "karyawan",
+  "atasan",
+  "tanggal",
+  "column_break_zbwx",
+  "tempat",
+  "pemberi_konseling",
+  "section_break_whxn",
+  "komi_column",
+  "uraian",
+  "komitmen_karyawan_yang_bersangkutan"
+ ],
+ "fields": [
+  {
+   "fieldname": "karyawan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Karyawan",
+   "options": "Karyawan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "atasan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Atasan",
+   "options": "Karyawan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_zbwx",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tempat",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Tempat",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pemberi_konseling",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Pemberi Konseling",
+   "options": "Karyawan",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_whxn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "komi_column",
+   "fieldtype": "Column Break",
+   "label": "Komi"
+  },
+  {
+   "fieldname": "uraian",
+   "fieldtype": "Text",
+   "label": "Uraian",
+   "reqd": 1
+  },
+  {
+   "fieldname": "komitmen_karyawan_yang_bersangkutan",
+   "fieldtype": "Data",
+   "label": "Komitmen Karyawan Yang Bersangkutan"
+  },
+  {
+   "fieldname": "tanggal",
+   "fieldtype": "Date",
+   "label": "Tanggal",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-11 10:13:02.131139",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "Coaching and Conseling",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

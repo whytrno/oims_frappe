@@ -2,6 +2,21 @@
  {
   "docstatus": 0,
   "doctype": "Role Profile",
+  "modified": "2024-10-11 10:02:11.903636",
+  "name": "HR Management",
+  "role_profile": "HR Management",
+  "roles": [
+   {
+    "parent": "HR Management",
+    "parentfield": "roles",
+    "parenttype": "Role Profile",
+    "role": "System Manager"
+   }
+  ]
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
   "modified": "2024-06-07 08:34:45.988736",
   "name": "Karyawan",
   "role_profile": "Karyawan",
@@ -13,13 +28,5 @@
     "role": "Karyawan"
    }
   ]
- },
- {
-  "docstatus": 0,
-  "doctype": "Role Profile",
-  "modified": "2024-06-07 16:13:19.859329",
-  "name": "HR Management",
-  "role_profile": "HR Management",
-  "roles": []
  }
 ]

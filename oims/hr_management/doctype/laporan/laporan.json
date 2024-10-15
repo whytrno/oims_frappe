@@ -1,0 +1,104 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:LP-{#######}",
+ "creation": "2024-10-11 08:40:50.584067",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "karyawan",
+  "nama",
+  "column_break_wvwi",
+  "jenis_laporan",
+  "status_laporan",
+  "jadwalkan_konseling",
+  "section_break_hhkc",
+  "judul_laporan",
+  "laporanpengaduan",
+  "kritik_dan_saran"
+ ],
+ "fields": [
+  {
+   "fieldname": "karyawan",
+   "fieldtype": "Link",
+   "label": "Karyawan",
+   "options": "Karyawan"
+  },
+  {
+   "description": "Dapat dikosongkan",
+   "fieldname": "nama",
+   "fieldtype": "Data",
+   "label": "Nama"
+  },
+  {
+   "fieldname": "column_break_wvwi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "jenis_laporan",
+   "fieldtype": "Select",
+   "label": "Jenis Laporan",
+   "options": "Pengaduan\nLaporan\nLainnya"
+  },
+  {
+   "fieldname": "status_laporan",
+   "fieldtype": "Select",
+   "label": "Status Laporan",
+   "options": "Baru\nDi Tindak Lanjuti\nLanjut Konseling"
+  },
+  {
+   "default": "0",
+   "fieldname": "jadwalkan_konseling",
+   "fieldtype": "Check",
+   "label": "Jadwalkan Konseling"
+  },
+  {
+   "fieldname": "section_break_hhkc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "judul_laporan",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Judul Laporan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "laporanpengaduan",
+   "fieldtype": "Text",
+   "label": "Laporan/Pengaduan"
+  },
+  {
+   "fieldname": "kritik_dan_saran",
+   "fieldtype": "Text",
+   "label": "Kritik dan Saran"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-11 09:36:50.618038",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "Laporan",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1
+}

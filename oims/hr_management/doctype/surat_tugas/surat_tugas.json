@@ -24,7 +24,6 @@
   {
    "fieldname": "surat_ke",
    "fieldtype": "Int",
-   "in_list_view": 1,
    "label": "Surat Ke",
    "non_negative": 1,
    "reqd": 1
@@ -52,6 +51,7 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "Visit",
    "fieldname": "keperluan",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -111,7 +111,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-10 13:31:55.096256",
+ "modified": "2024-10-14 10:19:20.959608",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Surat Tugas",

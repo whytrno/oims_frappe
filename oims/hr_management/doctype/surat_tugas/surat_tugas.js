@@ -7,24 +7,27 @@ frappe.ui.form.on("Surat Tugas", {
     },
 	
 	onload: function (frm) {
-		frappe.call({
-			method: "frappe.client.get_list",
-			args: {
-				doctype: "Surat Tugas",
-				fields: ["surat_ke"],
-				limit_page_length: 1,
-				order_by: "creation desc"
-			},
-			callback: function (r) {
-				if (r.message && r.message.length > 0) {
-					let last_no_surat = r.message[0].surat_ke;
-
-					frm.set_value('surat_ke', last_no_surat + 1);
-				} else {
-					frm.set_value('surat_ke', 1);
+		if (frm.is_new()) {
+			frappe.call({
+				method: "frappe.client.get_list",
+				args: {
+					doctype: "Surat Tugas",
+					fields: ["surat_ke"],
+					limit_page_length: 1,
+					order_by: "creation desc"
+				},
+				callback: function (r) {
+					if (r.message && r.message.length > 0) {
+						let last_no_surat = r.message[0].surat_ke;
+						frm.set_value('surat_ke', last_no_surat + 1);
+					} else {
+						frm.set_value('surat_ke', 1);
+					}
 				}
-			}
-		});
+			});
+		}
+
+		// Tetap set query untuk user_email baik saat create maupun update
 		frm.fields_dict['karyawan'].grid.get_field('user_email').get_query = function (doc, cdt, cdn) {
 			return {
 				filters: {

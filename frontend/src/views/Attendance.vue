@@ -34,8 +34,6 @@
 						</p>
 					</div>
 
-					<ion-checkbox justify="space-between" v-model="ambilJatahMakan">Ambil Jatah Makan</ion-checkbox>
-
 					<div class="flex justify-between">
 						<p>Radius Absen</p>
 						<p>{{ selectedSite ? `${selectedSite.radius} m` : '- m' }}</p>
@@ -49,6 +47,8 @@
 							</ion-select-option>
 						</ion-select>
 					</div>
+
+					<ion-checkbox justify="space-between" v-model="ambilJatahMakan" v-if="selectedSite && selectedSite.name === 'HO - HO'">Ambil Jatah Makan</ion-checkbox>
 				</div>
 
 				<div class="p-5 flex gap-5">
@@ -100,12 +100,12 @@ const photoBlob = ref(null);
 const photoPreviewUrl = ref('');
 
 const selectedSite = ref(null);
-
 const checkins = createListResource({
 	doctype: DOCTYPE,
 	fields: ["*"],
 	filters: {
 		karyawan: employee.data.nrp,
+		waktu_absen: ['>=', dayjs().startOf('day').format("YYYY-MM-DD HH:mm:ss")],
 	},
 	orderBy: "waktu_absen desc",
 })

@@ -9,11 +9,10 @@
   "nama_perusahaan",
   "bidang_perusahaan",
   "alamat_perusahaan",
-  "logo_perusahaan",
   "column_break_emkb",
-  "email_perusahaan",
-  "no_telp_perusahaan",
-  "website_perusahaan"
+  "logo_perusahaan",
+  "website_perusahaan",
+  "kontak"
  ],
  "fields": [
   {
@@ -33,24 +32,12 @@
   },
   {
    "fieldname": "alamat_perusahaan",
-   "fieldtype": "Data",
+   "fieldtype": "Text",
    "label": "Alamat Perusahaan"
   },
   {
    "fieldname": "column_break_emkb",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "email_perusahaan",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Email Perusahaan"
-  },
-  {
-   "fieldname": "no_telp_perusahaan",
-   "fieldtype": "Phone",
-   "in_list_view": 1,
-   "label": "No. Telp. Perusahaan"
   },
   {
    "fieldname": "website_perusahaan",
@@ -61,6 +48,12 @@
    "fieldname": "logo_perusahaan",
    "fieldtype": "Attach Image",
    "label": "Logo Perusahaan"
+  },
+  {
+   "fieldname": "kontak",
+   "fieldtype": "Table",
+   "label": "Kontak",
+   "options": "List Alamat Kontak"
   }
  ],
  "image_field": "logo_perusahaan",
@@ -71,7 +64,7 @@
    "link_fieldname": "perusahaan"
   }
  ],
- "modified": "2024-10-08 14:09:54.497888",
+ "modified": "2024-10-14 13:22:43.842885",
  "modified_by": "Administrator",
  "module": "Customer Relationship Management",
  "name": "Perusahaan",

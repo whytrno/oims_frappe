@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { markRaw } from "vue"
+import { markRaw, ref } from "vue"
 
 import CheckInPanel from "@/components/CheckInPanel.vue"
 import QuickLinks from "@/components/QuickLinks.vue"
@@ -21,6 +21,15 @@ import LeaveIcon from "@/components/icons/LeaveIcon.vue"
 import ExpenseIcon from "@/components/icons/ExpenseIcon.vue"
 import EmployeeAdvanceIcon from "@/components/icons/EmployeeAdvanceIcon.vue"
 import SalaryIcon from "@/components/icons/SalaryIcon.vue"
+import CustomIonModal from "@/components/CustomIonModal.vue"
+
+const isModalOpen = ref(false)
+const isFirstRender = ref(false)
+
+const openModal = async () => {
+	isFirstRender.value = !isModalOpen.value
+	isModalOpen.value = !isModalOpen.value
+}
 
 const quickLinks = [
 	{

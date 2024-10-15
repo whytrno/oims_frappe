@@ -1,18 +1,18 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{nama}-{perusahaan}",
- "creation": "2024-10-01 11:25:37.406466",
+ "autoname": "field:nama",
+ "creation": "2024-10-14 12:30:49.034855",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "nama",
-  "no_telp",
   "foto",
-  "column_break_azog",
-  "email",
+  "column_break_bbvl",
   "perusahaan",
-  "jabatan"
+  "jabatan",
+  "section_break_qrpv",
+  "kontak"
  ],
  "fields": [
   {
@@ -24,54 +24,46 @@
    "unique": 1
   },
   {
-   "fieldname": "no_telp",
-   "fieldtype": "Phone",
-   "in_list_view": 1,
-   "label": "No. Telp"
+   "fieldname": "foto",
+   "fieldtype": "Attach Image",
+   "label": "Foto"
   },
   {
-   "fieldname": "column_break_azog",
+   "fieldname": "column_break_bbvl",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "email",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Email"
   },
   {
    "fieldname": "perusahaan",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Perusahaan",
-   "options": "Perusahaan"
-  },
-  {
-   "fieldname": "foto",
-   "fieldtype": "Attach Image",
-   "label": "Foto"
+   "options": "Perusahaan",
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "jabatan",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Jabatan",
-   "options": "Jabatan"
-  }
- ],
- "image_field": "foto",
- "index_web_pages_for_search": 1,
- "links": [
+   "fieldtype": "Data",
+   "label": "Jabatan"
+  },
   {
-   "link_doctype": "Perusahaan",
-   "link_fieldname": "name"
+   "fieldname": "section_break_qrpv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "kontak",
+   "fieldtype": "Table",
+   "label": "Kontak",
+   "options": "List Alamat Kontak"
   }
  ],
- "modified": "2024-10-08 14:11:52.358546",
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-14 13:29:14.175813",
  "modified_by": "Administrator",
  "module": "Customer Relationship Management",
  "name": "Kontak",
- "naming_rule": "Expression",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -87,8 +79,7 @@
    "write": 1
   }
  ],
- "sort_field": "creation",
+ "sort_field": "modified",
  "sort_order": "DESC",
- "states": [],
- "title_field": "nama"
+ "states": []
 }
