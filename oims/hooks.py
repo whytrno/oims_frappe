@@ -33,6 +33,12 @@ website_route_rules = [
 ]
 
 fixtures = [
+    "Perusahaan",
+    "Kontak",
+    "List Alamat Kontak",
+    "Divisi",
+    "Jabatan",
+    "Jabatan Detail",
     # "Projek",
     # "Lokasi Absen",
     # "Provinsi",
@@ -44,17 +50,17 @@ fixtures = [
     # "Role Profile",
     # "Jenis Perusahaan Dalam Projek",
     # "Jenis Projek",
-    # "Karyawan",
-    # {
-	# 	"dt": "User",
-	# 	"filters": [
-	# 		[
-	# 			"role_profile_name", "in", [
-	# 				"Karyawan",
-	# 			]
-	# 		]
-	# 	]
-	# },
+    "Karyawan",
+    {
+		"dt": "User",
+		"filters": [
+			[
+				"role_profile_name", "in", [
+					"Karyawan",
+				]
+			]
+		]
+	},
     # {
     #     "dt": "Role", 
     #     "filters": [

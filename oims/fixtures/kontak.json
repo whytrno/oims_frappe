@@ -1,0 +1,252 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Kontak",
+  "foto": null,
+  "jabatan": "President Director",
+  "kontak": [
+   {
+    "kontak": "+62212522948",
+    "parent": "Judy S. Kartadikaria, S.E., CIIB, ANZIIF (Snr. Assoc) CIP",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "No. Telp"
+   },
+   {
+    "kontak": "+62212522949",
+    "parent": "Judy S. Kartadikaria, S.E., CIIB, ANZIIF (Snr. Assoc) CIP",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "No. Telp"
+   },
+   {
+    "kontak": "+62215204021",
+    "parent": "Judy S. Kartadikaria, S.E., CIIB, ANZIIF (Snr. Assoc) CIP",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "Fax"
+   }
+  ],
+  "modified": "2024-10-14 13:31:30.037538",
+  "nama": "Judy S. Kartadikaria, S.E., CIIB, ANZIIF (Snr. Assoc) CIP",
+  "name": "Judy S. Kartadikaria, S.E., CIIB, ANZIIF (Snr. Assoc) CIP",
+  "perusahaan": "PT DINDA PRADANA INSURANCE BROKER (DPIB)"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Kontak",
+  "foto": null,
+  "jabatan": "CFO",
+  "kontak": [
+   {
+    "kontak": "+622180636888",
+    "parent": "Ailiy",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "No. Telp"
+   },
+   {
+    "kontak": "+622180636887",
+    "parent": "Ailiy",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "Fax"
+   },
+   {
+    "kontak": "aily@titan.co.id",
+    "parent": "Ailiy",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "Email"
+   }
+  ],
+  "modified": "2024-10-14 13:30:45.222754",
+  "nama": "Ailiy",
+  "name": "Ailiy",
+  "perusahaan": "PT Manggala Usaha Manunggal"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Kontak",
+  "foto": null,
+  "jabatan": "Key Account Manager",
+  "kontak": [
+   {
+    "kontak": "+6281310959601",
+    "parent": "Andre Adjani Casal",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "No. HP"
+   },
+   {
+    "kontak": "andre.casal@triputraenergi.com",
+    "parent": "Andre Adjani Casal",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "Email"
+   }
+  ],
+  "modified": "2024-10-14 13:48:30.033485",
+  "nama": "Andre Adjani Casal",
+  "name": "Andre Adjani Casal",
+  "perusahaan": "PT TRIPUTRA ENERGI MEGATARA"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Kontak",
+  "foto": null,
+  "jabatan": "Chief Operating Officer",
+  "kontak": [
+   {
+    "kontak": "+622180636888",
+    "parent": "Suryo Suwignjo",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "No. Telp"
+   },
+   {
+    "kontak": "+622180633887",
+    "parent": "Suryo Suwignjo",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "Fax"
+   },
+   {
+    "kontak": "suryo@titaninfra.com",
+    "parent": "Suryo Suwignjo",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "Email"
+   }
+  ],
+  "modified": "2024-10-14 13:51:05.428021",
+  "nama": "Suryo Suwignjo",
+  "name": "Suryo Suwignjo",
+  "perusahaan": "PT Titan Infra Energy"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Kontak",
+  "foto": null,
+  "jabatan": "CEO",
+  "kontak": [
+   {
+    "kontak": "+622180636888",
+    "parent": "Dwi Hartanto",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "No. Telp"
+   },
+   {
+    "kontak": "+622180636887",
+    "parent": "Dwi Hartanto",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "Fax"
+   },
+   {
+    "kontak": "+628115459393",
+    "parent": "Dwi Hartanto",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "No. HP"
+   },
+   {
+    "kontak": "dwi.hartanto@tifaninfra.com",
+    "parent": "Dwi Hartanto",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "Email"
+   }
+  ],
+  "modified": "2024-10-14 13:52:28.120845",
+  "nama": "Dwi Hartanto",
+  "name": "Dwi Hartanto",
+  "perusahaan": "PT Manggala Usaha Manunggal"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Kontak",
+  "foto": null,
+  "jabatan": "Account Manager",
+  "kontak": [
+   {
+    "kontak": "02129976650",
+    "parent": "Fikry Abdu",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "No. Telp"
+   },
+   {
+    "kontak": "+6282138469154",
+    "parent": "Fikry Abdu",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "No. HP"
+   },
+   {
+    "kontak": "fikryabdy@csul.co.id",
+    "parent": "Fikry Abdu",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "Email"
+   }
+  ],
+  "modified": "2024-10-14 13:54:06.041989",
+  "nama": "Fikry Abdu",
+  "name": "Fikry Abdu",
+  "perusahaan": "PT Chandra Sakti Utama Leasing"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Kontak",
+  "foto": null,
+  "jabatan": "Director",
+  "kontak": [
+   {
+    "kontak": "+62811769818",
+    "parent": "Dirmanto",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "No. HP"
+   },
+   {
+    "kontak": "dirmanto@mc-group.co.id",
+    "parent": "Dirmanto",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "Email"
+   }
+  ],
+  "modified": "2024-10-14 13:56:14.384245",
+  "nama": "Dirmanto",
+  "name": "Dirmanto",
+  "perusahaan": "MC GROUP"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Kontak",
+  "foto": null,
+  "jabatan": "Chief Technology Officer",
+  "kontak": [
+   {
+    "kontak": "+6285387575688",
+    "parent": "Alif Fandio Arianda",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "No. HP"
+   },
+   {
+    "kontak": "alif.arianda@eternoglobaltechnologies.com",
+    "parent": "Alif Fandio Arianda",
+    "parentfield": "kontak",
+    "parenttype": "Kontak",
+    "tipe": "Email"
+   }
+  ],
+  "modified": "2024-10-14 13:58:33.221567",
+  "nama": "Alif Fandio Arianda",
+  "name": "Alif Fandio Arianda",
+  "perusahaan": "Eterno Global Technologies"
+ }
+]

@@ -1,8 +1,7 @@
 {
  "actions": [],
  "allow_import": 1,
- "allow_rename": 1,
- "autoname": "field:nrp",
+ "autoname": "autoincrement",
  "creation": "2024-09-29 10:39:44.502757",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -12,6 +11,7 @@
   "alamat_di_ktp",
   "no_ktp",
   "tanggal_lahir",
+  "usia",
   "agama",
   "beri_akses_untuk_login_oims_app",
   "user_id",
@@ -39,6 +39,8 @@
   "nrp",
   "no_kontrak",
   "jabatan",
+  "jabatan_detail",
+  "divisi",
   "column_break_hjzs",
   "tanggal_bergabung",
   "status_kontrak",
@@ -54,7 +56,9 @@
   "jumlah_anak",
   "data_lainnya_tab",
   "foto_mcu",
-  "foto_vaksin"
+  "foto_vaksin",
+  "column_break_ymyr",
+  "catatan"
  ],
  "fields": [
   {
@@ -142,7 +146,6 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "NRP",
-   "reqd": 1,
    "unique": 1
   },
   {
@@ -332,6 +335,35 @@
    "fieldname": "email",
    "fieldtype": "Data",
    "label": "Email"
+  },
+  {
+   "default": "0",
+   "fieldname": "usia",
+   "fieldtype": "Int",
+   "label": "Usia",
+   "non_negative": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "divisi",
+   "fieldtype": "Link",
+   "label": "Divisi",
+   "options": "Divisi"
+  },
+  {
+   "fieldname": "jabatan_detail",
+   "fieldtype": "Link",
+   "label": "Jabatan Detail",
+   "options": "Jabatan Detail"
+  },
+  {
+   "fieldname": "column_break_ymyr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "catatan",
+   "fieldtype": "Text",
+   "label": "Catatan"
   }
  ],
  "image_field": "foto",
@@ -347,11 +379,11 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2024-10-10 14:52:52.751215",
+ "modified": "2024-10-15 12:14:50.341814",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",
- "naming_rule": "By fieldname",
+ "naming_rule": "Autoincrement",
  "owner": "Administrator",
  "permissions": [
   {

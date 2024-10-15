@@ -77,11 +77,11 @@ const registerServiceWorker = async () => {
 				type: "classic",
 			})
 			.then((registration) => {
-				if (config) {
-					window.frappePushNotification.initialize(registration).then(() => {
-						console.log("Frappe Push Notification initialized")
-					})
-				}
+				// if (config) {
+				// 	window.frappePushNotification.initialize(registration).then(() => {
+				// 		console.log("Frappe Push Notification initialized")
+				// 	})
+				// }
 			})
 			.catch((err) => {
 				console.error("Failed to register service worker", err)

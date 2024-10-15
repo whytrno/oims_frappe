@@ -1,0 +1,98 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan Detail",
+  "jabatan": "Operator",
+  "modified": "2024-10-14 11:37:40.681271",
+  "nama": "Aimix",
+  "name": "Aimix"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan Detail",
+  "jabatan": "Master",
+  "modified": "2024-10-14 11:38:08.424530",
+  "nama": "CP. DT, WL, WT",
+  "name": "CP. DT, WL, WT"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan Detail",
+  "jabatan": "Master",
+  "modified": "2024-10-14 11:38:19.834743",
+  "nama": "Dump Truck",
+  "name": "Dump Truck"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan Detail",
+  "jabatan": "Operator",
+  "modified": "2024-10-14 11:38:45.767660",
+  "nama": "Bulldozer",
+  "name": "Bulldozer"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan Detail",
+  "jabatan": "Operator",
+  "modified": "2024-10-14 11:39:03.695092",
+  "nama": "Compact",
+  "name": "Compact"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan Detail",
+  "jabatan": "Operator",
+  "modified": "2024-10-14 11:39:18.665125",
+  "nama": "Exavator",
+  "name": "Exavator"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan Detail",
+  "jabatan": "Operator",
+  "modified": "2024-10-14 11:39:37.478141",
+  "nama": "Fuel Truck",
+  "name": "Fuel Truck"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan Detail",
+  "jabatan": "Operator",
+  "modified": "2024-10-14 11:39:50.252437",
+  "nama": "Grader",
+  "name": "Grader"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan Detail",
+  "jabatan": "Operator",
+  "modified": "2024-10-14 11:40:04.775225",
+  "nama": "Wheel Loader",
+  "name": "Wheel Loader"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan Detail",
+  "jabatan": "Helper",
+  "modified": "2024-10-14 14:30:54.556305",
+  "nama": "Water Truck",
+  "name": "Water Truck"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan Detail",
+  "jabatan": "Helper",
+  "modified": "2024-10-14 14:31:27.035416",
+  "nama": "Mechanic",
+  "name": "Mechanic"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Jabatan Detail",
+  "jabatan": "Staff",
+  "modified": "2024-10-14 11:37:19.145003",
+  "nama": "Quality Control",
+  "name": "Quality Control"
+ }
+]

@@ -1,0 +1,98 @@
+[
+ {
+  "alamat_perusahaan": "Menara Duta Building Wing C, 6th Floor\nJl. H.R Rasuna Said Kav. B-9\nJakarta 12910",
+  "bidang_perusahaan": null,
+  "docstatus": 0,
+  "doctype": "Perusahaan",
+  "kontak": [],
+  "logo_perusahaan": "/private/files/Unknown.png",
+  "modified": "2024-10-14 13:31:36.286418",
+  "nama_perusahaan": "PT DINDA PRADANA INSURANCE BROKER (DPIB)",
+  "name": "PT DINDA PRADANA INSURANCE BROKER (DPIB)",
+  "website_perusahaan": "https://dpib.co.id"
+ },
+ {
+  "alamat_perusahaan": "Graha Anabatic 8th Floor\nJl. Scientia Boulevard Kav. U2\nSummarecon Serpong\nTangerang 1581, Indonesia",
+  "bidang_perusahaan": "Infrastructures and Engery",
+  "docstatus": 0,
+  "doctype": "Perusahaan",
+  "kontak": [],
+  "logo_perusahaan": null,
+  "modified": "2024-10-14 13:30:54.521746",
+  "nama_perusahaan": "PT Manggala Usaha Manunggal",
+  "name": "PT Manggala Usaha Manunggal",
+  "website_perusahaan": "www.tifaninfra.com"
+ },
+ {
+  "alamat_perusahaan": "Graha Anabatic 8th Floor\nJl. Scientia Boulevard Kav. U2\nSummarecon Serpong\nTangerang 15811, Indonesia",
+  "bidang_perusahaan": null,
+  "docstatus": 0,
+  "doctype": "Perusahaan",
+  "kontak": [],
+  "logo_perusahaan": null,
+  "modified": "2024-10-14 13:50:02.405269",
+  "nama_perusahaan": "PT Titan Infra Energy",
+  "name": "PT Titan Infra Energy",
+  "website_perusahaan": null
+ },
+ {
+  "alamat_perusahaan": "Gedung TMT 1, Lantai 2\nJl. Cilandak KKO No. 1\nJakarta 12560 - Indonesia",
+  "bidang_perusahaan": null,
+  "docstatus": 0,
+  "doctype": "Perusahaan",
+  "kontak": [],
+  "logo_perusahaan": null,
+  "modified": "2024-10-14 13:53:16.986100",
+  "nama_perusahaan": "PT Chandra Sakti Utama Leasing",
+  "name": "PT Chandra Sakti Utama Leasing",
+  "website_perusahaan": null
+ },
+ {
+  "alamat_perusahaan": "GEDUNG WTC Mangga Dua Lt. 3A\nJl. Mangga Dua Raya No. 8, Kel. Ancol,\nKec. Padamengan, Jakarta Utara - 14430",
+  "bidang_perusahaan": null,
+  "docstatus": 0,
+  "doctype": "Perusahaan",
+  "kontak": [],
+  "logo_perusahaan": null,
+  "modified": "2024-10-14 13:55:24.222405",
+  "nama_perusahaan": "MC GROUP",
+  "name": "MC GROUP",
+  "website_perusahaan": null
+ },
+ {
+  "alamat_perusahaan": "Menara Citibank Pondok Indah Lt. 2\nJl. Metro Pondok Indah Kav 2 / BA No. 2,\nPondok Pinang, Kebayoran Lama, \nJakarta Selatan 12310, Indonesia",
+  "bidang_perusahaan": null,
+  "docstatus": 0,
+  "doctype": "Perusahaan",
+  "kontak": [],
+  "logo_perusahaan": null,
+  "modified": "2024-10-14 13:57:45.106634",
+  "nama_perusahaan": "Eterno Global Technologies",
+  "name": "Eterno Global Technologies",
+  "website_perusahaan": "eternoglobaltechnologies.com"
+ },
+ {
+  "alamat_perusahaan": null,
+  "bidang_perusahaan": null,
+  "docstatus": 0,
+  "doctype": "Perusahaan",
+  "kontak": [],
+  "logo_perusahaan": null,
+  "modified": "2024-10-14 14:01:09.558017",
+  "nama_perusahaan": "PT Antareja Mahada Makmur",
+  "name": "PT Antareja Mahada Makmur",
+  "website_perusahaan": null
+ },
+ {
+  "alamat_perusahaan": "Menara Astra Lt. 35\nJl. Jendral Sudirman Kav 5-6\nJakarta Pusat 10220 INDONESIA",
+  "bidang_perusahaan": null,
+  "docstatus": 0,
+  "doctype": "Perusahaan",
+  "kontak": [],
+  "logo_perusahaan": "/private/files/Unknown-1.png",
+  "modified": "2024-10-14 13:49:07.166922",
+  "nama_perusahaan": "PT TRIPUTRA ENERGI MEGATARA",
+  "name": "PT TRIPUTRA ENERGI MEGATARA",
+  "website_perusahaan": "triputraenergi.com"
+ }
+]
