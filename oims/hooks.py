@@ -39,17 +39,17 @@ fixtures = [
     "Divisi",
     "Jabatan",
     "Jabatan Detail",
-    # "Projek",
-    # "Lokasi Absen",
-    # "Provinsi",
-    # "Kabupaten",
-    # "Kecamatan",
-    # "Server Script",
-    # "Client Script",
-    # "Jabatan",
-    # "Role Profile",
-    # "Jenis Perusahaan Dalam Projek",
-    # "Jenis Projek",
+    "Projek",
+    "Lokasi Absen",
+    "Provinsi",
+    "Kabupaten",
+    "Kecamatan",
+    "Server Script",
+    "Client Script",
+    "Jabatan",
+    "Role Profile",
+    "Jenis Perusahaan Dalam Projek",
+    "Jenis Projek",
     "Karyawan",
     {
 		"dt": "User",
@@ -61,17 +61,17 @@ fixtures = [
 			]
 		]
 	},
-    # {
-    #     "dt": "Role", 
-    #     "filters": [
-	# 		[
-	# 			"role_name", "in", [
-	# 				"Karyawan",
-	# 				"Hr Management"
-	# 			]
-	# 		]
-    # 	]
-	# },
+    {
+        "dt": "Role", 
+        "filters": [
+			[
+				"role_name", "in", [
+					"Karyawan",
+					"Hr Management"
+				]
+			]
+    	]
+	},
     {
 		"doctype": "Custom DocPerm",
 		"filters": {
