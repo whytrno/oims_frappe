@@ -1,6 +1,6 @@
 {
  "actions": [],
- "allow_rename": 1,
+ "autoname": "autoincrement",
  "creation": "2024-09-29 11:35:24.005491",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -23,7 +23,8 @@
    "in_list_view": 1,
    "label": "Karyawan",
    "options": "Karyawan",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "default": "In",
@@ -83,11 +84,11 @@
  "image_field": "foto",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-08 11:13:59.740183",
+ "modified": "2024-10-15 16:49:12.707705",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Absensi",
- "naming_rule": "By script",
+ "naming_rule": "Autoincrement",
  "owner": "Administrator",
  "permissions": [
   {
