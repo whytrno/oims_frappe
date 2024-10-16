@@ -57,9 +57,10 @@
    "options": "List Alamat Kontak"
   }
  ],
+ "image_field": "foto",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-14 13:29:14.175813",
+ "modified": "2024-10-16 09:23:19.512057",
  "modified_by": "Administrator",
  "module": "Customer Relationship Management",
  "name": "Kontak",

@@ -34,6 +34,7 @@ website_route_rules = [
 
 fixtures = [
     "Perusahaan",
+    "Bidang Perusahaan",
     "Kontak",
     "List Alamat Kontak",
     "Divisi",

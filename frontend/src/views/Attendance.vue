@@ -373,7 +373,7 @@ const submitLog = async (logType) => {
 
 	checkins.insert.submit(
 		{
-			karyawan: employee.data.nrp,
+			karyawan: employee.data.name,
 			lokasi_absen: selectedSite.value.name,
 			foto: photoUrl,
 			tipe: logType,

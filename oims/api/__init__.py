@@ -68,6 +68,7 @@ def get_current_employee_info() -> dict:
 		"Karyawan",
 		{"user_id": current_user, "status": "Aktif"},
 		[
+			"name",
 			"nrp",
 			"nama_lengkap",
 			"jabatan",
