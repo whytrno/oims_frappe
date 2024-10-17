@@ -42,7 +42,7 @@ const checkins = createListResource({
 	doctype: DOCTYPE,
 	fields: ["*"],
 	filters: {
-		karyawan: employee.data.nrp,
+		karyawan: employee.data.name,
 		waktu_absen: ['>=', dayjs().startOf('day').format("YYYY-MM-DD HH:mm:ss")],
 	},
 	orderBy: "waktu_absen desc",

@@ -48,15 +48,21 @@
 						</ion-select>
 					</div>
 
-					<ion-checkbox justify="space-between" v-model="ambilJatahMakan" v-if="selectedSite && selectedSite.name === 'HO - HO'">Ambil Jatah Makan</ion-checkbox>
+					<ion-checkbox justify="space-between" v-model="ambilJatahMakan"
+						v-if="selectedSite && selectedSite.name === 'HO - HO'">Ambil Jatah Makan</ion-checkbox>
 				</div>
 
 				<div class="p-5 flex gap-5">
-					<Button variant="solid" class="w-full py-6 text-sm" @click="submitLog(nextAction.action)">
-						{{ nextAction.label }}
+					<Button variant="solid" class="w-full py-6 text-sm" @click="submitLog(nextAction.action)"
+						:disabled="isButtonDisabled">
+						<ion-spinner v-if="loading" class="text-white text-sm"></ion-spinner>
+						<template v-else>
+							{{ nextAction.label }}
+						</template>
 					</Button>
 
-					<Button variant="solid" class="w-full py-6 text-sm">
+
+					<Button variant="solid" class="w-full py-6 text-sm" :disabled="isButtonDisabled">
 						Izin
 					</Button>
 				</div>
@@ -66,7 +72,7 @@
 </template>
 
 <script setup>
-import { IonPage, IonContent, IonSelect, IonCheckbox, IonList, IonSelectOption, IonItem } from "@ionic/vue"
+import { IonPage, IonContent, IonSelect, IonCheckbox, IonList, IonSelectOption, IonItem, IonSpinner } from "@ionic/vue"
 import { useRouter } from "vue-router"
 import { createListResource, toast, FeatherIcon } from "frappe-ui"
 import { computed, inject, ref, watch, onMounted, onBeforeUnmount } from "vue"
@@ -104,7 +110,7 @@ const checkins = createListResource({
 	doctype: DOCTYPE,
 	fields: ["*"],
 	filters: {
-		karyawan: employee.data.nrp,
+		karyawan: employee.data.name,
 		waktu_absen: ['>=', dayjs().startOf('day').format("YYYY-MM-DD HH:mm:ss")],
 	},
 	orderBy: "waktu_absen desc",
@@ -119,17 +125,21 @@ const lokasiSite = createListResource({
 	},
 })
 
+const loading = ref(false);
+const isButtonDisabled = ref(false);
+
 checkins.reload()
 lokasiSite.reload()
 watch(() => selectedSite.value, (newValue, oldValue) => {
 	console.log("Selected Site Changed", newValue, oldValue)
 })
 
-
 const lastLog = computed(() => {
 	if (checkins.list.loading || !checkins.data) return {}
 	return checkins.data[0]
 })
+
+console.log("Last Log", checkins)
 
 const nextAction = computed(() => {
 	return lastLog?.value?.tipe === "In"
@@ -311,7 +321,6 @@ const getDistanceFromLatLonInMeters = (lat1, lon1, lat2, lon2) => {
 	return R * c; // Distance in meters
 };
 
-
 const submitLog = async (logType) => {
 	const action = logType === "In" ? "In" : "Out";
 
@@ -371,6 +380,9 @@ const submitLog = async (logType) => {
 		return;
 	}
 
+	loading.value = true;
+	isButtonDisabled.value = true; // Disable the button
+
 	checkins.insert.submit(
 		{
 			karyawan: employee.data.name,
@@ -392,6 +404,7 @@ const submitLog = async (logType) => {
 					position: "top-center",
 					iconClasses: "text-green-500",
 				});
+				loading.value = false;
 			},
 			onError() {
 				toast({
@@ -401,10 +414,13 @@ const submitLog = async (logType) => {
 					position: "top-center",
 					iconClasses: "text-red-500",
 				});
+				loading.value = false;
+				isButtonDisabled.value = false; // Re-enable on error
 			},
 		}
 	);
 };
+
 
 
 const initializeMap = () => {

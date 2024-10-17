@@ -1,0 +1,126 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:no_surat",
+ "creation": "2024-10-16 11:24:15.884453",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "surat_ke",
+  "no_surat",
+  "karyawan",
+  "dari_divisi",
+  "lokasi_site_awal",
+  "column_break_mipf",
+  "ke_divisi",
+  "ke_jabatan",
+  "lokasi_site_tujuan",
+  "tanggal_mutasi",
+  "doc_url"
+ ],
+ "fields": [
+  {
+   "fieldname": "surat_ke",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Surat Ke",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "default": "-",
+   "fieldname": "no_surat",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "is_virtual": 1,
+   "label": "No Surat",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "karyawan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Karyawan",
+   "options": "Karyawan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "lokasi_site_awal",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Lokasi Site Awal",
+   "options": "Projek",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_mipf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lokasi_site_tujuan",
+   "fieldtype": "Link",
+   "label": "Lokasi Site Tujuan",
+   "options": "Projek",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tanggal_mutasi",
+   "fieldtype": "Date",
+   "label": "Tanggal Mutasi",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ke_divisi",
+   "fieldtype": "Link",
+   "label": "Ke Divisi",
+   "options": "Divisi",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ke_jabatan",
+   "fieldtype": "Link",
+   "label": "Ke Jabatan",
+   "options": "Jabatan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "dari_divisi",
+   "fieldtype": "Link",
+   "label": "Dari Divisi",
+   "options": "Divisi",
+   "reqd": 1
+  },
+  {
+   "fieldname": "doc_url",
+   "fieldtype": "Attach",
+   "label": "Doc URL",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-16 14:03:31.835494",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "Surat Mutasi",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
