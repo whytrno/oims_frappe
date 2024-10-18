@@ -10,7 +10,9 @@
   "name": "ERPP - Unit Sarana",
   "peta": null,
   "projek": "ERPP",
-  "radius": 50
+  "radius": 50,
+  "waktu_keluar": "17:00:00",
+  "waktu_masuk": "9:00:00"
  },
  {
   "docstatus": 0,
@@ -23,7 +25,9 @@
   "name": "PWDK - Head Office",
   "peta": null,
   "projek": "PWDK",
-  "radius": 50
+  "radius": 50,
+  "waktu_keluar": "17:00:00",
+  "waktu_masuk": "9:00:00"
  },
  {
   "docstatus": 0,
@@ -36,7 +40,9 @@
   "name": "ERPL - Head Office",
   "peta": null,
   "projek": "ERPL",
-  "radius": 50
+  "radius": 50,
+  "waktu_keluar": "17:00:00",
+  "waktu_masuk": "9:00:00"
  },
  {
   "docstatus": 0,
@@ -49,7 +55,9 @@
   "name": "ERAM - Head Office",
   "peta": null,
   "projek": "ERAM",
-  "radius": 1000
+  "radius": 1000,
+  "waktu_keluar": "17:00:00",
+  "waktu_masuk": "9:00:00"
  },
  {
   "docstatus": 0,
@@ -62,7 +70,9 @@
   "name": "OPPS - Head Office",
   "peta": null,
   "projek": "OPPS",
-  "radius": 50
+  "radius": 50,
+  "waktu_keluar": "17:00:00",
+  "waktu_masuk": "9:00:00"
  },
  {
   "docstatus": 0,
@@ -75,7 +85,9 @@
   "name": "ERPP - Head Office",
   "peta": null,
   "projek": "ERPP",
-  "radius": 50
+  "radius": 50,
+  "waktu_keluar": "17:00:00",
+  "waktu_masuk": "9:00:00"
  },
  {
   "docstatus": 0,
@@ -88,7 +100,9 @@
   "name": "ERPM - Head Office",
   "peta": null,
   "projek": "ERPM",
-  "radius": 50
+  "radius": 50,
+  "waktu_keluar": "17:00:00",
+  "waktu_masuk": "9:00:00"
  },
  {
   "docstatus": 0,
@@ -101,7 +115,9 @@
   "name": "SKKK - Head Office",
   "peta": null,
   "projek": "SKKK",
-  "radius": 50
+  "radius": 50,
+  "waktu_keluar": "17:00:00",
+  "waktu_masuk": "9:00:00"
  },
  {
   "docstatus": 0,
@@ -114,7 +130,9 @@
   "name": "HO - Mess",
   "peta": null,
   "projek": "HO",
-  "radius": 25
+  "radius": 25,
+  "waktu_keluar": "17:00:00",
+  "waktu_masuk": "9:00:00"
  },
  {
   "docstatus": 0,
@@ -122,11 +140,13 @@
   "gunakan_lokasi_saat_ini": 1,
   "latitude": "-6.395160675048828",
   "longitude": "106.93040584357988",
-  "modified": "2024-10-08 10:34:58.589898",
+  "modified": "2024-10-18 10:33:42.172072",
   "nama": "HO",
   "name": "HO - HO",
   "peta": null,
   "projek": "HO",
-  "radius": 50
+  "radius": 50,
+  "waktu_keluar": "17:00:00",
+  "waktu_masuk": "9:00:00"
  }
 ]
