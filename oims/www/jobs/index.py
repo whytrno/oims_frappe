@@ -27,7 +27,6 @@ def get_job_openings(filters=None, txt=None, sort=None, limit=20, offset=0):
 		frappe.qb.from_(jo)
 		.select(
 			jo.judul,
-			jo.perusahaan,
 			jo.route,
 			jo.divisi,
 			jo.dibuka_pada,

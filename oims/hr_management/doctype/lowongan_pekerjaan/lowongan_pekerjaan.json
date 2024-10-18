@@ -108,7 +108,7 @@
    "label": "Publish gaji"
   },
   {
-   "default": "0",
+   "default": "1",
    "fieldname": "publish",
    "fieldtype": "Check",
    "label": "Publish ke website"
@@ -116,7 +116,8 @@
   {
    "fieldname": "route",
    "fieldtype": "Data",
-   "label": "Route"
+   "label": "Route",
+   "read_only": 1
   },
   {
    "fieldname": "judul",
@@ -128,8 +129,13 @@
   }
  ],
  "has_web_view": 1,
- "links": [],
- "modified": "2024-10-07 15:37:41.554271",
+ "links": [
+  {
+   "link_doctype": "Pelamar Pekerjaan",
+   "link_fieldname": "judul_pekerjaan"
+  }
+ ],
+ "modified": "2024-10-18 08:58:30.416505",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Lowongan Pekerjaan",
@@ -149,7 +155,7 @@
    "write": 1
   }
  ],
- "route": "route",
+ "route": "jobs",
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": []

@@ -7,6 +7,7 @@
  "field_order": [
   "lokasi_absen",
   "karyawan",
+  "nama_karyawan",
   "tipe",
   "foto",
   "ambil_jatah_makan",
@@ -20,7 +21,6 @@
   {
    "fieldname": "karyawan",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "label": "Karyawan",
    "options": "Karyawan",
    "reqd": 1,
@@ -79,12 +79,20 @@
    "label": "Lokasi Absen",
    "options": "Lokasi Absen",
    "reqd": 1
+  },
+  {
+   "fetch_from": "karyawan.nama_lengkap",
+   "fieldname": "nama_karyawan",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama Karyawan",
+   "read_only": 1
   }
  ],
  "image_field": "foto",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-15 16:49:12.707705",
+ "modified": "2024-10-18 09:09:55.389867",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Absensi",

@@ -15,7 +15,6 @@ class LowonganPekerjaan(WebsiteGenerator):
 	def get_context(self, context):
 		context.judul = self.judul
 		context.deskripsi = self.deskripsi
-		context.perusahaan = self.perusahaan
 		context.divisi = self.divisi
 		context.dibuka_pada = pretty_date(self.dibuka_pada)
 		context.ditutup_pada = self.ditutup_pada

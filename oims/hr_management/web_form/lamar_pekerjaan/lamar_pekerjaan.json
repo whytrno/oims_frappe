@@ -18,7 +18,7 @@
  "list_columns": [],
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2024-10-07 13:13:58.869708",
+ "modified": "2024-10-18 08:51:59.227681",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "lamar-pekerjaan",
@@ -85,6 +85,7 @@
   },
   {
    "allow_read_on_all_link_options": 0,
+   "default": "+62-",
    "fieldname": "no_hp",
    "fieldtype": "Phone",
    "hidden": 0,
