@@ -8,6 +8,8 @@
  "field_order": [
   "nama",
   "projek",
+  "waktu_masuk",
+  "waktu_keluar",
   "column_break_lbnv",
   "gunakan_lokasi_saat_ini",
   "latitude",
@@ -40,12 +42,14 @@
   {
    "fieldname": "latitude",
    "fieldtype": "Data",
-   "label": "Latitude"
+   "label": "Latitude",
+   "reqd": 1
   },
   {
    "fieldname": "longitude",
    "fieldtype": "Data",
-   "label": "Longitude"
+   "label": "Longitude",
+   "reqd": 1
   },
   {
    "default": "25",
@@ -53,7 +57,8 @@
    "fieldtype": "Int",
    "in_list_view": 1,
    "label": "Radius (Meter)",
-   "non_negative": 1
+   "non_negative": 1,
+   "reqd": 1
   },
   {
    "fieldname": "section_break_culr",
@@ -69,6 +74,20 @@
    "fieldname": "gunakan_lokasi_saat_ini",
    "fieldtype": "Check",
    "label": "Gunakan Lokasi Saat Ini"
+  },
+  {
+   "default": "09:00:00",
+   "fieldname": "waktu_masuk",
+   "fieldtype": "Time",
+   "label": "Waktu Masuk",
+   "reqd": 1
+  },
+  {
+   "default": "17:00:00",
+   "fieldname": "waktu_keluar",
+   "fieldtype": "Time",
+   "label": "Waktu Keluar",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -79,7 +98,7 @@
    "table_fieldname": "projek"
   }
  ],
- "modified": "2024-10-08 16:54:40.511609",
+ "modified": "2024-10-18 10:33:25.090466",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Lokasi Absen",

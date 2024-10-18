@@ -15,7 +15,8 @@
   "waktu_absen",
   "latitude",
   "longitude",
-  "keterangan"
+  "keterangan",
+  "telat"
  ],
  "fields": [
   {
@@ -87,12 +88,18 @@
    "in_list_view": 1,
    "label": "Nama Karyawan",
    "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "telat",
+   "fieldtype": "Check",
+   "label": "Telat"
   }
  ],
  "image_field": "foto",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-18 09:09:55.389867",
+ "modified": "2024-10-18 10:34:43.367469",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Absensi",

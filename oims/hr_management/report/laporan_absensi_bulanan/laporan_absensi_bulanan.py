@@ -15,7 +15,7 @@ Filters = frappe._dict
 
 status_map = {
 	"Hadir": "H",
-	# "Tidak Hadir": "TH",
+	"Telat": "T",
 	"Izin": "I",
 	"Work From Home": "WFH",
 }
@@ -50,7 +50,7 @@ def get_attendance_map(filters):
 		filters={
 			"waktu_absen": ["between", (f"{filters.year}-{filters.month}-01", f"{filters.year}-{filters.month}-{monthrange(int(filters.year), int(filters.month))[1]}")]
 		},
-		fields=["lokasi_absen", "karyawan", "tipe", "waktu_absen", "ambil_jatah_makan"]
+		fields=["lokasi_absen", "karyawan", "tipe", "waktu_absen", "ambil_jatah_makan", "telat"]
 	)
 
 	attendance_map = {}
@@ -62,6 +62,7 @@ def get_attendance_map(filters):
 		ambil_jatah_makan = record.ambil_jatah_makan
 		site = record.lokasi_absen
 		tipe = record.tipe
+		telat = record.telat
 		hari_absen = record.waktu_absen.day
 
 		# Jika hari_absen belum ada di attendance_map, tambahkan
@@ -82,7 +83,8 @@ def get_attendance_map(filters):
 		# Tambahkan data absen ke dalam 'data_absen' list
 		attendance_map[hari_absen][site][karyawan]["data_absen"].append({
 			"tipe": tipe,
-			"ambil_jatah_makan": ambil_jatah_makan
+			"ambil_jatah_makan": ambil_jatah_makan,
+			"telat": telat
 		})
  
 	return attendance_map
@@ -186,15 +188,15 @@ def get_data(filters) -> list[list]:
                     hadir = False
                     for absensi in absensi_harian:
                         if absensi["tipe"] == "In" or absensi["tipe"] == "Out":
-                            row[2 + day] = '<p style="color: green;">'+site+'</p>';  # Indeks 2 karena data setelah NRP dan nama
+                            row[1 + day] = '<p style="color: green;">'+site+'</p>';  # Indeks 2 karena data setelah NRP dan nama
                             hadir = True
                             break
                         elif absensi["tipe"] == "Izin":
-                            row[2 + day] = '<p style="color: red;">'+site+'</p>';
+                            row[1 + day] = '<p style="color: red;">'+site+'</p>';
                             hadir = True
                             break
                     if not hadir:
-                        row[2 + day] = " "
+                        row[1 + day] = " "
 
     # Convert the data_map values to a list for final output
     return list(data_map.values())
@@ -206,13 +208,14 @@ def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
     labels = []
     izin = []
     hadir = []
+    telat = []
     ambil_jatah_makan = []
 
     # Iterasi melalui semua hari yang ada
     for day in days:
         date = day['label'].split(' ')[0]  # Mengambil tanggal
         labels.append(date)
-        total_hadir_on_day = total_izin_on_day = total_ambil_jatah_makan = 0
+        total_hadir_on_day = total_izin_on_day = total_ambil_jatah_makan = total_telat = 0
         day_index = cint(day["fieldname"])  # Konversi hari ke integer
 
         # Iterasi melalui hari dalam attendance_map
@@ -231,6 +234,9 @@ def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
 
                         # Iterasi melalui setiap entri absensi karyawan
                         for absensi in attendance_on_day:
+                            if absensi["telat"]:
+                                total_telat += 1
+                                        
                             if absensi["tipe"] == "Izin":
                                 total_izin_on_day += 1
                             elif absensi["tipe"] in ["In", "Out", "Work From Home"]:
@@ -242,10 +248,11 @@ def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
                                 if absensi["ambil_jatah_makan"] and not sudah_ambil_jatah_makan:
                                     total_ambil_jatah_makan += 1
                                     sudah_ambil_jatah_makan = True  # Menandai jatah makan sudah dihitung
-
+                                    
         # Tambahkan hasil perhitungan untuk hari ini ke dalam list
         izin.append(total_izin_on_day)
         hadir.append(total_hadir_on_day)
+        telat.append(total_telat)
         ambil_jatah_makan.append(total_ambil_jatah_makan)
 
     # Return data dalam format yang diminta (untuk chart)
@@ -253,12 +260,14 @@ def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
         "data": {
             "labels": labels,
             "datasets": [
-                {"name": "Izin", "values": izin},
                 {"name": "Hadir", "values": hadir},
+                {"name": "Telat", "values": telat},  # Mengoreksi label yang salah sebelumnya
+                {"name": "Izin", "values": izin},
                 {"name": "Ambil Jatah Makan", "values": ambil_jatah_makan},
             ],
         },
         "type": "line",
-        "colors": ["red", "green", "purple"],
+        "colors": ["green", "red", "blue", "orange"],
     }
+
 
