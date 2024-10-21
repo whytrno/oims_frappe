@@ -10,6 +10,7 @@
   "nama_pelamar",
   "domisili",
   "email",
+  "column_break_chkc",
   "no_hp",
   "status",
   "cv_atau_resume",
@@ -79,11 +80,15 @@
    "fieldname": "dokumen_pendukung_lainnya",
    "fieldtype": "Attach",
    "label": "Dokumen Pendukung Lainnya"
+  },
+  {
+   "fieldname": "column_break_chkc",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-18 08:51:35.395891",
+ "modified": "2024-10-21 10:16:06.455481",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Pelamar Pekerjaan",

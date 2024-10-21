@@ -74,7 +74,7 @@
 <script setup>
 import { IonPage, IonContent, IonSelect, IonCheckbox, IonList, IonSelectOption, IonItem, IonSpinner } from "@ionic/vue"
 import { useRouter } from "vue-router"
-import { createListResource, toast, FeatherIcon } from "frappe-ui"
+import { createListResource, toast, FeatherIcon, createResource } from "frappe-ui"
 import { computed, inject, ref, watch, onMounted, onBeforeUnmount } from "vue"
 import { modalController } from "@ionic/vue"
 import L from "leaflet";
@@ -125,9 +125,6 @@ const lokasiSite = createListResource({
 	},
 })
 
-const loading = ref(false);
-const isButtonDisabled = ref(false);
-
 checkins.reload()
 lokasiSite.reload()
 watch(() => selectedSite.value, (newValue, oldValue) => {
@@ -138,8 +135,6 @@ const lastLog = computed(() => {
 	if (checkins.list.loading || !checkins.data) return {}
 	return checkins.data[0]
 })
-
-console.log("Last Log", checkins)
 
 const nextAction = computed(() => {
 	return lastLog?.value?.tipe === "In"
@@ -322,6 +317,11 @@ const getDistanceFromLatLonInMeters = (lat1, lon1, lat2, lon2) => {
 };
 
 const submitLog = async (logType) => {
+	const loading = ref(false);
+	const isButtonDisabled = ref(false);
+
+	loading.value = true;
+	isButtonDisabled.value = true; // Disable the button
 	const action = logType === "In" ? "In" : "Out";
 
 	// Check if a site is selected
@@ -380,45 +380,45 @@ const submitLog = async (logType) => {
 		return;
 	}
 
-	loading.value = true;
-	isButtonDisabled.value = true; // Disable the button
-
-	checkins.insert.submit(
-		{
+	createResource({
+		url: "oims.api.submit_attendance",
+		method: "POST",
+		params: {
 			karyawan: employee.data.name,
 			lokasi_absen: selectedSite.value.name,
 			foto: photoUrl,
 			tipe: logType,
+			// tipe: "In",
 			waktu_absen: checkinTimestamp.value,
 			latitude: latitude.value,
 			longitude: longitude.value,
 			ambil_jatah_makan: ambilJatahMakan.value,
 		},
-		{
-			onSuccess() {
-				modalController.dismiss();
-				toast({
-					title: "Success",
-					text: `${action} successful!`,
-					icon: "check-circle",
-					position: "top-center",
-					iconClasses: "text-green-500",
-				});
-				loading.value = false;
-			},
-			onError() {
-				toast({
-					title: "Error",
-					text: `${action} failed!`,
-					icon: "alert-circle",
-					position: "top-center",
-					iconClasses: "text-red-500",
-				});
-				loading.value = false;
-				isButtonDisabled.value = false; // Re-enable on error
-			},
-		}
-	);
+		auto: true,
+		onError(error) {
+			
+			toast({
+				title: "Error",
+				text: `${action} failed!`,
+				icon: "alert-circle",
+				position: "top-center",
+				iconClasses: "text-red-500",
+			});
+			loading.value = false;
+			isButtonDisabled.value = false; // Re-enable on error
+		},
+		onSuccess(data) {
+			modalController.dismiss();
+			toast({
+				title: "Success",
+				text: `${action} successful!`,
+				icon: "check-circle",
+				position: "top-center",
+				iconClasses: "text-green-500",
+			});
+			loading.value = false;
+		},
+	})
 };
 
 

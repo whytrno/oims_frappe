@@ -250,6 +250,7 @@ def get_data(filters) -> list[list]:
                             break
                     if not hadir:
                         row[1 + day] = " "
+                        
 
     # Convert the data_map values to a list for final output
     return list(data_map.values())
@@ -293,6 +294,8 @@ def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
         izin.append(total_izin_on_day)
         telat.append(total_telat)
         ambil_jatah_makan.append(total_ambil_jatah_makan)
+    
+        print(f'hadir {total_hadir_on_day}')
 
         # Pindah ke hari berikutnya
         current_date = add_days(current_date, 1)
@@ -309,8 +312,6 @@ def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
         },
         "type": "line",  # Bisa juga menggunakan "bar" jika lebih sesuai
     }
-    
-    print(f'chart_data {chart_data}')
 
     return chart_data
 

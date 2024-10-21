@@ -4,6 +4,7 @@ from frappe.model import get_permitted_fields
 from frappe.model.workflow import get_workflow_name
 from frappe.query_builder import Order
 from frappe.utils import getdate, strip_html
+from datetime import datetime
 
 SUPPORTED_FIELD_TYPES = [
 	"Link",
@@ -34,6 +35,50 @@ def get_current_user_info() -> dict:
 	user["roles"] = frappe.get_roles(current_user)
 
 	return user
+
+@frappe.whitelist()
+def submit_attendance(karyawan, lokasi_absen, foto, tipe, waktu_absen, latitude, longitude, ambil_jatah_makan=False):
+    """
+    Submit attendance for an employee.
+
+    :param employee: The name of the employee.
+    :param location: The location of the attendance.
+    :param photo_url: The URL of the photo taken during attendance.
+    :param attendance_type: The type of attendance (e.g., check-in, check-out).
+    :param timestamp: The timestamp of the attendance.
+    :param latitude: The latitude of the attendance location.
+    :param longitude: The longitude of the attendance location.
+    :param take_meal_allowance: Boolean indicating if meal allowance is taken.
+    :return: A dictionary containing the attendance details.
+    """
+    # Cek jika sudah absen dari tipe yang sama di hari ini
+    today = datetime.today().date()
+    existing_attendance = frappe.db.exists(
+        "Absensi",
+        {
+            "karyawan": karyawan,
+            "tipe": tipe,
+            "waktu_absen": ["like", f"{today}%"]
+        }
+    )
+    if existing_attendance:
+        frappe.throw(_("Anda sudah absen {tipe} hari ini."))
+
+    attendance_doc = frappe.get_doc({
+        "doctype": "Absensi",
+        "karyawan": karyawan,
+        "lokasi_absen": lokasi_absen,
+        "foto": foto,
+        "tipe": tipe,
+        "waktu_absen": waktu_absen,
+        "latitude": latitude,
+        "longitude": longitude,
+        "ambil_jatah_makan": ambil_jatah_makan
+    })
+    attendance_doc.save()
+    frappe.logger().info(f"Attendance submitted for {karyawan} at {waktu_absen}")
+    return attendance_doc.as_dict()
+
 
 @frappe.whitelist()
 def create_folders_if_not_exist(base_path, folder_path):
