@@ -9,7 +9,7 @@
 			Anda belum absen hari ini
 		</div>
 
-		<template v-if="nextAction.action === 'In'">
+		<template v-if="lastLogType === 'check-out'">
 			<div
 				class="mt-4 mb-1 drop-shadow-sm text-base"
 				:to="{ name: 'Attendance' }"
