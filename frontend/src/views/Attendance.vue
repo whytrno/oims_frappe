@@ -101,8 +101,8 @@ const photoTaken = ref(false);
 const photoBlob = ref(null);
 const photoPreviewUrl = ref('');
 
-const loading = ref(true);
-const isButtonDisabled = ref(true);
+const loading = ref(false);
+const isButtonDisabled = ref(false);
 
 const selectedSite = ref(null);
 const checkins = createListResource({
