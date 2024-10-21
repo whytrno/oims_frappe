@@ -53,14 +53,40 @@
 				</div>
 
 				<div class="p-5 flex gap-5">
-					<Button :variant="'solid'" :loading="loading" :loadingText="'Processing...'" class="w-full py-6 text-sm" @click="submitLog(nextAction.action)"
-						:disabled="isButtonDisabled">
+					<Button :variant="'solid'" :loading="loading" :loadingText="'Processing...'"
+						class="w-full py-6 text-sm" @click="submitLog(nextAction.action)" :disabled="isButtonDisabled">
 						{{ nextAction.label }}
 					</Button>
 
-					<Button :loading="loading" :loadingText="'Processing...'" :variant="'solid'" class="w-full py-6 text-sm" :disabled="isButtonDisabled">
+					<Button :loading="loading" :loadingText="'Processing...'" :variant="'solid'"
+						class="w-full py-6 text-sm" :disabled="isButtonDisabled" @click="izinDialog = true">
 						Izin
 					</Button>
+
+					<Dialog v-model="izinDialog">
+						<template #body-title>
+							<h3>Modal Izin</h3>
+						</template>
+						<template #body-content>
+							<div class="p-2">
+								<FormControl :type="'text'" :ref_for="true" size="lg" variant="subtle"
+									placeholder="Sakit" :disabled="false" label="Keterangan" v-model="keterangan" />
+							</div>
+						</template>
+						<template #actions>
+							<div class="flex gap-2">
+								<Button :loading="loading" :loadingText="'Processing...'" :variant="'solid'"
+									class="w-full py-6 text-sm" :disabled="isButtonDisabled" @click="submitLog(nextAction.action, true)">
+									Izin
+								</Button>
+								<Button :loading="loading" :loadingText="'Processing...'" :variant="'solid'"
+									class="w-full py-6 text-sm" :disabled="isButtonDisabled"
+									@click="izinDialog = false">
+									Batal
+								</Button>
+							</div>
+						</template>
+					</Dialog>
 				</div>
 			</div>
 		</ion-content>
@@ -70,7 +96,7 @@
 <script setup>
 import { IonPage, IonContent, IonSelect, IonCheckbox, IonList, IonSelectOption, IonItem, IonSpinner } from "@ionic/vue"
 import { useRouter } from "vue-router"
-import { createListResource, toast, FeatherIcon, createResource } from "frappe-ui"
+import { createListResource, toast, FeatherIcon, createResource, Dialog } from "frappe-ui"
 import { computed, inject, ref, watch, onMounted, onBeforeUnmount } from "vue"
 import { modalController } from "@ionic/vue"
 import L from "leaflet";
@@ -79,6 +105,7 @@ import "../../public/leaflet.css";
 const router = useRouter()
 
 const DOCTYPE = "Absensi"
+const izinDialog = ref(false)
 
 const socket = inject("$socket")
 const employee = inject("$employee")
@@ -93,6 +120,7 @@ let marker = null;
 let circle = null;
 let cameraStream = null;
 let watchID = null;
+const keterangan = ref("")
 
 const videoElement = ref(null);
 const canvasElement = ref(null);
@@ -315,9 +343,10 @@ const getDistanceFromLatLonInMeters = (lat1, lon1, lat2, lon2) => {
 	return R * c; // Distance in meters
 };
 
-const submitLog = async (logType) => {
+const submitLog = async (logType, izin = false) => {
 	loading.value = true;
-	isButtonDisabled.value = true; // Disable the button
+	isButtonDisabled.value = true;
+	
 	const action = logType === "In" ? "In" : "Out";
 
 	// Check if a site is selected
@@ -329,6 +358,9 @@ const submitLog = async (logType) => {
 			position: "top-center",
 			iconClasses: "text-red-500",
 		});
+
+		loading.value = false;
+		isButtonDisabled.value = false;
 		return;
 	}
 
@@ -341,6 +373,9 @@ const submitLog = async (logType) => {
 			position: "top-center",
 			iconClasses: "text-red-500",
 		});
+
+		loading.value = false;
+		isButtonDisabled.value = false;
 		return;
 	}
 
@@ -353,7 +388,7 @@ const submitLog = async (logType) => {
 	);
 
 	// Check if the distance exceeds the selected site's radius
-	if (distance > selectedSite.value.radius) {
+	if (distance > selectedSite.value.radius && izin !== true) {
 		toast({
 			title: "Error",
 			text: "You are outside the allowed radius for this site.",
@@ -361,6 +396,23 @@ const submitLog = async (logType) => {
 			position: "top-center",
 			iconClasses: "text-red-500",
 		});
+
+		loading.value = false;
+		isButtonDisabled.value = false;
+		return;
+	}
+
+	if (izin === true && keterangan.value === ""){
+		toast({
+			title: "Error",
+			text: "Keterangan wajib diisi jika izin",
+			icon: "alert-circle",
+			position: "top-center",
+			iconClasses: "text-red-500",
+		});
+
+		loading.value = false;
+		isButtonDisabled.value = false;
 		return;
 	}
 
@@ -373,6 +425,9 @@ const submitLog = async (logType) => {
 			position: "top-center",
 			iconClasses: "text-red-500",
 		});
+
+		loading.value = false;
+		isButtonDisabled.value = false;
 		return;
 	}
 
@@ -384,15 +439,15 @@ const submitLog = async (logType) => {
 			lokasi_absen: selectedSite.value.name,
 			foto: photoUrl,
 			tipe: logType,
-			// tipe: "In",
+			keterangan: keterangan.value,
 			waktu_absen: checkinTimestamp.value,
 			latitude: latitude.value,
 			longitude: longitude.value,
 			ambil_jatah_makan: ambilJatahMakan.value,
+			izin: izin,
 		},
 		auto: true,
 		onError(error) {
-			
 			toast({
 				title: "Error",
 				text: `${action} failed!`,
@@ -401,7 +456,7 @@ const submitLog = async (logType) => {
 				iconClasses: "text-red-500",
 			});
 			loading.value = false;
-			isButtonDisabled.value = false; // Re-enable on error
+			isButtonDisabled.value = false;
 		},
 		onSuccess(data) {
 			modalController.dismiss();
@@ -413,8 +468,15 @@ const submitLog = async (logType) => {
 				iconClasses: "text-green-500",
 			});
 			loading.value = false;
+			izinDialog.value = false
+
+			router.push("/home").then(() => {
+				window.location.reload();
+			});
 		},
 	})
+	loading.value = false;
+	isButtonDisabled.value = false;
 };
 
 

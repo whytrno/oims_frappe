@@ -37,7 +37,7 @@ def get_current_user_info() -> dict:
 	return user
 
 @frappe.whitelist()
-def submit_attendance(karyawan, lokasi_absen, foto, tipe, waktu_absen, latitude, longitude, ambil_jatah_makan=False):
+def submit_attendance(karyawan, lokasi_absen, foto, tipe, keterangan, waktu_absen, latitude, longitude, ambil_jatah_makan=False, izin=False):
     """
     Submit attendance for an employee.
 
@@ -70,10 +70,12 @@ def submit_attendance(karyawan, lokasi_absen, foto, tipe, waktu_absen, latitude,
         "lokasi_absen": lokasi_absen,
         "foto": foto,
         "tipe": tipe,
+        "keterangan": keterangan,
         "waktu_absen": waktu_absen,
         "latitude": latitude,
         "longitude": longitude,
-        "ambil_jatah_makan": ambil_jatah_makan
+        "ambil_jatah_makan": ambil_jatah_makan,
+        "izin": izin
     })
     attendance_doc.save()
     frappe.logger().info(f"Attendance submitted for {karyawan} at {waktu_absen}")

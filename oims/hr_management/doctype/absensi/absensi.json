@@ -15,6 +15,7 @@
   "waktu_absen",
   "latitude",
   "longitude",
+  "izin",
   "keterangan",
   "telat"
  ],
@@ -94,12 +95,18 @@
    "fieldname": "telat",
    "fieldtype": "Check",
    "label": "Telat"
+  },
+  {
+   "default": "0",
+   "fieldname": "izin",
+   "fieldtype": "Check",
+   "label": "Izin"
   }
  ],
  "image_field": "foto",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-18 10:34:43.367469",
+ "modified": "2024-10-21 15:55:33.120171",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Absensi",
