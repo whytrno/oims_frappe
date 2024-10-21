@@ -94,7 +94,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "+62-",
    "fieldname": "no_hp",
    "fieldtype": "Phone",
    "label": "No. HP"
@@ -380,7 +379,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2024-10-18 08:49:59.501761",
+ "modified": "2024-10-21 09:36:50.939887",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",

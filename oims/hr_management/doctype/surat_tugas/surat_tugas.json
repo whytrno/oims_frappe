@@ -82,11 +82,9 @@
    "reqd": 1
   },
   {
-   "default": "8019002",
    "fieldname": "penanda_tangan",
    "fieldtype": "Link",
-   "label": "NRP Penanda Tangan",
-   "link_filters": "[[\"Karyawan\",\"nrp\",\"in\",[\"8019001\",\"8019002\"]]]",
+   "label": "ID Penanda Tangan",
    "options": "Karyawan",
    "reqd": 1
   },
@@ -111,7 +109,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-14 10:19:20.959608",
+ "modified": "2024-10-21 09:47:30.948951",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Surat Tugas",

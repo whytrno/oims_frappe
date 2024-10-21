@@ -35,7 +35,20 @@ frappe.query_reports["Laporan Absensi Bulanan"] = {
 			label: __("Lokasi Absen"),
 			fieldtype: "Link",
 			options: "Lokasi Absen",
-		}
+		},
+		{
+			fieldname: "minggu_ke",
+			label: __("Minggu Ke"),
+			fieldtype: "Select",
+			options: [
+				{ value: 1, label: __("Perbulan") },
+				{ value: 2, label: __("Minggu 1 (1 - 7)") },
+				{ value: 3, label: __("Minggu 2 (8 - 14)") },
+				{ value: 4, label: __("Minggu 3 (15 - 21)") },
+				{ value: 5, label: __("Minggu 4 (22 - 28)") },
+				{ value: 6, label: __("Minggu 5 (29 - 35)") },
+			],
+		},
 	],
 	onload: function () {
 		return frappe.call({

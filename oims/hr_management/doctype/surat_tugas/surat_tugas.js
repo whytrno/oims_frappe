@@ -27,6 +27,13 @@ frappe.ui.form.on("Surat Tugas", {
 			});
 		}
 
+		frappe.db.get_value('Karyawan', {'nrp': '8019002'}, 'name')
+			.then(r => {
+				if (r.message) {
+					frm.set_value('penanda_tangan', r.message.name);
+				}
+			});
+
 		// Tetap set query untuk user_email baik saat create maupun update
 		frm.fields_dict['karyawan'].grid.get_field('user_email').get_query = function (doc, cdt, cdn) {
 			return {

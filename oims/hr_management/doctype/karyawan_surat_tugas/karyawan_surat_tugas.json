@@ -15,7 +15,7 @@
    "fieldname": "nrp",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "NRP",
+   "label": "User ID",
    "options": "Karyawan",
    "reqd": 1
   },
@@ -38,7 +38,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-10-10 11:55:30.206497",
+ "modified": "2024-10-21 09:39:48.941502",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan Surat Tugas",

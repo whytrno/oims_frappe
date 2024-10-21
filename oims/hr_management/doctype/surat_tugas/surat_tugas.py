@@ -11,7 +11,7 @@ import os
 class SuratTugas(Document):
 	def before_save(self):
 		self.validate_karyawan_data()
-  
+
 		karyawan_items = self.get_karyawan_data();
 
 		nama_surat_raw = f"{self.no_surat.replace('/', '_')} - {self.site}"
@@ -32,8 +32,9 @@ class SuratTugas(Document):
 				if not karyawan_doc.foto_ktp:
 					errors.append(f"User {karyawan_doc.nama_lengkap} belum upload foto KTP.")
 				
-				if not karyawan_doc.nrp:
-					errors.append(f"User {karyawan_doc.nama_lengkap} belum mengisi NRP.")
+				if karyawan_doc.status_kontrak is "Project Base":
+					if not karyawan_doc.nrp:
+						errors.append(f"User {karyawan_doc.nama_lengkap} belum mengisi NRP.")
 				
 				if not karyawan_doc.jabatan:
 					errors.append(f"User {karyawan_doc.nama_lengkap} belum mengisi jabatan.")
