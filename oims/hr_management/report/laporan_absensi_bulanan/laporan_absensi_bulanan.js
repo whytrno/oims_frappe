@@ -30,6 +30,12 @@ frappe.query_reports["Laporan Absensi Bulanan"] = {
 			fieldtype: "Select",
 			reqd: 1,
 		},
+		{
+			fieldname: "site",
+			label: __("Lokasi Absen"),
+			fieldtype: "Link",
+			options: "Lokasi Absen",
+		}
 	],
 	onload: function () {
 		return frappe.call({

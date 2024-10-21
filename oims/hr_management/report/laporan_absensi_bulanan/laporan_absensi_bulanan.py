@@ -48,10 +48,13 @@ def get_attendance_map(filters):
 	attendance_records = frappe.get_all(
 		"Absensi",
 		filters={
-			"waktu_absen": ["between", (f"{filters.year}-{filters.month}-01", f"{filters.year}-{filters.month}-{monthrange(int(filters.year), int(filters.month))[1]}")]
+			"waktu_absen": ["between", (f"{filters.year}-{filters.month}-01", f"{filters.year}-{filters.month}-{monthrange(int(filters.year), int(filters.month))[1]}")],
 		},
 		fields=["lokasi_absen", "karyawan", "tipe", "waktu_absen", "ambil_jatah_makan", "telat"]
 	)
+
+	if filters.site:
+		attendance_records = [record for record in attendance_records if record.lokasi_absen == filters.site]
 
 	attendance_map = {}
 
@@ -188,11 +191,16 @@ def get_data(filters) -> list[list]:
                     hadir = False
                     for absensi in absensi_harian:
                         if absensi["tipe"] == "In" or absensi["tipe"] == "Out":
-                            row[1 + day] = '<p style="color: green;">'+site+'</p>';  # Indeks 2 karena data setelah NRP dan nama
-                            hadir = True
-                            break
+                            if absensi["tipe"] == "In" and absensi["telat"]:
+                                row[1 + day] = '<p style="color: red;">'+site+'</p>';
+                                hadir = True
+                                break
+                            else:
+                                row[1 + day] = '<p style="color: green;">'+site+'</p>';
+                                hadir = True
+                                break
                         elif absensi["tipe"] == "Izin":
-                            row[1 + day] = '<p style="color: red;">'+site+'</p>';
+                            row[1 + day] = '<p style="color: blue;">'+site+'</p>';
                             hadir = True
                             break
                     if not hadir:
