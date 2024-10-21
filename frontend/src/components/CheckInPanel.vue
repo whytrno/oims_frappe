@@ -9,32 +9,20 @@
 			Anda belum absen hari ini
 		</div>
 
-		<template v-if="lastLogType === 'check-out'">
-			<div
-				class="mt-4 mb-1 drop-shadow-sm text-base"
-				:to="{ name: 'Attendance' }"
-			>
-				<Button class="w-full py-5">
-					Anda sudah absen hari ini
-				</Button>
-			</div>
-		</template>
-		<template v-else>
-			<router-link
-				class="mt-4 mb-1 drop-shadow-sm text-base"
-				:to="{ name: 'Attendance' }"
-			>
-				<Button class="w-full py-5">
-					<template #prefix>
-					<FeatherIcon
-						:name="nextAction.action === 'In' ? 'arrow-right-circle' : 'arrow-left-circle'"
-						class="w-4"
-					/>
-					</template>
-					{{ nextAction.label }}
-				</Button>
-			</router-link>
-		</template>
+		<router-link
+			class="mt-4 mb-1 drop-shadow-sm text-base"
+			:to="{ name: 'Attendance' }"
+		>
+			<Button class="w-full py-5">
+				<template #prefix>
+				<FeatherIcon
+					:name="nextAction.action === 'In' ? 'arrow-right-circle' : 'arrow-left-circle'"
+					class="w-4"
+				/>
+				</template>
+				{{ nextAction.label }}
+			</Button>
+		</router-link>
 
 	</div>
 </template>
