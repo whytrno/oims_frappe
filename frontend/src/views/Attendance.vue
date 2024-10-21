@@ -53,16 +53,12 @@
 				</div>
 
 				<div class="p-5 flex gap-5">
-					<Button variant="solid" class="w-full py-6 text-sm" @click="submitLog(nextAction.action)"
+					<Button :variant="'solid'" :loading="loading" :loadingText="'Processing...'" class="w-full py-6 text-sm" @click="submitLog(nextAction.action)"
 						:disabled="isButtonDisabled">
-						<ion-spinner v-if="loading" class="text-white text-sm"></ion-spinner>
-						<template v-else>
-							{{ nextAction.label }}
-						</template>
+						{{ nextAction.label }}
 					</Button>
 
-
-					<Button variant="solid" class="w-full py-6 text-sm" :disabled="isButtonDisabled">
+					<Button :loading="loading" :loadingText="'Processing...'" :variant="'solid'" class="w-full py-6 text-sm" :disabled="isButtonDisabled">
 						Izin
 					</Button>
 				</div>
@@ -105,8 +101,8 @@ const photoTaken = ref(false);
 const photoBlob = ref(null);
 const photoPreviewUrl = ref('');
 
-const loading = ref(false);
-const isButtonDisabled = ref(false);
+const loading = ref(true);
+const isButtonDisabled = ref(true);
 
 const selectedSite = ref(null);
 const checkins = createListResource({
