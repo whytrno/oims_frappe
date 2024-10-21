@@ -105,6 +105,9 @@ const photoTaken = ref(false);
 const photoBlob = ref(null);
 const photoPreviewUrl = ref('');
 
+const loading = ref(false);
+const isButtonDisabled = ref(false);
+
 const selectedSite = ref(null);
 const checkins = createListResource({
 	doctype: DOCTYPE,
@@ -317,9 +320,6 @@ const getDistanceFromLatLonInMeters = (lat1, lon1, lat2, lon2) => {
 };
 
 const submitLog = async (logType) => {
-	const loading = ref(false);
-	const isButtonDisabled = ref(false);
-
 	loading.value = true;
 	isButtonDisabled.value = true; // Disable the button
 	const action = logType === "In" ? "In" : "Out";
