@@ -24,10 +24,9 @@ day_abbr = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
 def execute(filters: Filters | None = None):
     if not (filters.month and filters.year):
-        filters.month, filters.year, filters.minggu_ke = getdate().month, getdate().year
+        filters.month, filters.year, filters.jenis = getdate().month, getdate().year
 
     # Jika filter perbulan tidak dipilih, cek minggu ke berapa
-    if filters.minggu_ke and cint(filters.minggu_ke) > 1:
         start_date, end_date = get_week_date_range(filters)
         filters.start_date = start_date
         filters.end_date = end_date
@@ -106,23 +105,29 @@ def get_attendance_map(filters):
 
     return attendance_map
 
+def filter_jenis_to_minggu_ke(filters):
+    jenis = filters.jenis
+    if jenis != "Perbulan":
+        return cint(filters.jenis.split()[-1])
+    else:
+        return "Perbulan"
+
 def get_week_date_range(filters):
     """Mengembalikan rentang tanggal untuk minggu ke berapa yang dipilih"""
-    minggu_ke = cint(filters.minggu_ke)
     year = cint(filters.year)
     month = cint(filters.month)
 
     first_day_of_month = getdate(f"{year}-{month}-01")
     first_weekday = first_day_of_month.weekday()  # Dapatkan weekday dari hari pertama bulan ini (0: Senin)
 
-    if minggu_ke == 1:
+    if filters.jenis != "Perbulan":
         # Jika minggu ke-1 dipilih, maka pilih seluruh bulan
         start_date = first_day_of_month
         end_date = getdate(f"{year}-{month}-{monthrange(year, month)[1]}")
     else:
         # Hitung rentang minggu untuk minggu ke-2, ke-3, dst.
         # Karena `minggu_ke = 2` mewakili minggu ke-1, kita perlu menyesuaikan perhitungannya.
-        start_day_of_week = (minggu_ke - 2) * 7  # Minggu pertama dimulai dari hari pertama bulan
+        start_day_of_week = (filter_jenis_to_minggu_ke(filters) - 2) * 7
         start_date = add_days(first_day_of_month, start_day_of_week)
 
         # Akhiri minggu pada akhir pekan atau akhir bulan, mana yang lebih dulu
@@ -208,9 +213,9 @@ def get_data(filters) -> list[list]:
     data_map = {}
     
     # Untuk hari ke-X, tambahkan status kehadiran jika ada
-    minggu_ke = cint(filters.minggu_ke)
+    minggu_ke = filter_jenis_to_minggu_ke(filters)
 
-    if minggu_ke > 1:
+    if minggu_ke != "Perbulan":
         total_days = 7
 
     # Misalkan attendance_map adalah hasil dari get_attendance_map(filters)
@@ -218,8 +223,8 @@ def get_data(filters) -> list[list]:
 
     # Iterasi melalui semua hari dalam attendance_map
     for day, site_data in attendance_map.items():
-        if minggu_ke > 1:
-            day = day - ((minggu_ke - 2) * 7)
+        if minggu_ke != "Perbulan":
+            day = day - (minggu_ke * 7)
             
         # Iterasi melalui semua site dalam hari tersebut
         for site, karyawan_data in site_data.items():
