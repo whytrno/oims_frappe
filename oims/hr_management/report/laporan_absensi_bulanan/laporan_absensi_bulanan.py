@@ -10,7 +10,6 @@ from frappe.query_builder.functions import Count, Extract, Sum
 from frappe.utils import cint, cstr, getdate, add_days, date_diff
 from frappe.utils.nestedset import get_descendants_of
 
-
 Filters = frappe._dict
 
 status_map = {
@@ -22,14 +21,13 @@ status_map = {
 
 day_abbr = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
-
 def execute(filters: Filters | None = None):
     if not (filters.month and filters.year):
         filters.month, filters.year, filters.minggu_ke = getdate().month, getdate().year
 
     # Jika filter perbulan tidak dipilih, cek minggu ke berapa
     if filters.minggu_ke and cint(filters.minggu_ke) > 1:
-        start_date, end_date = get_week_date_range(filters)
+        start_date, _, end_date, _ = get_week_date_range(filters)
         filters.start_date = start_date
         filters.end_date = end_date
     else:
@@ -50,7 +48,7 @@ def execute(filters: Filters | None = None):
 
     message = get_message() if not get_message() else ""
     chart = get_chart_data(attendance_map, filters)
-
+    
     return columns, data, message, chart
 
 def get_attendance_map(filters):
@@ -120,10 +118,13 @@ def get_week_date_range(filters):
         # Jika minggu ke-1 dipilih, maka pilih seluruh bulan
         start_date = first_day_of_month
         end_date = getdate(f"{year}-{month}-{monthrange(year, month)[1]}")
+        start_day_of_week = first_day_of_month
+        end_day_of_week = end_date
     else:
         # Hitung rentang minggu untuk minggu ke-2, ke-3, dst.
         # Karena `minggu_ke = 2` mewakili minggu ke-1, kita perlu menyesuaikan perhitungannya.
         start_day_of_week = (minggu_ke - 2) * 7  # Minggu pertama dimulai dari hari pertama bulan
+        end_day_of_week = start_day_of_week + 6
         start_date = add_days(first_day_of_month, start_day_of_week)
 
         # Akhiri minggu pada akhir pekan atau akhir bulan, mana yang lebih dulu
@@ -133,8 +134,7 @@ def get_week_date_range(filters):
         if end_date > end_of_month:
             end_date = end_of_month
 
-    return start_date, end_date
-
+    return start_date, start_day_of_week, end_date, end_day_of_week
 
 @frappe.whitelist()
 def get_attendance_years() -> str:
@@ -202,20 +202,28 @@ def get_columns_for_days(filters: Filters) -> list[dict]:
 
     return days
 
-
 def get_total_days_in_month(filters: Filters) -> int:
-	return monthrange(cint(filters.year), cint(filters.month))[1]
-
+    return monthrange(cint(filters.year), cint(filters.month))[1]
 
 def get_data(filters) -> list[list]:
     total_days = get_total_days_in_month(filters)
     data_map = {}
+    
+    # Untuk hari ke-X, tambahkan status kehadiran jika ada
+    minggu_ke = cint(filters.minggu_ke)
+    _, start_date_day, _, end_date_day = get_week_date_range(filters)
+
+    if minggu_ke > 1:
+        total_days = 7
 
     # Misalkan attendance_map adalah hasil dari get_attendance_map(filters)
     attendance_map = get_attendance_map(filters)
 
     # Iterasi melalui semua hari dalam attendance_map
     for day, site_data in attendance_map.items():
+        if minggu_ke > 1:
+            day = day - ((minggu_ke - 2) * 7)
+            
         # Iterasi melalui semua site dalam hari tersebut
         for site, karyawan_data in site_data.items():
             # Iterasi melalui semua karyawan di site tersebut
@@ -229,8 +237,7 @@ def get_data(filters) -> list[list]:
                     data_map[karyawan] = row
                 else:
                     row = data_map[karyawan]
-
-                # Untuk hari ke-X, tambahkan status kehadiran jika ada
+                
                 if day <= total_days:
                     absensi_harian = attendance.get("data_absen", [])
                     hadir = False
@@ -251,11 +258,9 @@ def get_data(filters) -> list[list]:
                     if not hadir:
                         row[1 + day] = " "
                         
-
+    # data2 = 
     # Convert the data_map values to a list for final output
     return list(data_map.values())
-
-
 
 def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
     # Menyesuaikan chart untuk data harian sesuai rentang tanggal di filter
@@ -294,8 +299,6 @@ def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
         izin.append(total_izin_on_day)
         telat.append(total_telat)
         ambil_jatah_makan.append(total_ambil_jatah_makan)
-    
-        print(f'hadir {total_hadir_on_day}')
 
         # Pindah ke hari berikutnya
         current_date = add_days(current_date, 1)
