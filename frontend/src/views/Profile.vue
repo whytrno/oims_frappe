@@ -45,7 +45,7 @@
 						<!-- Profile Links -->
 						<div class="flex flex-col gap-5 my-4 w-full">
 							<div class="flex flex-col bg-white rounded">
-								<div
+								<!-- <div
 									class="flex flex-row cursor-pointer flex-start p-4 items-center justify-between border-b"
 									v-for="link in profileLinks"
 									:key="link.title"
@@ -64,7 +64,24 @@
 										name="chevron-right"
 										class="h-5 w-5 text-gray-500"
 									/>
-								</div>
+								</div> -->
+								<a :href="'https://new-oims.orecon.co.id/perbaharui-data-karyawan/'+employee.data.name" target="_blank"
+									class="flex flex-row cursor-pointer flex-start p-4 items-center justify-between border-b"
+								>
+									<div class="flex flex-row items-center gap-3 grow">
+										<FeatherIcon
+											name="user"
+											class="h-5 w-5 text-gray-500"
+										/>
+										<div class="text-base font-normal text-gray-800">
+											Detail Karyawan
+										</div>
+									</div>
+									<FeatherIcon
+										name="chevron-right"
+										class="h-5 w-5 text-gray-500"
+									/>
+								</a>
 							</div>
 						</div>
 

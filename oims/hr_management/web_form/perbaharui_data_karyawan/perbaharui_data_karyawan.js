@@ -4,8 +4,7 @@ frappe.ready(function () {
 
 	// Split URL berdasarkan '/' dan ambil bagian setelah 'perbaharui-data-karyawan'
 	var parts = currentUrl.split('/');
-	var nrp = parts[2];  // Ini adalah NRP dari URL
-	console.log(nrp)
+	var id = parts[2];
 
 	// Dapatkan email user yang sedang login
 	var currentUser = frappe.session.user;
@@ -15,15 +14,15 @@ frappe.ready(function () {
 		args: {
 			doctype: "Karyawan",
 			filters: { "user_id": currentUser },
-			fieldname: "nrp"
+			fieldname: "name"
 		},
 		callback: function (response) {
 			if (response.message) {
-				var user_nrp = response.message.nrp;
+				var user_id = response.message.name;
 
 				// Cek apakah email dari karyawan cocok dengan user yang sedang login
-				if (nrp !== user_nrp) {
-					window.location.href = `/perbaharui-data-karyawan/${user_nrp}`;
+				if (id != user_id) {
+					window.location.href = `/perbaharui-data-karyawan/${user_id}`;
 				}
 			}
 		}
