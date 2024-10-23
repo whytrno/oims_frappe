@@ -108,7 +108,7 @@
 								<div class="text-14">
 									<span class="font-weight-bold">PT Orecon Sadanus Perkasa</span>
 									<span class="text-secondary">
-										{{ " · " }} {{ jo.dibuka_pada }}
+										{{ " · " }} {{ jo.dibuka_pada_formatted }}
 									</span>
 								</div>
 							</div>
@@ -185,11 +185,9 @@
 						<div class="row text-12 text-secondary">
 							<p
 								class="col-6 text-center mb-0 {{ 'border-right' if (jo.publish_applications_received or jo.closes_on) }}">
-								{{ _("Pendaftar:") + " " }}
-								{%- if jo.publish_applications_received -%}
-								<b>{{ jo.no_of_applications }}</b>
-								{% else %}
-								‎0
+								{%- if jo.dibuka_pada -%}
+								{{ _("Dibuka pada:") + " " }}
+								<b>{{ frappe.format_date(jo.dibuka_pada, "d MMM, YYYY") }}</b>
 								{% endif %}
 							</p>
 							<p class="col-6 text-center mb-0">

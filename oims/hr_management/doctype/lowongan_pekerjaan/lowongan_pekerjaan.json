@@ -42,12 +42,14 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "options": "Dibuka\nDitutup"
+   "options": "Dibuka\nDitutup",
+   "reqd": 1
   },
   {
    "fieldname": "dibuka_pada",
    "fieldtype": "Datetime",
-   "label": "Dibuka Pada"
+   "label": "Dibuka Pada",
+   "reqd": 1
   },
   {
    "fieldname": "ditutup_pada",
@@ -74,7 +76,8 @@
   {
    "fieldname": "lokasi",
    "fieldtype": "Data",
-   "label": "Lokasi Penempatan"
+   "label": "Lokasi Penempatan",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_frng",
@@ -134,7 +137,7 @@
    "link_fieldname": "judul_pekerjaan"
   }
  ],
- "modified": "2024-10-23 13:56:59.925064",
+ "modified": "2024-10-23 15:04:57.742930",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Lowongan Pekerjaan",

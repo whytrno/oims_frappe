@@ -13,11 +13,10 @@ def get_context(context):
 	context.body_class = "jobs-page"
 	page_len = 20
 	filters, txt, sort, offset = get_filters_txt_sort_offset(page_len)
-	# context.no_of_pages = get_no_of_pages(filters, txt, page_len)
-	# context.all_filters = get_all_filters(filters)
+	context.no_of_pages = get_no_of_pages(filters, txt, page_len)
 	context.job_openings = get_job_openings(filters, txt, sort, page_len, offset)
-	context.no_of_pages = 1
-	context.all_filters = {"jenis_kontrak": ['Magang']}
+	context.all_filters = get_all_filters(filters)
+	context.all_filters['jenis_kontrak'] = ['Intership', 'PKWT', 'Project Base']
 	context.sort = sort
 
 def get_job_openings(filters=None, txt=None, sort=None, limit=20, offset=0):
@@ -32,65 +31,73 @@ def get_job_openings(filters=None, txt=None, sort=None, limit=20, offset=0):
 			jo.dibuka_pada,
 			jo.ditutup_pada,
 			jo.jenis_kontrak,
-   			jo.lokasi,
+			jo.lokasi,
 			jo.publish_gaji,
 			jo.gaji_minimal,
 			jo.gaji_maksimal,
 			jo.dibayarkan_setiap,
 		)
+		.where((jo.status == "Dibuka") & (jo.publish))
+		.limit(limit)  # Tambahkan limit
+		.offset(offset)  # Tambahkan offset
 	)
 
 	for d in filters:
 		query = query.where(frappe.qb.Field(d).isin(filters[d]))
 
 	if txt:
-		query = query.where((jo.judul_pekerjaan.like(f"%{txt}%")) | (jo.deskripsi.like(f"%{txt}%")))
+		query = query.where((jo.judul.like(f"%{txt}%")))
 
 	query = query.orderby("dibuka_pada", order=Order.asc if sort == "asc" else Order.desc)
 	results = query.run(as_dict=True)
 
 	for d in results:
-		d.dibuka_pada = pretty_date(d.dibuka_pada)
+		if d.ditutup_pada:
+			if d.ditutup_pada >= frappe.utils.now():
+				d.ditutup_pada_formatted = pretty_date(d.ditutup_pada)
+			else:
+				results.remove(d)
+    
+		d.dibuka_pada_formatted = pretty_date(d.dibuka_pada)
 
 	return results
 
+def get_no_of_pages(filters=None, txt=None, page_length=20):
+	jo = frappe.qb.DocType("Lowongan Pekerjaan")
+	query = (
+		frappe.qb.from_(jo)
+		.select(
+			Count("*").as_("no_of_openings"),
+		)
+		.where((jo.status == "Dibuka") & (jo.publish))
+	)
 
-# def get_no_of_pages(filters=None, txt=None, page_length=20):
-# 	jo = frappe.qb.DocType("Job Opening")
-# 	query = (
-# 		frappe.qb.from_(jo)
-# 		.select(
-# 			Count("*").as_("no_of_openings"),
-# 		)
-# 		.where((jo.status == "Open") & (jo.publish == 1))
-# 	)
+	for d in filters:
+		query = query.where(frappe.qb.Field(d).isin(filters[d]))
 
-# 	for d in filters:
-# 		query = query.where(frappe.qb.Field(d).isin(filters[d]))
+	if txt:
+		query = query.where((jo.judul.like(f"%{txt}%")))
 
-# 	if txt:
-# 		query = query.where((jo.job_title.like(f"%{txt}%")) | (jo.description.like(f"%{txt}%")))
+	result = query.run(as_dict=True)
 
-# 	result = query.run(as_dict=True)
-# 	return math.ceil(result[0].no_of_openings / page_length)
+	return math.ceil(result[0].no_of_openings / page_length)
 
 
-# def get_all_filters(filters=None):
-# 	job_openings = frappe.get_all(
-# 		"Job Opening",
-# 		filters={"publish": 1, "status": "Open"},
-# 		fields=["company", "department", "employment_type", "location"],
-# 	)
+def get_all_filters(filters=None):
+	job_openings = frappe.get_all(
+		"Lowongan Pekerjaan",
+		filters={"publish": 1, "status": "Dibuka"},
+		fields=["divisi", "lokasi"],
+	)
+    
+	all_filters = {}
+	for opening in job_openings:
+		for key, value in opening.items():
+			if key in ["divisi", "lokasi"]:
+				if value not in all_filters.get(key, []):
+					all_filters.setdefault(key, []).append(value)
 
-# 	companies = filters.get("company", [])
-
-# 	all_filters = {}
-# 	for opening in job_openings:
-# 		for key, value in opening.items():
-# 			if value and (key == "company" or not companies or opening.company in companies):
-# 				all_filters.setdefault(key, set()).add(value)
-
-# 	return {key: sorted(value) for key, value in all_filters.items()}
+	return {key: sorted(value) for key, value in all_filters.items()}
 
 
 def get_filters_txt_sort_offset(page_len=20):
@@ -99,7 +106,7 @@ def get_filters_txt_sort_offset(page_len=20):
 	txt = ""
 	sort = None
 	offset = 0
-	allowed_filters = ["company", "department", "employment_type", "location"]
+	allowed_filters = ["divisi", "lokasi", "jenis_kontrak"]
 
 	for d in args:
 		if d in allowed_filters:
