@@ -52,12 +52,6 @@ def get_job_openings(filters=None, txt=None, sort=None, limit=20, offset=0):
 	results = query.run(as_dict=True)
 
 	for d in results:
-		if d.ditutup_pada:
-			if d.ditutup_pada >= frappe.utils.now():
-				d.ditutup_pada_formatted = pretty_date(d.ditutup_pada)
-			else:
-				results.remove(d)
-    
 		d.dibuka_pada_formatted = pretty_date(d.dibuka_pada)
 
 	return results
