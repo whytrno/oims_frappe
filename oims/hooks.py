@@ -33,31 +33,31 @@ website_route_rules = [
 ]
 
 fixtures = [
-    "Perusahaan",
-    "Bidang Perusahaan",
-    "Kontak",
-    "List Alamat Kontak",
-    "Divisi",
-    "Jabatan",
-    "Jabatan Detail",
-    "Projek",
-    "Lokasi Absen",
-    "Provinsi",
-    "Kabupaten",
-    "Kecamatan",
-    "Server Script",
-    "Client Script",
-    "Jabatan",
-    "Role Profile",
-    "Jenis Perusahaan Dalam Projek",
-    "Jenis Projek",
-    "Karyawan",
+    # "Perusahaan",
+    # "Bidang Perusahaan",
+    # "Kontak",
+    # "List Alamat Kontak",
+    # "Divisi",
+    # "Jabatan",
+    # "Jabatan Detail",
+    # "Projek",
+    # "Lokasi Absen",
+    # "Provinsi",
+    # "Kabupaten",
+    # "Kecamatan",
+    # "Server Script",
+    # "Client Script",
+    # "Jabatan",
+    # "Role Profile",
+    # "Jenis Perusahaan Dalam Projek",
+    # "Jenis Projek",
+    # "Karyawan",
     {
 		"dt": "User",
 		"filters": [
 			[
 				"role_profile_name", "in", [
-					"Karyawan",
+					"Management Development",
 				]
 			]
 		]
@@ -68,7 +68,8 @@ fixtures = [
 			[
 				"role_name", "in", [
 					"Karyawan",
-					"Hr Management"
+					"Hr Management",
+					"Management Development",
 				]
 			]
     	]
@@ -79,7 +80,8 @@ fixtures = [
 			"role": [
        			"in",[
        				"Karyawan", 
-					"System Manager"
+					"System Manager",
+					"Management Development",
 				]
             ]
 		}
