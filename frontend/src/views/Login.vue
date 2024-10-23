@@ -3,8 +3,8 @@
 		<ion-content class="ion-padding">
 			<div class="flex h-screen w-screen flex-col justify-center bg-white">
 				<div class="flex flex-col mx-auto gap-3 items-center">
-					<FrappeHRLogo class="h-8 w-8" />
-					<div class="text-3xl font-semibold text-gray-900 text-center">Login to OIMS</div>
+					<img src="/src/logo.png" alt="OIMS Logo" class="h-8 w-8">
+					<!-- <div class="text-3xl font-semibold text-gray-900 text-center">Login to OIMS</div> -->
 				</div>
 
 				<div class="mx-auto mt-10 w-full px-8 sm:w-96">
