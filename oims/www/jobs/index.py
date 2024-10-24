@@ -21,7 +21,6 @@ def get_context(context):
 
 def get_job_openings(filters=None, txt=None, sort=None, limit=20, offset=0):
 	jo = frappe.qb.DocType("Lowongan Pekerjaan")
-	jenis_kontrak = frappe.qb.DocType('Lowongan Pekerjaan Jenis Kontrak')
 
 	query = (
 		frappe.qb.from_(jo)
@@ -55,17 +54,6 @@ def get_job_openings(filters=None, txt=None, sort=None, limit=20, offset=0):
 
 	for d in results:
 		d.dibuka_pada_formatted = pretty_date(d.dibuka_pada)
-
-		query_jenis_kontrak = (
-			frappe.qb.from_(jenis_kontrak)
-			.select(
-				jenis_kontrak.jenis_kontrak
-			)
-			.where(jenis_kontrak.parent == d.judul)	
-		)
-		results_jenis_kontrak = query_jenis_kontrak.run(as_dict=True)
-
-		d.jenis_kontrak = [x.jenis_kontrak for x in results_jenis_kontrak]
 
 	return results
 

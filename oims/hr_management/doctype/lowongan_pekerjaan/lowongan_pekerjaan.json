@@ -8,7 +8,6 @@
  "field_order": [
   "judul",
   "divisi",
-  "jenis_kontrak_pekerjaan",
   "jenis_kontrak",
   "publish",
   "route",
@@ -73,9 +72,9 @@
   {
    "fieldname": "jenis_kontrak",
    "fieldtype": "Select",
-   "hidden": 1,
    "label": "Jenis Kontrak",
-   "options": "Intership\nPKWT\nProject Base"
+   "options": "Intership\nPKWT\nProject Base",
+   "reqd": 1
   },
   {
    "fieldname": "lokasi",
@@ -134,13 +133,6 @@
    "unique": 1
   },
   {
-   "fieldname": "jenis_kontrak_pekerjaan",
-   "fieldtype": "Table",
-   "label": "Jenis Kontrak Pekerjaan",
-   "options": "Lowongan Pekerjaan Jenis Kontrak",
-   "reqd": 1
-  },
-  {
    "fieldname": "provinsi_penempatan",
    "fieldtype": "Link",
    "label": "Provinsi Penempatan",
@@ -164,7 +156,7 @@
    "link_fieldname": "judul_pekerjaan"
   }
  ],
- "modified": "2024-10-24 10:24:13.234636",
+ "modified": "2024-10-24 10:49:45.978854",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Lowongan Pekerjaan",

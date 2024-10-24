@@ -114,15 +114,23 @@
 							</div>
 
 							{%- if jo.jenis_kontrak -%}
-								<div class="col-3 px-0 flex d-none d-lg-flex">
-									<div class="ml-auto font-weight-bold text-nowrap text-12">
-										{%- for jenis in jo.jenis_kontrak -%}
-										<div class="py-1 px-2 {{ 'full-time-badge' if jenis == 'Full Time' else 'part-time-badge' if jenis == 'Kontrak' else 'other-badge' }} mt-1">
-											• {{ jenis }}
-										</div>
-										{%- endfor -%}
+							<div class="col-3 px-0 flex d-none d-lg-flex">
+								<div class="ml-auto font-weight-bold text-nowrap text-12">
+									{%- if jo.jenis_kontrak == "Full Time" -%}
+									<div class="py-1 px-2 full-time-badge">
+										• {{ jo.jenis_kontrak }}
 									</div>
+									{%- elif jo.jenis_kontrak == "Kontrak" -%}
+									<div class="py-1 px-2 part-time-badge">
+										• {{ jo.jenis_kontrak }}
+									</div>
+									{%- else -%}
+									<div class="py-1 px-2 other-badge">
+										• {{ jo.jenis_kontrak }}
+									</div>
+									{% endif %}
 								</div>
+							</div>
 							{% endif %}
 						</div>
 
