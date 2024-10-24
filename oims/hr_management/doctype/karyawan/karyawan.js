@@ -30,6 +30,14 @@ frappe.ui.form.on("Karyawan", {
 		clear_fields_on_change(frm, 'kelurahan_ktp');
 		clear_fields_on_change(frm, 'alamat_ktp');
 	},
+
+	alamat_ktp_sama_dengan_domisili: function (frm) {
+		frm.toggle_display('provinsi_ktp', !frm.doc.alamat_ktp_sama_dengan_domisili);
+		frm.toggle_display('kabupaten_ktp', !frm.doc.alamat_ktp_sama_dengan_domisili);
+		frm.toggle_display('kecamatan_ktp', !frm.doc.alamat_ktp_sama_dengan_domisili);
+		frm.toggle_display('kelurahan_ktp', !frm.doc.alamat_ktp_sama_dengan_domisili);
+		frm.toggle_display('alamat_ktp', !frm.doc.alamat_ktp_sama_dengan_domisili);
+	},
 });
 
 function set_filters(frm, doctype, field_awal, field_tujuan, filter) {

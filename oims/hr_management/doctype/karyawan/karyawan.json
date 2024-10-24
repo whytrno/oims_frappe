@@ -8,7 +8,6 @@
  "field_order": [
   "data_pribadi_tab",
   "nama_lengkap",
-  "alamat_di_ktp",
   "no_ktp",
   "tanggal_lahir",
   "usia",
@@ -29,6 +28,7 @@
   "kecamatan_domisili",
   "kelurahan_domisili",
   "alamat_domisili",
+  "alamat_ktp_sama_dengan_domisili",
   "column_break_ufis",
   "provinsi_ktp",
   "kabupaten_ktp",
@@ -75,13 +75,8 @@
    "unique": 1
   },
   {
-   "fieldname": "alamat_di_ktp",
-   "fieldtype": "Data",
-   "label": "Alamat di KTP"
-  },
-  {
    "fieldname": "no_ktp",
-   "fieldtype": "Int",
+   "fieldtype": "Data",
    "label": "No. KTP"
   },
   {
@@ -128,7 +123,7 @@
   },
   {
    "fieldname": "no_rek_bca",
-   "fieldtype": "Int",
+   "fieldtype": "Data",
    "label": "No. Rek. BCA"
   },
   {
@@ -364,6 +359,12 @@
    "fieldname": "catatan",
    "fieldtype": "Text",
    "label": "Catatan"
+  },
+  {
+   "default": "0",
+   "fieldname": "alamat_ktp_sama_dengan_domisili",
+   "fieldtype": "Check",
+   "label": "Alamat KTP sama dengan domisili?"
   }
  ],
  "image_field": "foto",
@@ -379,7 +380,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2024-10-21 09:36:50.939887",
+ "modified": "2024-10-24 12:06:12.564130",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",
