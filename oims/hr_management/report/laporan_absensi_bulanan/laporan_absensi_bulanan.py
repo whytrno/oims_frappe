@@ -63,8 +63,10 @@ def get_attendance_map(filters):
         "Absensi",
         filters={
             "waktu_absen": ["between", date_range],
+            "tipe": "In"
         },
-        fields=["lokasi_absen", "karyawan", "tipe", "waktu_absen", "ambil_jatah_makan", "telat"]
+        fields=["lokasi_absen", "karyawan", "tipe", "waktu_absen", "ambil_jatah_makan", "telat"],
+        group_by="karyawan, DATE(waktu_absen)"
     )
 
     if filters.site:
@@ -77,6 +79,7 @@ def get_attendance_map(filters):
         karyawan_doc = frappe.get_doc("Karyawan", karyawan)
         nama_lengkap = karyawan_doc.nama_lengkap
         ambil_jatah_makan = record.ambil_jatah_makan
+        jam_absen = record.waktu_absen.strftime("%H:%M")
         site = record.lokasi_absen
         tipe = record.tipe
         telat = record.telat
@@ -101,7 +104,8 @@ def get_attendance_map(filters):
         attendance_map[hari_absen][site][karyawan]["data_absen"].append({
             "tipe": tipe,
             "ambil_jatah_makan": ambil_jatah_makan,
-            "telat": telat
+            "telat": telat,
+            "jam_absen": jam_absen
         })
 
     return attendance_map
@@ -195,7 +199,7 @@ def get_columns_for_days(filters: Filters) -> list[dict]:
         day = cstr(current_date.day)
         weekday = day_abbr[current_date.weekday()]
         label = f"{day} {weekday}"
-        days.append({"label": label, "fieldtype": "Data", "fieldname": day})
+        days.append({"label": label, "fieldtype": "Data", "fieldname": day, "width": 150})
         current_date = add_days(current_date, 1)
 
     return days
@@ -241,15 +245,15 @@ def get_data(filters) -> list[list]:
                     for absensi in absensi_harian:
                         if absensi["tipe"] == "In" or absensi["tipe"] == "Out":
                             if absensi["tipe"] == "In" and absensi["telat"]:
-                                row[1 + day] = '<p style="color: red;">'+site+'</p>';
+                                row[1 + day] = '<p style="color: red;">'+site+' <small>('+absensi["jam_absen"]+')</small></p>';
                                 hadir = True
                                 break
                             else:
-                                row[1 + day] = '<p style="color: green;">'+site+'</p>';
+                                row[1 + day] = '<p style="color: green;">'+site+' <small>('+absensi["jam_absen"]+')</small></p>';
                                 hadir = True
                                 break
                         elif absensi["tipe"] == "Izin":
-                            row[1 + day] = '<p style="color: blue;">'+site+'</p>';
+                            row[1 + day] = '<p style="color: blue;">'+site+' <small>('+absensi["jam_absen"]+')</small></p>';
                             hadir = True
                             break
                     if not hadir:
