@@ -48,8 +48,10 @@
 						</ion-select>
 					</div>
 
-					<ion-checkbox justify="space-between" v-model="ambilJatahMakan"
-						v-if="selectedSite && selectedSite.name === 'HO - HO'">Ambil Jatah Makan</ion-checkbox>
+					<template v-if="nextAction.action == 'In'">
+						<ion-checkbox justify="space-between" v-model="ambilJatahMakan"
+							v-if="selectedSite && selectedSite.name === 'HO - HO'">Ambil Jatah Makan</ion-checkbox>
+					</template>
 				</div>
 
 				<div class="p-5 flex gap-5">
@@ -114,7 +116,7 @@ const checkinTimestamp = ref(null)
 const latitude = ref(0)
 const longitude = ref(0)
 const locationStatus = ref("")
-const ambilJatahMakan = ref(true)
+const ambilJatahMakan = ref(false)
 let map = null;
 let marker = null;
 let circle = null;
@@ -154,9 +156,6 @@ const lokasiSite = createListResource({
 
 checkins.reload()
 lokasiSite.reload()
-watch(() => selectedSite.value, (newValue, oldValue) => {
-	console.log("Selected Site Changed", newValue, oldValue)
-})
 
 const lastLog = computed(() => {
 	if (checkins.list.loading || !checkins.data) return {}
@@ -167,6 +166,17 @@ const nextAction = computed(() => {
 	return lastLog?.value?.tipe === "In"
 		? { action: "Out", label: "Check Out" }
 		: { action: "In", label: "Check In" }
+})
+
+
+watch(() => selectedSite.value, (newValue, oldValue) => {
+	if(selectedSite.value.name === "HO - HO"){
+		if(nextAction.value.action === "In"){
+			ambilJatahMakan.value = true
+		}
+	} else {
+		ambilJatahMakan.value = false
+	}
 })
 
 function handleLocationSuccess(position) {
