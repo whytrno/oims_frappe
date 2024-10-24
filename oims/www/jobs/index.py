@@ -21,6 +21,7 @@ def get_context(context):
 
 def get_job_openings(filters=None, txt=None, sort=None, limit=20, offset=0):
 	jo = frappe.qb.DocType("Lowongan Pekerjaan")
+	jenis_kontrak = frappe.qb.DocType('Lowongan Pekerjaan Jenis Kontrak')
 
 	query = (
 		frappe.qb.from_(jo)
@@ -36,10 +37,11 @@ def get_job_openings(filters=None, txt=None, sort=None, limit=20, offset=0):
 			jo.gaji_minimal,
 			jo.gaji_maksimal,
 			jo.dibayarkan_setiap,
+			jo.kabupaten_penempatan
 		)
 		.where((jo.status == "Dibuka") & (jo.publish))
-		.limit(limit)  # Tambahkan limit
-		.offset(offset)  # Tambahkan offset
+		.limit(limit)
+		.offset(offset)
 	)
 
 	for d in filters:
@@ -53,6 +55,17 @@ def get_job_openings(filters=None, txt=None, sort=None, limit=20, offset=0):
 
 	for d in results:
 		d.dibuka_pada_formatted = pretty_date(d.dibuka_pada)
+
+		query_jenis_kontrak = (
+			frappe.qb.from_(jenis_kontrak)
+			.select(
+				jenis_kontrak.jenis_kontrak
+			)
+			.where(jenis_kontrak.parent == d.judul)	
+		)
+		results_jenis_kontrak = query_jenis_kontrak.run(as_dict=True)
+
+		d.jenis_kontrak = [x.jenis_kontrak for x in results_jenis_kontrak]
 
 	return results
 
@@ -81,13 +94,13 @@ def get_all_filters(filters=None):
 	job_openings = frappe.get_all(
 		"Lowongan Pekerjaan",
 		filters={"publish": 1, "status": "Dibuka"},
-		fields=["divisi", "lokasi"],
+		fields=["divisi", "kabupaten_penempatan"],
 	)
     
 	all_filters = {}
 	for opening in job_openings:
 		for key, value in opening.items():
-			if key in ["divisi", "lokasi"]:
+			if key in ["divisi", "kabupaten_penempatan"]:
 				if value not in all_filters.get(key, []):
 					all_filters.setdefault(key, []).append(value)
 
@@ -100,7 +113,7 @@ def get_filters_txt_sort_offset(page_len=20):
 	txt = ""
 	sort = None
 	offset = 0
-	allowed_filters = ["divisi", "lokasi", "jenis_kontrak"]
+	allowed_filters = ["divisi", "kabupaten_penempatan", "jenis_kontrak"]
 
 	for d in args:
 		if d in allowed_filters:

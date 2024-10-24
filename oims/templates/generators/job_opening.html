@@ -37,7 +37,7 @@
 	<!-- Job Opening Details -->
 	<div class="mb-md-4 p-md-4">
 		<div class="row">
-			{%- if lokasi -%}
+			{%- if kabupaten_penempatan -%}
 			<div class="col-12 col-md-4 mb-6 mb-md-8">
 				<div class="flex flex-row align-items-center">
 					<div class="rounded-circle p-4" style="background: var(--purple-50)">
@@ -52,8 +52,8 @@
 						</svg>
 					</div>
 					<div class="ml-5">
-						<div class="text-secondary text-uppercase" style="font-size: 11px">{{ _("lokasi") }}</div>
-						<div class="font-weight-bold">{{ lokasi }}</div>
+						<div class="text-secondary text-uppercase" style="font-size: 11px">{{ _("Lokasi Penempatan") }}</div>
+						<div class="font-weight-bold">{{ kabupaten_penempatan }}</div>
 					</div>
 				</div>
 			</div>
@@ -107,7 +107,7 @@
 			</div>
 			{% endif %}
 
-			{%- if jenis_kontrak -%}
+			{%- if jenis_kontrak_pekerjaan -%}
 			<div class="col-12 col-md-4 mb-6 mb-md-8">
 				<div class="flex flex-row align-items-center">
 					<div class="rounded-circle p-4" style="background: var(--yellow-50)">
@@ -120,7 +120,11 @@
 					<div class="ml-5">
 						<div class="text-secondary text-uppercase" style="font-size: 11px">{{ _("Employment Type") }}
 						</div>
-						<div class="font-weight-bold">{{ jenis_kontrak }}</div>
+						<div class="font-weight-bold">
+							{%- for jenis in jenis_kontrak_pekerjaan -%}
+							{{ jenis.jenis_kontrak }}{%- if not loop.last -%}, {% endif %}
+							{%- endfor -%}
+						</div>
 					</div>
 				</div>
 			</div>

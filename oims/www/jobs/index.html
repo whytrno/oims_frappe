@@ -114,29 +114,21 @@
 							</div>
 
 							{%- if jo.jenis_kontrak -%}
-							<div class="col-3 px-0 flex d-none d-lg-flex">
-								<div class="ml-auto font-weight-bold text-nowrap text-12">
-									{%- if jo.jenis_kontrak == "Full Time" -%}
-									<div class="py-1 px-2 full-time-badge">
-										• {{ jo.jenis_kontrak }}
+								<div class="col-3 px-0 flex d-none d-lg-flex">
+									<div class="ml-auto font-weight-bold text-nowrap text-12">
+										{%- for jenis in jo.jenis_kontrak -%}
+										<div class="py-1 px-2 {{ 'full-time-badge' if jenis == 'Full Time' else 'part-time-badge' if jenis == 'Kontrak' else 'other-badge' }} mt-1">
+											• {{ jenis }}
+										</div>
+										{%- endfor -%}
 									</div>
-									{%- elif jo.jenis_kontrak == "Kontrak" -%}
-									<div class="py-1 px-2 part-time-badge">
-										• {{ jo.jenis_kontrak }}
-									</div>
-									{%- else -%}
-									<div class="py-1 px-2 other-badge">
-										• {{ jo.jenis_kontrak }}
-									</div>
-									{% endif %}
 								</div>
-							</div>
 							{% endif %}
 						</div>
 
 						<!-- Job Details -->
 						<div class="text-14">
-							{%- if jo.lokasi -%}
+							{%- if jo.kabupaten_penempatan -%}
 							<div class="mt-3 flex align-items-center">
 								<svg class="icon ml-0 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
 									<g stroke="var(--gray-700)" stroke-miterlimit="10">
@@ -146,7 +138,7 @@
 										<path d="M7.971 8.259a1.305 1.305 0 100-2.61 1.305 1.305 0 000 2.61z"></path>
 									</g>
 								</svg>
-								{{ jo.lokasi }}
+								{{ jo.kabupaten_penempatan }}
 							</div>
 							{% endif %}
 

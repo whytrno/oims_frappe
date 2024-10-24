@@ -8,9 +8,11 @@
  "field_order": [
   "judul_pekerjaan",
   "nama_pelamar",
+  "provinsi_domisili",
+  "kabupaten_domisili",
   "domisili",
-  "email",
   "column_break_chkc",
+  "email",
   "no_hp",
   "status",
   "cv_atau_resume",
@@ -25,18 +27,21 @@
    "in_list_view": 1,
    "label": "Judul Pekerjaan",
    "options": "Lowongan Pekerjaan",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "nama_pelamar",
    "fieldtype": "Data",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Nama Pelamar",
    "reqd": 1
   },
   {
    "fieldname": "email",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Email",
    "reqd": 1
   },
@@ -45,12 +50,15 @@
    "description": "Tersambung dengan Whatsapp",
    "fieldname": "no_hp",
    "fieldtype": "Phone",
+   "in_list_view": 1,
    "label": "No. HP ",
    "reqd": 1
   },
   {
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Hold\nDijawab\nDiterima\nDitolak"
   },
@@ -66,8 +74,10 @@
   {
    "fieldname": "domisili",
    "fieldtype": "Data",
-   "label": "Domisili",
-   "reqd": 1
+   "hidden": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Domisili"
   },
   {
    "fieldname": "cv_atau_resume",
@@ -84,11 +94,29 @@
   {
    "fieldname": "column_break_chkc",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "provinsi_domisili",
+   "fieldtype": "Link",
+   "label": "Provinsi Domisili",
+   "options": "Provinsi",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "depends_on": "eval:doc.provinsi_domisili;",
+   "fieldname": "kabupaten_domisili",
+   "fieldtype": "Link",
+   "label": "Kota/Kabupaten Domisili",
+   "mandatory_depends_on": "eval:doc.provinsi_domisili;",
+   "options": "Kabupaten",
+   "reqd": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-21 10:16:06.455481",
+ "modified": "2024-10-24 09:08:03.036066",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Pelamar Pekerjaan",
