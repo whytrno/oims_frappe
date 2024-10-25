@@ -6,14 +6,65 @@ frappe.ui.form.on("Pelamar Pekerjaan", {
 		set_filters(frm);
 
         if (!frm.is_new()) {
-            frm.add_custom_button('Interview', () => {
-				var phone = frm.doc.no_hp;
-				phone = phone.replace(/-/g, '');
-				const pelamar = frm.doc.nama_pelamar;
-				const message = `Halo ${pelamar}, saya HRD dari PT ORECON SADANUS PERKASA, ingin mengundang saudara untuk interview pada...`;
-				const url = `https://wa.me/${phone}?text=${message}`;
-				window.open(url, '_blank');
-            }, __("Chat Whatsapp"));
+			frm.add_custom_button(__("Interview"), () => {
+				const nama_pelamar = frm.doc.nama_pelamar;
+				const name = frm.doc.name;
+				frappe.prompt(
+				[ 
+					{
+						'fieldname': 'name', 
+						'fieldtype': 'Data', 
+						'label': 'Name', 
+						'reqd': 1,
+						"read_only": 1,
+						'default': name
+					},
+					{
+						'fieldname': 'nama_pelamar', 
+						'fieldtype': 'Data', 
+						'label': 'Nama Pelamar', 
+						'reqd': 1,
+						"read_only": 1,
+						'default': nama_pelamar
+					},
+					{
+						'fieldname': 'tanggal_interview_mulai', 
+						'fieldtype': 'Datetime', 
+						'label': 'Tanggal Interview Mulai', 
+						'reqd': 1
+					},
+					{
+						'fieldname': 'tanggal_interview_selesai', 
+						'fieldtype': 'Datetime', 
+						'label': 'Tanggal Interview Selesai', 
+						'reqd': 1
+					} 
+				], 
+				function(values){ 
+					frappe.call({
+						method: 'oims.hr_management.doctype.pelamar_pekerjaan.pelamar_pekerjaan.create_internal_applicant',
+						args: {
+							'doc_name': values.name,
+							'tanggal_interview_mulai': values.tanggal_interview_mulai,
+							'tanggal_interview_selesai': values.tanggal_interview_selesai
+						},
+						callback: function(r) {
+							if(r.message) {
+								frappe.msgprint("Internal Applicant Created");
+							}
+						}
+					});
+				}, 'Pembuat Jadwal Interview', 'Submit' )
+			}, __("Chat Whatsapp"));
+			
+            // frm.add_custom_button('Interview', () => {
+			// 	var phone = frm.doc.no_hp;
+			// 	phone = phone.replace(/-/g, '');
+			// 	const pelamar = frm.doc.nama_pelamar;
+			// 	const message = `Halo ${pelamar}, saya HRD dari PT ORECON SADANUS PERKASA, ingin mengundang saudara untuk interview pada...`;
+			// 	const url = `https://wa.me/${phone}?text=${message}`;
+			// 	window.open(url, '_blank');
+            // }, __("Chat Whatsapp"));
 
             frm.add_custom_button('Offering letter', () => {
 				var phone = frm.doc.no_hp;
