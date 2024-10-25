@@ -4,7 +4,7 @@ frappe.call('frappe.desk.desktop.get_workspace_sidebar_items')
 	.then(r => {
 		if (r.message && r.message.pages) {
 			frappe.desktop.add_sidebar_item({
-				label: __("Your Custom App"),
+				label: __("Oims Apps"),
 				icon: 'octicon octicon-project', // Atau gunakan path ke logo custom Anda
 				route: '#custom-app',
 				type: 'module',

@@ -78,6 +78,7 @@ def get_attendance_map(filters):
         karyawan = record.karyawan
         karyawan_doc = frappe.get_doc("Karyawan", karyawan)
         nama_lengkap = karyawan_doc.nama_lengkap
+        nrp = karyawan_doc.nrp
         ambil_jatah_makan = record.ambil_jatah_makan
         jam_absen = record.waktu_absen.strftime("%H:%M")
         site = record.lokasi_absen
@@ -95,13 +96,13 @@ def get_attendance_map(filters):
 
         # Jika karyawan belum ada di site, tambahkan
         if karyawan not in attendance_map[hari_absen][site]:
-            attendance_map[hari_absen][site][karyawan] = {
+            attendance_map[hari_absen][site][nrp] = {
                 "nama_karyawan": nama_lengkap,
                 "data_absen": []
             }
 
         # Tambahkan data absen ke dalam 'data_absen' list
-        attendance_map[hari_absen][site][karyawan]["data_absen"].append({
+        attendance_map[hari_absen][site][nrp]["data_absen"].append({
             "tipe": tipe,
             "ambil_jatah_makan": ambil_jatah_makan,
             "telat": telat,
@@ -180,7 +181,12 @@ def get_columns(filters: Filters) -> list[dict]:
 				"options": "Karyawan",
 				"width": 120,
 			},
-			{"label": _("Nama karyawan"), "fieldname": "nama_karyawan", "fieldtype": "Data", "width": 150},
+			{
+                "label": _("Nama karyawan"), 
+                "fieldname": "nama_karyawan", 
+                "fieldtype": "Data", 
+                "width": 150
+            },
 		]
 	)
 
