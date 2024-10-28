@@ -65,7 +65,7 @@ def get_attendance_map(filters):
             "waktu_absen": ["between", date_range],
             "tipe": "In"
         },
-        fields=["lokasi_absen", "karyawan", "tipe", "waktu_absen", "ambil_jatah_makan", "telat"],
+        fields=["lokasi_absen", "karyawan", "tipe", "waktu_absen", "ambil_jatah_makan", "telat", "izin"],
         group_by="karyawan, DATE(waktu_absen)"
     )
 
@@ -84,6 +84,7 @@ def get_attendance_map(filters):
         site = record.lokasi_absen
         tipe = record.tipe
         telat = record.telat
+        izin = record.izin
         hari_absen = record.waktu_absen.day
 
         # Jika hari_absen belum ada di attendance_map, tambahkan
@@ -104,6 +105,7 @@ def get_attendance_map(filters):
         # Tambahkan data absen ke dalam 'data_absen' list
         attendance_map[hari_absen][site][nrp]["data_absen"].append({
             "tipe": tipe,
+            "izin": izin,
             "ambil_jatah_makan": ambil_jatah_makan,
             "telat": telat,
             "jam_absen": jam_absen
@@ -250,7 +252,11 @@ def get_data(filters) -> list[list]:
                     hadir = False
                     for absensi in absensi_harian:
                         if absensi["tipe"] == "In" or absensi["tipe"] == "Out":
-                            if absensi["tipe"] == "In" and absensi["telat"]:
+                            if absensi["izin"]:
+                                row[1 + day] = '<p style="color: blue;">'+site+' <small>('+absensi["jam_absen"]+')</small></p>';
+                                hadir = True
+                                break
+                            elif absensi["tipe"] == "In" and absensi["telat"]:
                                 row[1 + day] = '<p style="color: red;">'+site+' <small>('+absensi["jam_absen"]+')</small></p>';
                                 hadir = True
                                 break
@@ -258,10 +264,6 @@ def get_data(filters) -> list[list]:
                                 row[1 + day] = '<p style="color: green;">'+site+' <small>('+absensi["jam_absen"]+')</small></p>';
                                 hadir = True
                                 break
-                        elif absensi["tipe"] == "Izin":
-                            row[1 + day] = '<p style="color: blue;">'+site+' <small>('+absensi["jam_absen"]+')</small></p>';
-                            hadir = True
-                            break
                     if not hadir:
                         row[1 + day] = " "
                         
@@ -292,12 +294,13 @@ def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
                 for karyawan, attendance in karyawan_data.items():
                     absensi_harian = attendance.get("data_absen", [])
                     for absensi in absensi_harian:
-                        if absensi["tipe"] == "In" or absensi["tipe"] == "Out":
+                        print(f'absensi: {absensi["izin"]}')
+                        if absensi["izin"]:
+                            total_izin_on_day += 1
+                        elif absensi["tipe"] == "In" or absensi["tipe"] == "Out":
                             total_hadir_on_day += 1
                             if absensi["telat"]:
                                 total_telat += 1
-                        elif absensi["tipe"] == "Izin":
-                            total_izin_on_day += 1
                         if absensi["ambil_jatah_makan"]:
                             total_ambil_jatah_makan += 1
 
