@@ -2,3 +2,4 @@ Hr Management
 Oims
 Customer Relationship Management
 Legal
+Finance
