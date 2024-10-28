@@ -3,6 +3,11 @@
 
 frappe.ui.form.on("Surat Tugas", {
     before_save: async function (frm) {
+		// console.log(frm.doc.karyawan_surat_tugas)
+        // let karyawan_nama_list = frm.doc.karyawan_surat_tugas.map(row => row.nama_karyawan);
+        // frm.set_value('karyawan_for_list_view', karyawan_nama_list.join(', '));
+		// console.log("karyawan_nama_list", karyawan_nama_list);
+
 		validate_site(frm)
     },
 	
@@ -168,8 +173,19 @@ frappe.ui.form.on('Karyawan Surat Tugas', {
 	nrp: function (frm, cdt, cdn) {
 		let row = locals[cdt][cdn];
 		check_if_ktp_uploaded(frm, row.nama_karyawan);
-	}
+		set_karyawan_to_karyawan_for_list_view(frm, row.nama_karyawan);
+	},
 });
+
+function set_karyawan_to_karyawan_for_list_view(frm, nama_karyawan) {
+	let karyawan_list = frm.doc.karyawan_for_list_view ? frm.doc.karyawan_for_list_view.split(', ') : [];
+
+	if (!karyawan_list.includes(nama_karyawan)) {  // Hindari duplikasi
+		karyawan_list.push(nama_karyawan);
+	}
+
+	frm.set_value('karyawan_for_list_view', karyawan_list.join(', '));
+}
 
 function check_if_ktp_uploaded(frm, karyawan_nama_karyawan) {
 	frappe.call({

@@ -10,7 +10,6 @@
   "nama_pelamar",
   "provinsi_domisili",
   "kabupaten_domisili",
-  "domisili",
   "column_break_chkc",
   "email",
   "no_hp",
@@ -25,6 +24,7 @@
    "fieldname": "judul_pekerjaan",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Judul Pekerjaan",
    "options": "Lowongan Pekerjaan",
    "reqd": 1,
@@ -72,14 +72,6 @@
    "label": "Catatan"
   },
   {
-   "fieldname": "domisili",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Domisili"
-  },
-  {
    "fieldname": "cv_atau_resume",
    "fieldtype": "Attach",
    "label": "CV atau Resume",
@@ -116,7 +108,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-24 09:08:03.036066",
+ "modified": "2024-10-28 08:40:02.551425",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Pelamar Pekerjaan",

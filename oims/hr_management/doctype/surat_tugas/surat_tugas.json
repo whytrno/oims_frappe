@@ -18,7 +18,9 @@
   "column_break_isry",
   "nama_penanda_tangan",
   "section_break_glmr",
-  "karyawan"
+  "karyawan",
+  "section_break_cwlg",
+  "karyawan_for_list_view"
  ],
  "fields": [
   {
@@ -40,7 +42,6 @@
    "default": "-",
    "fieldname": "no_surat",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "No. Surat",
    "read_only": 1,
    "reqd": 1,
@@ -105,11 +106,23 @@
    "label": "Nama Penanda Tangan",
    "read_only": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "section_break_cwlg",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "karyawan_for_list_view",
+   "fieldtype": "Small Text",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Karyawan For List View",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-21 09:47:30.948951",
+ "modified": "2024-10-28 09:18:15.789766",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Surat Tugas",

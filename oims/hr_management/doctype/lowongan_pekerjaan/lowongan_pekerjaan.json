@@ -15,7 +15,6 @@
   "status",
   "dibuka_pada",
   "ditutup_pada",
-  "lokasi",
   "provinsi_penempatan",
   "kabupaten_penempatan",
   "section_break_rzbz",
@@ -75,12 +74,6 @@
    "label": "Jenis Kontrak",
    "options": "Intership\nPKWT\nProject Base",
    "reqd": 1
-  },
-  {
-   "fieldname": "lokasi",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Lokasi Penempatan"
   },
   {
    "fieldname": "section_break_frng",
@@ -156,7 +149,7 @@
    "link_fieldname": "judul_pekerjaan"
   }
  ],
- "modified": "2024-10-24 10:49:45.978854",
+ "modified": "2024-10-28 08:40:41.431492",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Lowongan Pekerjaan",
