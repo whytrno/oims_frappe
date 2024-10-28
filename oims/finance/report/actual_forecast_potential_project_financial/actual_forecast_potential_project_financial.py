@@ -146,6 +146,17 @@ def get_chart_data(filters=Filters, raw_data = []):
             fields=["total"],
         )
 
+        total_project_per_actual = {}
+        for d in data_total_actual:
+            # if d.project in total_per_project:
+            #     total_per_project[d.project] += int(d.total)
+            # else:
+            #     total_per_project[d.project] = int(d.total)
+            if d.project in total_project_per_actual:
+                total_project_per_actual[d.project] += int(d.total)
+            else:
+                total_project_per_actual[d.project] = int(d.total)
+
         datasets.append({
             "name": "Actual",
             "values": [d.total for d in data_total_actual]
@@ -166,12 +177,19 @@ def get_chart_data(filters=Filters, raw_data = []):
 				"menu": filters.menu if filters.menu != "semua" else None,
                 "tipe": filters.tipe
             },
-            fields=["total"],
+            fields=["total", "project"],
         )
+
+        total_per_project = {}
+        for d in data_filtered:
+            if d.project in total_per_project:
+                total_per_project[d.project] += int(d.total)
+            else:
+                total_per_project[d.project] = int(d.total)
 
         datasets.append({
             "name": filters.tipe,
-            "values": [d.total for d in data_filtered]
+            "values": list(total_per_project.values())
         })
 
     for d in raw_data:
