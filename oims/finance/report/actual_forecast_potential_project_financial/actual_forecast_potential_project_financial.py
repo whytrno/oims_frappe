@@ -201,7 +201,7 @@ def get_chart_data(filters=Filters, raw_data = []):
             "labels": labels_data,
             "datasets": datasets,
         },
-        "type": "line",
+        "type": "bar",
         "colors": ['green', 'blue', 'red', 'purple']
     }
 
