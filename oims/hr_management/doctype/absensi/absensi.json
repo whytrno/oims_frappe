@@ -33,6 +33,7 @@
    "fieldname": "tipe",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Tipe",
    "options": "In\nOut\nIzin"
   },
@@ -72,12 +73,15 @@
    "default": "0",
    "fieldname": "ambil_jatah_makan",
    "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Ambil Jatah Makan"
   },
   {
    "fieldname": "lokasi_absen",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Lokasi Absen",
    "options": "Lokasi Absen",
    "reqd": 1
@@ -87,6 +91,7 @@
    "fieldname": "nama_karyawan",
    "fieldtype": "Data",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Nama Karyawan",
    "read_only": 1
   },
@@ -94,19 +99,23 @@
    "default": "0",
    "fieldname": "telat",
    "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Telat"
   },
   {
    "default": "0",
    "fieldname": "izin",
    "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Izin"
   }
  ],
  "image_field": "foto",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-21 15:55:33.120171",
+ "modified": "2024-10-31 08:59:52.514284",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Absensi",

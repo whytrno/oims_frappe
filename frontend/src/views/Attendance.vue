@@ -356,7 +356,7 @@ const getDistanceFromLatLonInMeters = (lat1, lon1, lat2, lon2) => {
 const submitLog = async (logType, izin = false) => {
 	loading.value = true;
 	isButtonDisabled.value = true;
-	
+
 	const action = logType === "In" ? "In" : "Out";
 
 	// Check if a site is selected
@@ -420,7 +420,6 @@ const submitLog = async (logType, izin = false) => {
 			position: "top-center",
 			iconClasses: "text-red-500",
 		});
-
 		loading.value = false;
 		isButtonDisabled.value = false;
 		return;
@@ -441,7 +440,11 @@ const submitLog = async (logType, izin = false) => {
 		return;
 	}
 
-	createResource({
+	if(izin === true){
+		ambilJatahMakan.value = false;
+	}
+
+	await createResource({
 		url: "oims.api.submit_attendance",
 		method: "POST",
 		params: {
