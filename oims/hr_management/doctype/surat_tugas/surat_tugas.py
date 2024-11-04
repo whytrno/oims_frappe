@@ -27,23 +27,23 @@ class SuratTugas(Document):
 		for row in self.karyawan:
 			if row.nrp:
 				karyawan_doc = frappe.get_doc('Karyawan', row.nrp, ['nama_lengkap', 'foto_ktp', 'nrp', 'jabatan'])
-				
+
 				# Check if required fields are missing
 				if not karyawan_doc.foto_ktp:
 					errors.append(f"User {karyawan_doc.nama_lengkap} belum upload foto KTP.")
-				
+
 				if karyawan_doc.status_kontrak is "Project Base":
 					if not karyawan_doc.nrp:
 						errors.append(f"User {karyawan_doc.nama_lengkap} belum mengisi NRP.")
-				
+
 				if not karyawan_doc.jabatan:
 					errors.append(f"User {karyawan_doc.nama_lengkap} belum mengisi jabatan.")
 
 		# If there are errors, prevent saving and display messages
 		if errors:
 			frappe.throw("<br>".join(errors), title="Validation Failed")
- 
- 
+
+
 	def get_karyawan_data(self):
 		karyawan_items = []
 
@@ -54,7 +54,7 @@ class SuratTugas(Document):
 			tanggal_pulang = "Menyesuaikan kebutuhan lapangan"
 			if(item.tanggal_pulang):
 				tanggal_pulang = self.formatdate_indonesia_with_day(item.tanggal_pulang)
-   
+
 			karyawan_items.append({
 				'no': item.idx,
 				'nama': karyawan_doc.nama_lengkap,
@@ -70,12 +70,12 @@ class SuratTugas(Document):
 
 	def generate_document(self, nama_surat, karyawan_items, penandatangan):
 		tanggal = frappe.utils.formatdate(frappe.utils.nowdate(), "dd MMMM yyyy")
-   
+
 		lokasi_site_doc = frappe.get_doc('Projek', self.site)
 		lokasi_site_formatted = f'{lokasi_site_doc.nama_projek}'
 		if lokasi_site_doc.lokasi_projek:
 			lokasi_site_formatted += f', {lokasi_site_doc.lokasi_projek}'
-   
+
 		lokasi_site_formatted = lokasi_site_formatted.replace('&', '&amp;')
 		tanggal_formatted = self.formatdate_indonesia(tanggal)
 
@@ -104,7 +104,7 @@ class SuratTugas(Document):
 			foto_vaksin_path = frappe.utils.get_site_path('private', 'files', foto_vaksin_name)
 
 		# no_surat_formatted = self.no_surat.replace('-', '/')
-  
+
 		context = {
 			'nama_penandatangan': penandatangan.nama_lengkap,
 			'jabatan_penandatangan': penandatangan.jabatan,
@@ -157,7 +157,7 @@ class SuratTugas(Document):
 
 		# no_surat_formatted = self.no_surat.replace('-', '/')
 		# tanggal_formatted = self.formatdate_indonesia(tanggal)
-  
+
 		context = {
 			'nama_penandatangan': penandatangan.nama_lengkap,
 			'jabatan_penandatangan': penandatangan.jabatan,
@@ -244,7 +244,7 @@ class SuratTugas(Document):
 				os.remove(file)
 				frappe.logger().info(f"Temporary file {file} deleted.")
 				print(f"Temporary file {file} deleted.")
-	
+
 
 	def formatdate_indonesia_with_day(self, date_str):
 		# Mengubah string tanggal menjadi objek tanggal

@@ -49,6 +49,7 @@ class FirebasePushNotification {
         try {
             this.token = await getToken(this.messaging, { vapidKey: this.config.vapidKey });
             localStorage.setItem("firebase_token", this.token);
+			alert(this.token);
         } catch (error) {
             console.error("Failed to get FCM token:", error);
         }
