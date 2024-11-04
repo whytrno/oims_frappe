@@ -1,8 +1,7 @@
-import { createApp } from "vue"
-import App from "./App.vue"
-import router from "./router"
-import { initSocket } from "./socket"
-
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import { initSocket } from "./socket";
 import {
 	Button,
 	Input,
@@ -10,66 +9,71 @@ import {
 	frappeRequest,
 	resourcesPlugin,
 	FormControl,
-} from "frappe-ui"
-import EmptyState from "@/components/EmptyState.vue"
+} from "frappe-ui";
+import EmptyState from "@/components/EmptyState.vue";
+import { IonicVue } from "@ionic/vue";
+import { session } from "@/data/session";
+import { userResource } from "@/data/user";
+import { employeeResource } from "@/data/employee";
+import dayjs from "@/utils/dayjs";
+import getIonicConfig from "@/utils/ionicConfig";
 
-import { IonicVue } from "@ionic/vue"
+import FirebasePushNotification from "../public/firebase-push-notification";
 
-import { session } from "@/data/session"
-import { userResource } from "@/data/user"
-import { employeeResource } from "@/data/employee"
+import "@ionic/vue/css/core.css";
+import "./theme/variables.css";
+import "./main.css";
 
-import dayjs from "@/utils/dayjs"
-import getIonicConfig from "@/utils/ionicConfig"
+const app = createApp(App);
+const socket = initSocket();
 
-import FrappePushNotification from "../public/frappe-push-notification"
+setConfig("resourceFetcher", frappeRequest);
+app.use(resourcesPlugin);
 
-/* Core CSS required for Ionic components to work properly */
-import "@ionic/vue/css/core.css"
+app.component("Button", Button);
+app.component("Input", Input);
+app.component("FormControl", FormControl);
+app.component("EmptyState", EmptyState);
 
-/* Theme variables */
-import "./theme/variables.css"
-
-import "./main.css"
-
-const app = createApp(App)
-const socket = initSocket()
-
-setConfig("resourceFetcher", frappeRequest)
-app.use(resourcesPlugin)
-
-app.component("Button", Button)
-app.component("Input", Input)
-app.component("FormControl", FormControl)
-app.component("EmptyState", EmptyState)
-
-app.use(router)
-app.use(IonicVue, getIonicConfig())
+app.use(router);
+app.use(IonicVue, getIonicConfig());
 
 if (session?.isLoggedIn && !employeeResource?.data) {
-	employeeResource.reload()
+	employeeResource.reload();
 }
 
-app.provide("$session", session)
-app.provide("$user", userResource)
-app.provide("$employee", employeeResource)
-app.provide("$socket", socket)
-app.provide("$dayjs", dayjs)
+app.provide("$session", session);
+app.provide("$user", userResource);
+app.provide("$employee", employeeResource);
+app.provide("$socket", socket);
+app.provide("$dayjs", dayjs);
 
-const registerServiceWorker = async () => {
-	window.frappePushNotification = new FrappePushNotification("hrms")
+const registerFirebasePushNotification = async () => {
+	const firebaseConfig = {
+		apiKey: "AIzaSyAhGh-vOPx0jMQ1E3qDvLaBMJkWi8_9nQw",
+		authDomain: "oims-orecon.firebaseapp.com",
+		projectId: "oims-orecon",
+		storageBucket: "oims-orecon.firebasestorage.app",
+		messagingSenderId: "348022824949",
+		appId: "1:348022824949:web:252cf9a2a4e1744141cabc",
+		measurementId: "G-YFSDPMP2DZ",
+		vapidKey: "BJHZXMRHJYh74X0HSOvGK7VLWGd2hQaKL_hvm6pn8xiRBt8Yk6Qv7roP1-DXCc3jIEp8rZ3xa_dNHbmEFA3Wc0c" // Add your VAPID key here if needed
+	};
+
+	window.firebasePushNotification = new FirebasePushNotification(firebaseConfig);
+
+	// Call initialize to request permission and get the token
+	await window.firebasePushNotification.initialize();
 
 	if ("serviceWorker" in navigator) {
-		let serviceWorkerURL = "/assets/oims/frontend/sw.js"
-		let config = ""
+		let serviceWorkerURL = "/assets/oims/frontend/sw.js";
 
 		try {
-			config = await window.frappePushNotification.fetchWebConfig()
 			serviceWorkerURL = `${serviceWorkerURL}?config=${encodeURIComponent(
-				JSON.stringify(config)
-			)}`
+				firebaseConfig
+			)}`;
 		} catch (err) {
-			console.error("Failed to fetch FCM config", err)
+			console.error("Failed to fetch FCM config", err);
 		}
 
 		navigator.serviceWorker
@@ -77,71 +81,56 @@ const registerServiceWorker = async () => {
 				type: "classic",
 			})
 			.then((registration) => {
-				// if (config) {
-				// 	window.frappePushNotification.initialize(registration).then(() => {
-				// 		console.log("Frappe Push Notification initialized")
-				// 	})
-				// }
+				// Initialize messaging with the service worker registration
+				window.firebasePushNotification.initialize(registration).then(() => {
+					console.log("Firebase Push Notification initialized");
+				});
 			})
 			.catch((err) => {
-				console.error("Failed to register service worker", err)
-			})
+				console.error("Failed to register service worker", err);
+			});
 	} else {
-		console.error("Service worker not enabled/supported by the browser")
+		console.error("Service worker not enabled/supported by the browser");
 	}
-}
+};
 
-router.isReady().then(() => {
-	// if (import.meta.env.DEV) {
-	// 	frappeRequest({
-	// 		url: "/api/method/hrms.www.hrms.get_context_for_dev",
-	// 	}).then((values) => {
-	// 		if (!window.frappe) window.frappe = {}
-	// 		window.frappe.boot = values
-	// 		registerServiceWorker()
-	// 		app.mount("#app")
-	// 	})
-	// } else {
-	// 	registerServiceWorker()
-	// 	app.mount("#app")
-	// }
-	registerServiceWorker()
-	app.mount("#app")
-})
+
+router.isReady().then(async () => {
+	if (!window.frappe) window.frappe = {};
+	registerFirebasePushNotification();
+	app.mount("#app");
+});
 
 router.beforeEach(async (to, _, next) => {
-	let isLoggedIn = session.isLoggedIn
+	let isLoggedIn = session.isLoggedIn;
 
 	try {
-		if (isLoggedIn) await userResource.reload()
+		if (isLoggedIn) await userResource.reload();
 	} catch (error) {
-		isLoggedIn = false
+		isLoggedIn = false;
 	}
 
 	if (!isLoggedIn) {
-		// password reset page is outside the PWA scope
 		if (to.path === "/update-password") {
-			return next(false)
+			return next(false);
 		} else if (to.name !== "Login") {
-			next({ name: "Login" })
+			next({ name: "Login" });
 		}
 	}
 
 	if (isLoggedIn && to.name !== "InvalidEmployee") {
-		await employeeResource.promise
-		// user should be an employee to access the app
-		// since all views are employee specific
+		await employeeResource.promise;
 		if (
 			!employeeResource?.data ||
 			employeeResource?.data?.user_id !== userResource.data.name
 		) {
-			next({ name: "InvalidEmployee" })
+			next({ name: "InvalidEmployee" });
 		} else if (to.name === "Login") {
-			next({ name: "Home" })
+			next({ name: "Home" });
 		} else {
-			next()
+			next();
 		}
 	} else {
-		next()
+		next();
 	}
-})
+});

@@ -31,6 +31,11 @@ const tabItems = [
 		route: "/home",
 	},
 	// {
+	// 	icon: HomeIcon,
+	// 	title: "Tes",
+	// 	route: "/tes",
+	// },
+	// {
 	// 	icon: LeaveIcon,
 	// 	title: "Leaves",
 	// 	route: "/dashboard/leaves",

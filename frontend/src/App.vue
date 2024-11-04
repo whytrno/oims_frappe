@@ -17,7 +17,7 @@ import InstallPrompt from "@/components/InstallPrompt.vue"
 import { showNotification } from "@/utils/pushNotifications"
 
 onMounted(() => {
-	window?.frappePushNotification?.onMessage((payload) => {
+	window?.firebasePushNotification?.onMessage((payload) => {
 		showNotification(payload)
 	})
 })

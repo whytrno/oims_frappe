@@ -173,7 +173,7 @@ function setTotalLeaveDays() {
 	if (!areValuesSet()) return
 
 	const leaveDays = createResource({
-		url: "hrms.hr.doctype.leave_application.leave_application.get_number_of_leave_days",
+		url: "oims.hr.doctype.leave_application.leave_application.get_number_of_leave_days",
 		params: {
 			employee: employee.data.name,
 			leave_type: leaveApplication.value.leave_type,
@@ -194,7 +194,7 @@ function setLeaveBalance() {
 	if (!areValuesSet()) return
 
 	const leaveBalance = createResource({
-		url: "hrms.hr.doctype.leave_application.leave_application.get_leave_balance_on",
+		url: "oims.hr.doctype.leave_application.leave_application.get_leave_balance_on",
 		params: {
 			employee: employee.data.name,
 			date: leaveApplication.value.from_date,

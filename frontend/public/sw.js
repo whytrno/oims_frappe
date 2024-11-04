@@ -14,7 +14,9 @@ const jsonConfig = new URL(location).searchParams.get("config")
 
 // Firebase config initialization
 try {
-	const firebaseApp = initializeApp(JSON.parse(jsonConfig))
+	const firebaseApp = initializeApp({
+		messagingSenderId: "348022824949"
+	});
 	const messaging = getMessaging(firebaseApp)
 
 	function isChrome() {
