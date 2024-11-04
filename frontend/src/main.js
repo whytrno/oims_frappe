@@ -77,9 +77,7 @@ const registerFirebasePushNotification = async () => {
 		}
 
 		navigator.serviceWorker
-			.register(serviceWorkerURL, {
-				type: "classic",
-			})
+			.register("/assets/oims/frontend/firebase-messaging-sw.js")
 			.then((registration) => {
 				// Initialize messaging with the service worker registration
 				window.firebasePushNotification.initialize(registration).then(() => {
