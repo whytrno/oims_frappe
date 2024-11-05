@@ -82,11 +82,14 @@
 										class="h-5 w-5 text-gray-500"
 									/>
 								</a>
+								<div class="flex flex-row cursor-pointer flex-start p-4 items-center justify-center border-b">
+									<div class='onesignal-customlink-container' style="min-height: fit-content;"></div>
+								</div>
 							</div>
 						</div>
 
 						<!-- Settings -->
-						<div
+						<!-- <div
 							class="flex flex-col gap-5 my-4 w-full"
 							v-if="allowPushNotifications"
 						>
@@ -110,8 +113,7 @@
 									/>
 								</router-link>
 							</div>
-						</div>
-
+						</div> -->
 						<Button
 							@click="logout"
 							variant="outline"
@@ -152,6 +154,31 @@
 		</ion-content>
 	</ion-page>
 </template>
+
+<style scoped>
+.custom-link-style {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem; /* Sesuaikan padding sesuai kebutuhan */
+    border-bottom: 1px solid #e5e7eb; /* Border warna abu-abu */
+    cursor: pointer;
+}
+
+.custom-link-style .text-gray-500 {
+    color: #6b7280; /* Warna abu-abu teks */
+}
+
+.custom-link-style .text-gray-800 {
+    color: #374151; /* Warna abu-abu tua teks */
+}
+
+.custom-link-style:hover {
+    background-color: #f3f4f6; /* Warna latar saat hover */
+}
+</style>
+
 
 <script setup>
 import { computed, inject, ref, onMounted, onBeforeUnmount } from "vue"
@@ -232,13 +259,6 @@ const profileLinks = [
 
 const isInfoModalOpen = ref(false)
 const selectedItem = ref(null)
-
-const allowPushNotifications = computed(
-	() =>{
-		// window.frappe?.boot.push_relay_server_url &&
-		// arePushNotificationsEnabled.data
-	}
-)
 
 const openInfoModal = async (request) => {
 	selectedItem.value = request
