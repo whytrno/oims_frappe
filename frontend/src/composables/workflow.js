@@ -6,7 +6,7 @@ export default function useWorkflow(doctype) {
 	const workflowDoc = createResource({
 		url: "oims.api.get_workflow",
 		params: { doctype: doctype },
-		cache: ["hrms:workflow", doctype],
+		cache: ["oims:workflow", doctype],
 	})
 	workflowDoc.reload()
 

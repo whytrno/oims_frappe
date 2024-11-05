@@ -88,22 +88,12 @@ class FrappePushNotification {
 			return this.webConfig
 		}
 		try {
-			// let url = `${FrappePushNotification.relayServerBaseURL}/api/method/notification_relay.api.get_config?project_name=${this.projectName}`
-			// let response = await fetch(url)
-			// let response_json = await response.json()
-			// this.webConfig = response_json.config
-			// return this.webConfig
-			return {
-				apiKey: "AIzaSyAhGh-vOPx0jMQ1E3qDvLaBMJkWi8_9nQw",
-				authDomain: "oims-orecon.firebaseapp.com",
-				projectId: "oims-orecon",
-				storageBucket: "oims-orecon.firebasestorage.app",
-				messagingSenderId: "348022824949",
-				appId: "1:348022824949:web:252cf9a2a4e1744141cabc",
-				measurementId: "G-YFSDPMP2DZ"
-			};
+			let url = `${FrappePushNotification.relayServerBaseURL}/api/method/notification_relay.api.get_config?project_name=${this.projectName}`
+			let response = await fetch(url)
+			let response_json = await response.json()
+			this.webConfig = response_json.config
+			return this.webConfig
 		} catch (e) {
-			console.log('ANJAY', e)
 			throw new Error(
 				"Push Notification Relay is not configured properly on your site."
 			)
@@ -119,18 +109,17 @@ class FrappePushNotification {
 		if (this.vapidPublicKey !== "") {
 			return this.vapidPublicKey
 		}
-		return "BJHZXMRHJYh74X0HSOvGK7VLWGd2hQaKL_hvm6pn8xiRBt8Yk6Qv7roP1-DXCc3jIEp8rZ3xa_dNHbmEFA3Wc0c"
-		// try {
-		// 	let url = `${FrappePushNotification.relayServerBaseURL}/api/method/notification_relay.api.get_config?project_name=${this.projectName}`
-		// 	let response = await fetch(url)
-		// 	let response_json = await response.json()
-		// 	this.vapidPublicKey = response_json.vapid_public_key
-		// 	return this.vapidPublicKey
-		// } catch (e) {
-		// 	throw new Error(
-		// 		"Push Notification Relay is not configured properly on your site."
-		// 	)
-		// }
+		try {
+			let url = `${FrappePushNotification.relayServerBaseURL}/api/method/notification_relay.api.get_config?project_name=${this.projectName}`
+			let response = await fetch(url)
+			let response_json = await response.json()
+			this.vapidPublicKey = response_json.vapid_public_key
+			return this.vapidPublicKey
+		} catch (e) {
+			throw new Error(
+				"Push Notification Relay is not configured properly on your site."
+			)
+		}
 	}
 
 	/**
@@ -169,7 +158,6 @@ class FrappePushNotification {
 	 * @returns {Promise<{permission_granted: boolean, token: string}>}
 	 */
 	async enableNotification() {
-		console.log('saadwadaw')
 		if (!(await isSupported())) {
 			throw new Error("Push notifications are not supported on your device")
 		}
@@ -195,8 +183,6 @@ class FrappePushNotification {
 			vapidKey: vapidKey,
 			serviceWorkerRegistration: this.serviceWorkerRegistration,
 		})
-
-		console.log('newToken', newToken)
 		// register new token if token is changed
 		if (oldToken !== newToken) {
 			// unsubscribe old token

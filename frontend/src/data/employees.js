@@ -5,12 +5,19 @@ import { employeeResource } from "./employee"
 let employeesByID = reactive({})
 let employeesByUserID = reactive({})
 
+// export const employeeResource = {
+// 	data: [],
+// 	loading: false,
+// 	error: null,
+// 	async reload() {
+// 	},
+// }
 export const employees = createResource({
 	url: "oims.api.get_all_employees",
 	auto: true,
 	transform(data) {
 		return data.map((employee) => {
-			employee.isActive = employee.status === "Aktif"
+			employee.isActive = employee.status === "Active"
 			employeesByID[employee.name] = employee
 			employeesByUserID[employee.user_id] = employee
 

@@ -2,14 +2,21 @@ import { createResource } from "frappe-ui"
 import { employeeResource } from "./employee"
 import { reactive } from "vue"
 
-export const expenseClaimSummary = createResource({
-	url: "oims.api.get_expense_claim_summary",
-	params: {
-		employee: employeeResource.data.name,
+export const expenseClaimSummary = {
+	data: [],
+	loading: false,
+	error: null,
+	async reload() {
 	},
-	auto: true,
-	cache: "hrms:expense_claim_summary",
-})
+}
+// export const expenseClaimSummary = createResource({
+// 	url: "oims.api.get_expense_claim_summary",
+// 	params: {
+// 		employee: employeeResource.data.name,
+// 	},
+// 	auto: true,
+// 	cache: "oims:expense_claim_summary",
+// })
 
 const transformClaimData = (data) => {
 	return data.map((claim) => {
@@ -18,46 +25,67 @@ const transformClaimData = (data) => {
 	})
 }
 
-export const myClaims = createResource({
-	url: "oims.api.get_expense_claims",
-	params: {
-		employee: employeeResource.data.name,
-		limit: 10,
+export const myClaims = {
+	data: [],
+	loading: false,
+	error: null,
+	async reload() {
 	},
-	auto: true,
-	cache: "hrms:my_claims",
-	transform(data) {
-		return transformClaimData(data)
-	},
-	onSuccess() {
-		expenseClaimSummary.reload()
-	},
-})
+}
+// export const myClaims = createResource({
+// 	url: "oims.api.get_expense_claims",
+// 	params: {
+// 		employee: employeeResource.data.name,
+// 		limit: 10,
+// 	},
+// 	auto: true,
+// 	cache: "oims:my_claims",
+// 	transform(data) {
+// 		return transformClaimData(data)
+// 	},
+// 	onSuccess() {
+// 		expenseClaimSummary.reload()
+// 	},
+// })
 
-export const teamClaims = createResource({
-	url: "oims.api.get_expense_claims",
-	params: {
-		employee: employeeResource.data.name,
-		approver_id: employeeResource.data.user_id,
-		for_approval: 1,
-		limit: 10,
+export const teamClaims = {
+	data: [],
+	loading: false,
+	error: null,
+	async reload() {
 	},
-	auto: true,
-	cache: "hrms:team_claims",
-	transform(data) {
-		return transformClaimData(data)
-	},
-})
+}
+// export const teamClaims = createResource({
+// 	url: "oims.api.get_expense_claims",
+// 	params: {
+// 		employee: employeeResource.data.name,
+// 		approver_id: employeeResource.data.user_id,
+// 		for_approval: 1,
+// 		limit: 10,
+// 	},
+// 	auto: true,
+// 	cache: "oims:team_claims",
+// 	transform(data) {
+// 		return transformClaimData(data)
+// 	},
+// })
 
 export let claimTypesByID = reactive({})
 
-export const claimTypesResource = createResource({
-	url: "oims.api.get_expense_claim_types",
-	auto: true,
-	transform(data) {
-		return data.map((row) => {
-			claimTypesByID[row.name] = row
-			return row
-		})
+export const claimTypesResource = {
+	data: [],
+	loading: false,
+	error: null,
+	async reload() {
 	},
-})
+}
+// export const claimTypesResource = createResource({
+// 	url: "oims.api.get_expense_claim_types",
+// 	auto: true,
+// 	transform(data) {
+// 		return data.map((row) => {
+// 			claimTypesByID[row.name] = row
+// 			return row
+// 		})
+// 	},
+// })

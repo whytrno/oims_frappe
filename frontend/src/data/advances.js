@@ -7,15 +7,21 @@ const transformAdvanceData = (data) => {
 		return claim
 	})
 }
-
-export const advanceBalance = createResource({
-	url: "oims.api.get_employee_advance_balance",
-	params: {
-		employee: employeeResource.data.name,
+export const advanceBalance = {
+	data: [],
+	loading: false,
+	error: null,
+	async reload() {
 	},
-	auto: true,
-	cache: "hrms:employee_advance_balance",
-	transform(data) {
-		return transformAdvanceData(data)
-	},
-})
+}
+// export const advanceBalance = createResource({
+// 	url: "oims.api.get_employee_advance_balance",
+// 	params: {
+// 		employee: employeeResource.data.name,
+// 	},
+// 	auto: true,
+// 	cache: "oims:employee_advance_balance",
+// 	transform(data) {
+// 		return transformAdvanceData(data)
+// 	},
+// })

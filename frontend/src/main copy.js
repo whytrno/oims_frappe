@@ -11,6 +11,7 @@ import {
 	resourcesPlugin,
 	FormControl,
 } from "frappe-ui"
+import { translationsPlugin } from "./plugins/translationsPlugin.js"
 import EmptyState from "@/components/EmptyState.vue"
 
 import { IonicVue } from "@ionic/vue"
@@ -37,6 +38,7 @@ const socket = initSocket()
 
 setConfig("resourceFetcher", frappeRequest)
 app.use(resourcesPlugin)
+app.use(translationsPlugin)
 
 app.component("Button", Button)
 app.component("Input", Input)
@@ -57,10 +59,10 @@ app.provide("$socket", socket)
 app.provide("$dayjs", dayjs)
 
 const registerServiceWorker = async () => {
-	window.frappePushNotification = new FrappePushNotification("oims-orecon")
+	window.frappePushNotification = new FrappePushNotification("hrms")
 
 	if ("serviceWorker" in navigator) {
-		let serviceWorkerURL = "/assets/oims/frontend/sw.js"
+		let serviceWorkerURL = "/assets/hrms/frontend/sw.js"
 		let config = ""
 
 		try {
@@ -80,38 +82,6 @@ const registerServiceWorker = async () => {
 				if (config) {
 					window.frappePushNotification.initialize(registration).then(() => {
 						console.log("Frappe Push Notification initialized")
-					})
-
-					window.frappePushNotification
-					.enableNotification()
-					.then((data) => {
-						console.log(data)
-						if (data.permission_granted) {
-							pushNotificationState.value = true
-						} else {
-							toast({
-								title: "Error",
-								text: "Push Notification permission denied",
-								icon: "alert-circle",
-								position: "bottom-center",
-								iconClasses: "text-red-500",
-							})
-							pushNotificationState.value = false
-						}
-					})
-					.catch((error) => {
-						console.log(error)
-						toast({
-							title: "Error",
-							text: error.message,
-							icon: "alert-circle",
-							position: "bottom-center",
-							iconClasses: "text-red-500",
-						})
-						pushNotificationState.value = false
-					})
-					.finally(() => {
-						isLoading.value = false
 					})
 				}
 			})

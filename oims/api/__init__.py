@@ -3,7 +3,7 @@ from frappe import _
 from frappe.model import get_permitted_fields
 from frappe.model.workflow import get_workflow_name
 from frappe.query_builder import Order
-from frappe.utils import getdate, strip_html
+from frappe.utils import add_days, date_diff, getdate, strip_html
 from datetime import datetime
 
 SUPPORTED_FIELD_TYPES = [
@@ -80,6 +80,58 @@ def submit_attendance(karyawan, lokasi_absen, foto, tipe, keterangan, waktu_abse
     attendance_doc.save()
     frappe.logger().info(f"Attendance submitted for {karyawan} at {waktu_absen}")
     return attendance_doc.as_dict()
+
+@frappe.whitelist()
+def get_attendance_calendar_events(employee: int, from_date: str, to_date: str) -> dict[str, str]:
+	holidays = []
+	attendance = get_attendance_for_calendar(employee, from_date, to_date)
+	events = {}
+
+	date = getdate(from_date)
+	while date_diff(to_date, date) >= 0:
+		date_str = date.strftime("%Y-%m-%d")
+		if date in holidays:
+			events[date_str] = "Holiday"
+		elif date in attendance:
+			events[date_str] = attendance[date]
+		date = add_days(date, 1)
+
+	return events
+
+# def get_holidays_for_calendar(employee: str, from_date: str, to_date: str) -> list[str]:
+# 	if holiday_list := get_holiday_list_for_employee(employee, raise_exception=False):
+# 		return frappe.get_all(
+# 			"Holiday",
+# 			filters={"parent": holiday_list, "holiday_date": ["between", [from_date, to_date]]},
+# 			pluck="holiday_date",
+# 		)
+
+# 	return []
+
+
+
+def get_attendance_for_calendar(employee: str, from_date: str, to_date: str) -> list[dict[str, str]]:
+	attendance = frappe.get_all(
+		"Absensi",
+		{"karyawan": employee, "waktu_absen": ["between", [from_date, to_date]], "tipe": ["!=", "Out"]},
+		["waktu_absen", "tipe", "izin", "telat"],
+	)
+
+	for att in attendance:
+		# ubah time datetime ke date
+		att["attendance_date"] = att["waktu_absen"].date()
+
+		if att["izin"]:
+			att["status"] = "Izin"
+		elif att["telat"]:
+			att["status"] = "Telat"
+		elif att["tipe"] == "In":
+			att["status"] = "Tepat Waktu"
+
+	data = {d["attendance_date"]: d["status"] for d in attendance}
+	print(f'data: {data}')
+
+	return {d["attendance_date"]: d["status"] for d in attendance}
 
 
 @frappe.whitelist()

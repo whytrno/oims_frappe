@@ -14,7 +14,7 @@
 							>
 								<FeatherIcon name="chevron-left" class="h-5 w-5" />
 							</Button>
-							<h2 class="text-xl font-semibold text-gray-900">Notifications</h2>
+							<h2 class="text-xl font-semibold text-gray-900">{{ __("Notifications") }} </h2>
 						</div>
 					</header>
 
@@ -46,7 +46,7 @@
 									<template #prefix>
 										<FeatherIcon name="check-circle" class="w-4" />
 									</template>
-									Mark all as read
+									{{ __('Mark all as read') }}
 								</Button>
 							</div>
 						</div>
@@ -107,9 +107,10 @@ const dayjs = inject("$dayjs")
 const router = useRouter()
 
 const allowPushNotifications = computed(
-	() =>
-		window.frappe?.boot.push_relay_server_url &&
-		arePushNotificationsEnabled.data
+	() =>{
+		// window.frappe?.boot.push_relay_server_url &&
+		// arePushNotificationsEnabled.data
+	}
 )
 
 const markAllAsRead = createResource({

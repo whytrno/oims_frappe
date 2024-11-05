@@ -21,8 +21,9 @@ export class FileAttachment {
 				onError: (error) => {
 					toast({
 						title: "Error",
-						text: `File upload failed for ${this.fileName}. ${error.messages?.[0] || ""
-							}`,
+						text: `File upload failed for ${this.fileName}. ${
+							error.messages?.[0] || ""
+						}`,
 						icon: "alert-circle",
 						position: "bottom-center",
 						iconClasses: "text-red-500",
