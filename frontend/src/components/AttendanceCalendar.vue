@@ -69,9 +69,9 @@ const __ = inject("$translate")
 const firstOfMonth = ref(dayjs().date(1).startOf("D"))
 
 const colorMap = {
-	"Tepat Waktu": "green-200",
-	"Telat": "red-100",
-	Izin: "gray-100",
+	"Tepat Waktu": "green-500",
+	"Telat": "red-500",
+	Izin: "gray-500",
 }
 
 const summaryStatuses = ["Tepat Waktu", "Telat", "Izin"]
