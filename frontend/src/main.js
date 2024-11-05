@@ -31,7 +31,8 @@ const app = createApp(App);
 
 // OneSignal configuration
 app.use(OneSignalVuePlugin, {
-	appId: '57681691-1547-471a-a362-799e19617665',
+	appId: '0e972c8f-983c-41ac-a097-837c7b92a80e',
+	// appId: '57681691-1547-471a-a362-799e19617665',
 	notifyButton: {
 		enable: true
 	},
