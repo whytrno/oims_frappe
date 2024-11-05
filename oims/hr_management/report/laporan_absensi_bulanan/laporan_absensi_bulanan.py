@@ -66,7 +66,6 @@ def get_attendance_map(filters):
             "tipe": "In"
         },
         fields=["lokasi_absen", "karyawan", "tipe", "waktu_absen", "ambil_jatah_makan", "telat", "izin"],
-        group_by="karyawan, DATE(waktu_absen)"
     )
 
     if filters.site:
@@ -78,6 +77,7 @@ def get_attendance_map(filters):
         karyawan = record.karyawan
         karyawan_doc = frappe.get_doc("Karyawan", karyawan)
         nama_lengkap = karyawan_doc.nama_lengkap
+        karyawan_id = karyawan_doc.name
         nrp = karyawan_doc.nrp
         ambil_jatah_makan = record.ambil_jatah_makan
         jam_absen = record.waktu_absen.strftime("%H:%M")
@@ -97,13 +97,13 @@ def get_attendance_map(filters):
 
         # Jika karyawan belum ada di site, tambahkan
         if karyawan not in attendance_map[hari_absen][site]:
-            attendance_map[hari_absen][site][nrp] = {
+            attendance_map[hari_absen][site][karyawan_id] = {
                 "nama_karyawan": nama_lengkap,
                 "data_absen": []
             }
 
         # Tambahkan data absen ke dalam 'data_absen' list
-        attendance_map[hari_absen][site][nrp]["data_absen"].append({
+        attendance_map[hari_absen][site][karyawan_id]["data_absen"].append({
             "tipe": tipe,
             "izin": izin,
             "ambil_jatah_makan": ambil_jatah_makan,
@@ -111,6 +111,7 @@ def get_attendance_map(filters):
             "jam_absen": jam_absen
         })
 
+    print(f'attendance_map: {attendance_map}')
     return attendance_map
 
 def get_week_date_range(filters):
@@ -184,9 +185,9 @@ def get_columns(filters: Filters) -> list[dict]:
 				"width": 120,
 			},
 			{
-                "label": _("Nama karyawan"), 
-                "fieldname": "nama_karyawan", 
-                "fieldtype": "Data", 
+                "label": _("Nama karyawan"),
+                "fieldname": "nama_karyawan",
+                "fieldtype": "Data",
                 "width": 150
             },
 		]
@@ -218,7 +219,7 @@ def get_total_days_in_month(filters: Filters) -> int:
 def get_data(filters) -> list[list]:
     total_days = get_total_days_in_month(filters)
     data_map = {}
-    
+
     # Untuk hari ke-X, tambahkan status kehadiran jika ada
     minggu_ke = cint(filters.minggu_ke)
 
@@ -232,13 +233,13 @@ def get_data(filters) -> list[list]:
     for day, site_data in attendance_map.items():
         if minggu_ke > 1:
             day = day - ((minggu_ke - 2) * 7)
-            
+
         # Iterasi melalui semua site dalam hari tersebut
         for site, karyawan_data in site_data.items():
             # Iterasi melalui semua karyawan di site tersebut
             for karyawan, attendance in karyawan_data.items():
                 nama_lengkap_karyawan = attendance["nama_karyawan"]
-                
+
                 # Jika karyawan belum ada di data_map, inisialisasi row baru
                 if karyawan not in data_map:
                     # Inisialisasi row dengan NRP, nama karyawan, dan site
@@ -246,7 +247,7 @@ def get_data(filters) -> list[list]:
                     data_map[karyawan] = row
                 else:
                     row = data_map[karyawan]
-                
+
                 if day <= total_days:
                     absensi_harian = attendance.get("data_absen", [])
                     hadir = False
@@ -266,7 +267,7 @@ def get_data(filters) -> list[list]:
                                 break
                     if not hadir:
                         row[1 + day] = " "
-                        
+
     # Convert the data_map values to a list for final output
     return list(data_map.values())
 
@@ -274,7 +275,7 @@ def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
     # Menyesuaikan chart untuk data harian sesuai rentang tanggal di filter
     start_date = getdate(filters.start_date)
     end_date = getdate(filters.end_date)
-    
+
     labels = []
     izin = []
     hadir = []
@@ -294,7 +295,6 @@ def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
                 for karyawan, attendance in karyawan_data.items():
                     absensi_harian = attendance.get("data_absen", [])
                     for absensi in absensi_harian:
-                        print(f'absensi: {absensi["izin"]}')
                         if absensi["izin"]:
                             total_izin_on_day += 1
                         elif absensi["tipe"] == "In" or absensi["tipe"] == "Out":

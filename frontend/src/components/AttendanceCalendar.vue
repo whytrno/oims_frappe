@@ -32,7 +32,7 @@
 				<div v-for="index in firstOfMonth.endOf('M').get('D')">
 					<div
 						class="h-8 w-8 flex rounded-full mx-auto"
-						:class="getEventOnDate(index) && `bg-${colorMap[getEventOnDate(index)]}`"
+						:class="getEventOnDate(index) && `${colorMap[getEventOnDate(index)]}`"
 					>
 						<span class="text-gray-800 text-sm font-medium m-auto">
 							{{ index }}
@@ -47,7 +47,7 @@
 			<div class="grid grid-cols-3 mx-2">
 				<div v-for="status in summaryStatuses" class="flex flex-col gap-1">
 					<div class="flex flex-row gap-1 items-center justify-center">
-						<span class="rounded full h-3 w-3" :class="`bg-${colorMap[status]}`" />
+						<span class="rounded full h-3 w-3" :class="`${colorMap[status]}`" />
 						<span class="text-gray-600 text-sm font-medium leading-5"> {{ __(status) }} </span>
 					</div>
 					<span class="text-gray-800 text-base font-semibold leading-6 mx-auto">
@@ -69,9 +69,9 @@ const __ = inject("$translate")
 const firstOfMonth = ref(dayjs().date(1).startOf("D"))
 
 const colorMap = {
-	"Tepat Waktu": "green-500",
-	"Telat": "red-500",
-	Izin: "gray-500",
+	"Tepat Waktu": "bg-green-500",
+	"Telat": "bg-red-300",
+	Izin: "bg-gray-300",
 }
 
 const summaryStatuses = ["Tepat Waktu", "Telat", "Izin"]
