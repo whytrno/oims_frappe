@@ -8,7 +8,7 @@
 		"build": "vite build --base=/assets/oims/frontend/ && yarn copy-html-entry",
 		"ionic:build": "npm run build",
 		"ionic:serve": "vite dev --host",
-		"copy-html-entry": "cp ../oims/public/frontend/index.html ../oims/www/oims.html"
+		"copy-html-entry": "cp ../oims/public/frontend/index.html ../oims/www/mobile.html"
 	},
 	"dependencies": {
 		"@ionic/vue": "^7.4.3",
