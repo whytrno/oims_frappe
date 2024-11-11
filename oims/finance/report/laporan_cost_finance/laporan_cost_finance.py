@@ -135,20 +135,14 @@ def get_chart_data(filters=Filters, raw_data=[]):
     datasets.append({
         "name": "Total Forecast",
         "values": [total_forecast[day] for day in labels_data],
-        "fieldtype": "Currency",
-        "options": "currency",
     })
     datasets.append({
         "name": "Total Cost",
         "values": [total_cost[day] for day in labels_data],
-        "fieldtype": "Currency",
-        "options": "currency",
     })
     datasets.append({
         "name": "Total Potential",
         "values": [total_potential[day] for day in labels_data],
-        "fieldtype": "Currency",
-        "options": "currency",
     })
 
     # Struktur data chart dengan label hanya berupa tanggal
@@ -158,14 +152,10 @@ def get_chart_data(filters=Filters, raw_data=[]):
             "datasets": datasets,
         },
         "type": "bar",
-        "colors": ["blue", "red", "yellow"],  # Different colors for Forecast and Cost
-        "tooltip_options": {
-            "value_format": "formatted_values",  # Menggunakan formatted_values untuk tooltip
-            "formatted_values": {
-                "forecast": [fmt_money(total_forecast[day]) for day in labels_data],  # Format Rp. untuk Forecast
-                "cost": [fmt_money(total_cost[day]) for day in labels_data],  # Format Rp. untuk Cost
-            }
-        }
+        "colors": ["blue", "red", "yellow"],
+		"fieldtype": "Currency",
+		"options": "currency",
+		"currency": "IDR"
     }
 
     return chart_data
