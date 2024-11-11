@@ -1,5 +1,5 @@
 {
- "add_total_row": 1,
+ "add_total_row": 0,
  "columns": [],
  "creation": "2024-11-11 15:22:13.425156",
  "disabled": 0,
@@ -9,7 +9,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letterhead": null,
- "modified": "2024-11-11 15:22:13.425156",
+ "modified": "2024-11-11 22:07:46.494043",
  "modified_by": "Administrator",
  "module": "Finance",
  "name": "Laporan Cost Finance",

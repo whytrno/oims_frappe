@@ -19,8 +19,37 @@ def execute(filters=Filters):
 
     data = get_data(filters)
     chart_data = get_chart_data(filters, data)
+    summary = get_summary(data)
 
-    return columns, data, None, chart_data
+    return columns, data, None, chart_data, summary
+
+def get_summary(data):
+    """Menghitung total Forecast, Cost, dan Potential dari data"""
+    total_forecast = sum(int(row["total"]) for row in data if row["tipe"] == "Forecast")
+    total_cost = sum(int(row["total"]) for row in data if row["tipe"] == "Actual")
+    total_potential = sum(int(row["total"]) for row in data if row["tipe"] == "Potential")
+
+    summary = [
+        {
+            "label": "Total Forecast",
+            "value": total_forecast,
+			"datatype": "Currency",
+			"currency": "IDR",
+		},
+        {
+            "label": "Total Cost",
+            "value": total_cost,
+			"datatype": "Currency",
+			"currency": "IDR",
+		},
+        {
+            "label": "Total Potential",
+            "value": total_potential,
+			"datatype": "Currency",
+			"currency": "IDR",
+		},
+    ]
+    return summary
 
 def get_week_date_range(filters):
     """Mengembalikan rentang tanggal untuk minggu ke berapa yang dipilih"""
@@ -52,11 +81,11 @@ def get_week_date_range(filters):
 
 def get_columns():
     columns = [
-        {"label": "Tanggal", "fieldname": "tanggal", "fieldtype": "data", "width": 120},
-        {"label": "Project", "fieldname": "project", "fieldtype": "data", "width": 120},
-        {"label": "Menu", "fieldname": "menu", "fieldtype": "data", "width": 120},
-        {"label": "Tipe", "fieldname": "tipe", "fieldtype": "data", "width": 120},
-        {"label": "Total", "fieldname": "total", "fieldtype": "currency", "width": 200},
+        {"label": "Tanggal", "fieldname": "tanggal", "fieldtype": "Data", "width": 120},
+        {"label": "Project", "fieldname": "project", "fieldtype": "Data", "width": 120},
+        {"label": "Menu", "fieldname": "menu", "fieldtype": "Data", "width": 120},
+        {"label": "Tipe", "fieldname": "tipe", "fieldtype": "Data", "width": 120},
+        {"label": "Total", "fieldname": "total", "fieldtype": "Currency", "options": "currency", "width": 200},
     ]
     return columns
 
@@ -90,6 +119,7 @@ def get_chart_data(filters=Filters, raw_data=[]):
     # Dictionary untuk menyimpan total berdasarkan tanggal (hari saja)
     total_forecast = {day: 0 for day in labels_data}
     total_cost = {day: 0 for day in labels_data}
+    total_potential = {day: 0 for day in labels_data}
 
     # Akumulasi total untuk forecast dan cost berdasarkan tanggal
     for row in raw_data:
@@ -98,15 +128,27 @@ def get_chart_data(filters=Filters, raw_data=[]):
             total_forecast[day] += int(row["total"])
         elif row['tipe'] == 'Actual':
             total_cost[day] += int(row["total"])
+        elif row['tipe'] == 'Potential':
+            total_potential[day] += int(row["total"])
 
     # Menambahkan dataset untuk chart dengan angka mentah (numerik)
     datasets.append({
         "name": "Total Forecast",
-        "values": [total_forecast[day] for day in labels_data],  # Nilai numerik
+        "values": [total_forecast[day] for day in labels_data],
+        "fieldtype": "Currency",
+        "options": "currency",
     })
     datasets.append({
         "name": "Total Cost",
-        "values": [total_cost[day] for day in labels_data],  # Nilai numerik
+        "values": [total_cost[day] for day in labels_data],
+        "fieldtype": "Currency",
+        "options": "currency",
+    })
+    datasets.append({
+        "name": "Total Potential",
+        "values": [total_potential[day] for day in labels_data],
+        "fieldtype": "Currency",
+        "options": "currency",
     })
 
     # Struktur data chart dengan label hanya berupa tanggal
@@ -116,7 +158,7 @@ def get_chart_data(filters=Filters, raw_data=[]):
             "datasets": datasets,
         },
         "type": "bar",
-        "colors": ["blue", "red"],  # Different colors for Forecast and Cost
+        "colors": ["blue", "red", "yellow"],  # Different colors for Forecast and Cost
         "tooltip_options": {
             "value_format": "formatted_values",  # Menggunakan formatted_values untuk tooltip
             "formatted_values": {
