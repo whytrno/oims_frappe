@@ -12,6 +12,10 @@
   "column_break_tlzs",
   "lokasi_projek",
   "status_projek",
+  "latitude",
+  "longitude",
+  "section_break_phtv",
+  "peta",
   "perusahaan_terkait_tab",
   "perusahaan_terkait",
   "karyawan_terkait_tab",
@@ -77,6 +81,25 @@
    "fieldtype": "Table",
    "label": "Karyawan Terkait",
    "options": "Karyawan Projek"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Data",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Data",
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "section_break_phtv",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "peta",
+   "fieldtype": "Geolocation",
+   "label": "Peta"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -86,7 +109,7 @@
    "link_fieldname": "projek"
   }
  ],
- "modified": "2024-10-14 14:08:07.034090",
+ "modified": "2024-11-15 13:00:07.859176",
  "modified_by": "Administrator",
  "module": "Legal",
  "name": "Projek",
