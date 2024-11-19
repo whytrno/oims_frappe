@@ -116,6 +116,9 @@ def submit_attendance(karyawan, lokasi_absen, foto, tipe, keterangan, waktu_abse
 			"izin": izin
 		})
         attendance_doc.save()
+
+        frappe.log_error("berhasil absen", 'payment failed')
+        frappe.logger().error(f"Validation error for attendance submission")
         frappe.logger().info(f"Attendance submitted for {karyawan} at {waktu_absen}")
         return attendance_doc.as_dict()
 
