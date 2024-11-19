@@ -81,6 +81,54 @@ def submit_attendance(karyawan, lokasi_absen, foto, tipe, keterangan, waktu_abse
     frappe.logger().info(f"Attendance submitted for {karyawan} at {waktu_absen}")
     return attendance_doc.as_dict()
 
+from datetime import datetime
+
+def submit_attendance(karyawan, lokasi_absen, foto, tipe, keterangan, waktu_absen, latitude, longitude, ambil_jatah_makan=False, izin=False):
+    """
+    Submit attendance for an employee with error handling and logging.
+    """
+    try:
+        # Validasi format waktu_absen
+        today = datetime.today().date()
+        existing_attendance = frappe.db.exists(
+			"Absensi",
+			{
+				"karyawan": karyawan,
+				"tipe": tipe,
+				"waktu_absen": ["like", f"{today}%"]
+			}
+		)
+        if existing_attendance:
+            frappe.throw(_("Anda sudah absen {tipe} hari ini."))
+
+        attendance_doc = frappe.get_doc({
+			"doctype": "Absensi",
+			"karyawan": karyawan,
+			"lokasi_absen": lokasi_absen,
+			"foto": foto,
+			"tipe": tipe,
+			"keterangan": keterangan,
+			"waktu_absen": waktu_absen,
+			"latitude": latitude,
+			"longitude": longitude,
+			"ambil_jatah_makan": ambil_jatah_makan,
+			"izin": izin
+		})
+        attendance_doc.save()
+        frappe.logger().info(f"Attendance submitted for {karyawan} at {waktu_absen}")
+        return attendance_doc.as_dict()
+
+    except frappe.ValidationError as e:
+        # Tangkap error validasi
+        frappe.logger().error(f"Validation error for attendance submission: {str(e)}")
+        frappe.throw(_("Terjadi kesalahan validasi: {0}").format(str(e)))
+
+    except Exception as e:
+        # Tangkap error lainnya
+        frappe.logger().error(f"Unexpected error during attendance submission: {str(e)}", exc_info=True)
+        frappe.throw(_("Terjadi kesalahan yang tidak terduga: {0}").format(str(e)))
+
+
 @frappe.whitelist()
 def get_attendance_calendar_events(employee: int, from_date: str, to_date: str) -> dict[str, str]:
 	holidays = []
