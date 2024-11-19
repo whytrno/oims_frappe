@@ -120,11 +120,13 @@ def submit_attendance(karyawan, lokasi_absen, foto, tipe, keterangan, waktu_abse
 
     except frappe.ValidationError as e:
         # Tangkap error validasi
+        frappe.log_error(e, 'payment failed')
         frappe.logger().error(f"Validation error for attendance submission: {str(e)}")
         frappe.throw(_("Terjadi kesalahan validasi: {0}").format(str(e)))
 
     except Exception as e:
         # Tangkap error lainnya
+        frappe.log_error(e, 'payment failed')
         frappe.logger().error(f"Unexpected error during attendance submission: {str(e)}", exc_info=True)
         frappe.throw(_("Terjadi kesalahan yang tidak terduga: {0}").format(str(e)))
 
