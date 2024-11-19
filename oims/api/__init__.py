@@ -84,55 +84,59 @@ def get_current_user_info() -> dict:
 # from datetime import datetime
 
 @frappe.whitelist()
+@frappe.whitelist()
 def submit_attendance(karyawan, lokasi_absen, foto, tipe, keterangan, waktu_absen, latitude, longitude, ambil_jatah_makan=False, izin=False):
     """
     Submit attendance for an employee with error handling and logging.
     """
     try:
-        # Validasi format waktu_absen
+        # Cek jika sudah absen dari tipe yang sama di hari ini
         today = datetime.today().date()
         existing_attendance = frappe.db.exists(
-			"Absensi",
-			{
-				"karyawan": karyawan,
-				"tipe": tipe,
-				"waktu_absen": ["like", f"{today}%"]
-			}
-		)
+            "Absensi",
+            {
+                "karyawan": karyawan,
+                "tipe": tipe,
+                "waktu_absen": ["like", f"{today}%"]
+            }
+        )
         if existing_attendance:
             frappe.throw(_("Anda sudah absen {tipe} hari ini."))
 
+        # Buat dokumen Absensi
         attendance_doc = frappe.get_doc({
-			"doctype": "Absensi",
-			"karyawan": karyawan,
-			"lokasi_absen": lokasi_absen,
-			"foto": foto,
-			"tipe": tipe,
-			"keterangan": keterangan,
-			"waktu_absen": waktu_absen,
-			"latitude": latitude,
-			"longitude": longitude,
-			"ambil_jatah_makan": ambil_jatah_makan,
-			"izin": izin
-		})
+            "doctype": "Absensi",
+            "karyawan": karyawan,
+            "lokasi_absen": lokasi_absen,
+            "foto": foto,
+            "tipe": tipe,
+            "keterangan": keterangan,
+            "waktu_absen": waktu_absen,
+            "latitude": latitude,
+            "longitude": longitude,
+            "ambil_jatah_makan": ambil_jatah_makan,
+            "izin": izin
+        })
+
+        # Simpan dokumen ke database
         attendance_doc.save()
 
-        frappe.log_error("berhasil absen", 'payment failed')
-        frappe.logger().error(f"Validation error for attendance submission")
-        frappe.logger().info(f"Attendance submitted for {karyawan} at {waktu_absen}")
+        # Catat log sukses (info log, bukan error)
+        frappe.logger().info(f"Attendance successfully submitted for {karyawan} at {waktu_absen}")
         return attendance_doc.as_dict()
 
     except frappe.ValidationError as e:
-        # Tangkap error validasi
-        frappe.log_error(e, 'payment failed')
+        # Tangkap dan catat error validasi
+        frappe.log_error(title='Validation Error in Attendance', message=str(e))
         frappe.logger().error(f"Validation error for attendance submission: {str(e)}")
         frappe.throw(_("Terjadi kesalahan validasi: {0}").format(str(e)))
 
     except Exception as e:
-        # Tangkap error lainnya
-        frappe.log_error(e, 'payment failed')
+        # Tangkap dan catat error yang tidak terduga
+        frappe.log_error(title='Unexpected Error in Attendance Submission', message=frappe.get_traceback())
         frappe.logger().error(f"Unexpected error during attendance submission: {str(e)}", exc_info=True)
         frappe.throw(_("Terjadi kesalahan yang tidak terduga: {0}").format(str(e)))
+
 
 
 @frappe.whitelist()
