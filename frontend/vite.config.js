@@ -68,6 +68,9 @@ export default defineConfig({
 			"@": path.resolve(__dirname, "src"),
 		},
 	},
+	// resolve: {
+	// 	alias: [{ find: "@", replacement: resolve(__dirname, "./src") }]
+	// },
 	build: {
 		outDir: "../oims/public/frontend",
 		emptyOutDir: true,

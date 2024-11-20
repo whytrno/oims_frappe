@@ -19,10 +19,9 @@ const routes = [
 				redirect: "/home",
 			},
 			{
-				path: "/attendance",
-				name: "Attendance",
-				component: () => import("@/views/Attendance.vue"),
-				props: true
+				path: "/dashboard/surat-tugas",
+				name: "SuratTugas",
+				component: () => import("@/views/SuratTugas.vue"),
 			},
 			{
 				path: "/home",
@@ -35,11 +34,37 @@ const routes = [
 				component: () => import("@/views/attendance/Dashboard.vue"),
 			},
 			{
+				path: "/dashboard/fueling",
+				name: "FuelingDashboard",
+				component: () => import("@/views/fueling/Dashboard.vue"),
+			},
+			{
 				path: "/dashboard/expense-claims",
 				name: "ExpenseClaimsDashboard",
 				component: () => import("@/views/expense_claim/Dashboard.vue"),
 			},
 		],
+	},
+	{
+		path: "/dashboard/fueling/scan-qr",
+		name: "FuelingScanQr",
+		component: () => import("@/views/fueling/FuelingScanQr.vue"),
+	},
+	{
+		path: "/dashboard/fueling/unit/:unitId",
+		name: "FuelingForm",
+		component: () => import("@/views/fueling/Form.vue"),
+		props: true, // Tambahkan ini
+	},
+	{
+		path: "/attendance",
+		name: "Attendance",
+		component: () => import("@/views/Attendance.vue"),
+	},
+	{
+		name: "SuratTugasDetailView",
+		path: "/surat-tugas-requests",
+		component: () => import("@/views/SuratTugas.vue"),
 	},
 	{
 		path: "/login",

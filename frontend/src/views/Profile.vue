@@ -82,9 +82,6 @@
 										class="h-5 w-5 text-gray-500"
 									/>
 								</a>
-								<div class="flex flex-row cursor-pointer flex-start p-4 items-center justify-center border-b">
-									<div class='onesignal-customlink-container' style="min-height: fit-content;"></div>
-								</div>
 							</div>
 						</div>
 

@@ -135,17 +135,50 @@
 			:disabled="isReadOnly"
 		/>
 
+		<VueSignaturePad
+			v-else-if="props.fieldtype === 'Signature'"
+          ref='signature'
+          height='400px'
+          width='950px'
+          :max-width='options.maxWidth'
+          :min-width='options.minWidth'
+          :options='{
+            penColor: options.penColor,
+            backgroundColor: options.backgroundColor,
+          }'
+        />
+
 		<ErrorMessage :message="props.errorMessage" />
 	</div>
 </template>
 
 <script setup>
 import { Autocomplete, DateTimePicker, ErrorMessage, Input } from "frappe-ui"
-import { computed, onMounted, inject } from "vue"
+import { computed, onMounted, inject, ref } from "vue"
+import { VueSignaturePad } from '@selemondev/vue3-signature-pad'
 
 import Link from "@/components/Link.vue"
 
 const __ = inject("$translate")
+const options = ref({
+  penColor: 'rgb(0,0,0)',
+  backgroundColor: 'rgb(255, 255, 255)',
+  maxWidth: 2,
+  minWidth: 2,
+})
+const signature = ref()
+
+function handleUndo() {
+  return signature.value?.undo && signature.value?.undo()
+}
+
+function handleClearCanvas() {
+  return signature.value?.clearCanvas && signature.value?.clearCanvas()
+}
+
+function handleSaveSignature() {
+  return signature.value?.saveSignature && alert(signature.value?.saveSignature())
+}
 
 const props = defineProps({
 	fieldtype: String,
@@ -173,6 +206,13 @@ const props = defineProps({
 
 const emit = defineEmits(["change", "update:modelValue"])
 const dayjs = inject("$dayjs")
+
+// Signature pad-related logic
+// const signatureCanvas = ref(null)
+// const signaturePad = ref(null)
+// const canvasWidth = 400
+// const canvasHeight = 200
+// let isDrawing = false
 
 const showField = computed(() => {
 	if (props.readOnly && !isLayoutField.value && !props.modelValue) return false

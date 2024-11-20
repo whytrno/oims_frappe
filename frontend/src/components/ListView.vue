@@ -150,6 +150,7 @@ import ShiftRequestItem from "@/components/ShiftRequestItem.vue"
 import ShiftAssignmentItem from "@/components/ShiftAssignmentItem.vue"
 import LeaveRequestItem from "@/components/LeaveRequestItem.vue"
 import ExpenseClaimItem from "@/components/ExpenseClaimItem.vue"
+import SuratTugasItem from "@/components/SuratTugasItem.vue"
 import EmployeeAdvanceItem from "@/components/EmployeeAdvanceItem.vue"
 import ListFiltersActionSheet from "@/components/ListFiltersActionSheet.vue"
 import CustomIonModal from "@/components/CustomIonModal.vue"
@@ -186,7 +187,7 @@ const props = defineProps({
 	},
 })
 
-const getButtonKey = (tab) => tab?.key ?? tab
+const getButtonKey = (tab) => tab?.label ?? tab
 
 const listItemComponent = {
 	"Employee Checkin": markRaw(EmployeeCheckinItem),
@@ -196,6 +197,7 @@ const listItemComponent = {
 	"Leave Application": markRaw(LeaveRequestItem),
 	"Expense Claim": markRaw(ExpenseClaimItem),
 	"Employee Advance": markRaw(EmployeeAdvanceItem),
+	"Surat Tugas": markRaw(SuratTugasItem),
 }
 
 const router = useRouter()
@@ -203,7 +205,7 @@ const dayjs = inject("$dayjs")
 const socket = inject("$socket")
 const employee = inject("$employee")
 const filterMap = reactive({})
-const activeTab = ref(props.tabButtons ? getButtonKey(props.tabButtons[0]) : undefined)
+const activeTab = ref(props.tabButtons ? getButtonKey(props.tabButtons[0].label) : null);
 const areFiltersApplied = ref(false)
 const appliedFilters = ref([])
 const workflowStateField = ref(null)
@@ -237,10 +239,8 @@ const detailViewRoute = computed(() => {
 const defaultFilters = computed(() => {
 	const filters = []
 
-	if (isTeamRequest.value) {
-		filters.push([props.doctype, "employee", "!=", employee.data.name])
-	} else {
-		filters.push([props.doctype, "employee", "=", employee.data.name])
+	if(props.karyawan){
+		filters.push([props.doctype, "karyawan", "=", employee.data.name])
 	}
 
 	return filters
@@ -351,7 +351,7 @@ function fetchDocumentList(start = 0) {
 		hasNextPage.value = true
 	}
 
-	const filters = [[props.doctype, "docstatus", "!=", "2"]]
+	const filters = []
 	filters.push(...defaultFilters.value)
 
 	if (appliedFilters.value) filters.push(...appliedFilters.value)
@@ -359,6 +359,13 @@ function fetchDocumentList(start = 0) {
 	if (workflowStateField.value) {
 		listOptions.value.fields.push(workflowStateField.value)
 	}
+
+	const currentTab = props.tabButtons.find((tab) => getButtonKey(tab) === activeTab.value);
+	if (currentTab) {
+		filters.push([props.doctype, currentTab.fieldname, currentTab.condition, currentTab.value]);
+	}
+
+	console.log(filters)
 
 	documents.submit({
 		...listOptions.value,

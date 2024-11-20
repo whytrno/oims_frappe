@@ -463,8 +463,7 @@ const submitLog = async (logType, izin = false) => {
 		onError(error) {
 			toast({
 				title: "Error",
-				// text: `${action} failed!`,
-				text: error,
+				text: `${action} failed!`,
 				icon: "alert-circle",
 				position: "top-center",
 				iconClasses: "text-red-500",

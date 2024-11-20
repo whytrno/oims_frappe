@@ -375,6 +375,8 @@ const props = defineProps({
 		default: true,
 	},
 })
+
+console.log(props)
 const emit = defineEmits(["validateForm", "update:modelValue"])
 const router = useRouter()
 
