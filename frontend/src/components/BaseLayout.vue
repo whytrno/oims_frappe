@@ -1,5 +1,5 @@
 <template>
-	<ion-page class="h-screen flex flex-col">
+	<ion-page class="h-screen flex flex-col mb-[66px]">
 		<ion-header class="ion-no-border">
 			<div class="w-full sm:w-96">
 				<div class="flex flex-col bg-white shadow-sm p-4">
@@ -31,6 +31,11 @@
 				<slot name="body"></slot>
 			</div>
 		</ion-content>
+
+		<!-- Untuk space bottom bar -->
+		<div class="h-[66px]">
+
+		</div>
 	</ion-page>
 </template>
 

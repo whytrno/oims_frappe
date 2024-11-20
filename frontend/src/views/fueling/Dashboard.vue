@@ -18,7 +18,7 @@
 					<FuelingData :items="todayFueling" />
 				</div>
 
-				<div class="w-full absolute bottom-12 left-0 px-4">
+				<div class="w-full absolute bottom-0 left-0 px-4">
 					<router-link :to="{ name: 'FuelingScanQr' }" v-slot="{ navigate }">
 						<Button @click="navigate" variant="solid" class="w-full py-5 text-base">
 							{{ __("Tambahkan Pengisian Baru") }}
