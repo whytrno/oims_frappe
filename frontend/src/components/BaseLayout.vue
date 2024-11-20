@@ -33,7 +33,7 @@
 		</ion-content>
 
 		<!-- Untuk space bottom bar -->
-		<div class="h-[66px]">
+		<div class="h-[120px]">
 
 		</div>
 	</ion-page>
