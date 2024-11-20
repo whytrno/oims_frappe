@@ -85,7 +85,7 @@ def get_columns():
         {"label": "Project", "fieldname": "project", "fieldtype": "Data", "width": 120},
         {"label": "Menu", "fieldname": "menu", "fieldtype": "Data", "width": 120},
         {"label": "Tipe", "fieldname": "tipe", "fieldtype": "Data", "width": 120},
-        {"label": "Total", "fieldname": "total", "fieldtype": "Currency", "options": "currency", "width": 200},
+        {"label": "Total", "fieldname": "total", "fieldtype": "Currency", "options": "IDR", "width": 200},
     ]
     return columns
 

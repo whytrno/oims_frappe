@@ -84,7 +84,6 @@ def get_current_user_info() -> dict:
 # from datetime import datetime
 
 @frappe.whitelist()
-@frappe.whitelist()
 def submit_attendance(karyawan, lokasi_absen, foto, tipe, keterangan, waktu_absen, latitude, longitude, ambil_jatah_makan=False, izin=False):
     """
     Submit attendance for an employee with error handling and logging.

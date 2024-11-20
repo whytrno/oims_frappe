@@ -19,6 +19,8 @@
   "nama_penanda_tangan",
   "section_break_glmr",
   "karyawan",
+  "section_break_jngh",
+  "tandatangan",
   "section_break_cwlg",
   "karyawan_for_list_view"
  ],
@@ -118,11 +120,20 @@
    "in_list_view": 1,
    "label": "Karyawan For List View",
    "read_only": 1
+  },
+  {
+   "fieldname": "section_break_jngh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tandatangan",
+   "fieldtype": "Signature",
+   "label": "Tandatangan"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-10-28 09:18:15.789766",
+ "modified": "2024-11-06 20:17:56.142466",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Surat Tugas",
