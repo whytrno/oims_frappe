@@ -1,0 +1,107 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:WEEKLY-{#}",
+ "creation": "2024-11-11 09:57:17.195860",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "critical_issue",
+  "pic",
+  "nama_pic",
+  "column_break_oimb",
+  "divisi",
+  "status",
+  "section_break_gqot",
+  "plan",
+  "update_plan"
+ ],
+ "fields": [
+  {
+   "fieldname": "critical_issue",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Critical Issue",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pic",
+   "fieldtype": "Link",
+   "label": "PIC",
+   "options": "Karyawan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_oimb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "divisi",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Divisi",
+   "options": "Divisi",
+   "reqd": 1
+  },
+  {
+   "default": "Upcoming",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Upcoming\nRunning\nClose",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_gqot",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "plan",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Plan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "update_plan",
+   "fieldtype": "Text Editor",
+   "label": "Update Plan"
+  },
+  {
+   "default": "-",
+   "fetch_from": "pic.nama_lengkap",
+   "fieldname": "nama_pic",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Nama PIC",
+   "read_only": 1,
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-11-11 10:22:28.433491",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "Weekly Progress",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
