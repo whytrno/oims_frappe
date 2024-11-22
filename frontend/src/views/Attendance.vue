@@ -49,7 +49,7 @@
 					</div>
 
 					<template v-if="nextAction.action == 'In'">
-						<ion-checkbox justify="space-between" v-model="ambilJatahMakan"
+						<ion-checkbox justify="space-between" v-model="ambilJatahMakan" class="w-full"
 							v-if="selectedSite && selectedSite.name === 'HO - HO'">Ambil Jatah Makan</ion-checkbox>
 					</template>
 				</div>

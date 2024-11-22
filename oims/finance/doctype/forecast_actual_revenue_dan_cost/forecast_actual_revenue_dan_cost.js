@@ -1,7 +1,7 @@
 // Copyright (c) 2024, Wahyu Triono and contributors
 // For license information, please see license.txt
 
-// frappe.ui.form.on("Laporan", {
+// frappe.ui.form.on("Forecast Actual Revenue dan Cost", {
 // 	refresh(frm) {
 
 // 	},

@@ -1,51 +1,51 @@
 {
  "actions": [],
- "allow_rename": 1,
- "creation": "2024-10-28 22:38:19.004906",
+ "autoname": "autoincrement",
+ "creation": "2024-11-22 14:50:46.127160",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "jenis",
+  "costrevenue",
+  "column_break_dxuq",
+  "projek",
   "tanggal",
-  "project",
-  "menu",
-  "column_break_vrni",
-  "tipe",
   "total"
  ],
  "fields": [
+  {
+   "fieldname": "jenis",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Jenis",
+   "options": "Actual\nForecast\nPotential",
+   "reqd": 1
+  },
+  {
+   "fieldname": "costrevenue",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Cost/Revenue",
+   "options": "Cost\nRevenue",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_dxuq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "projek",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Projek",
+   "options": "Projek",
+   "reqd": 1
+  },
   {
    "fieldname": "tanggal",
    "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Tanggal",
-   "reqd": 1
-  },
-  {
-   "fieldname": "project",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Project",
-   "options": "Projek",
-   "reqd": 1
-  },
-  {
-   "fieldname": "menu",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Menu",
-   "options": "Cost\nRevenue",
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_break_vrni",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "tipe",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Tipe",
-   "options": "Actual\nForecast\nPotential",
    "reqd": 1
   },
   {
@@ -57,10 +57,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-22 11:14:47.279763",
+ "modified": "2024-11-22 14:59:51.698159",
  "modified_by": "Administrator",
  "module": "Finance",
- "name": "Actual Forecast Potential Project Financial",
+ "name": "Forecast Actual Revenue dan Cost",
+ "naming_rule": "Autoincrement",
  "owner": "Administrator",
  "permissions": [
   {
@@ -78,5 +79,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }

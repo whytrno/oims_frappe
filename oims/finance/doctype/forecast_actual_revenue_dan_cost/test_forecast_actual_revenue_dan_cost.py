@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestLaporan(FrappeTestCase):
+class TestForecastActualRevenuedanCost(FrappeTestCase):
 	pass

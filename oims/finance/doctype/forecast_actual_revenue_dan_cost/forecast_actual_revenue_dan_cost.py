@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class Laporan(Document):
+class ForecastActualRevenuedanCost(Document):
 	pass

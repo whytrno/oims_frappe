@@ -39,6 +39,8 @@ def get_job_openings(filters=None, txt=None, sort=None, limit=20, offset=0):
 			jo.kabupaten_penempatan
 		)
 		.where((jo.status == "Dibuka") & (jo.publish))
+		.where(jo.dibuka_pada <= frappe.utils.now())
+		.where(jo.ditutup_pada >= frappe.utils.now())
 		.limit(limit)
 		.offset(offset)
 	)
@@ -84,7 +86,7 @@ def get_all_filters(filters=None):
 		filters={"publish": 1, "status": "Dibuka"},
 		fields=["divisi", "kabupaten_penempatan"],
 	)
-    
+
 	all_filters = {}
 	for opening in job_openings:
 		for key, value in opening.items():
