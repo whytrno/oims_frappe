@@ -49,8 +49,11 @@
 					</div>
 
 					<template v-if="nextAction.action == 'In'">
-						<ion-checkbox justify="space-between" v-model="ambilJatahMakan" class="w-full"
+						<ion-checkbox justify="space-between" v-model="ambilJatahMakan" class="w-full" :disabled="ambilJatahMakanDisabled"
 							v-if="selectedSite && selectedSite.name === 'HO - HO'">Ambil Jatah Makan</ion-checkbox>
+						<template v-if="selectedSite && selectedSite.name === 'HO - HO' && ambilJatahMakanDisabled">
+							<p class="text-red-500 text-xs">*Anda telat lebih dari 30 menit sehingga tidak bisa mengambil jatah makan</p>
+						</template>
 					</template>
 				</div>
 
@@ -123,6 +126,7 @@ let circle = null;
 let cameraStream = null;
 let watchID = null;
 const keterangan = ref("")
+const ambilJatahMakanDisabled = ref(true)
 
 const videoElement = ref(null);
 const canvasElement = ref(null);
@@ -170,12 +174,28 @@ const nextAction = computed(() => {
 
 
 watch(() => selectedSite.value, (newValue, oldValue) => {
-	if(selectedSite.value.name === "HO - HO"){
-		if(nextAction.value.action === "In"){
+	const siteName = selectedSite.value.name
+	const attendanceInTime = selectedSite.value.waktu_masuk
+	
+	const now = new Date();
+	const timeToCompare = new Date(now);
+	const [hours, minutes, seconds] = attendanceInTime.split(':');
+	timeToCompare.setHours(hours, minutes, seconds, 0);
+	
+	if(siteName === "HO - HO" && nextAction.value.action === "In"){
+		console.log(now, timeToCompare, now >= timeToCompare)
+		if(now >= timeToCompare){
+			console.log('asd')
+			ambilJatahMakan.value = false
+			ambilJatahMakanDisabled.value = true
+		}else{
+			console.log('asds')
 			ambilJatahMakan.value = true
+			ambilJatahMakanDisabled.value = false
 		}
 	} else {
 		ambilJatahMakan.value = false
+		ambilJatahMakanDisabled.value = true
 	}
 })
 

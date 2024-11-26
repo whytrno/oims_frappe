@@ -32,9 +32,6 @@ const employee = inject("$employee")
 
 import HomeIcon from "@/components/icons/HomeIcon.vue"
 import ShiftIcon from "@/components/icons/ShiftIcon.vue"
-import LeaveIcon from "@/components/icons/LeaveIcon.vue"
-import ExpenseIcon from "@/components/icons/ExpenseIcon.vue"
-import SalaryIcon from "@/components/icons/SalaryIcon.vue"
 import AttendanceIcon from "@/components/icons/AttendanceIcon.vue"
 import { inject, computed } from "vue"
 import FuelingIcon from "./icons/FuelingIcon.vue"
@@ -48,13 +45,13 @@ const tabItems = [
 		icon: HomeIcon,
 		title: __("Home"),
 		route: "/home",
-		role: [""]
+		role: null
 	},
 	{
 		icon: AttendanceIcon,
 		title: __("Kalendar Absen"),
 		route: "/dashboard/attendance",
-		role: [""]
+		role: null
 	},
 	{
 		icon: FuelingIcon,
@@ -66,7 +63,7 @@ const tabItems = [
 	// 	icon: ShiftIcon,
 	// 	title: __("Surat Tugas"),
 	// 	route: "/dashboard/surat-tugas",
-	// role: ["Fuelman"]
+	// 	role: null
 	// },
 	// {
 	// 	icon: ExpenseIcon,
@@ -77,7 +74,6 @@ const tabItems = [
 ]
 
 const filteredTabItems = computed(() => {
-	// Ambil role pengguna dari $user
 	const userRoles = employee.data?.jabatan || []
 
 	// Kembalikan tab yang role-nya cocok atau role-nya null (tidak terbatas)
