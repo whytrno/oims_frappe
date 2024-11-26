@@ -178,7 +178,8 @@ watch(() => selectedSite.value, (newValue, oldValue) => {
 	const attendanceInTime = selectedSite.value.waktu_masuk
 	
 	const now = new Date();
-	const timeToCompare = new Date(now);
+	let timeToCompare = new Date(now);
+	timeToCompare.setMinutes(timeToCompare.getMinutes() + 30);
 	const [hours, minutes, seconds] = attendanceInTime.split(':');
 	timeToCompare.setHours(hours, minutes, seconds, 0);
 	
