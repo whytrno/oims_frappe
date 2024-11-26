@@ -40,7 +40,7 @@ def get_job_openings(filters=None, txt=None, sort=None, limit=20, offset=0):
 		)
 		.where((jo.status == "Dibuka") & (jo.publish))
 		.where(jo.dibuka_pada <= frappe.utils.now())
-		.where(jo.ditutup_pada >= frappe.utils.now())
+		# .where(jo.ditutup_pada >= frappe.utils.now())
 		.limit(limit)
 		.offset(offset)
 	)
