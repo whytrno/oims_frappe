@@ -63,22 +63,13 @@ frappe.ui.form.on("Surat Mutasi", {
 	},
 
     karyawan: function (frm) {
-        if (frm.doc.karyawan) {
-            frappe.call({
-                method: "frappe.client.get",
-                args: {
-                    doctype: "Karyawan",
-                    name: frm.doc.karyawan
-                },
-                callback: function (r) {
-                    if (r.message) {
-                        frm.set_value('dari_divisi', r.message.divisi);
-                        frm.set_value('ke_divisi', r.message.divisi);
-                        frm.set_value('ke_jabatan', r.message.jabatan);
-                    }
-                }
-            });
-        }
+		if(!frm.doc.dari_jabatan) {
+			frm.set_value('dari_jabatan', "-");
+		}
+
+		if(!frm.doc.dari_divisi) {
+			frm.set_value('dari_divisi', "-");
+		}
     }
 });
 

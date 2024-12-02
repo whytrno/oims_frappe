@@ -7,13 +7,17 @@
  "engine": "InnoDB",
  "field_order": [
   "surat_ke",
+  "column_break_mipf",
   "no_surat",
+  "section_break_vbkh",
   "karyawan",
+  "nama_karyawan",
+  "dari_jabatan",
   "dari_divisi",
   "lokasi_site_awal",
-  "column_break_mipf",
-  "ke_divisi",
+  "column_break_cjye",
   "ke_jabatan",
+  "ke_divisi",
   "lokasi_site_tujuan",
   "tanggal_mutasi",
   "doc_url"
@@ -85,10 +89,12 @@
    "reqd": 1
   },
   {
+   "default": "-",
+   "fetch_from": "karyawan.divisi",
    "fieldname": "dari_divisi",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "Dari Divisi",
-   "options": "Divisi",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -96,11 +102,42 @@
    "fieldtype": "Attach",
    "label": "Doc URL",
    "read_only": 1
+  },
+  {
+   "fieldname": "section_break_vbkh",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "-",
+   "fetch_from": "karyawan.jabatan",
+   "fieldname": "dari_jabatan",
+   "fieldtype": "Data",
+   "label": "Dari Jabatan",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_cjye",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "-",
+   "fetch_from": "karyawan.nama_lengkap",
+   "fieldname": "nama_karyawan",
+   "fieldtype": "Data",
+   "label": "Nama Karyawan",
+   "read_only": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2024-10-16 14:03:31.835494",
+ "links": [
+  {
+   "link_doctype": "Surat Tugas",
+   "link_fieldname": "no_surat_mutasi"
+  }
+ ],
+ "modified": "2024-11-26 16:35:13.015856",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Surat Mutasi",

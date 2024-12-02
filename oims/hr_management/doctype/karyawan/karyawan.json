@@ -380,7 +380,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2024-10-24 12:06:12.564130",
+ "modified": "2024-12-02 15:40:37.294992",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",
@@ -401,6 +401,7 @@
   }
  ],
  "quick_entry": 1,
+ "show_title_field_in_link": 1,
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],

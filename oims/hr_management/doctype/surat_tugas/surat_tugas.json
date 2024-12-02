@@ -6,10 +6,11 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "no_surat_mutasi",
   "surat_ke",
-  "site",
   "no_surat",
   "column_break_ihtt",
+  "site",
   "keperluan",
   "tanggal_berangkat",
   "doc_url",
@@ -129,11 +130,17 @@
    "fieldname": "tandatangan",
    "fieldtype": "Signature",
    "label": "Tandatangan"
+  },
+  {
+   "fieldname": "no_surat_mutasi",
+   "fieldtype": "Link",
+   "label": "No. Surat Mutasi",
+   "options": "Surat Mutasi"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-06 20:17:56.142466",
+ "modified": "2024-11-26 16:34:43.914229",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Surat Tugas",
