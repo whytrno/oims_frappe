@@ -111,7 +111,6 @@ def get_attendance_map(filters):
             "jam_absen": jam_absen
         })
 
-    print(f'attendance_map: {attendance_map}')
     return attendance_map
 
 def get_week_date_range(filters):
@@ -190,6 +189,12 @@ def get_columns(filters: Filters) -> list[dict]:
                 "fieldtype": "Data",
                 "width": 150
             },
+			{
+                "label": _("Presentase Kehadiran"),
+                "fieldname": "presentase_kehadiran",
+                "fieldtype": "Data",
+                "width": 150
+            },
 		]
 	)
 
@@ -239,11 +244,12 @@ def get_data(filters) -> list[list]:
             # Iterasi melalui semua karyawan di site tersebut
             for karyawan, attendance in karyawan_data.items():
                 nama_lengkap_karyawan = attendance["nama_karyawan"]
+                presentase_kehadiran = 0
 
                 # Jika karyawan belum ada di data_map, inisialisasi row baru
                 if karyawan not in data_map:
                     # Inisialisasi row dengan NRP, nama karyawan, dan site
-                    row = [karyawan, nama_lengkap_karyawan] + [" "] * total_days
+                    row = [karyawan, nama_lengkap_karyawan, presentase_kehadiran] + [" "] * total_days
                     data_map[karyawan] = row
                 else:
                     row = data_map[karyawan]
@@ -252,23 +258,52 @@ def get_data(filters) -> list[list]:
                     absensi_harian = attendance.get("data_absen", [])
                     hadir = False
                     for absensi in absensi_harian:
+                        row[2] = int(row[2]) + 1
                         if absensi["tipe"] == "In" or absensi["tipe"] == "Out":
                             if absensi["izin"]:
-                                row[1 + day] = '<p style="color: blue;">'+site+' <small>('+absensi["jam_absen"]+')</small></p>';
+                                row[2 + day] = '<p style="color: blue;">'+site+' <small>('+absensi["jam_absen"]+')</small></p>';
                                 hadir = True
                                 break
                             elif absensi["tipe"] == "In" and absensi["telat"]:
-                                row[1 + day] = '<p style="color: red;">'+site+' <small>('+absensi["jam_absen"]+')</small></p>';
+                                row[2 + day] = '<p style="color: red;">'+site+' <small>('+absensi["jam_absen"]+')</small></p>';
                                 hadir = True
                                 break
                             else:
-                                row[1 + day] = '<p style="color: green;">'+site+' <small>('+absensi["jam_absen"]+')</small></p>';
+                                row[2 + day] = '<p style="color: green;">'+site+' <small>('+absensi["jam_absen"]+')</small></p>';
                                 hadir = True
                                 break
-                    if not hadir:
-                        row[1 + day] = " "
 
+                    if not hadir:
+                        row[2 + day] = " "
     # Convert the data_map values to a list for final output
+
+    for karyawan, row in data_map.items():
+        # if(karyawan == 473):
+        print(f'row222: {row}')
+
+        date_now = getdate()
+        working_days = 0
+        month = filters.month
+        year = filters.year
+
+		# Tentukan tanggal awal dan akhir berdasarkan bulan
+        start_date = getdate(f"{year}-{month}-01")
+        if int(month) == date_now.month and int(year) == date_now.year:
+            end_date = date_now
+        else:
+            end_date = getdate(f"{year}-{month}-{monthrange(int(year), int(month))[1]}")
+
+        current_date = start_date
+        while current_date <= end_date:
+			# weekday() returns 0-6 (Mon-Sun)
+            if current_date.weekday() < 5:  # 0-4 adalah Senin-Jumat
+                working_days += 1
+            current_date = add_days(current_date, 1)
+
+            # Gunakan working_days sebagai pembagi
+        row[2] = f'{round((row[2] / working_days) * 100, 2)}%' if working_days > 0 else '0%'
+        data_map[karyawan] = row
+
     return list(data_map.values())
 
 def get_chart_data(attendance_map: dict, filters: Filters) -> dict:
