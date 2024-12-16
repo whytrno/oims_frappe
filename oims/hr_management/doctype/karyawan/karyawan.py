@@ -6,14 +6,13 @@ from frappe.model.document import Document
 
 
 class Karyawan(Document):
-	def before_save(self):
-		'''
+    def before_insert(self):
+        '''
 		Membuat User baru dengan data yang sama
   		'''
-		if not self.email:
-			self.make_email_from_name()
-
-		user = frappe.get_doc({
+        if not self.email:
+            self.make_email_from_name()
+        user = frappe.get_doc({
 			"doctype": "User",
 			"email": self.email,
 			"first_name": self.nama_lengkap,
@@ -25,23 +24,24 @@ class Karyawan(Document):
 			}],
 		})
 
-		user.insert(ignore_permissions=True)
-		frappe.db.commit()
+        user.insert(ignore_permissions=True)
+        frappe.db.commit()
 
-		self.beri_akses_untuk_login_oims_app = 1
-		self.user_id = user.name
+        self.beri_akses_untuk_login_oims_app = 1
+        self.user_id = user.name
 
-		if self.alamat_ktp_sama_dengan_domisili:
-			self.provinsi_ktp = self.provinsi_domisili
-			self.kabupaten_ktp = self.kabupaten_domisili
-			self.kecamatan_ktp = self.kecamatan_domisili
-			self.kelurahan_ktp = self.kelurahan_domisili
-			self.alamat_ktp = self.alamat_domisili
+    def before_save(self):
+        if self.alamat_ktp_sama_dengan_domisili:
+            self.provinsi_ktp = self.provinsi_domisili
+            self.kabupaten_ktp = self.kabupaten_domisili
+            self.kecamatan_ktp = self.kecamatan_domisili
+            self.kelurahan_ktp = self.kelurahan_domisili
+            self.alamat_ktp = self.alamat_domisili
 
 
-	def make_email_from_name(self):
-		'''
+    def make_email_from_name(self):
+        '''
 		Membuat email dari nama lengkap
 		'''
-		if self.nama_lengkap:
-			self.email = self.nama_lengkap.replace(" ", "").lower() + "@orecon.co.id"
+        if self.nama_lengkap:
+        	self.email = self.nama_lengkap.replace(" ", "").lower() + "@orecon.co.id"
