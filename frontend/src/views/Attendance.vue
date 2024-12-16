@@ -172,17 +172,23 @@ const nextAction = computed(() => {
 		: { action: "In", label: "Check In" }
 })
 
+// watch locationStatus
+watch(() => locationStatus.value, (newValue, oldValue) => {
+	if (newValue !== oldValue) {
+		console.log(newValue)
+	}
+})
 
 watch(() => selectedSite.value, (newValue, oldValue) => {
 	const siteName = selectedSite.value.name
 	const attendanceInTime = selectedSite.value.waktu_masuk
-	
+
 	const now = new Date();
 	let timeToCompare = new Date(now);
 	timeToCompare.setMinutes(timeToCompare.getMinutes() + 30);
 	const [hours, minutes, seconds] = attendanceInTime.split(':');
 	timeToCompare.setHours(hours, minutes, seconds, 0);
-	
+
 	if(siteName === "HO - HO" && nextAction.value.action === "In"){
 		console.log(now, timeToCompare, now >= timeToCompare)
 		if(now >= timeToCompare){
@@ -232,14 +238,21 @@ const startWatchingPosition = () => {
 	}
 };
 
-const stopWatchingPosition = () => {
-	if (watchID !== null) {
-		navigator.geolocation.clearWatch(watchID);
-		watchID = null;
-	}
-};
+// const stopWatchingPosition = () => {
+// 	if (watchID !== null) {
+// 		navigator.geolocation.clearWatch(watchID);
+// 		watchID = null;
+// 	}
+// };
 
 function handleLocationError(error) {
+	toast({
+		title: "Error",
+		text: "Akses lokasi tidak diizinkan. Mohon izinkan akses lokasi untuk melanjutkan.",
+		icon: "alert-circle",
+		position: "top-center",
+		iconClasses: "text-red-500",
+	});
 	locationStatus.value = "Unable to retrieve your location"
 	if (error) locationStatus.value += `: ERROR(${error.code}): ${error.message}`
 }
@@ -550,9 +563,18 @@ const initializeCamera = () => {
 				if (videoElement.value) {
 					videoElement.value.srcObject = stream;
 				}
+				console.log('Camera access granted');
 			})
 			.catch((error) => {
-				console.error('Camera access failed:', error);
+				toast({
+					title: "Error",
+					text: "Akses kamera tidak diizinkan. Mohon izinkan akses kamera untuk melanjutkan.",
+					icon: "alert-circle",
+					position: "top-center",
+					iconClasses: "text-red-500",
+				});
+
+				console.error('Camera access denied:', error);
 			});
 	}
 }

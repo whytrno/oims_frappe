@@ -5,6 +5,13 @@ frappe.ui.form.on("Karyawan", {
 	refresh: function (frm) {
 		set_filters(frm);
 	},
+
+	email: function (frm) {
+		if (frm.doc.email && !is_valid_email(frm.doc.email)) {
+			frappe.msgprint('Email tidak boleh mengandung spasi atau karakter tidak valid lainnya');
+		}
+	},
+
 	provinsi_domisili: function (frm) {
 		clear_fields_on_change(frm, 'kabupaten_domisili', 'kecamatan_domisili');
 		set_filters(frm, 'Provinsi', 'provinsi_domisili', 'kabupaten_domisili', 'province_id');
@@ -39,6 +46,11 @@ frappe.ui.form.on("Karyawan", {
 		frm.toggle_display('alamat_ktp', !frm.doc.alamat_ktp_sama_dengan_domisili);
 	},
 });
+
+function is_valid_email(email) {
+	let email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	return email_regex.test(email);
+}
 
 function set_filters(frm, doctype, field_awal, field_tujuan, filter) {
 	if (frm.doc[field_awal]) {

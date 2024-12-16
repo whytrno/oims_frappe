@@ -45,11 +45,18 @@ const formFieldsWithStaticFields = computed(() => [
 		default: shift.value.unit || "",
 	},
 	{
+		label: "Jenis Operator",
+		fieldname: "jenis_operator",
+		fieldtype: "Data",
+		read_only: 1,
+		default: shift.value.jenis_operator || "",
+	},
+	{
 		label: "Nama Operator",
 		fieldname: "nama_operator",
 		fieldtype: "Data",
 		read_only: 1,
-		default: shift.value.nama_operator || "",
+		default: shift.value.operator || "",
 	},
 	{
 		label: "Pengisi Bahan Bakar",
@@ -59,12 +66,19 @@ const formFieldsWithStaticFields = computed(() => [
 		default: user.data?.full_name || "",
 	},
 	{
-		label: "Sisa Jatah Fuel (Liter)",
-		fieldname: "sisa_jatah_fuel",
-		fieldtype: "Data",
-		read_only: 1,
-		default: 200,
+		label: "Waktu Pengisian",
+		fieldname: "waktu",
+		fieldtype: "Datetime",
+		read_only: 0,
+		reqd: 1,
 	},
+	// {
+	// 	label: "Sisa Jatah Fuel (Liter)",
+	// 	fieldname: "sisa_jatah_fuel",
+	// 	fieldtype: "Data",
+	// 	read_only: 1,
+	// 	default: 200,
+	// },
 	...formFields.value, // Merge dynamic form fields fetched from API
 ]);
 
@@ -94,7 +108,7 @@ onMounted(async () => {
 			url: "oims.api.get_doctype_fields",
 			params: { doctype: "Fueling Table" },
 			transform(data) {
-				const excludeFields = ["pengisi_bahan_bakar"];
+				const excludeFields = ["pengisi_bahan_bakar", "waktu"];
 				return data.filter((field) => !excludeFields.includes(field.fieldname));
 			},
 		});
@@ -108,6 +122,7 @@ onMounted(async () => {
 			hm: null,
 			shift: shift.value.tanggal_shift,
 			parent: shift.value.name,
+			waktu: null,
 			parenttype: "Shift", // Nama Parent Doctype
 			parentfield: "refueling_data",
 		};
@@ -128,11 +143,18 @@ onMounted(async () => {
 				default: shift.data?.unit
 			},
 			{
+				label: "Jenis Operator",
+				fieldname: "jenis_operator",
+				fieldtype: "Data",
+				read_only: 1,
+				default: shift.data?.jenis_operator,
+			},
+			{
 				label: "Nama Operator",
 				fieldname: "nama_operator",
 				fieldtype: "Data",
 				read_only: 1,
-				default: shift.data?.nama_operator
+				default: shift.data?.operator
 			},
 			{
 				label: "Pengisi Bahan Bakar",
@@ -141,13 +163,21 @@ onMounted(async () => {
 				read_only: 1,
 				default: user.data.full_name
 			},
-			{
-				label: "Sisa Jatah Fuel (Liter)",
-				fieldname: "sisa_jatah_fuel",
-				fieldtype: "Data",
-				read_only: 1,
-				default: 200
-			},
+			// {
+			// 	label: "Waktu Pengisian",
+			// 	fieldname: "waktu",
+			// 	fieldtype: "Datetime",
+			// 	read_only: 0,
+			// 	reqd: 1,
+			// 	default: new Date().toISOString(),
+			// },
+			// {
+			// 	label: "Sisa Jatah Fuel (Liter)",
+			// 	fieldname: "sisa_jatah_fuel",
+			// 	fieldtype: "Data",
+			// 	read_only: 1,
+			// 	default: 200
+			// },
 			...formFields.value,
 		])
 
@@ -162,7 +192,7 @@ onMounted(async () => {
 // Function to validate and submit the form
 function validateForm() {
 	// Custom validation logic, if needed
-	if (!fuelingData.value.volume_litter || !fuelingData.value.hm) {
+	if (!fuelingData.value.volume_litter || !fuelingData.value.hm || !fuelingData.value.waktu) {
 		alert("Please fill in the required fields.");
 		return false;
 	}
