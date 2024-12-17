@@ -45,40 +45,46 @@ const tabItems = [
 		icon: HomeIcon,
 		title: __("Home"),
 		route: "/home",
-		role: null
+		jabatan: null
 	},
 	{
 		icon: AttendanceIcon,
 		title: __("Kalendar Absen"),
 		route: "/dashboard/attendance",
-		role: null
+		jabatan: null
 	},
 	{
 		icon: FuelingIcon,
 		title: __("Fueling"),
 		route: "/dashboard/fueling",
-		role: ["Fuelman"]
+		jabatan: ["Fuelman"]
+	},
+	{
+		icon: ShiftIcon,
+		title: __("Jumlah Makan"),
+		route: "/dashboard/jumlah-makan",
+		jabatan: ["Office Boy", "Gs", "Hr"]
 	},
 	// {
 	// 	icon: ShiftIcon,
 	// 	title: __("Surat Tugas"),
 	// 	route: "/dashboard/surat-tugas",
-	// 	role: null
+	// 	jabatan: null
 	// },
 	// {
 	// 	icon: ExpenseIcon,
 	// 	title: __("Expenses"),
 	// 	route: "/dashboard/expense-claims",
-	// role: ["Fuelman"]
+	// jabatan: ["Fuelman"]
 	// },
 ]
 
 const filteredTabItems = computed(() => {
-	const userRoles = employee.data?.jabatan || []
+	const userjabatans = employee.data?.jabatan || []
 
-	// Kembalikan tab yang role-nya cocok atau role-nya null (tidak terbatas)
+	// Kembalikan tab yang jabatan-nya cocok atau jabatan-nya null (tidak terbatas)
 	return tabItems.filter(
-		(item) => !item.role || userRoles.includes(item.role)
+		(item) => !item.jabatan || userjabatans.includes(item.jabatan)
 	)
 })
 </script>

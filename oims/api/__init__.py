@@ -826,3 +826,16 @@ def get_all_lokasi_absen() -> list[dict]:
 		fields=["nama", "latitude", "longitude", "radius"],
 		limit=999999,
 	)
+
+# Jumlah Makan
+@frappe.whitelist()
+def get_today_karyawan_makan() -> list[dict]:
+	return frappe.get_all(
+		"Absensi",
+		{
+			"ambil_jatah_makan": 1,
+			"creation": [">=", datetime.today().date()],
+		},
+		["nama_karyawan"],
+		limit=999999,
+	)
