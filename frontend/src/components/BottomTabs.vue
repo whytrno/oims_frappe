@@ -84,7 +84,10 @@ const filteredTabItems = computed(() => {
 
 	// Kembalikan tab yang jabatan-nya cocok atau jabatan-nya null (tidak terbatas)
 	return tabItems.filter(
-		(item) => !item.jabatan || userjabatans.includes(item.jabatan)
+		(item) =>
+			!item.jabatan ||
+			item.jabatan.some((jabatan) => userjabatans.includes(jabatan))
 	)
 })
+
 </script>
