@@ -1,5 +1,5 @@
 <template>
-	<BaseLayout :pageTitle="__('Fueling Dashboard')">
+	<BaseLayout :pageTitle="__('Ambil Jatah Makan')">
 		<template #body>
 			<div class="flex flex-col mt-2 mb-7 p-4 gap-7 h-full relative">
 				<JumlahMakanSummary :jumlah_makan="todayAmbilJatahMakanCount" />
