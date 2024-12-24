@@ -239,8 +239,8 @@ def get_columns(filters: Filters) -> list[dict]:
     columns.extend(
         [
             {
-                "label": _("NRP"),
-                "fieldname": "nrp",
+                "label": _("ID Pengguna"),
+                "fieldname": "id",
                 "fieldtype": "Link",
                 "options": "Karyawan",
                 "width": 120,
@@ -254,6 +254,12 @@ def get_columns(filters: Filters) -> list[dict]:
             {
                 "label": _("Presentase Kehadiran"),
                 "fieldname": "presentase_kehadiran",
+                "fieldtype": "Data",
+                "width": 150
+            },
+            {
+                "label": _("Total Hari Kerja"),
+                "fieldname": "total_hari_kerja",
                 "fieldtype": "Data",
                 "width": 150
             },
@@ -320,13 +326,14 @@ def get_data(attendance_map: dict, filters: Filters) -> list[list]:
                     absensi_harian = attendance.get("data_absen", [])
 
                     if karyawan not in data_map:
-                        row = [karyawan, nama_lengkap_karyawan, presentase_kehadiran] + [" "] * len(columns[3:])
+                        row = [karyawan, nama_lengkap_karyawan, presentase_kehadiran, 0] + [" "] * len(columns[3:])
                         data_map[karyawan] = row
                     else:
                         row = data_map[karyawan]
 
                     for absensi in absensi_harian:
                         row[2] = int(row[2]) + 1
+                        row[3] = int(row[3]) + 1
                         if absensi["izin"]:
                             row[index_now] = (
                                 f'<p style="color: blue;">{site} <small>({absensi["jam_absen"]})</small></p>'
