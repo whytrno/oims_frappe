@@ -4,6 +4,12 @@
 frappe.query_reports["Laporan Absensi Bulanan"] = {
 	filters: [
 		{
+			fieldname: "perusahaan",
+			label: __("Perusahaan"),
+			fieldtype: "Link",
+			options: "Perusahaan",
+		},
+		{
 			fieldname: "month",
 			label: __("Month"),
 			fieldtype: "Select",
@@ -49,6 +55,17 @@ frappe.query_reports["Laporan Absensi Bulanan"] = {
 				{ value: 6, label: __("Minggu 5 (29 - 35)") },
 			],
 		},
+		{
+			fieldname: "rentang_tanggal",
+			label: __("Rentang Tanggal"),
+			fieldtype: "Select",
+			options: [
+				{ value: "bulan", label: __("Full") },
+				{ value: "gaji", label: __("25 - 25") },
+			],
+			default: "bulan",
+			reqd: 1,
+		}
 	],
 	onload: function () {
 		return frappe.call({

@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"8Ea1JTMyxy\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data Karyawan</b></span>\",\"col\":12}},{\"id\":\"84c_dLQPzC\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":4}},{\"id\":\"tEVIcDuG_h\",\"type\":\"card\",\"data\":{\"card_name\":\"Lowongan Pekerjaan\",\"col\":4}},{\"id\":\"f1brW28QaI\",\"type\":\"card\",\"data\":{\"card_name\":\"Laporan\",\"col\":4}},{\"id\":\"_Giylsja4o\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Buka Portal Lowongan Pekerjaan\",\"col\":12}},{\"id\":\"c0J-ObpaJm\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Absensi Hari Ini\",\"col\":4}},{\"id\":\"5HF7MRLnAd\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Makan Hari Ini\",\"col\":4}},{\"id\":\"SVq0iAqjjM\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Pendaftar Hari Ini\",\"col\":4}},{\"id\":\"5ziurz20na\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Pemberangkatan minggu ini\",\"col\":12}}]",
+ "content": "[{\"id\":\"8Ea1JTMyxy\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data Karyawan</b></span>\",\"col\":12}},{\"id\":\"84c_dLQPzC\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":4}},{\"id\":\"tEVIcDuG_h\",\"type\":\"card\",\"data\":{\"card_name\":\"Lowongan Pekerjaan\",\"col\":4}},{\"id\":\"7lrkx6C5iT\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Laporan Absensi Bulanan\",\"col\":4}},{\"id\":\"_Giylsja4o\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Buka Portal Lowongan Pekerjaan\",\"col\":12}},{\"id\":\"c0J-ObpaJm\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Absensi Hari Ini\",\"col\":4}},{\"id\":\"5HF7MRLnAd\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Makan Hari Ini\",\"col\":4}},{\"id\":\"SVq0iAqjjM\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Pendaftar Hari Ini\",\"col\":4}},{\"id\":\"5ziurz20na\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Pemberangkatan minggu ini\",\"col\":12}}]",
  "creation": "2024-10-04 22:44:37.041963",
  "custom_blocks": [],
  "docstatus": 0,
@@ -100,29 +100,9 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Laporan",
-   "link_count": 1,
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Laporan Absensi Bulanan",
-   "link_count": 0,
-   "link_to": "Laporan Absensi Bulanan",
-   "link_type": "Report",
-   "onboard": 0,
-   "report_ref_doctype": "Absensi",
-   "type": "Link"
   }
  ],
- "modified": "2024-10-28 08:37:59.384449",
+ "modified": "2024-12-17 09:01:24.277421",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "HR Management",
@@ -159,6 +139,13 @@
    "label": "Buka Portal Lowongan Pekerjaan",
    "type": "URL",
    "url": "/jobs"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Laporan Absensi Bulanan",
+   "link_to": "Laporan Absensi Bulanan",
+   "type": "Report"
   }
  ],
  "title": "HR Management"

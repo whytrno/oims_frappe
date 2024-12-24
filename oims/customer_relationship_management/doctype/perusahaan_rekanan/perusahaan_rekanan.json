@@ -28,7 +28,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Bidang Perusahaan",
-   "options": "Bidang Perusahaan"
+   "options": "Bidang Perusahaan Rekanan"
   },
   {
    "fieldname": "alamat_perusahaan",
@@ -64,10 +64,10 @@
    "link_fieldname": "perusahaan"
   }
  ],
- "modified": "2024-10-14 13:22:43.842885",
+ "modified": "2024-12-17 08:55:04.370080",
  "modified_by": "Administrator",
  "module": "Customer Relationship Management",
- "name": "Perusahaan",
+ "name": "Perusahaan Rekanan",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [

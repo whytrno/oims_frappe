@@ -36,6 +36,7 @@
   "kelurahan_ktp",
   "alamat_ktp",
   "data_karyawan_tab",
+  "perusahaan",
   "nrp",
   "no_kontrak",
   "jabatan",
@@ -365,6 +366,12 @@
    "fieldname": "alamat_ktp_sama_dengan_domisili",
    "fieldtype": "Check",
    "label": "Alamat KTP sama dengan domisili?"
+  },
+  {
+   "fieldname": "perusahaan",
+   "fieldtype": "Link",
+   "label": "Perusahaan",
+   "options": "Perusahaan"
   }
  ],
  "image_field": "foto",
@@ -380,7 +387,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2024-12-02 15:40:37.294992",
+ "modified": "2024-12-17 08:57:36.046784",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",

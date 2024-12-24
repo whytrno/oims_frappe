@@ -25,9 +25,9 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Perusahaan",
+   "label": "Perusahaan Rekanan",
    "link_count": 0,
-   "link_to": "Perusahaan",
+   "link_to": "Perusahaan Rekanan",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -45,7 +45,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Bidang Perusahaan",
+   "label": "Bidang Perusahaan Rekanan",
    "link_count": 0,
    "link_to": "Bidang Perusahaan",
    "link_type": "DocType",
@@ -53,7 +53,7 @@
    "type": "Link"
   }
  ],
- "modified": "2024-10-25 09:21:53.843510",
+ "modified": "2024-12-17 08:54:46.126604",
  "modified_by": "Administrator",
  "module": "Customer Relationship Management",
  "name": "Customer Relationship Management",

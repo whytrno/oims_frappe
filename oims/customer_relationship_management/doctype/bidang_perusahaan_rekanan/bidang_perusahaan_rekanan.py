@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class BidangPerusahaan(Document):
+class BidangPerusahaanRekanan(Document):
 	pass
