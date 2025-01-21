@@ -27,13 +27,13 @@
 		</ion-header>
 
 		<ion-content class="ion-no-padding flex-grow">
-			<div class="flex flex-col h-full w-screen sm:w-96">
+			<div class="flex flex-col h-full w-screen sm:w-96 relative">
 				<slot name="body"></slot>
 			</div>
 		</ion-content>
 
 		<!-- Untuk space bottom bar -->
-		<div class="h-[120px]">
+		<div class="h-16">
 
 		</div>
 	</ion-page>

@@ -2,6 +2,7 @@ import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
 import { VitePWA } from "vite-plugin-pwa"
 import frappeui from "frappe-ui/vite"
+import vueJsx from '@vitejs/plugin-vue-jsx';
 
 import path from "path"
 import fs from "fs"
@@ -14,6 +15,7 @@ export default defineConfig({
 	plugins: [
 		vue(),
 		frappeui(),
+		vueJsx(),
 		VitePWA({
 			registerType: "autoUpdate",
 			strategies: "injectManifest",

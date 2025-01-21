@@ -4,27 +4,16 @@
 			<header
 				class="flex flex-row bg-white shadow-sm py-4 px-3 items-center sticky top-0 z-[1000]"
 			>
-				<Button
-					variant="ghost"
-					class="!pl-0 hover:bg-white"
-					@click="router.back()"
-				>
+				<Button variant="ghost" class="!pl-0 hover:bg-white" @click="router.back()">
 					<FeatherIcon name="chevron-left" class="h-5 w-5" />
 				</Button>
-				<div
-					v-if="id"
-					class="flex flex-row items-center gap-2 overflow-hidden grow"
-				>
+				<div v-if="id" class="flex flex-row items-center gap-2 overflow-hidden grow">
 					<h2
 						class="text-xl font-semibold text-gray-900 whitespace-nowrap overflow-hidden text-ellipsis"
 					>
 						{{ __(props.doctype) }}
 					</h2>
-					<Badge
-						:label="id"
-						class="whitespace-nowrap text-[8px]"
-						variant="outline"
-					/>
+					<Badge :label="id" class="whitespace-nowrap text-[8px]" variant="outline" />
 					<Badge
 						v-if="status"
 						:label="__(status, null, doctype)"
@@ -50,7 +39,7 @@
 					/>
 				</div>
 				<h2 v-else class="text-2xl font-semibold text-gray-900">
-					{{ __('New {0}', [__(doctype)], props.doctype) }}
+					{{ __("New {0}", [__(doctype)], props.doctype) }}
 				</h2>
 			</header>
 
@@ -79,10 +68,7 @@
 					</div>
 
 					<template v-for="(fieldList, tabName, index) in tabFields">
-						<div
-							v-show="tabName === activeTab"
-							class="flex flex-col space-y-4 p-4"
-						>
+						<div v-show="tabName === activeTab" class="flex flex-col space-y-4 p-4">
 							<template v-for="field in fieldList" :key="field.fieldname">
 								<slot
 									v-if="field.fieldtype == 'Table'"
@@ -91,7 +77,8 @@
 								></slot>
 
 								<FormField
-									v-else
+									v-for="field in props.fields"
+									:key="field.name"
 									:fieldtype="field.fieldtype"
 									:fieldname="field.fieldname"
 									v-model="formModel[field.fieldname]"
@@ -106,7 +93,9 @@
 									:errorMessage="field.error_message"
 									:minDate="field.minDate"
 									:maxDate="field.maxDate"
-									:addSectionPadding="fieldList[0].name !== field.name"
+									:files="files"
+									:handleFileSelect="handleFileSelectForFiles"
+									:handleFileDelete="handleFileDeleteForFiles"
 								/>
 							</template>
 
@@ -147,13 +136,13 @@
 						:errorMessage="field.error_message"
 						:minDate="field.minDate"
 						:maxDate="field.maxDate"
+						:files="files"
+						:handleFileSelect="handleFileSelectForFiles"
+						:handleFileDelete="handleFileDeleteForFiles"
 					/>
 
 					<!-- Attachment upload -->
-					<div
-						class="flex flex-row gap-2 items-center justify-center p-5"
-						v-if="isFileUploading"
-					>
+					<div class="flex flex-row gap-2 items-center justify-center p-5" v-if="isFileUploading">
 						<LoadingIndicator class="w-3 h-3 text-gray-800" />
 						<span class="text-gray-900 text-sm">{{ __("Uploading...") }} </span>
 					</div>
@@ -192,9 +181,7 @@
 				<ErrorMessage
 					class="mb-2"
 					:message="
-						formErrorMessage ||
-						docList?.insert?.error ||
-						documentResource?.setValue?.error
+						formErrorMessage || docList?.insert?.error || documentResource?.setValue?.error
 					"
 				/>
 
@@ -203,9 +190,7 @@
 					:class="formButton === 'Cancel' ? 'shadow' : ''"
 					@click="formButton === 'Save' ? saveForm() : submitOrCancelForm()"
 					:variant="formButton === 'Cancel' ? 'subtle' : 'solid'"
-					:loading="
-						docList.insert.loading || documentResource?.setValue?.loading
-					"
+					:loading="docList.insert.loading || documentResource?.setValue?.loading"
 				>
 					{{ __(formButton) }}
 				</Button>
@@ -220,27 +205,18 @@
 		</template>
 		<template #body-content>
 			<p>
-				{{ __("Are you sure you want to delete the {0}", [__(props.doctype)])  }}
+				{{ __("Are you sure you want to delete the {0}", [__(props.doctype)]) }}
 				<span class="font-bold">{{ formModel.name }}</span>
 				?
 			</p>
 		</template>
 		<template #actions>
 			<div class="flex flex-row gap-4">
-				<Button
-					variant="outline"
-					class="py-5 w-full"
-					@click="showDeleteDialog = false"
-				>
+				<Button variant="outline" class="py-5 w-full" @click="showDeleteDialog = false">
 					{{ __("Cancel") }}
 				</Button>
-				<Button
-					variant="solid"
-					theme="red"
-					@click="handleDocDelete"
-					class="py-5 w-full"
-				>
-					{{__("Delete") }}
+				<Button variant="solid" theme="red" @click="handleDocDelete" class="py-5 w-full">
+					{{ __("Delete") }}
 				</Button>
 			</div>
 		</template>
@@ -248,7 +224,7 @@
 
 	<Dialog v-model="showSubmitDialog">
 		<template #body-title>
-			<h2 class="text-xl font-bold">{{ __("Confirm") }} </h2>
+			<h2 class="text-xl font-bold">{{ __("Confirm") }}</h2>
 		</template>
 		<template #body-content>
 			<p>
@@ -259,18 +235,10 @@
 		</template>
 		<template #actions>
 			<div class="flex flex-row gap-4">
-				<Button
-					variant="outline"
-					class="py-5 w-full"
-					@click="showSubmitDialog = false"
-				>
+				<Button variant="outline" class="py-5 w-full" @click="showSubmitDialog = false">
 					{{ __("No") }}
 				</Button>
-				<Button
-					variant="solid"
-					@click="handleDocUpdate('submit')"
-					class="py-5 w-full"
-				>
+				<Button variant="solid" @click="handleDocUpdate('submit')" class="py-5 w-full">
 					{{ __("Yes") }}
 				</Button>
 			</div>
@@ -279,7 +247,7 @@
 
 	<Dialog v-model="showCancelDialog">
 		<template #body-title>
-			<h2 class="text-xl font-bold">{{ __("Confirm") }} </h2>
+			<h2 class="text-xl font-bold">{{ __("Confirm") }}</h2>
 		</template>
 		<template #body-content>
 			<p>
@@ -290,18 +258,10 @@
 		</template>
 		<template #actions>
 			<div class="flex flex-row gap-4">
-				<Button
-					variant="outline"
-					class="py-5 w-full"
-					@click="showCancelDialog = false"
-				>
+				<Button variant="outline" class="py-5 w-full" @click="showCancelDialog = false">
 					{{ __("No") }}
 				</Button>
-				<Button
-					variant="solid"
-					@click="handleDocUpdate('cancel')"
-					class="py-5 w-full"
-				>
+				<Button variant="solid" @click="handleDocUpdate('cancel')" class="py-5 w-full">
 					{{ __("Yes") }}
 				</Button>
 			</div>
@@ -374,9 +334,20 @@ const props = defineProps({
 		required: false,
 		default: true,
 	},
+	childPhotoTable: {
+		type: String,
+		required: false,
+	},
+	redirectToName: {
+		type: String,
+		required: false,
+	},
+	redirectParams: {
+		type: Object,
+		required: false,
+	},
 })
 
-console.log(props)
 const emit = defineEmits(["validateForm", "update:modelValue"])
 const router = useRouter()
 
@@ -384,6 +355,7 @@ const __ = inject("$translate")
 
 let activeTab = ref(props.tabs?.[0].name)
 let fileAttachments = ref([])
+let files = ref([])
 let statusColor = ref("")
 let formErrorMessage = ref("")
 let isFormDirty = ref(false)
@@ -444,9 +416,7 @@ const tabFields = computed(() => {
 	let lastFieldIndex = 0
 
 	props.tabs?.forEach((tab) => {
-		lastFieldIndex = props.fields.findIndex(
-			(field) => field.fieldname === tab.lastField
-		)
+		lastFieldIndex = props.fields.findIndex((field) => field.fieldname === tab.lastField)
 		fieldList = props.fields.slice(firstFieldIndex, lastFieldIndex + 1)
 		fieldsByTab[tab.name] = fieldList
 		firstFieldIndex = lastFieldIndex + 1
@@ -471,7 +441,8 @@ const attachedFiles = createResource({
 
 const handleFileSelect = (e) => {
 	if (props.id) {
-		uploadAllAttachments(props.doctype, props.id, [...e.target.files])
+		// uploadAllAttachments(props.doctype, props.id, [...e.target.files])
+		fileAttachments.value.push(...e.target.files)
 	} else {
 		fileAttachments.value.push(...e.target.files)
 	}
@@ -483,29 +454,45 @@ const handleFileDelete = async (fileObj) => {
 		await fileAttachment.delete()
 		await attachedFiles.reload()
 	} else {
-		fileAttachments.value = fileAttachments.value.filter(
-			(file) => file.name !== fileObj.name
-		)
+		fileAttachments.value = fileAttachments.value.filter((file) => file.name !== fileObj.name)
 	}
+}
+
+const handleFileSelectForFiles = (e, fieldName) => {
+	files.value[fieldName] = files.value[fieldName] || []
+	files.value[fieldName].push(...e.target.files)
+}
+
+const handleFileDeleteForFiles = (fileObj, fieldName) => {
+	files.value[fieldName] = files.value[fieldName].filter((file) => file.name !== fileObj.name)
 }
 
 async function uploadAllAttachments(documentType, documentName, attachments) {
 	isFileUploading.value = true
 
+	// Array untuk menyimpan URL file yang diupload
+	const uploadedFiles = []
+
 	const uploadPromises = attachments.map((attachment) => {
 		const fileAttachment = new FileAttachment(attachment)
-		return fileAttachment
-			.upload(documentType, documentName, "")
-			.then((fileDoc) => {
-				fileDoc.uploaded = true
-				if (props.id) {
-					fileAttachments.value.push(fileDoc)
-				}
-			})
+		return fileAttachment.upload(documentType, documentName, "").then((fileDoc) => {
+			fileDoc.uploaded = true
+
+			const fileUrl = fileDoc.file_url
+			if (fileUrl) {
+				uploadedFiles.push(fileUrl)
+			}
+
+			if (props.id) {
+				fileAttachments.value.push(fileDoc)
+			}
+		})
 	})
 
 	await Promise.allSettled(uploadPromises)
 	isFileUploading.value = false
+
+	return uploadedFiles
 }
 
 // CRUD for doc
@@ -520,12 +507,48 @@ const docList = createListResource({
 				position: "bottom-center",
 				iconClasses: "text-green-500",
 			})
-			await uploadAllAttachments(data.doctype, data.name, fileAttachments.value)
 
-			router.replace({
-				name: `${props.doctype.replace(/\s+/g, "")}DetailView`,
-				params: { id: data.name },
-			})
+			if (fileAttachments.value.length) {
+				await uploadAllAttachments(data.doctype, data.name, fileAttachments.value)
+			} else {
+				const attachImageFields = props.fields
+					.filter((field) => field.fieldtype === "Attach Image")
+					.map((field) => field.fieldname)
+
+				if (files.value) {
+					for (const fieldName in files.value) {
+						if (attachImageFields.includes(fieldName)) {
+							const uploadedFiles = await uploadAllAttachments(
+								data.doctype,
+								data.name,
+								files.value[fieldName]
+							)
+							const fieldNameUpper = fieldName.charAt(0).toUpperCase() + fieldName.slice(1)
+
+							createResource({
+								url: "oims.api.upload_files_to_hazard_report_child_table",
+								params: {
+									name: data.name,
+									files: uploadedFiles,
+									jenis: fieldNameUpper,
+								},
+							}).fetch()
+						}
+					}
+				}
+			}
+
+			if (props.redirectToName) {
+				router.replace({
+					name: props.redirectToName,
+					params: props.redirectParams,
+				})
+			} else {
+				router.replace({
+					name: `${props.doctype.replace(/\s+/g, "")}DetailView`,
+					params: { id: data.name },
+				})
+			}
 		},
 		onError() {
 			toast({
@@ -623,9 +646,9 @@ function hasPermission(action) {
 
 function isFieldReadOnly(field) {
 	return (
-		Boolean(field.read_only)
-		|| isFormReadOnly.value
-		|| (props.id && !permittedWriteFields.data?.includes(field.fieldname))
+		Boolean(field.read_only) ||
+		isFormReadOnly.value ||
+		(props.id && !permittedWriteFields.data?.includes(field.fieldname))
 	)
 }
 
@@ -636,10 +659,7 @@ function handleDocInsert() {
 
 function validateMandatoryFields() {
 	const errorFields = props.fields
-		.filter(
-			(field) =>
-				field.reqd && !field.hidden && !formModel.value[field.fieldname]
-		)
+		.filter((field) => field.reqd && !field.hidden && !formModel.value[field.fieldname])
 		.map((field) => field.label)
 
 	if (errorFields.length) {
@@ -681,6 +701,7 @@ function saveForm() {
 		handleDocUpdate()
 	} else {
 		handleDocInsert()
+		// uploadFilesToChildTable()
 	}
 }
 

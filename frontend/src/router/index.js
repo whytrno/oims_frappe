@@ -48,6 +48,11 @@ const routes = [
 				name: "ExpenseClaimsDashboard",
 				component: () => import("@/views/expense_claim/Dashboard.vue"),
 			},
+			{
+				path: "/hazard-reports",
+				name: "HazardReports",
+				component: () => import("@/views/hazard-report/Dashboard.vue"),
+			},
 		],
 	},
 	{
@@ -60,6 +65,12 @@ const routes = [
 		name: "FuelingForm",
 		component: () => import("@/views/fueling/Form.vue"),
 		props: true, // Tambahkan ini
+	},
+	{
+		path: "/dashboard/hazard-report/:id?",
+		name: "HazardReportForm",
+		component: () => import("@/views/hazard-report/Form.vue"),
+		props: true,
 	},
 	{
 		path: "/attendance",

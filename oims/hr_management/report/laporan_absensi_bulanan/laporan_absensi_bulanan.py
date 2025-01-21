@@ -98,7 +98,11 @@ def get_attendance_map(filters):
                 "tipe": "In",
                 "karyawan": ["in", frappe.get_all(
                     "Karyawan",
-                    filters={"perusahaan": filters.perusahaan},
+                    filters={
+                        "perusahaan": [
+                            "in", [filters.perusahaan]
+                        ],
+                    },
                     pluck="name"
                 )]
             },
@@ -301,13 +305,7 @@ def get_total_days_in_month(filters: Filters) -> int:
     return monthrange(cint(filters.year), cint(filters.month))[1]
 
 def get_data(attendance_map: dict, filters: Filters) -> list[list]:
-    total_days = get_total_days_in_month(filters)
     data_map = {}
-
-    minggu_ke = cint(filters.get("minggu_ke", 1))
-
-    if minggu_ke > 1:
-        total_days = 7
 
     columns = get_columns(filters)
 
@@ -332,8 +330,9 @@ def get_data(attendance_map: dict, filters: Filters) -> list[list]:
                         row = data_map[karyawan]
 
                     for absensi in absensi_harian:
-                        row[2] = int(row[2]) + 1
-                        row[3] = int(row[3]) + 1
+                        total_work = int(row[2]) + 1
+                        row[2] = total_work
+                        row[3] = total_work
                         if absensi["izin"]:
                             row[index_now] = (
                                 f'<p style="color: blue;">{site} <small>({absensi["jam_absen"]})</small></p>'
@@ -369,12 +368,12 @@ def get_data(attendance_map: dict, filters: Filters) -> list[list]:
             end_date = getdate(f"{year}-{month}-{monthrange(int(year), int(month))[1]}")
 
         while current_date <= end_date:
-			# weekday() returns 0-6 (Mon-Sun)
+            # weekday() returns 0-6 (Mon-Sun)
             if current_date.weekday() < 5:  # 0-4 adalah Senin-Jumat
                 working_days += 1
             current_date = add_days(current_date, 1)
 
-		# Gunakan working_days sebagai pembagi
+        # Gunakan working_days sebagai pembagi
         row[2] = f'{round((row[2] / working_days) * 100, 2)}%' if working_days > 0 else '0%'
         data_map[karyawan] = row
 

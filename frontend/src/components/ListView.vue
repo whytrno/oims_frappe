@@ -365,8 +365,6 @@ function fetchDocumentList(start = 0) {
 		filters.push([props.doctype, currentTab.fieldname, currentTab.condition, currentTab.value]);
 	}
 
-	console.log(filters)
-
 	documents.submit({
 		...listOptions.value,
 		start: start || 0,

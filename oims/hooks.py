@@ -63,7 +63,7 @@ fixtures = [
 		]
 	},
     {
-        "dt": "Role", 
+        "dt": "Role",
         "filters": [
 			[
 				"role_name", "in", [
@@ -79,7 +79,7 @@ fixtures = [
 		"filters": {
 			"role": [
        			"in",[
-       				"Karyawan", 
+       				"Karyawan",
 					"System Manager",
 					"Management Development",
 				]

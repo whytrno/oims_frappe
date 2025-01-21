@@ -135,18 +135,32 @@
 			:disabled="isReadOnly"
 		/>
 
+		<!-- <div class="flex flex-row gap-2 items-center justify-center p-5" v-if="isFileUploading">
+			<LoadingIndicator class="w-3 h-3 text-gray-800" />
+			<span class="text-gray-900 text-sm">{{ __("Uploading...") }} </span>
+		</div> -->
+
 		<VueSignaturePad
 			v-else-if="props.fieldtype === 'Signature'"
-          ref='signature'
-          height='400px'
-          width='950px'
-          :max-width='options.maxWidth'
-          :min-width='options.minWidth'
-          :options='{
-            penColor: options.penColor,
-            backgroundColor: options.backgroundColor,
-          }'
-        />
+			ref="signature"
+			height="400px"
+			width="950px"
+			:max-width="options.maxWidth"
+			:min-width="options.minWidth"
+			:options="{
+				penColor: options.penColor,
+				backgroundColor: options.backgroundColor,
+			}"
+		/>
+
+		<FileUploaderView
+			v-else-if="props.fieldtype === 'Attach Image'"
+			v-model="props.files"
+			@handleFileSelect="handleFileSelect($event, props.fieldname)"
+			@handleFileDelete="handleFileDelete($event, props.fieldname)"
+			:usingTitle="false"
+			:fieldName="props.fieldname"
+		/>
 
 		<ErrorMessage :message="props.errorMessage" />
 	</div>
@@ -154,30 +168,51 @@
 
 <script setup>
 import { Autocomplete, DateTimePicker, ErrorMessage, Input } from "frappe-ui"
-import { computed, onMounted, inject, ref } from "vue"
-import { VueSignaturePad } from '@selemondev/vue3-signature-pad'
+import { computed, onMounted, inject, ref, watch } from "vue"
+import FileUploaderView from "@/components/FileUploaderView.vue"
+import { VueSignaturePad } from "@selemondev/vue3-signature-pad"
+import { FileAttachment } from "@/composables"
 
 import Link from "@/components/Link.vue"
 
 const __ = inject("$translate")
 const options = ref({
-  penColor: 'rgb(0,0,0)',
-  backgroundColor: 'rgb(255, 255, 255)',
-  maxWidth: 2,
-  minWidth: 2,
+	penColor: "rgb(0,0,0)",
+	backgroundColor: "rgb(255, 255, 255)",
+	maxWidth: 2,
+	minWidth: 2,
 })
 const signature = ref()
+// let fileAttachments = ref([])
+
+// const handleFileSelect = (e) => {
+// 	if (props.id) {
+// 		uploadAllAttachments(props.doctype, props.id, [...e.target.files])
+// 	} else {
+// 		fileAttachments.value.push(...e.target.files)
+// 	}
+// }
+
+// const handleFileDelete = async (fileObj) => {
+// 	if (fileObj.uploaded) {
+// 		const fileAttachment = new FileAttachment(fileObj)
+// 		await fileAttachment.delete()
+// 		await attachedFiles.reload()
+// 	} else {
+// 		fileAttachments.value = fileAttachments.value.filter((file) => file.name !== fileObj.name)
+// 	}
+// }
 
 function handleUndo() {
-  return signature.value?.undo && signature.value?.undo()
+	return signature.value?.undo && signature.value?.undo()
 }
 
 function handleClearCanvas() {
-  return signature.value?.clearCanvas && signature.value?.clearCanvas()
+	return signature.value?.clearCanvas && signature.value?.clearCanvas()
 }
 
 function handleSaveSignature() {
-  return signature.value?.saveSignature && alert(signature.value?.saveSignature())
+	return signature.value?.saveSignature && alert(signature.value?.saveSignature())
 }
 
 const props = defineProps({
@@ -202,7 +237,12 @@ const props = defineProps({
 		type: Boolean,
 		default: true,
 	},
+	files: Array,
+	handleFileSelect: Function,
+	handleFileDelete: Function,
 })
+
+console.log("props", props.fieldtype)
 
 const emit = defineEmits(["change", "update:modelValue"])
 const dayjs = inject("$dayjs")
@@ -215,6 +255,7 @@ const dayjs = inject("$dayjs")
 // let isDrawing = false
 
 const showField = computed(() => {
+	if (props.fieldtype === "Attach Image") return true
 	if (props.readOnly && !isLayoutField.value && !props.modelValue) return false
 
 	return props.fieldtype !== "Table" && !props.hidden

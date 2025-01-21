@@ -36,7 +36,6 @@
   "kelurahan_ktp",
   "alamat_ktp",
   "data_karyawan_tab",
-  "perusahaan",
   "nrp",
   "no_kontrak",
   "jabatan",
@@ -46,6 +45,7 @@
   "tanggal_bergabung",
   "status_kontrak",
   "status",
+  "perusahaan",
   "kontak_darurat_tab",
   "nama_kontak_darurat",
   "no_kontak_darurat",
@@ -369,9 +369,10 @@
   },
   {
    "fieldname": "perusahaan",
-   "fieldtype": "Link",
+   "fieldtype": "Table",
    "label": "Perusahaan",
-   "options": "Perusahaan"
+   "options": "Karyawan Perusahaan",
+   "reqd": 1
   }
  ],
  "image_field": "foto",
@@ -387,7 +388,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2024-12-17 08:57:36.046784",
+ "modified": "2024-12-24 10:25:19.989516",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",

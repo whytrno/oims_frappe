@@ -1,6 +1,6 @@
 <template>
 	<ion-page>
-		<FormField
+		<!-- <FormField
 							v-for="field in expensesTableFields.data"
 							:key="field.fieldname"
 							class="w-full"
@@ -12,7 +12,7 @@
 							:reqd="field.reqd"
 							:default="field.default"
 							:readOnly="field.read_only"
-							/>
+							/> -->
 		<ListView
 			doctype="Surat Tugas"
 			:pageTitle="('Surat Tugas')"
@@ -29,15 +29,16 @@ import ListView from "@/components/ListView.vue"
 import { createResource } from "frappe-ui"
 import FormField from "@/components/FormField.vue"
 
-const expensesTableFields = createResource({
-	url: "oims.api.get_doctype_fields",
-	params: { doctype: "Surat Tugas" },
-	transform(data) {
-		const excludeFields = ["description_sb", "amounts_sb"]
-		return data.filter((field) => !excludeFields.includes(field.fieldname))
-	},
-})
-expensesTableFields.reload()
+// const expensesTableFields = createResource({
+// 	url: "oims.api.get_doctype_fields",
+// 	params: { doctype: "Surat Tugas" },
+// 	transform(data) {
+// 		console.log(data)
+// 		const excludeFields = ["description_sb", "amounts_sb"]
+// 		return data.filter((field) => !excludeFields.includes(field.fieldname))
+// 	},
+// })
+// expensesTableFields.reload()
 
 const TAB_BUTTONS = [
 	{

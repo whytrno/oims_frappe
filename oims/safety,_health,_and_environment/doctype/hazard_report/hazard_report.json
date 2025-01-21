@@ -1,0 +1,125 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:SHR-{#}",
+ "creation": "2024-12-24 11:40:40.991690",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "waktu",
+  "karyawan",
+  "site",
+  "kategori_temuan",
+  "column_break_wixs",
+  "kode_bahaya",
+  "lokasi_temuan",
+  "status_temuan",
+  "section_break_oyze",
+  "foto",
+  "deskripsi_temuan",
+  "tindakan_perbaikan"
+ ],
+ "fields": [
+  {
+   "fieldname": "waktu",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Waktu",
+   "reqd": 1
+  },
+  {
+   "fieldname": "karyawan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Karyawan",
+   "options": "Karyawan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Site",
+   "options": "Projek",
+   "reqd": 1
+  },
+  {
+   "fieldname": "kategori_temuan",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Kategori Temuan",
+   "options": "Unsafe Condition\nUnsafe Action",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_wixs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "kode_bahaya",
+   "fieldtype": "Select",
+   "label": "Kode Bahaya",
+   "options": "AA (Sangat Bahaya)\nA (Berbahaya)\nB (Sedang)\nC (Ringan)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "lokasi_temuan",
+   "fieldtype": "Data",
+   "label": "Lokasi Temuan",
+   "reqd": 1
+  },
+  {
+   "default": "Open",
+   "fieldname": "status_temuan",
+   "fieldtype": "Select",
+   "label": "Status Temuan",
+   "options": "Open\nClosed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_oyze",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "deskripsi_temuan",
+   "fieldtype": "Small Text",
+   "label": "Deskripsi Temuan"
+  },
+  {
+   "fieldname": "tindakan_perbaikan",
+   "fieldtype": "Small Text",
+   "label": "Tindakan Perbaikan"
+  },
+  {
+   "fieldname": "foto",
+   "fieldtype": "Table",
+   "label": "Foto",
+   "options": "Hazard Report Image"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-01-14 19:47:44.002736",
+ "modified_by": "Administrator",
+ "module": "Safety, Health, and Environment",
+ "name": "Hazard Report",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
