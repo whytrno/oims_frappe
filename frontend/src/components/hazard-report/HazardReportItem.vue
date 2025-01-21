@@ -2,7 +2,7 @@
 	<div class="bg-gray-200 rounded-xl border cursor-pointer">
 		<div class="aspect-square w-full relative">
 			<img
-				:src="`http://localhost:8000${props.report.foto[0].foto}`"
+				:src="`https://oims.orecon.co.id${props.report.foto[0].foto}`"
 				class="rounded-xl w-full h-full"
 				alt="Report Image"
 			/>
