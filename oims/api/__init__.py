@@ -515,7 +515,7 @@ def get_today_karyawan_makan() -> list[dict]:
 			"ambil_jatah_makan": 1,
 			"creation": [">=", datetime.today().date()],
 		},
-		["nama_karyawan"],
+		["karyawan.nama_lengkap as nama_karyawan"],
 		limit=999999,
 	)
 

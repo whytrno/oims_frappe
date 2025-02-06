@@ -1,15 +1,15 @@
 <template>
 	<!-- <router-link :to="{ name: 'Attendance' }" v-slot="{ navigate }"> -->
-		<ListItem class="p-3.5 bg-white rounded">
-			<template #left>
-				<div class="flex flex-col items-start gap-1.5">
-					<!-- Parent data (dynamic) -->
-					<div class="text-base font-normal text-gray-800">
-						{{ item.nama_karyawan }}
-					</div>
+	<ListItem class="p-3.5 bg-white rounded">
+		<template #left>
+			<div class="flex flex-col items-start gap-1.5">
+				<!-- Parent data (dynamic) -->
+				<div class="text-base font-normal text-gray-800">
+					{{ item.nama_karyawan }}
 				</div>
-			</template>
-		</ListItem>
+			</div>
+		</template>
+	</ListItem>
 	<!-- </router-link> -->
 </template>
 
@@ -22,5 +22,5 @@ const props = defineProps({
 		type: Object,
 		required: true,
 	},
-});
+})
 </script>
