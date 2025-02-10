@@ -20,8 +20,6 @@
   "nama_penanda_tangan",
   "section_break_glmr",
   "karyawan",
-  "section_break_jngh",
-  "tandatangan",
   "section_break_cwlg",
   "karyawan_for_list_view"
  ],
@@ -123,24 +121,16 @@
    "read_only": 1
   },
   {
-   "fieldname": "section_break_jngh",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "tandatangan",
-   "fieldtype": "Signature",
-   "label": "Tandatangan"
-  },
-  {
    "fieldname": "no_surat_mutasi",
    "fieldtype": "Link",
    "label": "No. Surat Mutasi",
-   "options": "Surat Mutasi"
+   "options": "Surat Mutasi",
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-11-26 16:34:43.914229",
+ "modified": "2025-02-08 12:36:19.328796",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Surat Tugas",
