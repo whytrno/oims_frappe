@@ -10,7 +10,7 @@
 					<HazardReportItem :report="report" />
 				</router-link>
 			</div>
-			<div class="w-full sticky bottom-0 right-0 pt-4">
+			<div class="w-full sticky bottom-16 right-0 pt-4">
 				<router-link :to="{ name: 'HazardReportForm' }" v-slot="{ navigate }">
 					<Button @click="navigate" variant="solid" class="w-full py-5 text-base rounded-b-none">
 						{{ __("Tambahkan Hazard Report") }}

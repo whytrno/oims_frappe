@@ -1,7 +1,7 @@
 <template>
 	<ion-tab-bar
 		slot="bottom"
-		class="bg-white shadow-md sm:w-96 py-2 pb-2 standalone:pb-safe-bottom"
+		class="bg-white shadow-md sm:w-96 h-16 pb-2 standalone:pb-safe-bottom"
 	>
 		<ion-tab-button
 			v-for="item in filteredTabItems"
@@ -45,25 +45,25 @@ const tabItems = [
 		icon: HomeIcon,
 		title: __("Home"),
 		route: "/home",
-		jabatan: null
+		jabatan: null,
 	},
 	{
 		icon: AttendanceIcon,
 		title: __("Kalendar Absen"),
 		route: "/dashboard/attendance",
-		jabatan: null
+		jabatan: null,
 	},
 	{
 		icon: FuelingIcon,
 		title: __("Fueling"),
 		route: "/dashboard/fueling",
-		jabatan: ["Fuelman"]
+		jabatan: ["Fuelman"],
 	},
 	{
 		icon: ShiftIcon,
 		title: __("Jumlah Makan"),
 		route: "/dashboard/jumlah-makan",
-		jabatan: ["Office Boy", "Gs", "Hr"]
+		jabatan: ["Office Boy", "Gs", "Hr"],
 	},
 	// {
 	// 	icon: ShiftIcon,
@@ -84,10 +84,7 @@ const filteredTabItems = computed(() => {
 
 	// Kembalikan tab yang jabatan-nya cocok atau jabatan-nya null (tidak terbatas)
 	return tabItems.filter(
-		(item) =>
-			!item.jabatan ||
-			item.jabatan.some((jabatan) => userjabatans.includes(jabatan))
+		(item) => !item.jabatan || item.jabatan.some((jabatan) => userjabatans.includes(jabatan))
 	)
 })
-
 </script>
