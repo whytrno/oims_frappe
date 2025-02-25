@@ -1,0 +1,70 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"8RamF6OKKy\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Safety</span>\",\"col\":12}},{\"id\":\"xSdY2ALgv1\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":12}},{\"id\":\"A9RSjbhdV3\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Hazard Report\",\"col\":6}},{\"id\":\"w4l2OVlbPQ\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Inspection Activities\",\"col\":6}}]",
+ "creation": "2025-02-25 20:21:16.507702",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "healthcare",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Safety",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Quick Links",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Hazard Report",
+   "link_count": 0,
+   "link_to": "Hazard Report",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Inspection Activities",
+   "link_count": 0,
+   "link_to": "Inspection Activities",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2025-02-25 20:26:32.690146",
+ "modified_by": "Administrator",
+ "module": "Safety, Health, and Environment",
+ "name": "Safety",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [
+  {
+   "document_type": "Hazard Report",
+   "label": "Hazard Report",
+   "quick_list_filter": "[]"
+  },
+  {
+   "document_type": "Inspection Activities",
+   "label": "Inspection Activities",
+   "quick_list_filter": "[]"
+  }
+ ],
+ "roles": [],
+ "sequence_id": 6.0,
+ "shortcuts": [],
+ "title": "Safety"
+}

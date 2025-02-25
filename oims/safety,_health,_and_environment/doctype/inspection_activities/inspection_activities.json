@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:SIA-{#}",
+ "creation": "2025-02-25 20:14:26.321714",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "site",
+  "waktu",
+  "foto",
+  "keterangan_hasil_inspeksi"
+ ],
+ "fields": [
+  {
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Site",
+   "options": "Projek",
+   "reqd": 1
+  },
+  {
+   "fieldname": "waktu",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Waktu",
+   "reqd": 1
+  },
+  {
+   "fieldname": "foto",
+   "fieldtype": "Table",
+   "label": "Foto",
+   "options": "Inspection Activitiy Images",
+   "reqd": 1
+  },
+  {
+   "fieldname": "keterangan_hasil_inspeksi",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Keterangan Hasil Inspeksi",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-02-25 20:24:52.234986",
+ "modified_by": "Administrator",
+ "module": "Safety, Health, and Environment",
+ "name": "Inspection Activities",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
