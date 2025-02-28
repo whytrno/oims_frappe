@@ -25,6 +25,9 @@
 				</div>
 			</div>
 		</div>
+		<div class="bg-blue-600 text-white text-sm p-2 text-center rounded-b-xl">
+			<p>{{ props.report.status_tindakan }}</p>
+		</div>
 	</div>
 </template>
 

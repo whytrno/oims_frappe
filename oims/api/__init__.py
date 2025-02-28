@@ -7,35 +7,35 @@ from frappe.utils import add_days, date_diff, getdate, strip_html
 from datetime import datetime
 
 SUPPORTED_FIELD_TYPES = [
-	"Link",
-	"Select",
-	"Small Text",
-	"Text",
-	"Long Text",
-	"Text Editor",
-	"Table",
-	"Check",
-	"Data",
-	"Float",
-	"Int",
-	"Section Break",
-	"Date",
-	"Time",
-	"Datetime",
-	"Currency",
-	"Attach Image",
+    "Link",
+    "Select",
+    "Small Text",
+    "Text",
+    "Long Text",
+    "Text Editor",
+    "Table",
+    "Check",
+    "Data",
+    "Float",
+    "Int",
+    "Section Break",
+    "Date",
+    "Time",
+    "Datetime",
+    "Currency",
+    "Attach Image",
 ]
 
 
 @frappe.whitelist()
 def get_current_user_info() -> dict:
-	current_user = frappe.session.user
-	user = frappe.db.get_value(
-		"User", current_user, ["name", "first_name", "full_name", "user_image"], as_dict=True
-	)
-	user["roles"] = frappe.get_roles(current_user)
+    current_user = frappe.session.user
+    user = frappe.db.get_value(
+        "User", current_user, ["name", "first_name", "full_name", "user_image"], as_dict=True
+    )
+    user["roles"] = frappe.get_roles(current_user)
 
-	return user
+    return user
 
 # @frappe.whitelist()
 # def submit_attendance(karyawan, lokasi_absen, foto, tipe, keterangan, waktu_absen, latitude, longitude, ambil_jatah_makan=False, izin=False):
@@ -141,20 +141,20 @@ def submit_attendance(karyawan, lokasi_absen, foto, tipe, keterangan, waktu_abse
 
 @frappe.whitelist()
 def get_attendance_calendar_events(employee: int, from_date: str, to_date: str) -> dict[str, str]:
-	holidays = []
-	attendance = get_attendance_for_calendar(employee, from_date, to_date)
-	events = {}
+    holidays = []
+    attendance = get_attendance_for_calendar(employee, from_date, to_date)
+    events = {}
 
-	date = getdate(from_date)
-	while date_diff(to_date, date) >= 0:
-		date_str = date.strftime("%Y-%m-%d")
-		if date in holidays:
-			events[date_str] = "Holiday"
-		elif date in attendance:
-			events[date_str] = attendance[date]
-		date = add_days(date, 1)
+    date = getdate(from_date)
+    while date_diff(to_date, date) >= 0:
+        date_str = date.strftime("%Y-%m-%d")
+        if date in holidays:
+            events[date_str] = "Holiday"
+        elif date in attendance:
+            events[date_str] = attendance[date]
+        date = add_days(date, 1)
 
-	return events
+    return events
 
 # def get_holidays_for_calendar(employee: str, from_date: str, to_date: str) -> list[str]:
 # 	if holiday_list := get_holiday_list_for_employee(employee, raise_exception=False):
@@ -169,293 +169,293 @@ def get_attendance_calendar_events(employee: int, from_date: str, to_date: str) 
 
 
 def get_attendance_for_calendar(employee: str, from_date: str, to_date: str) -> list[dict[str, str]]:
-	attendance = frappe.get_all(
-		"Absensi",
-		{"karyawan": employee, "waktu_absen": ["between", [from_date, to_date]], "tipe": ["!=", "Out"]},
-		["waktu_absen", "tipe", "izin", "telat"],
-	)
+    attendance = frappe.get_all(
+        "Absensi",
+        {"karyawan": employee, "waktu_absen": ["between", [from_date, to_date]], "tipe": ["!=", "Out"]},
+        ["waktu_absen", "tipe", "izin", "telat"],
+    )
 
-	for att in attendance:
-		# ubah time datetime ke date
-		att["attendance_date"] = att["waktu_absen"].date()
+    for att in attendance:
+        # ubah time datetime ke date
+        att["attendance_date"] = att["waktu_absen"].date()
 
-		if att["izin"]:
-			att["status"] = "Izin"
-		elif att["telat"]:
-			att["status"] = "Telat"
-		elif att["tipe"] == "In":
-			att["status"] = "Tepat Waktu"
+        if att["izin"]:
+            att["status"] = "Izin"
+        elif att["telat"]:
+            att["status"] = "Telat"
+        elif att["tipe"] == "In":
+            att["status"] = "Tepat Waktu"
 
-	data = {d["attendance_date"]: d["status"] for d in attendance}
-	print(f'data: {data}')
+    data = {d["attendance_date"]: d["status"] for d in attendance}
+    print(f'data: {data}')
 
-	return {d["attendance_date"]: d["status"] for d in attendance}
+    return {d["attendance_date"]: d["status"] for d in attendance}
 
 
 @frappe.whitelist()
 def create_folders_if_not_exist(base_path, folder_path):
-	# Pisahkan path menjadi komponen folder
-	folders = folder_path.split('/')
+    # Pisahkan path menjadi komponen folder
+    folders = folder_path.split('/')
 
-	# Variable untuk melacak full path dari folder
-	current_folder = base_path
+    # Variable untuk melacak full path dari folder
+    current_folder = base_path
 
-	# Loop melalui setiap folder di path
-	for folder in folders:
-		current_folder = f"{current_folder}/{folder}"
+    # Loop melalui setiap folder di path
+    for folder in folders:
+        current_folder = f"{current_folder}/{folder}"
 
-		# Jika folder belum ada, buat folder baru
-		if not frappe.db.exists('File', current_folder):
-			folder_doc = frappe.get_doc({
-				"doctype": "File",
-				"file_name": "Home/absensi",
-				"folder": base_path if current_folder == f"{base_path}/{folder}" else current_folder.rsplit('/', 1)[0],
-				"is_folder": 1,
-				"is_private": 1
-			})
-			folder_doc.save()
-			frappe.logger().info(f"Folder '{folder}' created in '{current_folder}'")
+        # Jika folder belum ada, buat folder baru
+        if not frappe.db.exists('File', current_folder):
+            folder_doc = frappe.get_doc({
+                "doctype": "File",
+                "file_name": "Home/absensi",
+                "folder": base_path if current_folder == f"{base_path}/{folder}" else current_folder.rsplit('/', 1)[0],
+                "is_folder": 1,
+                "is_private": 1
+            })
+            folder_doc.save()
+            frappe.logger().info(f"Folder '{folder}' created in '{current_folder}'")
 
 
 @frappe.whitelist()
 def get_current_employee_info() -> dict:
-	current_user = frappe.session.user
-	print(f"current_user: {current_user}")
-	employee = frappe.db.get_value(
-		"Karyawan",
-		{"user_id": current_user, "status": "Aktif"},
-		[
-			"name",
-			"nrp",
-			"nama_lengkap",
-			"jabatan",
-			"user_id",
-		],
-		as_dict=True,
-	)
-	return employee
+    current_user = frappe.session.user
+    print(f"current_user: {current_user}")
+    employee = frappe.db.get_value(
+        "Karyawan",
+        {"user_id": current_user, "status": "Aktif"},
+        [
+            "name",
+            "nrp",
+            "nama_lengkap",
+            "jabatan",
+            "user_id",
+        ],
+        as_dict=True,
+    )
+    return employee
 
 
 @frappe.whitelist()
 def get_all_employees() -> list[dict]:
-	return frappe.get_all(
-		"Karyawan",
-		fields=["*"],
-		limit=999999,
-	)
+    return frappe.get_all(
+        "Karyawan",
+        fields=["*"],
+        limit=999999,
+    )
 
 
 # HR Settings
 @frappe.whitelist()
 def get_hr_settings() -> dict:
-	settings = frappe.db.get_singles_dict("HR Settings", cast=True)
-	return frappe._dict(
-		allow_employee_checkin_from_mobile_app=settings.allow_employee_checkin_from_mobile_app,
-		allow_geolocation_tracking=settings.allow_geolocation_tracking,
-	)
+    settings = frappe.db.get_singles_dict("HR Settings", cast=True)
+    return frappe._dict(
+        allow_employee_checkin_from_mobile_app=settings.allow_employee_checkin_from_mobile_app,
+        allow_geolocation_tracking=settings.allow_geolocation_tracking,
+    )
 
 
 # Notifications
 @frappe.whitelist()
 def get_unread_notifications_count() -> int:
-	return frappe.db.count(
-		"PWA Notification",
-		{"to_user": frappe.session.user, "read": 0},
-	)
+    return frappe.db.count(
+        "PWA Notification",
+        {"to_user": frappe.session.user, "read": 0},
+    )
 
 
 @frappe.whitelist()
 def mark_all_notifications_as_read() -> None:
-	frappe.db.set_value(
-		"PWA Notification",
-		{"to_user": frappe.session.user, "read": 0},
-		"read",
-		1,
-		update_modified=False,
-	)
+    frappe.db.set_value(
+        "PWA Notification",
+        {"to_user": frappe.session.user, "read": 0},
+        "read",
+        1,
+        update_modified=False,
+    )
 
 
 @frappe.whitelist()
 def are_push_notifications_enabled() -> bool:
-	try:
-		return frappe.db.get_single_value("Push Notification Settings", "enable_push_notification_relay")
-	except frappe.DoesNotExistError:
-		# push notifications are not supported in the current framework version
-		return False
+    try:
+        return frappe.db.get_single_value("Push Notification Settings", "enable_push_notification_relay")
+    except frappe.DoesNotExistError:
+        # push notifications are not supported in the current framework version
+        return False
 
 
 # Company
 @frappe.whitelist()
 def get_company_currencies() -> dict:
-	Company = frappe.qb.DocType("Company")
-	Currency = frappe.qb.DocType("Currency")
+    Company = frappe.qb.DocType("Company")
+    Currency = frappe.qb.DocType("Currency")
 
-	query = (
-		frappe.qb.from_(Company)
-		.join(Currency)
-		.on(Company.default_currency == Currency.name)
-		.select(
-			Company.name,
-			Company.default_currency,
-			Currency.name.as_("currency"),
-			Currency.symbol.as_("symbol"),
-		)
-	)
+    query = (
+        frappe.qb.from_(Company)
+        .join(Currency)
+        .on(Company.default_currency == Currency.name)
+        .select(
+            Company.name,
+            Company.default_currency,
+            Currency.name.as_("currency"),
+            Currency.symbol.as_("symbol"),
+        )
+    )
 
-	companies = query.run(as_dict=True)
-	return {company.name: (company.default_currency, company.symbol) for company in companies}
+    companies = query.run(as_dict=True)
+    return {company.name: (company.default_currency, company.symbol) for company in companies}
 
 
 @frappe.whitelist()
 def get_currency_symbols() -> dict:
-	Currency = frappe.qb.DocType("Currency")
+    Currency = frappe.qb.DocType("Currency")
 
-	currencies = (frappe.qb.from_(Currency).select(Currency.name, Currency.symbol)).run(as_dict=True)
+    currencies = (frappe.qb.from_(Currency).select(Currency.name, Currency.symbol)).run(as_dict=True)
 
-	return {currency.name: currency.symbol or currency.name for currency in currencies}
+    return {currency.name: currency.symbol or currency.name for currency in currencies}
 
 
 @frappe.whitelist()
 def get_company_cost_center_and_expense_account(company: str) -> dict:
-	return frappe.db.get_value(
-		"Company", company, ["cost_center", "default_expense_claim_payable_account"], as_dict=True
-	)
+    return frappe.db.get_value(
+        "Company", company, ["cost_center", "default_expense_claim_payable_account"], as_dict=True
+    )
 
 
 # Form View APIs
 @frappe.whitelist()
 def get_doctype_fields(doctype: str) -> list[dict]:
-	fields = frappe.get_meta(doctype).fields
-	return [
-		field
-		for field in fields
-		if field.fieldtype in SUPPORTED_FIELD_TYPES and field.fieldname != "amended_from"
-	]
+    fields = frappe.get_meta(doctype).fields
+    return [
+        field
+        for field in fields
+        if field.fieldtype in SUPPORTED_FIELD_TYPES and field.fieldname != "amended_from"
+    ]
 
 
 @frappe.whitelist()
 def get_doctype_states(doctype: str) -> dict:
-	states = frappe.get_meta(doctype).states
-	return {state.title: state.color.lower() for state in states}
+    states = frappe.get_meta(doctype).states
+    return {state.title: state.color.lower() for state in states}
 
 
 # File
 @frappe.whitelist()
 def get_attachments(dt: str, dn: str):
-	from frappe.desk.form.load import get_attachments
+    from frappe.desk.form.load import get_attachments
 
-	return get_attachments(dt, dn)
+    return get_attachments(dt, dn)
 
 
 @frappe.whitelist()
 def upload_base64_file(content, filename, dt=None, dn=None, fieldname=None):
-	import base64
-	import io
-	from mimetypes import guess_type
+    import base64
+    import io
+    from mimetypes import guess_type
 
-	from PIL import Image, ImageOps
+    from PIL import Image, ImageOps
 
-	from frappe.handler import ALLOWED_MIMETYPES
+    from frappe.handler import ALLOWED_MIMETYPES
 
-	decoded_content = base64.b64decode(content)
-	content_type = guess_type(filename)[0]
-	if content_type not in ALLOWED_MIMETYPES:
-		frappe.throw(_("You can only upload JPG, PNG, PDF, TXT or Microsoft documents."))
+    decoded_content = base64.b64decode(content)
+    content_type = guess_type(filename)[0]
+    if content_type not in ALLOWED_MIMETYPES:
+        frappe.throw(_("You can only upload JPG, PNG, PDF, TXT or Microsoft documents."))
 
-	if content_type.startswith("image/jpeg"):
-		# transpose the image according to the orientation tag, and remove the orientation data
-		with Image.open(io.BytesIO(decoded_content)) as image:
-			transpose_img = ImageOps.exif_transpose(image)
-			# convert the image back to bytes
-			file_content = io.BytesIO()
-			transpose_img.save(file_content, format="JPEG")
-			file_content = file_content.getvalue()
-	else:
-		file_content = decoded_content
+    if content_type.startswith("image/jpeg"):
+        # transpose the image according to the orientation tag, and remove the orientation data
+        with Image.open(io.BytesIO(decoded_content)) as image:
+            transpose_img = ImageOps.exif_transpose(image)
+            # convert the image back to bytes
+            file_content = io.BytesIO()
+            transpose_img.save(file_content, format="JPEG")
+            file_content = file_content.getvalue()
+    else:
+        file_content = decoded_content
 
-	return frappe.get_doc(
-		{
-			"doctype": "File",
-			"attached_to_doctype": dt,
-			"attached_to_name": dn,
-			"attached_to_field": fieldname,
-			"folder": "Home",
-			"file_name": filename,
-			"content": file_content,
-			"is_private": 1,
-		}
-	).insert()
+    return frappe.get_doc(
+        {
+            "doctype": "File",
+            "attached_to_doctype": dt,
+            "attached_to_name": dn,
+            "attached_to_field": fieldname,
+            "folder": "Home",
+            "file_name": filename,
+            "content": file_content,
+            "is_private": 1,
+        }
+    ).insert()
 
 
 @frappe.whitelist()
 def delete_attachment(filename: str):
-	frappe.delete_doc("File", filename)
+    frappe.delete_doc("File", filename)
 
 
 @frappe.whitelist()
 def download_salary_slip(name: str):
-	import base64
+    import base64
 
-	from frappe.utils.print_format import download_pdf
+    from frappe.utils.print_format import download_pdf
 
-	default_print_format = frappe.get_meta("Salary Slip").default_print_format or "Standard"
+    default_print_format = frappe.get_meta("Salary Slip").default_print_format or "Standard"
 
-	try:
-		download_pdf("Salary Slip", name, format=default_print_format)
-	except Exception:
-		frappe.throw(_("Failed to download Salary Slip PDF"))
+    try:
+        download_pdf("Salary Slip", name, format=default_print_format)
+    except Exception:
+        frappe.throw(_("Failed to download Salary Slip PDF"))
 
-	base64content = base64.b64encode(frappe.local.response.filecontent)
-	content_type = frappe.local.response.type
+    base64content = base64.b64encode(frappe.local.response.filecontent)
+    content_type = frappe.local.response.type
 
-	return f"data:{content_type};base64," + base64content.decode("utf-8")
+    return f"data:{content_type};base64," + base64content.decode("utf-8")
 
 
 # Workflow
 @frappe.whitelist()
 def get_workflow(doctype: str) -> dict:
-	workflow = get_workflow_name(doctype)
-	if not workflow:
-		return frappe._dict()
-	return frappe.get_doc("Workflow", workflow)
+    workflow = get_workflow_name(doctype)
+    if not workflow:
+        return frappe._dict()
+    return frappe.get_doc("Workflow", workflow)
 
 
 def get_workflow_state_field(doctype: str) -> str | None:
-	workflow_name = get_workflow_name(doctype)
-	if not workflow_name:
-		return None
+    workflow_name = get_workflow_name(doctype)
+    if not workflow_name:
+        return None
 
-	override_status, workflow_state_field = frappe.db.get_value(
-		"Workflow",
-		workflow_name,
-		["override_status", "workflow_state_field"],
-	)
-	# NOTE: checkbox labelled 'Don't Override Status' is named override_status hence the inverted logic
-	if not override_status:
-		return workflow_state_field
-	return None
+    override_status, workflow_state_field = frappe.db.get_value(
+        "Workflow",
+        workflow_name,
+        ["override_status", "workflow_state_field"],
+    )
+    # NOTE: checkbox labelled 'Don't Override Status' is named override_status hence the inverted logic
+    if not override_status:
+        return workflow_state_field
+    return None
 
 
 def get_allowed_states_for_workflow(workflow: dict, user_id: str) -> list[str]:
-	user_roles = frappe.get_roles(user_id)
-	return [transition.state for transition in workflow.transitions if transition.allowed in user_roles]
+    user_roles = frappe.get_roles(user_id)
+    return [transition.state for transition in workflow.transitions if transition.allowed in user_roles]
 
 
 # Permissions
 @frappe.whitelist()
 def get_permitted_fields_for_write(doctype: str) -> list[str]:
-	return get_permitted_fields(doctype, permission_type="write")
+    return get_permitted_fields(doctype, permission_type="write")
 
 
 # Lokasi Site
 @frappe.whitelist()
 def get_all_lokasi_absen() -> list[dict]:
-	return frappe.get_all(
-		"Lokasi Absen",
-		fields=["nama", "latitude", "longitude", "radius"],
-		limit=999999,
-	)
- 
+    return frappe.get_all(
+        "Lokasi Absen",
+        fields=["nama", "latitude", "longitude", "radius"],
+        limit=999999,
+    )
+
 # Hazard Report
 @frappe.whitelist()
 def get_all_hazard_report() -> list[dict]:
@@ -469,9 +469,9 @@ def get_all_hazard_report() -> list[dict]:
         .on(Report.name == Photo.parent)
         .select(
             Report.name,
-            Report.waktu,	
+            Report.waktu,
             Report.kode_bahaya,
-            Report.kategori_temuan,	
+            Report.kategori_temuan,
             Report.site,
             Report.status_temuan,
             Photo.foto,
@@ -480,11 +480,13 @@ def get_all_hazard_report() -> list[dict]:
     )
 
     raw_data = query.run(as_dict=True)
+    print(f"raw_data: {raw_data}")
 
-    # Strukturkan data menjadi dictionary terorganisir
     reports = {}
+
     for row in raw_data:
         report_name = row["name"]
+
         if report_name not in reports:
             reports[report_name] = {
                 "name": report_name,
@@ -493,40 +495,44 @@ def get_all_hazard_report() -> list[dict]:
                 "kategori_temuan": row["kategori_temuan"],
                 "site": row["site"],
                 "status_temuan": row["status_temuan"],
-                "foto": [],  # Inisialisasi array untuk foto
+                "status_tindakan": "Belum ada tindakan",
+                "foto": [],
             }
-        # Tambahkan foto ke array
+
+        if row["jenis"] == "Tindakan":
+            reports[report_name]["status_tindakan"] = "Sudah ditindaklanjuti"
+        elif row["jenis"] == "Temuan" and reports[report_name]["status_tindakan"] != "Sudah ditindaklanjuti":
+            reports[report_name]["status_tindakan"] = "Masih temuan"
+
         reports[report_name]["foto"].append({
             "jenis": row["jenis"],
             "foto": row["foto"],
         })
 
-    # Ubah dictionary ke list
     return list(reports.values())
 
- 
 
 # Jumlah Makan
 @frappe.whitelist()
 def get_today_karyawan_makan() -> list[dict]:
-	return frappe.get_all(
-		"Absensi",
-		{
-			"ambil_jatah_makan": 1,
-			"creation": [">=", datetime.today().date()],
-		},
-		["karyawan.nama_lengkap as nama_karyawan"],
-		limit=999999,
-	)
+    return frappe.get_all(
+        "Absensi",
+        {
+            "ambil_jatah_makan": 1,
+            "creation": [">=", datetime.today().date()],
+        },
+        ["karyawan.nama_lengkap as nama_karyawan"],
+        limit=999999,
+    )
 
 @frappe.whitelist()
 def upload_files_to_hazard_report_child_table(name: str, files: list, jenis: str):
-	sales_invoice = frappe.get_doc("Hazard Report", name)
- 
-	for file in files:
-		sales_invoice.append("foto", {
-			"jenis": jenis,
-			"foto": file,
-		})
+    sales_invoice = frappe.get_doc("Hazard Report", name)
 
-	sales_invoice.save()
+    for file in files:
+        sales_invoice.append("foto", {
+            "jenis": jenis,
+            "foto": file,
+        })
+
+    sales_invoice.save()

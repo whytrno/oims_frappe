@@ -2,7 +2,7 @@
 	<BaseLayout :pageTitle="__('Hazard Report Dashboard')">
 		<template #body>
 			<div
-				class="p-4 gap-7 h-screen mb-2 relative space-y-5"
+				class="p-4 gap-7 h-screen mb-14 relative space-y-5"
 				v-for="report in hazardReports"
 				:key="report.name"
 			>
