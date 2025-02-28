@@ -11,33 +11,21 @@
 						{{ __("Upload images or documents") }}
 					</span>
 				</div>
-				<input
-					class="hidden"
-					ref="input"
-					type="file"
-					multiple
-					accept="*"
-					@change="(e) => emit('handle-file-select', e)"
-				/>
+				<input class="hidden" ref="input" type="file" multiple :accept="props.accept"
+					@change="(e) => emit('handle-file-select', e)" />
 			</div>
 		</label>
 		<template v-if="modelValue[fieldName]">
 			<div v-if="modelValue[fieldName].length" class="w-full">
 				<ul class="w-full flex flex-col items-center gap-2">
-					<li
-						class="bg-gray-100 rounded p-2 w-full"
-						v-for="(file, index) in modelValue[fieldName]"
-						:key="index"
-					>
+					<li class="bg-gray-100 rounded p-2 w-full" v-for="(file, index) in modelValue[fieldName]"
+						:key="index">
 						<div class="flex flex-row items-center justify-between text-gray-700 text-sm">
 							<span class="grow" @click="showFilePreview(file)">
 								{{ file.file_name || file.name }}
 							</span>
-							<FeatherIcon
-								name="x"
-								class="h-4 w-4 cursor-pointer text-gray-700"
-								@click="() => confirmDeleteAttachment(file)"
-							/>
+							<FeatherIcon name="x" class="h-4 w-4 cursor-pointer text-gray-700"
+								@click="() => confirmDeleteAttachment(file)" />
 						</div>
 					</li>
 				</ul>
@@ -93,6 +81,10 @@ const props = defineProps({
 	fieldName: {
 		type: String,
 		default: "",
+	},
+	accept: {
+		type: String,
+		default: "*",
 	},
 })
 let showDialog = ref(false)

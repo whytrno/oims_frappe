@@ -83,7 +83,8 @@
   {
    "fieldname": "deskripsi_temuan",
    "fieldtype": "Small Text",
-   "label": "Deskripsi Temuan"
+   "label": "Deskripsi Temuan",
+   "reqd": 1
   },
   {
    "fieldname": "tindakan_perbaikan",
@@ -99,7 +100,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-01-14 19:47:44.002736",
+ "modified": "2025-02-28 12:05:39.836173",
  "modified_by": "Administrator",
  "module": "Safety, Health, and Environment",
  "name": "Hazard Report",

@@ -480,7 +480,6 @@ def get_all_hazard_report() -> list[dict]:
     )
 
     raw_data = query.run(as_dict=True)
-    print(f"raw_data: {raw_data}")
 
     reports = {}
 
@@ -508,6 +507,8 @@ def get_all_hazard_report() -> list[dict]:
             "jenis": row["jenis"],
             "foto": row["foto"],
         })
+
+    reports = dict(sorted(reports.items(), key=lambda x: x[1]["waktu"], reverse=True))
 
     return list(reports.values())
 
