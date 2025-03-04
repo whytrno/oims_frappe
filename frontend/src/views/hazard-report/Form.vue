@@ -19,7 +19,7 @@
 						<Dropdown class="ml-auto" :options="[
 							{
 								label: __('Delete'),
-								condition: showDeleteButton,
+								condition: showUpdateDeleteButton,
 								onClick: () => (showDeleteDialog = true),
 							},
 						]" :button="{
@@ -43,7 +43,7 @@
 						</div>
 					</div>
 
-					<div
+					<div v-if="showUpdateDeleteButton() || !props.id"
 						class="px-4 pt-4 pb-4 standalone:pb-safe-bottom sm:w-96 bg-white sticky bottom-0 w-full drop-shadow-xl z-40 border-t rounded-t-lg">
 						<ErrorMessage v-if="errorMessage" class="mb-2" :message="errorMessage" />
 
@@ -110,18 +110,9 @@ const props = defineProps({
 	},
 })
 
-function hasPermission(action) {
-	return docPermissions.data?.permissions[action]
+function showUpdateDeleteButton() {
+	return props.id && formModel.value.docstatus !== 1 && formModel.value.karyawan == employee.data.name
 }
-
-function showDeleteButton() {
-	return props.id && formModel.value.docstatus !== 1 && hasPermission("delete")
-}
-
-const docPermissions = createResource({
-	url: "frappe.client.get_doc_permissions",
-	params: { doctype: props.doctype, docname: props.id },
-})
 
 onMounted(async () => {
 	const loading = await loadingController.create({
@@ -132,7 +123,7 @@ onMounted(async () => {
 	try {
 		const fieldsResponse = createResource({
 			url: "oims.api.get_doctype_fields",
-			params: { doctype: "Hazard Report" },
+			params: { doctype: doctype },
 		})
 		await fieldsResponse.fetch()
 		formFields.value = fieldsResponse.data

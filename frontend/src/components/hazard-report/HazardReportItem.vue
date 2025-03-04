@@ -22,7 +22,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="bg-blue-600 text-white text-sm p-2 text-center rounded-b-xl">
+		<div class="bg-blue-600 text-white text-sm p-2 text-center rounded-b-xl flex justify-between px-3">
+			<p>{{ props.report.name }}</p>
 			<p>{{ props.report.status_tindakan }}</p>
 		</div>
 	</div>
