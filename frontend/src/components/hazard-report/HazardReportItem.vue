@@ -1,11 +1,8 @@
 <template>
 	<div class="bg-gray-200 rounded-xl border cursor-pointer">
 		<div class="aspect-square w-full relative">
-			<img
-				:src="`https://oims.orecon.co.id${props.report.foto[0].foto}`"
-				class="rounded-xl w-full h-full"
-				alt="Report Image"
-			/>
+			<img :src="`https://oims.orecon.co.id${props.report.foto[0].foto}`"
+				class="rounded-xl w-full h-full object-contain" alt="Report Image" />
 			<div class="absolute flex justify-between inset-0 p-2">
 				<p class="bg-blue-600 rounded-full h-min text-xs p-2 text-white">
 					{{ props.report.site }}
