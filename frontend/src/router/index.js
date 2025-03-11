@@ -53,6 +53,11 @@ const routes = [
 				name: "HazardReports",
 				component: () => import("@/views/hazard-report/Dashboard.vue"),
 			},
+			{
+				path: "/inpsection-activities",
+				name: "InspectionActivities",
+				component: () => import("@/views/inspection-activity/Dashboard.vue"),
+			},
 		],
 	},
 	{
@@ -70,6 +75,12 @@ const routes = [
 		path: "/dashboard/hazard-report/:id?",
 		name: "HazardReportForm",
 		component: () => import("@/views/hazard-report/Form.vue"),
+		props: true,
+	},
+	{
+		path: "/dashboard/inspection-activity/:id?",
+		name: "InspectionActivityForm",
+		component: () => import("@/views/inspection-activity/Form.vue"),
 		props: true,
 	},
 	{

@@ -31,8 +31,7 @@
    "fieldname": "foto",
    "fieldtype": "Table",
    "label": "Foto",
-   "options": "Inspection Activitiy Images",
-   "reqd": 1
+   "options": "Inspection Activitiy Images"
   },
   {
    "fieldname": "keterangan_hasil_inspeksi",
@@ -44,7 +43,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-25 20:24:52.234986",
+ "modified": "2025-03-11 14:12:17.727126",
  "modified_by": "Administrator",
  "module": "Safety, Health, and Environment",
  "name": "Inspection Activities",

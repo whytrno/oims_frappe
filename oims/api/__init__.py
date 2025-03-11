@@ -512,6 +512,48 @@ def get_all_hazard_report() -> list[dict]:
 
     return list(reports.values())
 
+# Inspection Activity
+@frappe.whitelist()
+def get_all_inspection_activities() -> list[dict]:
+    Inspection = frappe.qb.DocType("Inspection Activities")
+    Photo = frappe.qb.DocType("Inspection Activitiy Images")
+
+    query = (
+        frappe.qb.from_(Inspection)
+        .join(Photo)
+        .on(Inspection.name == Photo.parent)
+        .select(
+            Inspection.name,
+            Inspection.site,
+            Inspection.waktu,
+            Inspection.keterangan_hasil_inspeksi,
+            Photo.foto,
+        )
+    )
+
+    raw_data = query.run(as_dict=True)
+
+    inspections = {}
+
+    for row in raw_data:
+        name = row["name"]
+
+        if name not in inspections:
+            inspections[name] = {
+                "name": name,
+                "site": row["site"],
+                "waktu": row["waktu"],
+                "keterangan_hasil_inspeksi": row["keterangan_hasil_inspeksi"],
+                "foto": [],
+            }
+
+        inspections[name]["foto"].append({
+            "foto": row["foto"],
+        })
+
+    inspections = dict(sorted(inspections.items(), key=lambda x: x[1]["waktu"], reverse=True))
+
+    return list(inspections.values())
 
 # Jumlah Makan
 @frappe.whitelist()
@@ -533,6 +575,17 @@ def upload_files_to_hazard_report_child_table(name: str, files: list, jenis: str
     for file in files:
         sales_invoice.append("foto", {
             "jenis": jenis,
+            "foto": file,
+        })
+
+    sales_invoice.save()
+
+@frappe.whitelist()
+def upload_files_to_inspection_activity_child_table(name: str, files: list):
+    sales_invoice = frappe.get_doc("Inspection Activities", name)
+
+    for file in files:
+        sales_invoice.append("foto", {
             "foto": file,
         })
 
