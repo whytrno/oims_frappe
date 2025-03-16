@@ -244,6 +244,14 @@ def get_all_employees() -> list[dict]:
         limit=999999,
     )
 
+@frappe.whitelist()
+def get_all_surat_tugas() -> list[dict]:
+    return frappe.get_all(
+        "Surat TUgas",
+        fields=["*"],
+        limit=999999,
+    )
+
 
 # HR Settings
 @frappe.whitelist()

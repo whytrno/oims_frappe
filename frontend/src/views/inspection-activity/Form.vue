@@ -111,7 +111,7 @@ const props = defineProps({
 })
 
 function showUpdateDeleteButton() {
-	return props.id && formModel.value.docstatus !== 1 && formModel.value.karyawan == employee.data.name
+	return props.id && formModel.value.docstatus !== 1 && formModel.value.owner == employee.data.user_id
 }
 
 onMounted(async () => {
@@ -259,8 +259,6 @@ async function updateForm() {
 						)
 
 						if (uploadedFiles.length !== 0) {
-							// const fieldNameUpper = fieldName.charAt(0).toUpperCase() + fieldName.slice(1)
-
 							await createResource({
 								url: "oims.api.upload_files_to_inspection_activity_child_table",
 								params: {
@@ -414,8 +412,7 @@ async function loadDocument() {
 	formModel.value = { ...documentResource.doc }
 	documentResource.doc.foto.forEach((file) => {
 		file.file_url = file.foto
-		const name = file.jenis.toLowerCase()
-		files.value[name].push(file)
+		files.value['inspeksi'].push(file)
 	})
 }
 </script>

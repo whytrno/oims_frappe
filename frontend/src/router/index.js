@@ -58,6 +58,16 @@ const routes = [
 				name: "InspectionActivities",
 				component: () => import("@/views/inspection-activity/Dashboard.vue"),
 			},
+			{
+				path: "/surat-tugas",
+				name: "SuratTugas",
+				component: () => import("@/views/surat-tugas/Dashboard.vue"),
+			},
+			{
+				path: "/surat-tugas/:id",
+				name: "SuratTugasDetail",
+				component: () => import("@/views/surat-tugas/Detail.vue"),
+			},
 		],
 	},
 	{

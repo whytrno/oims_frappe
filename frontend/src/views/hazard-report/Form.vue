@@ -111,7 +111,7 @@ const props = defineProps({
 })
 
 function showUpdateDeleteButton() {
-	return props.id && formModel.value.docstatus !== 1 && formModel.value.karyawan == employee.data.name
+	return props.id && formModel.value.docstatus !== 1 && formModel.value.owner == employee.data.user_id
 }
 
 onMounted(async () => {
