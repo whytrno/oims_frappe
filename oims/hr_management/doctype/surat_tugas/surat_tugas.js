@@ -10,7 +10,7 @@ frappe.ui.form.on("Surat Tugas", {
 
 		validate_site(frm)
     },
-	
+
 	onload: function (frm) {
 		if (frm.is_new()) {
 			frappe.call({
@@ -80,15 +80,20 @@ frappe.ui.form.on("Surat Tugas", {
 			// 	});
 			// });
 			frm.add_custom_button('Download Surat', () => {
-				const file_name_raw = frm.doc.doc_url;
-				const file_name = file_name_raw.split("/").pop();
+				// const file_name_raw = frm.doc.doc_url;
+				// const file_name = file_name_raw.split("/").pop();
+
+				const doc_name_raw = frm.doc.name
+				const site = frm.doc.site
+				const doc_name_final = doc_name_raw.replace(/\//g, '_');
+				const doc_url = `${doc_name_final} - ${site}.docx`
 
 				frappe.call({
 					method: "frappe.client.get_list",
 					args: {
 						doctype: "File",
 						filters: {
-							"file_name": ['like', file_name]
+							"file_name": ['like', doc_url]
 						},
 						fields: ["name", "file_url"],
 						limit_page_length: 1
@@ -96,7 +101,6 @@ frappe.ui.form.on("Surat Tugas", {
 					callback: function (r) {
 						if (r.message && r.message.length > 0) {
 							let file_url = r.message[0].file_url;
-							console.log("file_url", file_url);
 							window.open(file_url, '_blank');
 						} else {
 							frappe.msgprint(__('File not found!'));

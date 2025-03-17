@@ -12,6 +12,11 @@
 				<small class="text-center leading-4">Inspection</small>
 			</router-link>
 			<router-link class="rounded-lg flex flex-col items-center gap-1 border p-1"
+				:to="{ name: 'SuratTugas' }">
+				<FeatherIcon name="at-sign" class="h-8 w-8 text-blue-700" />
+				<small class="text-center leading-4">Surat Tugas</small>
+			</router-link>
+			<!-- <router-link class="rounded-lg flex flex-col items-center gap-1 border p-1"
 				:to="{ name: 'FuelingDashboard' }">
 				<FeatherIcon name="shield" class="h-8 w-8 text-blue-700" />
 				<small class="text-center leading-4">Safety Talk</small>
@@ -25,7 +30,7 @@
 				:to="{ name: 'FuelingDashboard' }">
 				<BarbellIcon />
 				<small class="text-center leading-4">Sport Activity</small>
-			</router-link>
+			</router-link> -->
 		</div>
 	</div>
 </template>

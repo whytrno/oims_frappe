@@ -1,8 +1,11 @@
 <template>
 	<BaseLayout :pageTitle="__('Hazard Report Dashboard')">
 		<template #body>
-			<div class="w-full overflow-auto flex justify-center">
-				<div ref="viewerContainer" class="scale-50 w-full origin-top-left" />
+			<div class="w-full overflow-auto flex justify-center h-full">
+				<iframe
+				class="h-full w-full"
+				:src="`https://docs.google.com/gview?url=https://oims.orecon.co.id${suratTugas.file_url}&embedded=true`">
+				</iframe>
 			</div>
 			<Button variant="solid" class="py-7 w-full">
 				Tanda Tangani
@@ -12,25 +15,36 @@
 </template>
 
 <script setup>
+import { loadingController } from "@ionic/vue"
 import BaseLayout from "@/components/BaseLayout.vue"
 import { ref, onMounted } from "vue"
-import * as docxParser from "docx-preview"
+import { getSuratTugasDocUrl } from "../../data/surat-tugas"
 
-const viewerContainer = ref(null)
+const props = defineProps({
+	name: {
+		type: String,
+		required: false,
+	},
+})
 
-const renderDocx = async () => {
+const suratTugas = ref({})
+
+onMounted(async () => {
+	const loading = await loadingController.create({
+		message: "Loading...",
+	})
+	loading.present()
+
 	try {
-		const response = await fetch("https://oims.orecon.co.id/files/Cover Letter -Venti Kristian.docx")
-		const blob = await response.blob()
-		const arrayBuffer = await blob.arrayBuffer()
-		docxParser.renderAsync(arrayBuffer, viewerContainer.value, null, {
-			inWrapper: false,
-			breakPages: false
-		})
-	} catch (error) {
-		console.error("Gagal memuat file DOCX:", error)
-	}
-}
+		const fetchSuratTugasDetail = getSuratTugasDocUrl(props.name)
+		await fetchSuratTugasDetail.fetch()
+		suratTugas.value = fetchSuratTugasDetail.data
 
-onMounted(renderDocx)
+		loading.dismiss()
+	} catch (error) {
+		console.error("Error loading data:", error)
+	} finally {
+		loading.dismiss()
+	}
+})
 </script>

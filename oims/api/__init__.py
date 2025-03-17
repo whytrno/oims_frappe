@@ -235,6 +235,20 @@ def get_current_employee_info() -> dict:
     )
     return employee
 
+import frappe
+
+@frappe.whitelist()
+def get_private_file(filename):
+    """Mengembalikan file dari folder private files"""
+    file_path = f"private/files/{filename}"
+
+    # Pastikan file ada di sistem
+    if not frappe.utils.file_manager.exists(file_path):
+        frappe.throw("File tidak ditemukan", frappe.DoesNotExistError)
+
+    # Kembalikan sebagai response file
+    return frappe.utils.response.download_private_file(file_path)
+
 
 @frappe.whitelist()
 def get_all_employees() -> list[dict]:
@@ -247,11 +261,41 @@ def get_all_employees() -> list[dict]:
 @frappe.whitelist()
 def get_all_surat_tugas() -> list[dict]:
     return frappe.get_all(
-        "Surat TUgas",
+        "Surat Tugas",
         fields=["*"],
         limit=999999,
     )
 
+@frappe.whitelist()
+def get_surat_tugas_detail(name: str) -> dict:
+	return frappe.get_doc("Surat Tugas", name).as_dict()
+
+@frappe.whitelist()
+def get_surat_tugas_doc_file(name: str) -> dict:
+    """Mengambil file terkait dengan Surat Tugas berdasarkan 'name'"""
+
+    # Ambil dokumen Surat Tugas berdasarkan name
+    surat_tugas = frappe.get_doc("Surat Tugas", name)
+
+    # Ganti semua '/' dengan '_'
+    doc_name_final = surat_tugas.name.replace("/", "_")
+
+    # Format nama dokumen
+    doc_url = f"{doc_name_final} - {surat_tugas.site}.docx"
+
+    # Cari file terkait berdasarkan file_name
+    file_record = frappe.get_all(
+        "File",
+        filters={"file_name": ["like", f"%{doc_url}%"]},  # Gunakan wildcard untuk pencarian
+        fields=["name", "file_url"],
+        limit=1,
+    )
+
+    # Jika file ditemukan, kembalikan file_url
+    if file_record:
+        return {"file_url": file_record[0]["file_url"]}
+
+    return {"error": "File not found"}
 
 # HR Settings
 @frappe.whitelist()

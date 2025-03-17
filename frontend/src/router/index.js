@@ -64,8 +64,9 @@ const routes = [
 				component: () => import("@/views/surat-tugas/Dashboard.vue"),
 			},
 			{
-				path: "/surat-tugas/:id",
+				path: "/surat-tugas/:name",
 				name: "SuratTugasDetail",
+				props: true,
 				component: () => import("@/views/surat-tugas/Detail.vue"),
 			},
 		],

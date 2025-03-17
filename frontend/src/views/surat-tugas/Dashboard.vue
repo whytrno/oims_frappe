@@ -1,21 +1,15 @@
 <template>
-	<BaseLayout :pageTitle="__('Hazard Report Dashboard')">
+	<BaseLayout :pageTitle="__('Surat Tugas Dashboard')">
 		<template #body>
-			<div class="p-4 gap-7 h-screen mb-14 relative space-y-5" v-for="report in hazardReports" :key="report.name">
-				<router-link :to="{ name: 'HazardReportForm', params: { id: report.name } }">
-					<HazardReportItem :report="report" />
-				</router-link>
-			</div>
-			<div class="p-4 gap-7 h-screen mb-14 relative space-y-5">
-				<router-link :to="{ name: 'SuratTugasDetail', params: { id: '15/41/ST/OSP/II/2025' } }">
-					<div class="w-full p-5 flex justify-between rounded border border-gray-300 bg-white items-center">
-						<div class="space-y-1">
-							<p><span class="font-bold">No:</span> 15/41/ST/OSP/II/2025</p>
-							<p><span class="font-bold">Site:</span> BDES</p>
-						</div>
-						<div>
-							->
-						</div>
+			<div class="p-4 gap-7 h-screen mb-14 relative space-y-3">
+				<router-link v-for="surat in suratTugas" :to="{ name: 'SuratTugasDetail', params: { name: surat.name } }" class="w-full p-5 flex justify-between rounded border border-gray-300 bg-white items-center">
+					<div class="space-y-1">
+						<p><span class="font-bold">No:</span> {{ surat.name }}</p>
+						<p><span class="font-bold">Site:</span> {{ surat.site }}</p>
+						<p><span class="font-bold">Tanggal Dibuat:</span> {{ new Date(surat.creation).toISOString().split("T")[0] }}</p>
+					</div>
+					<div>
+						->
 					</div>
 				</router-link>
 			</div>
@@ -27,7 +21,6 @@
 import { loadingController } from "@ionic/vue"
 import BaseLayout from "@/components/BaseLayout.vue"
 import { ref, onMounted } from "vue"
-import HazardReportItem from "../../components/hazard-report/HazardReportItem.vue"
 import { getAllSuratTugas } from "../../data/surat-tugas"
 
 const suratTugas = ref({})
