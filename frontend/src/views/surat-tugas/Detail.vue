@@ -16,23 +16,17 @@
 								variant="outline" />
 						</div>
 
-						<Dropdown class="ml-auto" :options="[
-							{
-								label: __('Tanda Tangani'),
-								onClick: tandaTangani,
-							},
-						]" :button="{
-							label: __('Menu'),
-							icon: 'more-horizontal',
-							variant: 'ghost',
-						}" />
 					</header>
-					<div class="bg-white grow overflow-y-auto">
+					<div class="bg-white grow overflow-y-auto relative">
 						<div class="w-full overflow-auto flex justify-center h-full">
 							<iframe class="h-full w-full"
 								:src="`https://docs.google.com/gview?url=https://oims.orecon.co.id${docUrl.file_url}&embedded=true`">
 							</iframe>
 						</div>
+
+						<button @click="tandaTangani" :disabled="suratTugas.sudah_di_tanda_tangani" class="absolute bottom-3 right-3 size-14 rounded-xl bg-white shadow-xl flex items-center justify-center disabled:bg-gray-600">
+							<FeatherIcon name="pen-tool" class="size-7" />
+						</button>
 					</div>
 					<!-- <Button variant="solid" class="py-7 w-full">
 				Tanda Tangani

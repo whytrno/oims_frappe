@@ -33,17 +33,17 @@ export const tandaTanganiSuratTugas = async (employeeName, suratTugasName) => {
 		// Jika karyawan sudah menambahkan tanda tangan
 		if (isEmployeeAddSignature.data) {
 			// Ambil resource dokumen Surat Tugas
-			const suratTugas = await createDocumentResource({
+			const suratTugas = createDocumentResource({
 				doctype: "Surat Tugas",
 				name: suratTugasName,
 			})
 
-			await suratTugas.setValue.submit({
+			suratTugas.setValue.submit({
 				sudah_di_tanda_tangani: 1, // Centang tanda tangan
 				ditanda_tangani_oleh: employeeName, // Isi nama penandatangan
 			})
 
-			const signSuratTugas = await createResource({
+			const signSuratTugas = createResource({
 				url: "oims.api.sign_surat_tugas",
 				params: {
 					name: suratTugasName,
@@ -51,7 +51,7 @@ export const tandaTanganiSuratTugas = async (employeeName, suratTugasName) => {
 				},
 			})
 
-			await signSuratTugas.fetch()
+			signSuratTugas.fetch()
 
 			alert("Surat tugas berhasil ditandatangani!")
 		} else {
