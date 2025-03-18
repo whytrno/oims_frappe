@@ -5,6 +5,8 @@ from frappe.model.workflow import get_workflow_name
 from frappe.query_builder import Order
 from frappe.utils import add_days, date_diff, getdate, strip_html
 from datetime import datetime
+from docxtpl import DocxTemplate, InlineImage
+from docx.shared import Mm, Cm
 
 SUPPORTED_FIELD_TYPES = [
     "Link",
@@ -211,7 +213,7 @@ def create_folders_if_not_exist(base_path, folder_path):
                 "file_name": "Home/absensi",
                 "folder": base_path if current_folder == f"{base_path}/{folder}" else current_folder.rsplit('/', 1)[0],
                 "is_folder": 1,
-                "is_private": 1
+                # "is_private": 1
             })
             folder_doc.save()
             frappe.logger().info(f"Folder '{folder}' created in '{current_folder}'")
@@ -270,32 +272,59 @@ def get_all_surat_tugas() -> list[dict]:
 def get_surat_tugas_detail(name: str) -> dict:
 	return frappe.get_doc("Surat Tugas", name).as_dict()
 
-@frappe.whitelist()
-def get_surat_tugas_doc_file(name: str) -> dict:
-    """Mengambil file terkait dengan Surat Tugas berdasarkan 'name'"""
-
-    # Ambil dokumen Surat Tugas berdasarkan name
+def get_surat_tugas_doc_file_fun(name: str):
     surat_tugas = frappe.get_doc("Surat Tugas", name)
-
-    # Ganti semua '/' dengan '_'
     doc_name_final = surat_tugas.name.replace("/", "_")
-
-    # Format nama dokumen
     doc_url = f"{doc_name_final} - {surat_tugas.site}.docx"
-
-    # Cari file terkait berdasarkan file_name
     file_record = frappe.get_all(
         "File",
-        filters={"file_name": ["like", f"%{doc_url}%"]},  # Gunakan wildcard untuk pencarian
+        filters={"file_name": ["like", f"%{doc_url}%"]},
         fields=["name", "file_url"],
         limit=1,
     )
 
-    # Jika file ditemukan, kembalikan file_url
-    if file_record:
-        return {"file_url": file_record[0]["file_url"]}
+    return file_record[0]["file_url"]
+
+@frappe.whitelist()
+def get_surat_tugas_doc_file(name: str) -> dict:
+    file_url = get_surat_tugas_doc_file_fun(name)
+
+    if file_url:
+        return {"file_url": file_url}
 
     return {"error": "File not found"}
+
+@frappe.whitelist()
+def sign_surat_tugas(name: str, employeeName) -> dict:
+    file_url = get_surat_tugas_doc_file_fun(name)
+    if not file_url:
+        return {"error": "File not found"}
+
+    user_signature = frappe.db.get_value("Karyawan", employeeName, "tanda_tangan")
+    if not user_signature:
+        return {"error": "User signature not found"}
+
+    # jika user_signature tidak ada kata private di string user_signature, maka tambahkan kata /public
+    if "private" not in user_signature:
+        user_signature = "/public" + user_signature
+
+    docx_local_path = frappe.get_site_path() + '/public' + file_url
+    signature_png_path = frappe.get_site_path() + user_signature
+
+    docxFile = DocxTemplate(docx_local_path)
+
+    image = InlineImage(docxFile, signature_png_path, width=Cm(6) , height=Cm(3))
+    context = {
+		'ttd': image
+	}
+    docxFile.render(context)
+
+    full_output_path = docx_local_path
+
+    docxFile.save(full_output_path)
+
+    return {"file_url": docx_local_path}
+
 
 @frappe.whitelist()
 def is_employee_add_signature(name) -> bool:
@@ -439,7 +468,7 @@ def upload_base64_file(content, filename, dt=None, dn=None, fieldname=None):
             "folder": "Home",
             "file_name": filename,
             "content": file_content,
-            "is_private": 1,
+            # "is_private": 1,
         }
     ).insert()
 

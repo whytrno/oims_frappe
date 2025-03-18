@@ -119,6 +119,7 @@ class SuratTugas(Document):
 			'tanggal_pulang': karyawan_items[0]['tanggal_pulang'],
 			'foto_ktp': InlineImage(doc, foto_ktp_path, width=Mm(80), height=Mm(50)) if foto_ktp_path else '',
 			'foto_vaksin': InlineImage(doc, foto_ktp_path, width=Mm(80), height=Mm(50)) if foto_vaksin_path else '',
+			'ttd': '{{ ttd }}'
 		}
 
 		# Render template
@@ -165,7 +166,8 @@ class SuratTugas(Document):
 			'keperluan': self.keperluan,
 			'lokasi_site': lokasi_site_formatted,
 			'tanggal': tanggal,
-			'karyawan': table_context
+			'karyawan': table_context,
+			'ttd': '{{ ttd }}'
 		}
 
 		# Render template
@@ -195,7 +197,7 @@ class SuratTugas(Document):
 					"file_name": folder,
 					"folder": base_path if current_folder == f"{base_path}/{folder}" else current_folder.rsplit('/', 1)[0],
 					"is_folder": 1,
-					"is_private": 1
+					# "is_private": 1
 				})
 				folder_doc.save()
 				frappe.logger().info(f"Folder '{folder}' created in '{current_folder}'")
@@ -224,7 +226,7 @@ class SuratTugas(Document):
 				"file_name": nama_surat,
 				"folder": final_folder,
 				"content": file_data,
-				"is_private": 1,
+				# "is_private": 1,
 				"ignore_duplicate_entry_error": True
 			})
 			_file.save()

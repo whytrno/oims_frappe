@@ -21,7 +21,6 @@ export const getSuratTugasDocUrl = (name) =>
 
 export const tandaTanganiSuratTugas = async (employeeName, suratTugasName) => {
 	try {
-
 		// Cek apakah karyawan sudah menambahkan tanda tangan
 		const isEmployeeAddSignature = await createResource({
 			url: "oims.api.is_employee_add_signature",
@@ -39,15 +38,29 @@ export const tandaTanganiSuratTugas = async (employeeName, suratTugasName) => {
 				name: suratTugasName,
 			})
 
-			// Update field langsung menggunakan setValue
 			await suratTugas.setValue.submit({
 				sudah_di_tanda_tangani: 1, // Centang tanda tangan
 				ditanda_tangani_oleh: employeeName, // Isi nama penandatangan
 			})
 
+			const signSuratTugas = await createResource({
+				url: "oims.api.sign_surat_tugas",
+				params: {
+					name: suratTugasName,
+					employeeName: employeeName
+				},
+			})
+
+			await signSuratTugas.fetch()
+
 			alert("Surat tugas berhasil ditandatangani!")
 		} else {
-			alert("Anda belum menambahkan tanda tangan di profil.")
+			// alert("Anda belum menambahkan tanda tangan di profil.")
+			const confirmation = confirm("Anda belum menambahkan tanda tangan di profil. Apakah Anda ingin menambahkan tanda tangan?")
+			if(confirmation){
+				// https://oims.orecon.co.id/perbaharui-data-karyawan/269
+				window.location.href = `https://oims.orecon.co.id/perbaharui-data-karyawan/${employeeName}`
+			}
 		}
 	} catch (error) {
 		console.log(error)

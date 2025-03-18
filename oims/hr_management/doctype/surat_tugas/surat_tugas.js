@@ -176,7 +176,7 @@ function validate_site(frm, throw_error = false) {
 frappe.ui.form.on('Karyawan Surat Tugas', {
 	nrp: function (frm, cdt, cdn) {
 		let row = locals[cdt][cdn];
-		check_if_ktp_uploaded(frm, row.nama_karyawan);
+		check_if_ktp_uploaded(frm, row.nrp);
 		set_karyawan_to_karyawan_for_list_view(frm, row.nama_karyawan);
 	},
 });
@@ -191,13 +191,13 @@ function set_karyawan_to_karyawan_for_list_view(frm, nama_karyawan) {
 	frm.set_value('karyawan_for_list_view', karyawan_list.join(', '));
 }
 
-function check_if_ktp_uploaded(frm, karyawan_nama_karyawan) {
+function check_if_ktp_uploaded(frm, nrp) {
 	frappe.call({
 		method: "frappe.client.get",
 		args: {
 			doctype: "Karyawan",
 			filters: {
-				"nama_lengkap": karyawan_nama_karyawan
+				"name": nrp
 			}
 		},
 		callback: function (r) {
@@ -205,11 +205,11 @@ function check_if_ktp_uploaded(frm, karyawan_nama_karyawan) {
 				let errors = [];
 
 				if (!r.message.foto_ktp) {
-					errors.push(`User ${karyawan_nama_karyawan} belum upload foto KTP.`);
+					errors.push(`Karyawan dengan NRP: ${nrp} belum upload foto KTP.`);
 				}
 
 				if (!r.message.jabatan) {
-					errors.push(`User ${karyawan_nama_karyawan} belum mengisi jabatan.`);
+					errors.push(`Karyawan dengan NRP: ${nrp} belum mengisi jabatan.`);
 				}
 
 				if (errors.length > 0) {

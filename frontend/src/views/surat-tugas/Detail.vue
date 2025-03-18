@@ -30,7 +30,7 @@
 					<div class="bg-white grow overflow-y-auto">
 						<div class="w-full overflow-auto flex justify-center h-full">
 							<iframe class="h-full w-full"
-								:src="`https://docs.google.com/gview?url=https://oims.orecon.co.id${suratTugas.file_url}&embedded=true`">
+								:src="`https://docs.google.com/gview?url=https://oims.orecon.co.id${docUrl.file_url}&embedded=true`">
 							</iframe>
 						</div>
 					</div>
@@ -60,6 +60,7 @@ const props = defineProps({
 })
 
 const suratTugas = ref({})
+const docUrl = ref("")
 const router = useRouter()
 const tandaTangani = async () => {
 	const confirmation = confirm("Apakah anda yakin ingin menandatangani surat tugas ini?")
@@ -76,9 +77,19 @@ onMounted(async () => {
 	loading.present()
 
 	try {
-		const fetchSuratTugasDetail = getSuratTugasDocUrl(props.name)
-		await fetchSuratTugasDetail.fetch()
-		suratTugas.value = fetchSuratTugasDetail.data
+		const fetchSuratTugasDetail = await createListResource({
+			doctype: "Surat Tugas",
+			fields: ["*"],
+			filters: {
+				name: props.name,
+			},
+		})
+		await fetchSuratTugasDetail.reload()
+		const fetchSuratTugasDocUrl = getSuratTugasDocUrl(props.name)
+		await fetchSuratTugasDocUrl.fetch()
+
+		suratTugas.value = fetchSuratTugasDetail.data[0]
+		docUrl.value = fetchSuratTugasDocUrl.data
 
 		loading.dismiss()
 	} catch (error) {

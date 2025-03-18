@@ -12,7 +12,7 @@ import os
 class SuratMutasi(Document):
 	def before_save(self):
 		self.validate_karyawan_data()
-		
+
 		nama_surat_raw = self.no_surat.replace('/', '_')
 		nama_surat_temp = f"{nama_surat_raw}_temp.docx"
 		nama_surat = f"{nama_surat_raw}.docx"
@@ -20,37 +20,37 @@ class SuratMutasi(Document):
 
 		generated_docx = self.generate_document(nama_surat_temp)
 		self.upload_document_to_file_manager(nama_surat, generated_docx)
-	
+
 	def validate_karyawan_data(self):
 		errors = []
 		if self.karyawan:
 			karyawan_doc = frappe.get_doc('Karyawan', self.karyawan, ['nrp', 'divisi'])
-			
+
 			if not karyawan_doc.divisi:
 				errors.append(f"User {karyawan_doc.nama_lengkap} belum mengisi divisi.")
-			
+
 			if not karyawan_doc.nrp:
 				errors.append(f"User {karyawan_doc.nama_lengkap} belum mengisi NRP.")
 
 		# If there are errors, prevent saving and display messages
 		if errors:
 			frappe.throw("<br>".join(errors), title="Validation Failed")
- 
+
 	def format_site_location(self, site_location):
 		site_location_doc = frappe.get_doc('Projek', site_location)
 		site_location_formatted = f'{site_location_doc.nama_projek}'
 		if site_location_doc.lokasi_projek:
 			site_location_formatted += f', {site_location_doc.lokasi_projek}'
-   
+
 		site_location_formatted = site_location_formatted.replace('&', '&amp;')
-   
+
 		return site_location_formatted
 
 	def generate_document(self, nama_surat):
 		tanggal_mutasi = self.formatdate_indonesia(self.tanggal_mutasi)
-  
+
 		tanggal_surat = frappe.utils.formatdate(frappe.utils.nowdate(), "dd MMMM yyyy")
-   
+
 		lokasi_site_awal = self.format_site_location(self.lokasi_site_awal)
 		lokasi_site_tujuan = self.format_site_location(self.lokasi_site_tujuan)
 		tanggal_surat_formatted = self.formatdate_indonesia(tanggal_surat)
@@ -106,7 +106,7 @@ class SuratMutasi(Document):
 					"file_name": folder,
 					"folder": base_path if current_folder == f"{base_path}/{folder}" else current_folder.rsplit('/', 1)[0],
 					"is_folder": 1,
-					"is_private": 1
+					# "is_private": 1
 				})
 				folder_doc.save()
 				frappe.logger().info(f"Folder '{folder}' created in '{current_folder}'")
@@ -135,7 +135,7 @@ class SuratMutasi(Document):
 				"file_name": nama_surat,
 				"folder": final_folder,
 				"content": file_data,
-				"is_private": 1,
+				# "is_private": 1,
 				"ignore_duplicate_entry_error": True
 			})
 			_file.save()
@@ -155,7 +155,7 @@ class SuratMutasi(Document):
 				os.remove(file)
 				frappe.logger().info(f"Temporary file {file} deleted.")
 				print(f"Temporary file {file} deleted.")
-	
+
 
 	def formatdate_indonesia_with_day(self, date_str):
 		# Mengubah string tanggal menjadi objek tanggal
