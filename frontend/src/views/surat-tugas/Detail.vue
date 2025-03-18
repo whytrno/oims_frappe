@@ -20,12 +20,12 @@
 					</header>
 					<div class="bg-white grow overflow-y-auto relative">
 						<div class="w-full overflow-auto flex justify-center h-full">
-							<iframe class="h-full w-full"
+							<iframe v-if="suratTugas.sudah_di_tanda_tangani" class="h-full w-full"
 								:src="`https://docs.google.com/gview?url=https://oims.orecon.co.id${docUrl.file_url}?time=0&embedded=true`">
 							</iframe>
-							<!-- <iframe class="h-full w-full"
+							<iframe v-else class="h-full w-full"
 								:src="`https://view.officeapps.live.com/op/embed.aspx?src=https://oims.orecon.co.id${docUrl.file_url}`">
-							</iframe> -->
+							</iframe>
 						</div>
 
 						<button @click="tandaTangani" :disabled="suratTugas.sudah_di_tanda_tangani || loading"
