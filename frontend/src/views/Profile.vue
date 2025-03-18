@@ -111,6 +111,7 @@
 								</router-link>
 							</div>
 						</div> -->
+
 						<Button
 							@click="logout"
 							variant="outline"
@@ -191,6 +192,12 @@ import ProfileInfoModal from "@/components/ProfileInfoModal.vue"
 import { arePushNotificationsEnabled } from "@/data/notifications"
 
 const DOCTYPE = "Employee"
+const options = ref({
+	penColor: "rgb(0,0,0)",
+	backgroundColor: "rgb(255, 255, 255)",
+	maxWidth: 2,
+	minWidth: 2,
+})
 
 const socket = inject("$socket")
 const session = inject("$session")

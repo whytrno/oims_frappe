@@ -297,6 +297,11 @@ def get_surat_tugas_doc_file(name: str) -> dict:
 
     return {"error": "File not found"}
 
+@frappe.whitelist()
+def is_employee_add_signature(name) -> bool:
+    tanda_tangan = frappe.db.get_value("Karyawan", name, "tanda_tangan")
+    return bool(tanda_tangan)
+
 # HR Settings
 @frappe.whitelist()
 def get_hr_settings() -> dict:

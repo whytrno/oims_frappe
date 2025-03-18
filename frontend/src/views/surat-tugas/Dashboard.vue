@@ -7,6 +7,7 @@
 						<p><span class="font-bold">No:</span> {{ surat.name }}</p>
 						<p><span class="font-bold">Site:</span> {{ surat.site }}</p>
 						<p><span class="font-bold">Tanggal Dibuat:</span> {{ new Date(surat.creation).toISOString().split("T")[0] }}</p>
+						<p><span class="font-bold">Sudah TTD:</span> {{surat.sudah_di_tanda_tangani ? 'Sudah' : 'Belum'}}</p>
 					</div>
 					<div>
 						->
@@ -21,7 +22,7 @@
 import { loadingController } from "@ionic/vue"
 import BaseLayout from "@/components/BaseLayout.vue"
 import { ref, onMounted } from "vue"
-import { getAllSuratTugas } from "../../data/surat-tugas"
+import { createListResource } from "frappe-ui"
 
 const suratTugas = ref({})
 
@@ -32,9 +33,14 @@ onMounted(async () => {
 	loading.present()
 
 	try {
-		const fetchAllSuratTugas = getAllSuratTugas
-		await fetchAllSuratTugas.fetch()
-		suratTugas.value = fetchAllSuratTugas.data
+		const fetchSuratTugas = await createListResource({
+			doctype: "Surat Tugas",
+			fields: ["*"],
+			orderBy: "creation desc",
+		})
+		await fetchSuratTugas.reload()
+		suratTugas.value = fetchSuratTugas.data
+		console.log(suratTugas)
 
 		loading.dismiss()
 	} catch (error) {

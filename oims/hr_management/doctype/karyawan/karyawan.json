@@ -18,8 +18,8 @@
   "email",
   "no_hp",
   "foto",
-  "foto_tanda_tangan",
   "foto_ktp",
+  "tanda_tangan",
   "pendidikan_terakhir",
   "no_rek_bca",
   "section_break_mnio",
@@ -98,12 +98,6 @@
    "fieldname": "foto",
    "fieldtype": "Attach Image",
    "label": "Foto"
-  },
-  {
-   "fieldname": "foto_tanda_tangan",
-   "fieldtype": "Attach Image",
-   "hidden": 1,
-   "label": "Foto Tanda Tangan"
   },
   {
    "fieldname": "foto_ktp",
@@ -373,6 +367,11 @@
    "label": "Perusahaan",
    "options": "Karyawan Perusahaan",
    "reqd": 1
+  },
+  {
+   "fieldname": "tanda_tangan",
+   "fieldtype": "Attach Image",
+   "label": "Tanda Tangan"
   }
  ],
  "image_field": "foto",
@@ -388,7 +387,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2024-12-24 10:25:19.989516",
+ "modified": "2025-03-17 17:02:45.129883",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",

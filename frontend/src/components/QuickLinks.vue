@@ -11,7 +11,7 @@
 				<FeatherIcon name="eye" class="h-8 w-8 text-blue-700" />
 				<small class="text-center leading-4">Inspection</small>
 			</router-link>
-			<router-link class="rounded-lg flex flex-col items-center gap-1 border p-1"
+			<router-link v-if="isSuratTugasRole" class="rounded-lg flex flex-col items-center gap-1 border p-1"
 				:to="{ name: 'SuratTugas' }">
 				<FeatherIcon name="at-sign" class="h-8 w-8 text-blue-700" />
 				<small class="text-center leading-4">Surat Tugas</small>
@@ -36,8 +36,12 @@
 </template>
 
 <script setup>
+import { inject } from "vue"
 import { FeatherIcon } from "frappe-ui"
 import BarbellIcon from "./icons/BarbellIcon.vue";
+const employee = inject("$employee")
+const suratTugasRole = ['Direktur', 'Manager']
+const isSuratTugasRole = suratTugasRole.some(jabatan => employee.data.jabatan.startsWith(jabatan));
 
 const props = defineProps({
 	title: {

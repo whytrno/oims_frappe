@@ -9,6 +9,8 @@
   "no_surat_mutasi",
   "surat_ke",
   "no_surat",
+  "sudah_di_tanda_tangani",
+  "ditanda_tangani_oleh",
   "column_break_ihtt",
   "site",
   "keperluan",
@@ -126,11 +128,25 @@
    "label": "No. Surat Mutasi",
    "options": "Surat Mutasi",
    "search_index": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "sudah_di_tanda_tangani",
+   "fieldtype": "Check",
+   "label": "Sudah Di Tanda Tangani",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ditanda_tangani_oleh",
+   "fieldtype": "Link",
+   "label": "Ditanda Tangani Oleh",
+   "options": "Karyawan",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-08 12:36:19.328796",
+ "modified": "2025-03-17 17:13:05.249255",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Surat Tugas",
