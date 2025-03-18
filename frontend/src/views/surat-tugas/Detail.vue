@@ -24,7 +24,7 @@
 								:src="`https://docs.google.com/gview?url=https://oims.orecon.co.id${docUrl.file_url}&embedded=true`">
 							</iframe> -->
 							<iframe class="h-full w-full"
-								src="https://view.officeapps.live.com/op/embed.aspx?src=https://oims.orecon.co.id/files/15_36_ST_OSP_III_2025%20-%20BDES.docx">
+								:src="`https://view.officeapps.live.com/op/embed.aspx?src=https://oims.orecon.co.id${docUrl.file_url}`">
 							</iframe>
 						</div>
 
