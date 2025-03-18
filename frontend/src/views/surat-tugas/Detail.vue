@@ -12,8 +12,9 @@
 								class="text-xl font-semibold text-gray-900 whitespace-nowrap overflow-hidden text-ellipsis">
 								Detail Surat Tugas
 							</h2>
-							<Badge :label="suratTugas.sudah_di_tanda_tangani ? 'Sudah TTD' : 'Belum TTD'" :theme="suratTugas.sudah_di_tanda_tangani ? 'green' : 'red'" class="whitespace-nowrap text-[8px]"
-								variant="outline" />
+							<Badge :label="suratTugas.sudah_di_tanda_tangani ? 'Sudah TTD' : 'Belum TTD'"
+								:theme="suratTugas.sudah_di_tanda_tangani ? 'green' : 'red'"
+								class="whitespace-nowrap text-[8px]" variant="outline" />
 						</div>
 
 					</header>
@@ -24,8 +25,10 @@
 							</iframe>
 						</div>
 
-						<button @click="tandaTangani" :disabled="suratTugas.sudah_di_tanda_tangani" class="absolute bottom-3 right-3 size-14 rounded-xl bg-white shadow-xl flex items-center justify-center disabled:bg-gray-600">
-							<FeatherIcon name="pen-tool" class="size-7" />
+						<button @click="tandaTangani" :disabled="suratTugas.sudah_di_tanda_tangani || loading"
+							class="absolute bottom-3 right-3 size-14 rounded-xl bg-white shadow-xl flex items-center justify-center disabled:bg-gray-600">
+							<FeatherIcon v-if="!loading" name="pen-tool" class="size-7" />
+							<FeatherIcon v-else name="loader" class="size-7 animate-spin" />
 						</button>
 					</div>
 					<!-- <Button variant="solid" class="py-7 w-full">
@@ -56,11 +59,29 @@ const props = defineProps({
 const suratTugas = ref({})
 const docUrl = ref("")
 const router = useRouter()
+const loading = ref(false)
+
+const fetchSuratTugasDetail = createListResource({
+	doctype: "Surat Tugas",
+	fields: ["*"],
+	filters: {
+		name: props.name,
+	},
+})
+
 const tandaTangani = async () => {
 	const confirmation = confirm("Apakah anda yakin ingin menandatangani surat tugas ini?")
 
-	if(confirmation){
+	if (confirmation) {
+		loading.value = true
 		await tandaTanganiSuratTugas(employee.data.name, props.name)
+
+		await fetchSuratTugasDetail.setValue.submit({
+			name: props.name,
+			sudah_di_tanda_tangani: 1,
+			ditanda_tangani_oleh: employee.data.name,
+		})
+		loading.value = false
 	}
 }
 
@@ -71,13 +92,6 @@ onMounted(async () => {
 	loading.present()
 
 	try {
-		const fetchSuratTugasDetail = await createListResource({
-			doctype: "Surat Tugas",
-			fields: ["*"],
-			filters: {
-				name: props.name,
-			},
-		})
 		await fetchSuratTugasDetail.reload()
 		const fetchSuratTugasDocUrl = getSuratTugasDocUrl(props.name)
 		await fetchSuratTugasDocUrl.fetch()

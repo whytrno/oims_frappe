@@ -28,22 +28,33 @@ export const tandaTanganiSuratTugas = async (employeeName, suratTugasName) => {
 			cache: `oims:is_employee_add_signature:${employeeName}`,
 		})
 
+		console.log("Mulai proses tanda tangan...")
+
+		// Cek tanda tangan karyawan
+		console.log("Memeriksa apakah karyawan sudah menambahkan tanda tangan...")
 		await isEmployeeAddSignature.fetch()
+		console.log("Hasil pengecekan:", isEmployeeAddSignature.data)
 
-		// Jika karyawan sudah menambahkan tanda tangan
 		if (isEmployeeAddSignature.data) {
-			// Ambil resource dokumen Surat Tugas
-			const suratTugas = createDocumentResource({
-				doctype: "Surat Tugas",
-				name: suratTugasName,
-			})
+			console.log("Karyawan sudah memiliki tanda tangan. Melanjutkan proses tanda tangan...")
 
-			suratTugas.setValue.submit({
-				sudah_di_tanda_tangani: 1, // Centang tanda tangan
-				ditanda_tangani_oleh: employeeName, // Isi nama penandatangan
-			})
+			// const suratTugas = await createDocumentResource({
+			// 	doctype: "Surat Tugas",
+			// 	name: suratTugasName,
+			// })
 
-			const signSuratTugas = createResource({
+			console.log("Dokumen Surat Tugas berhasil diambil:", suratTugas)
+
+			console.log("Data Surat Tugas diperbarui, melakukan submit...")
+			// await suratTugas.setValue.submit({
+			// 	sudah_di_tanda_tangani: 1,
+			// 	ditanda_tangani_oleh: employeeName,
+			// })
+
+			console.log("Surat Tugas berhasil disubmit.")
+
+			// Panggil API untuk update status di server
+			const signSuratTugas = await createResource({
 				url: "oims.api.sign_surat_tugas",
 				params: {
 					name: suratTugasName,
@@ -51,17 +62,20 @@ export const tandaTanganiSuratTugas = async (employeeName, suratTugasName) => {
 				},
 			})
 
-			signSuratTugas.fetch()
+			console.log("Memanggil API sign_surat_tugas...")
+			await signSuratTugas.fetch()
+			console.log("API sign_surat_tugas berhasil dipanggil.")
 
+			suratTugas.reload()
 			alert("Surat tugas berhasil ditandatangani!")
 		} else {
-			// alert("Anda belum menambahkan tanda tangan di profil.")
+			console.log("Karyawan belum memiliki tanda tangan.")
 			const confirmation = confirm("Anda belum menambahkan tanda tangan di profil. Apakah Anda ingin menambahkan tanda tangan?")
-			if(confirmation){
-				// https://oims.orecon.co.id/perbaharui-data-karyawan/269
+			if (confirmation) {
 				window.location.href = `https://oims.orecon.co.id/perbaharui-data-karyawan/${employeeName}`
 			}
 		}
+
 	} catch (error) {
 		console.log(error)
 	}
