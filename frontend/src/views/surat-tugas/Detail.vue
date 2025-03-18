@@ -76,15 +76,9 @@ onMounted(async () => {
 	loading.present()
 
 	try {
-		const fetchSuratTugasDetail = await createListResource({
-			doctype: "Surat Tugas",
-			fields: ["*"],
-			filters: {
-				name: props.name,
-			},
-		})
-		await fetchSuratTugasDetail.reload()
-		suratTugas.value = fetchSuratTugasDetail.data[0]
+		const fetchSuratTugasDetail = getSuratTugasDocUrl(props.name)
+		await fetchSuratTugasDetail.fetch()
+		suratTugas.value = fetchSuratTugasDetail.data
 
 		loading.dismiss()
 	} catch (error) {
