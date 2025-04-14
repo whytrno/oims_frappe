@@ -18,7 +18,7 @@
  "list_columns": [],
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2025-04-14 15:26:00.793285",
+ "modified": "2025-04-14 16:10:14.895364",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "pendaftaran-karyawan-baru",
@@ -53,7 +53,7 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -66,7 +66,7 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -80,7 +80,7 @@
    "options": "Kristen\nIslam\nKatolik\nHindu\nBudha",
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -111,16 +111,16 @@
   },
   {
    "allow_read_on_all_link_options": 0,
-   "default": "+62-",
+   "default": "",
    "fieldname": "no_hp",
-   "fieldtype": "Phone",
+   "fieldtype": "Data",
    "hidden": 0,
    "label": "No. HP",
    "max_length": 0,
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -133,7 +133,7 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -147,7 +147,7 @@
    "options": "SD\nSMP\nSMA\nD3\nS1\nS2\nS3",
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -175,7 +175,7 @@
    "options": "Provinsi",
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -193,7 +193,7 @@
    "precision": "",
    "read_only": 0,
    "read_only_depends_on": "",
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -209,7 +209,7 @@
    "options": "Kecamatan",
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -224,7 +224,7 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -238,7 +238,7 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -366,21 +366,21 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
    "allow_read_on_all_link_options": 0,
-   "default": "+62-",
+   "default": "",
    "fieldname": "no_kontak_darurat",
-   "fieldtype": "Phone",
+   "fieldtype": "Data",
    "hidden": 0,
    "label": "No. Kontak Darurat",
    "max_length": 0,
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -393,7 +393,7 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -465,6 +465,21 @@
    "max_value": 0,
    "precision": "",
    "read_only": 0,
+   "reqd": 0,
+   "show_in_filter": 0
+  },
+  {
+   "allow_read_on_all_link_options": 0,
+   "default": "Pendaftar Baru",
+   "fieldname": "status_kontrak",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Status Kontrak",
+   "max_length": 0,
+   "max_value": 0,
+   "options": "Pendaftar Baru\nProject Base\nKaryawan Tetap\nPKWT",
+   "precision": "",
+   "read_only": 1,
    "reqd": 0,
    "show_in_filter": 0
   }

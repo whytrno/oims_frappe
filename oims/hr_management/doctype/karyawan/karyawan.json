@@ -91,7 +91,7 @@
   },
   {
    "fieldname": "no_hp",
-   "fieldtype": "Phone",
+   "fieldtype": "Data",
    "label": "No. HP"
   },
   {
@@ -156,8 +156,10 @@
   {
    "fieldname": "status_kontrak",
    "fieldtype": "Select",
+   "in_filter": 1,
+   "in_standard_filter": 1,
    "label": "Status Kontrak",
-   "options": "Project Base\nKaryawan Tetap\nPKWT"
+   "options": "Pendaftar Baru\nProject Base\nKaryawan Tetap\nPKWT"
   },
   {
    "fieldname": "kontak_darurat_tab",
@@ -171,7 +173,7 @@
   },
   {
    "fieldname": "no_kontak_darurat",
-   "fieldtype": "Phone",
+   "fieldtype": "Data",
    "label": "No. Kontak Darurat"
   },
   {
@@ -365,8 +367,7 @@
    "fieldname": "perusahaan",
    "fieldtype": "Table",
    "label": "Perusahaan",
-   "options": "Karyawan Perusahaan",
-   "reqd": 1
+   "options": "Karyawan Perusahaan"
   },
   {
    "fieldname": "tanda_tangan",
@@ -387,7 +388,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2025-03-17 17:02:45.129883",
+ "modified": "2025-04-14 16:07:36.921084",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",

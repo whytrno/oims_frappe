@@ -6,7 +6,7 @@ from frappe.model.document import Document
 
 
 class Karyawan(Document):
-    def before_insert(self):
+    def after_insert(self):
         '''
 		Membuat User baru dengan data yang sama
   		'''
