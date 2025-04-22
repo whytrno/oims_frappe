@@ -141,6 +141,7 @@
   {
    "fieldname": "jabatan",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Jabatan",
    "options": "Jabatan"
   },
@@ -244,6 +245,7 @@
    "default": "Aktif",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Aktif\nTidak Aktif"
   },
@@ -388,7 +390,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2025-04-14 16:07:36.921084",
+ "modified": "2025-04-22 09:00:27.909010",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",
