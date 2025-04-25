@@ -10,7 +10,6 @@
   "nama_lengkap",
   "no_ktp",
   "tanggal_lahir",
-  "usia",
   "agama",
   "beri_akses_untuk_login_oims_app",
   "user_id",
@@ -333,14 +332,6 @@
    "label": "Email"
   },
   {
-   "default": "0",
-   "fieldname": "usia",
-   "fieldtype": "Int",
-   "label": "Usia",
-   "non_negative": 1,
-   "read_only": 1
-  },
-  {
    "fieldname": "divisi",
    "fieldtype": "Link",
    "label": "Divisi",
@@ -408,7 +399,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2025-04-25 08:54:26.883745",
+ "modified": "2025-04-25 18:04:56.872998",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",
