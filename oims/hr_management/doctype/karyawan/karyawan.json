@@ -14,6 +14,7 @@
   "agama",
   "beri_akses_untuk_login_oims_app",
   "user_id",
+  "user_type",
   "column_break_ndnr",
   "email",
   "no_hp",
@@ -375,6 +376,15 @@
    "fieldname": "tanda_tangan",
    "fieldtype": "Attach Image",
    "label": "Tanda Tangan"
+  },
+  {
+   "default": "USER/VIEWER",
+   "fieldname": "user_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "User Type",
+   "options": "USER/VIEWER\nMAKER\nMANAGER\nGENERAL MANAGER\nOPERATIONAL DIRECTOR\nDIRECTOR\nFINANCE",
+   "reqd": 1
   }
  ],
  "image_field": "foto",
@@ -390,7 +400,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2025-04-22 09:00:27.909010",
+ "modified": "2025-04-25 08:31:55.977924",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",

@@ -1,9 +1,16 @@
 // Copyright (c) 2024, Wahyu Triono and contributors
 // For license information, please see license.txt
-
+frappe.listview_settings["Karyawan"] = {
+	hide_name_column: true,
+	hide_name_filter: true,
+}
 frappe.ui.form.on("Karyawan", {
+	hide_name_column: true,
+	hide_name_filter: true,
 	refresh: function (frm) {
 		set_filters(frm);
+		console.log('Karyawan Form Loaded');
+		frm.set_df_property('nama_lengkap', 'visibility', 'hidden');
 	},
 
 	email: function (frm) {
