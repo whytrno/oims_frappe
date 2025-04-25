@@ -42,6 +42,7 @@
   "jabatan",
   "jabatan_detail",
   "divisi",
+  "posisi_site",
   "column_break_hjzs",
   "tanggal_bergabung",
   "status_kontrak",
@@ -385,6 +386,13 @@
    "label": "User Type",
    "options": "USER/VIEWER\nMAKER\nMANAGER\nGENERAL MANAGER\nOPERATIONAL DIRECTOR\nDIRECTOR\nFINANCE",
    "reqd": 1
+  },
+  {
+   "fieldname": "posisi_site",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Posisi (Site)",
+   "options": "Projek"
   }
  ],
  "image_field": "foto",
@@ -400,7 +408,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2025-04-25 08:31:55.977924",
+ "modified": "2025-04-25 08:54:26.883745",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",

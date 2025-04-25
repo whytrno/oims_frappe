@@ -25,6 +25,27 @@ class SuratTugas(Document):
 			frappe.throw(e, title="Before Save Failed")
 			raise
 
+	def after_insert(self):
+		try:
+			karyawan_data = self.validate_karyawan_data()
+			dikirim_ke = self.site
+			tanggal_berangkat = self.tanggal_berangkat
+
+			for karyawan in karyawan_data:
+				riwayat = frappe.get_doc({
+					"doctype": "Riwayat Penempatan Site",
+					"tanggal": tanggal_berangkat,
+					"karyawan": karyawan['name'],
+					"site": dikirim_ke,
+				})
+				riwayat.insert()
+				# Update posisi site di data karyawan
+				frappe.db.set_value("Karyawan", karyawan['name'], "posisi_site", dikirim_ke)
+
+		except Exception as e:
+			frappe.throw(e, title="After Save Failed")
+			raise
+
 	def validate_karyawan_data(self):
 		errors = []
 		employee_ids = [row.employee_id for row in self.karyawan if row.employee_id]

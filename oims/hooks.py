@@ -53,6 +53,16 @@ fixtures = [
     # "Jenis Projek",
     # "Karyawan",
     {
+        "dt": "Client Script",
+        "filters": [
+            [
+                "module" , "in" , [
+                    "Hr Management",
+				]
+			]
+		]
+	},
+    {
 		"dt": "User",
 		"filters": [
 			[
