@@ -18,7 +18,7 @@
  "list_columns": [],
  "login_required": 1,
  "max_attachment_size": 0,
- "modified": "2025-04-25 17:53:40.211477",
+ "modified": "2025-04-25 17:58:59.194688",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "perbaharui-data-karyawan",
@@ -431,7 +431,7 @@
    "show_in_filter": 0
   },
   {
-   "allow_read_on_all_link_options": 0,
+   "allow_read_on_all_link_options": 1,
    "fieldname": "posisi_site",
    "fieldtype": "Link",
    "hidden": 0,
