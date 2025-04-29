@@ -140,7 +140,7 @@
 											class="w-full border-0 bg-gray-200 rounded-sm"
 										>
 											<option selected>Sakit</option>
-											<option>Lainnya</option>
+											<option value="Izin">Lainnya</option>
 										</select>
 									</div>
 									<FormControl
@@ -188,10 +188,54 @@
 						:variant="'solid'"
 						class="w-full py-6 text-sm"
 						:disabled="isButtonDisabled"
-						@click="izinDialog = true"
+						@click="dinasKeluarDialog = true"
 					>
 						Dinas Luar
 					</Button>
+
+					<Dialog v-model="dinasKeluarDialog">
+							<template #body-title>
+								<h3>Modal Dinas Keluar</h3>
+							</template>
+							<template #body-content>
+								<div class="p-2 space-y-4">
+									<FormControl
+										:type="'text'"
+										:ref_for="true"
+										size="lg"
+										variant="subtle"
+										placeholder="Dinas Luar"
+										:disabled="false"
+										label="Keterangan"
+										v-model="keterangan"
+									/>
+								</div>
+							</template>
+							<template #actions>
+								<div class="flex gap-2">
+									<Button
+										:loading="loading"
+										:loadingText="'Processing...'"
+										:variant="'solid'"
+										class="w-full py-6 text-sm"
+										:disabled="isButtonDisabled"
+										@click="submitLog(nextAction.action, true, true)"
+									>
+										Absen
+									</Button>
+									<Button
+										:loading="loading"
+										:loadingText="'Processing...'"
+										:variant="'solid'"
+										class="w-full py-6 text-sm"
+										:disabled="isButtonDisabled"
+										@click="izinDialog = false"
+									>
+										Batal
+									</Button>
+								</div>
+							</template>
+						</Dialog>
 				</div>
 			</div>
 		</ion-content>
@@ -226,6 +270,7 @@ const router = useRouter()
 
 const DOCTYPE = "Absensi"
 const izinDialog = ref(false)
+const dinasKeluarDialog = ref(false)
 
 const socket = inject("$socket")
 const employee = inject("$employee")
@@ -518,14 +563,26 @@ const getDistanceFromLatLonInMeters = (lat1, lon1, lat2, lon2) => {
 	return R * c // Distance in meters
 }
 
-const submitLog = async (logType, izin = false) => {
+const submitLog = async (logType, izin = false, dinasLuar = false) => {
 	loading.value = true
 	isButtonDisabled.value = true
 
-	const action = logType === "In" ? "In" : "Out"
+	let action = logType === "In" ? "In" : "Out"
+
+	if(tipeIzin){
+		action = tipeIzin.value
+	}
+
+	if(dinasLuar){
+		action = "Dinas Luar"
+	}
+
+	// if(dinasLuar) {
+	// 	selectedSite.value = "HO - HO"
+	// }
 
 	// Check if a site is selected
-	if (!selectedSite.value) {
+	if (!dinasLuar && !selectedSite.value) {
 		toast({
 			title: "Error",
 			text: "Please select a site location.",
@@ -554,27 +611,29 @@ const submitLog = async (logType, izin = false) => {
 		return
 	}
 
-	// Calculate the distance from the user's location to the selected site
-	const distance = getDistanceFromLatLonInMeters(
-		latitude.value,
-		longitude.value,
-		selectedSite.value.latitude,
-		selectedSite.value.longitude
-	)
-
 	// Check if the distance exceeds the selected site's radius
-	if (distance > selectedSite.value.radius && izin !== true) {
-		toast({
-			title: "Error",
-			text: "You are outside the allowed radius for this site.",
-			icon: "alert-circle",
-			position: "top-center",
-			iconClasses: "text-red-500",
-		})
+	if (izin !== true) {
+		// Calculate the distance from the user's location to the selected site
+		const distance = getDistanceFromLatLonInMeters(
+			latitude.value,
+			longitude.value,
+			selectedSite.value.latitude,
+			selectedSite.value.longitude
+		)
 
-		loading.value = false
-		isButtonDisabled.value = false
-		return
+		if(distance > selectedSite.value.radius){
+			toast({
+				title: "Error",
+				text: "You are outside the allowed radius for this site.",
+				icon: "alert-circle",
+				position: "top-center",
+				iconClasses: "text-red-500",
+			})
+
+			loading.value = false
+			isButtonDisabled.value = false
+			return
+		}
 	}
 
 	if (izin === true && keterangan.value === "") {
@@ -614,9 +673,10 @@ const submitLog = async (logType, izin = false) => {
 		method: "POST",
 		params: {
 			karyawan: employee.data.name,
-			lokasi_absen: selectedSite.value.name,
+			lokasi_absen: dinasLuar ? "HO - HO" : selectedSite.value.name,
 			foto: photoUrl,
-			tipe: logType,
+			// tipe: logType,
+			tipe: action,
 			keterangan: keterangan.value,
 			waktu_absen: checkinTimestamp.value,
 			latitude: latitude.value,
