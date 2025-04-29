@@ -14,15 +14,18 @@ class Absensi(Document):
             frappe.throw("Karyawan tidak ditemukan untuk NRP tersebut")
 
     def before_save(self):
+        if self.tipe not in ("In", "Out"):
+            return
+
         lokasi_absen = frappe.get_doc("Lokasi Absen", self.lokasi_absen)
         waktu_absen = ""
-        
+
         if self.tipe == "In":
             waktu_absen = frappe.utils.get_time(lokasi_absen.waktu_masuk)
         elif self.tipe == "Out":
             waktu_absen = frappe.utils.get_time(lokasi_absen.waktu_keluar)
 
         waktu_sekarang = frappe.utils.get_time(self.waktu_absen)
-        
+
         if waktu_sekarang > waktu_absen:
             self.telat = 1

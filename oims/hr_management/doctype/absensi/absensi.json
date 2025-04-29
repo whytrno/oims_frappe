@@ -35,7 +35,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Tipe",
-   "options": "In\nOut\nIzin"
+   "options": "In\nOut\nIzin\nSakit\nDinas Luar"
   },
   {
    "fieldname": "foto",
@@ -106,7 +106,7 @@
  "image_field": "foto",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-02 22:59:07.993466",
+ "modified": "2025-04-29 09:20:38.860152",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Absensi",
