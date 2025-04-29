@@ -1,0 +1,46 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"CF4m5XX42m\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Dashboard Absensi</span>\",\"col\":12}},{\"id\":\"2kn9xnVnhH\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"Absen Terbanyak Table\",\"col\":6}},{\"id\":\"FrZQil6UnL\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"Absen Terburuk Table\",\"col\":6}},{\"id\":\"EuY5gEAc6d\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"Izin Terbanyak Table\",\"col\":6}},{\"id\":\"2Zg9h1V1w8\",\"type\":\"custom_block\",\"data\":{\"custom_block_name\":\"Absensi Pie Chart\",\"col\":6}}]",
+ "creation": "2025-04-27 19:56:57.012190",
+ "custom_blocks": [
+  {
+   "custom_block_name": "Absen Terbanyak Table",
+   "label": "Absen Terbanyak Table"
+  },
+  {
+   "custom_block_name": "Absen Terburuk Table",
+   "label": "Absen Terburuk Table"
+  },
+  {
+   "custom_block_name": "Izin Terbanyak Table",
+   "label": "Izin Terbanyak Table"
+  },
+  {
+   "custom_block_name": "Absensi Pie Chart",
+   "label": "Absensi Pie Chart"
+  }
+ ],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "calendar",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Absensi'",
+ "links": [],
+ "modified": "2025-04-30 01:15:44.209675",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "Absensi'",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "HR Management",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 2.0,
+ "shortcuts": [],
+ "title": "Absensi'"
+}

@@ -52,6 +52,13 @@ fixtures = [
     # "Jenis Perusahaan Dalam Projek",
     # "Jenis Projek",
     # "Karyawan",
+    # "Custom HMTL Block",
+    # {
+    #     "dt": "Custom HMTL Block",
+	# },
+    {
+		"dt": "Custom HTML Block",
+     },
     {
         "dt": "Client Script",
         "filters": [
