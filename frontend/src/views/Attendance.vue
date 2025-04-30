@@ -194,48 +194,48 @@
 					</Button>
 
 					<Dialog v-model="dinasKeluarDialog">
-							<template #body-title>
-								<h3>Modal Dinas Keluar</h3>
-							</template>
-							<template #body-content>
-								<div class="p-2 space-y-4">
-									<FormControl
-										:type="'text'"
-										:ref_for="true"
-										size="lg"
-										variant="subtle"
-										placeholder="Dinas Luar"
-										:disabled="false"
-										label="Keterangan"
-										v-model="keterangan"
-									/>
-								</div>
-							</template>
-							<template #actions>
-								<div class="flex gap-2">
-									<Button
-										:loading="loading"
-										:loadingText="'Processing...'"
-										:variant="'solid'"
-										class="w-full py-6 text-sm"
-										:disabled="isButtonDisabled"
-										@click="submitLog(nextAction.action, true, true)"
-									>
-										Absen
-									</Button>
-									<Button
-										:loading="loading"
-										:loadingText="'Processing...'"
-										:variant="'solid'"
-										class="w-full py-6 text-sm"
-										:disabled="isButtonDisabled"
-										@click="izinDialog = false"
-									>
-										Batal
-									</Button>
-								</div>
-							</template>
-						</Dialog>
+						<template #body-title>
+							<h3>Modal Dinas Keluar</h3>
+						</template>
+						<template #body-content>
+							<div class="p-2 space-y-4">
+								<FormControl
+									:type="'text'"
+									:ref_for="true"
+									size="lg"
+									variant="subtle"
+									placeholder="Dinas Luar"
+									:disabled="false"
+									label="Keterangan"
+									v-model="keterangan"
+								/>
+							</div>
+						</template>
+						<template #actions>
+							<div class="flex gap-2">
+								<Button
+									:loading="loading"
+									:loadingText="'Processing...'"
+									:variant="'solid'"
+									class="w-full py-6 text-sm"
+									:disabled="isButtonDisabled"
+									@click="submitLog(nextAction.action, true, true)"
+								>
+									Absen
+								</Button>
+								<Button
+									:loading="loading"
+									:loadingText="'Processing...'"
+									:variant="'solid'"
+									class="w-full py-6 text-sm"
+									:disabled="isButtonDisabled"
+									@click="izinDialog = false"
+								>
+									Batal
+								</Button>
+							</div>
+						</template>
+					</Dialog>
 				</div>
 			</div>
 		</ion-content>
@@ -569,17 +569,13 @@ const submitLog = async (logType, izin = false, dinasLuar = false) => {
 
 	let action = logType === "In" ? "In" : "Out"
 
-	if(tipeIzin){
+	if (tipeIzin) {
 		action = tipeIzin.value
 	}
 
-	if(dinasLuar){
+	if (dinasLuar) {
 		action = "Dinas Luar"
 	}
-
-	// if(dinasLuar) {
-	// 	selectedSite.value = "HO - HO"
-	// }
 
 	// Check if a site is selected
 	if (!dinasLuar && !selectedSite.value) {
@@ -621,7 +617,7 @@ const submitLog = async (logType, izin = false, dinasLuar = false) => {
 			selectedSite.value.longitude
 		)
 
-		if(distance > selectedSite.value.radius){
+		if (distance > selectedSite.value.radius) {
 			toast({
 				title: "Error",
 				text: "You are outside the allowed radius for this site.",
@@ -675,8 +671,7 @@ const submitLog = async (logType, izin = false, dinasLuar = false) => {
 			karyawan: employee.data.name,
 			lokasi_absen: dinasLuar ? "HO - HO" : selectedSite.value.name,
 			foto: photoUrl,
-			// tipe: logType,
-			tipe: action,
+			tipe: action == "" ? logType : action,
 			keterangan: keterangan.value,
 			waktu_absen: checkinTimestamp.value,
 			latitude: latitude.value,
