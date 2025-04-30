@@ -247,15 +247,22 @@ def get_attendance_for_calendar(employee: str, from_date: str, to_date: str) -> 
         # ubah time datetime ke date
         att["attendance_date"] = att["waktu_absen"].date()
 
-        if att["izin"]:
+        if att["tipe"] == "Izin":
             att["status"] = "Izin"
         elif att["telat"]:
             att["status"] = "Telat"
         elif att["tipe"] == "In":
             att["status"] = "Tepat Waktu"
+        elif att["tipe"] == "Sakit":
+            att["status"] = "Sakit"
+        elif att["tipe"] == "Dinas Luar":
+            att["status"] = "Dinas Luar"
+        else:
+        	att["status"] = "Lainnya"
 
-    data = {d["attendance_date"]: d["status"] for d in attendance}
-    print(f'data: {data}')
+    # data = {d["attendance_date"]: d["status"] for d in attendance}
+    # return data
+    # print(f'data: {data}')
 
     return {d["attendance_date"]: d["status"] for d in attendance}
 
