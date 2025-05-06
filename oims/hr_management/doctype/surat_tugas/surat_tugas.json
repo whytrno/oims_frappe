@@ -16,6 +16,7 @@
   "keperluan",
   "tanggal_berangkat",
   "doc_url",
+  "perjalanan_via",
   "section_break_igmd",
   "penanda_tangan",
   "column_break_isry",
@@ -142,11 +143,18 @@
    "label": "Ditanda Tangani Oleh",
    "options": "Karyawan",
    "read_only": 1
+  },
+  {
+   "fieldname": "perjalanan_via",
+   "fieldtype": "Select",
+   "label": "Perjalanan Via",
+   "options": "Darat\nUdara\nAir",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-17 17:13:05.249255",
+ "modified": "2025-05-07 00:19:40.346662",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Surat Tugas",
