@@ -53,7 +53,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-04-27 19:58:40.404165",
+ "modified": "2025-05-13 08:41:03.262961",
  "modified_by": "Administrator",
  "module": "Customer Relationship Management",
  "name": "Customer Relationship Management",
@@ -67,7 +67,7 @@
    "role": "System Manager"
   }
  ],
- "sequence_id": 5.0,
+ "sequence_id": 6.0,
  "shortcuts": [],
  "title": "Customer Relationship Management"
 }

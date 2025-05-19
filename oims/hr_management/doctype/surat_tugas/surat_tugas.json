@@ -13,6 +13,7 @@
   "ditanda_tangani_oleh",
   "column_break_ihtt",
   "site",
+  "status_penugasan",
   "keperluan",
   "tanggal_berangkat",
   "doc_url",
@@ -23,6 +24,7 @@
   "nama_penanda_tangan",
   "section_break_glmr",
   "karyawan",
+  "ticket",
   "section_break_cwlg",
   "karyawan_for_list_view"
  ],
@@ -61,6 +63,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Keperluan",
+   "permlevel": 1,
    "reqd": 1
   },
   {
@@ -150,11 +153,27 @@
    "label": "Perjalanan Via",
    "options": "Darat\nUdara\nAir",
    "reqd": 1
+  },
+  {
+   "description": "<b>Penugasan:</b> Merubah posisi/site karyawan ke site tujuan\n<br>\n<b>Visit:</b> Tidak merubah posisi/site karyawan ke site tujuan",
+   "fieldname": "status_penugasan",
+   "fieldtype": "Select",
+   "label": "Status Penugasan",
+   "options": "Penugasan\nVisit",
+   "reqd": 1
+  },
+  {
+   "description": "Diisi oleh GS",
+   "fieldname": "ticket",
+   "fieldtype": "Table",
+   "label": "Ticket",
+   "options": "Ticket on Surat Tugas",
+   "permlevel": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-07 00:19:40.346662",
+ "modified": "2025-05-19 09:30:51.783008",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Surat Tugas",

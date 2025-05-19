@@ -30,17 +30,23 @@ class SuratTugas(Document):
 			karyawan_data = self.validate_karyawan_data()
 			dikirim_ke = self.site
 			tanggal_berangkat = self.tanggal_berangkat
+			status_penugasan = self.status_penugasan
 
 			for karyawan in karyawan_data:
 				riwayat = frappe.get_doc({
 					"doctype": "Riwayat Penempatan Site",
 					"tanggal": tanggal_berangkat,
 					"karyawan": karyawan['name'],
+					"site_asal": karyawan['posisi_site'],
 					"site": dikirim_ke,
+					"status": status_penugasan,
+					"perjalanan_via": self.perjalanan_via,
+					"no_surat_tugas": self.name,
 				})
 				riwayat.insert()
 				# Update posisi site di data karyawan
-				frappe.db.set_value("Karyawan", karyawan['name'], "posisi_site", dikirim_ke)
+				if(status_penugasan == "Penugasan"):
+					frappe.db.set_value("Karyawan", karyawan['name'], "posisi_site", dikirim_ke)
 
 		except Exception as e:
 			frappe.throw(e, title="After Save Failed")
@@ -53,7 +59,7 @@ class SuratTugas(Document):
 		karyawan_data = frappe.get_all(
 			"Karyawan",
 			filters={"name": ["in", employee_ids]},
-			fields=["name", "nama_lengkap", "nrp", "jabatan", "foto_ktp", "foto_vaksin", "status_kontrak"],
+			fields=["name", "nama_lengkap", "nrp", "jabatan", "foto_ktp", "foto_vaksin", "status_kontrak", "posisi_site"],
 		)
 
 		karyawan_map = {row["name"]: row for row in karyawan_data}

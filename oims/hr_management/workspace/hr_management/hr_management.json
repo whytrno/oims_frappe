@@ -1,6 +1,11 @@
 {
- "charts": [],
- "content": "[{\"id\":\"8Ea1JTMyxy\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data Karyawan</b></span>\",\"col\":12}},{\"id\":\"84c_dLQPzC\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":4}},{\"id\":\"tEVIcDuG_h\",\"type\":\"card\",\"data\":{\"card_name\":\"Lowongan Pekerjaan\",\"col\":4}},{\"id\":\"7lrkx6C5iT\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Laporan Absensi Bulanan\",\"col\":4}},{\"id\":\"_Giylsja4o\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Buka Portal Lowongan Pekerjaan\",\"col\":12}},{\"id\":\"c0J-ObpaJm\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Absensi Hari Ini\",\"col\":4}},{\"id\":\"5HF7MRLnAd\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Makan Hari Ini\",\"col\":4}},{\"id\":\"SVq0iAqjjM\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Pendaftar Hari Ini\",\"col\":4}},{\"id\":\"5ziurz20na\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Pemberangkatan minggu ini\",\"col\":12}}]",
+ "charts": [
+  {
+   "chart_name": "Penempatan Karyawan",
+   "label": "Penempatan Karyawan"
+  }
+ ],
+ "content": "[{\"id\":\"8Ea1JTMyxy\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Data Karyawan</b></span>\",\"col\":12}},{\"id\":\"84c_dLQPzC\",\"type\":\"card\",\"data\":{\"card_name\":\"Quick Links\",\"col\":6}},{\"id\":\"tEVIcDuG_h\",\"type\":\"card\",\"data\":{\"card_name\":\"Lowongan Pekerjaan\",\"col\":6}},{\"id\":\"7lrkx6C5iT\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Laporan Absensi Bulanan\",\"col\":6}},{\"id\":\"_Giylsja4o\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Buka Portal Lowongan Pekerjaan\",\"col\":6}},{\"id\":\"c0J-ObpaJm\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Absensi Hari Ini\",\"col\":4}},{\"id\":\"5HF7MRLnAd\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Makan Hari Ini\",\"col\":4}},{\"id\":\"SVq0iAqjjM\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Pendaftar Hari Ini\",\"col\":4}},{\"id\":\"5ziurz20na\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Pemberangkatan minggu ini\",\"col\":6}},{\"id\":\"hJ7L05cvoy\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Penempatan Karyawan\",\"col\":6}}]",
  "creation": "2024-10-04 22:44:37.041963",
  "custom_blocks": [],
  "docstatus": 0,
@@ -46,7 +51,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Quick Links",
-   "link_count": 5,
+   "link_count": 6,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -100,9 +105,19 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Riwayat Penempatan Site",
+   "link_count": 0,
+   "link_to": "Riwayat Penempatan Site",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-12-17 09:01:24.277421",
+ "modified": "2025-05-13 08:41:02.780856",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "HR Management",

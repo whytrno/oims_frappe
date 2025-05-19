@@ -17,10 +17,20 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Quick Links",
-   "link_count": 1,
+   "link_count": 2,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Karyawan",
+   "link_count": 0,
+   "link_to": "Karyawan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   },
   {
    "hidden": 0,
@@ -33,7 +43,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-04-27 19:58:40.454849",
+ "modified": "2025-05-13 08:54:37.033881",
  "modified_by": "Administrator",
  "module": "Finance",
  "name": "Finance",
@@ -44,10 +54,10 @@
  "quick_lists": [],
  "roles": [
   {
-   "role": "System Manager"
+   "role": "Finance"
   }
  ],
- "sequence_id": 6.0,
+ "sequence_id": 7.0,
  "shortcuts": [
   {
    "color": "Grey",

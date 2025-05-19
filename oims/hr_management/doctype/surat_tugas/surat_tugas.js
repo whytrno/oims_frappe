@@ -173,13 +173,32 @@ function validate_site(frm, throw_error = false) {
     });
 }
 
+// frappe.ui.form.on('Karyawan Surat Tugas', {
+// 	employee_id: function (frm, cdt, cdn) {
+// 		let row = locals[cdt][cdn];
+// 		check_if_ktp_uploaded(frm, row.employee_id);
+// 		set_karyawan_to_karyawan_for_list_view(frm, row.nama_karyawan);
+// 	},
+// });
 frappe.ui.form.on('Karyawan Surat Tugas', {
 	employee_id: function (frm, cdt, cdn) {
 		let row = locals[cdt][cdn];
+
+		// Cek dan validasi data
 		check_if_ktp_uploaded(frm, row.employee_id);
 		set_karyawan_to_karyawan_for_list_view(frm, row.nama_karyawan);
-	},
+
+		// Tambahkan ke child table Ticket jika belum ada
+		let sudah_ada = frm.doc.ticket.some(ticket_row => ticket_row.employee_id === row.employee_id);
+
+		if (!sudah_ada) {
+			let ticket_row = frm.add_child('ticket');
+			ticket_row.employee_id = row.employee_id;
+			frm.refresh_field('ticket');
+		}
+	}
 });
+
 
 function set_karyawan_to_karyawan_for_list_view(frm, nama_karyawan) {
 	let karyawan_list = frm.doc.karyawan_for_list_view ? frm.doc.karyawan_for_list_view.split(', ') : [];

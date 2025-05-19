@@ -1,0 +1,101 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-04 19:42:03.294524",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "deskripsi",
+  "projek",
+  "category",
+  "quantity",
+  "satuan",
+  "harga_satuan",
+  "biaya_lainnya",
+  "total_harga_material",
+  "total_harga_material_dan_biaya_lainnya",
+  "paid",
+  "keterangan",
+  "comment"
+ ],
+ "fields": [
+  {
+   "fieldname": "deskripsi",
+   "fieldtype": "Data",
+   "label": "Deskripsi"
+  },
+  {
+   "fieldname": "projek",
+   "fieldtype": "Link",
+   "label": "Projek",
+   "options": "Projek"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "label": "Category",
+   "options": "Sarana"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Int",
+   "label": "Quantity"
+  },
+  {
+   "fieldname": "satuan",
+   "fieldtype": "Select",
+   "label": "Satuan",
+   "options": "KG"
+  },
+  {
+   "fieldname": "harga_satuan",
+   "fieldtype": "Int",
+   "label": "Harga Satuan"
+  },
+  {
+   "fieldname": "biaya_lainnya",
+   "fieldtype": "Int",
+   "label": "Biaya Lainnya"
+  },
+  {
+   "fieldname": "total_harga_material",
+   "fieldtype": "Data",
+   "label": "Total Harga Material"
+  },
+  {
+   "fieldname": "total_harga_material_dan_biaya_lainnya",
+   "fieldtype": "Data",
+   "label": "Total Harga Material dan Biaya Lainnya"
+  },
+  {
+   "fieldname": "paid",
+   "fieldtype": "Select",
+   "label": "Paid",
+   "options": "Tes"
+  },
+  {
+   "fieldname": "keterangan",
+   "fieldtype": "Data",
+   "label": "Keterangan"
+  },
+  {
+   "fieldname": "comment",
+   "fieldtype": "Table",
+   "label": "Comment",
+   "options": "Komentar Detail Material"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-05-04 20:18:11.226238",
+ "modified_by": "Administrator",
+ "module": "Finance",
+ "name": "Detail Material Pengajuan Operasional Projek",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

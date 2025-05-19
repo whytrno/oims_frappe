@@ -7,7 +7,12 @@
  "field_order": [
   "tanggal",
   "karyawan",
-  "site"
+  "site_asal",
+  "column_break_pcjl",
+  "site",
+  "status",
+  "perjalanan_via",
+  "no_surat_tugas"
  ],
  "fields": [
   {
@@ -29,19 +34,55 @@
    "search_index": 1
   },
   {
+   "fieldname": "site_asal",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Site/Projek Asal",
+   "options": "Projek",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Penugasan\nVisit",
+   "reqd": 1
+  },
+  {
    "fieldname": "site",
    "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Site/Projek",
+   "label": "Site/Projek Tujuan",
    "options": "Projek",
    "reqd": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "perjalanan_via",
+   "fieldtype": "Data",
+   "label": "Perjalanan Via",
+   "reqd": 1
+  },
+  {
+   "fieldname": "no_surat_tugas",
+   "fieldtype": "Link",
+   "label": "No. Surat Tugas",
+   "options": "Surat Tugas",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_pcjl",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-25 09:25:38.895872",
+ "modified": "2025-05-12 18:27:32.118734",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Riwayat Penempatan Site",
