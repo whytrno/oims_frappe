@@ -10,6 +10,10 @@ app_home = "/app/hr"
 # Apps
 # ------------------
 
+vapid_public_key = "BAVonb1d58S74dq6aa4_5YtJx3cqDK5Z2-ZwFYsNlGaIDLgC7-5fPwnhdYs1Hw5KIf99-9sG2hymEFcOd5bPhiE"
+vapid_private_key = "ZZ0hnbjxXWFb2c15REO4zukMVJrHR-pWxmfUu5WaZv8"
+vapid_email = "mailto:whytrno@gmail.com"
+
 # required_apps = []
 
 # Each item in the list will be shown as an app in the apps page
