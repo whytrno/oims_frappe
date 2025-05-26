@@ -48,8 +48,22 @@ class SuratTugas(Document):
 				if(status_penugasan == "Penugasan"):
 					frappe.db.set_value("Karyawan", karyawan['name'], "posisi_site", dikirim_ke)
 
+			karyawan_penandatangan = frappe.get_doc('Karyawan', self.penanda_tangan)
+			user_penandatangan = frappe.get_doc('User', karyawan_penandatangan.user_id)
+			fix_no_surat = self.no_surat.replace('/', '_')
+			oims_notification = frappe.get_doc({
+				"doctype": "OIMS Notification",
+				"title": f"Permintaan Tanda Tangan Surat Tugas {self.no_surat}",
+				"description": f"Anda diminta untuk menandatangani surat tugas baru dengan nomor {self.no_surat} untuk dikirim ke site {self.site}. Silakan cek dan lakukan penandatanganan pada sistem.",
+				"type": "Surat Tugas",
+				"user": user_penandatangan.name,
+				"link_to_label": "Lihat Surat Tugas",
+				"link_to": f"/surat-tugas/{fix_no_surat}",
+			})
+			oims_notification.insert(ignore_permissions=True)
+
 		except Exception as e:
-			frappe.throw(e, title="After Save Failed")
+			frappe.throw(str(e), title="After Save Failed")
 			raise
 
 	def validate_karyawan_data(self):
@@ -59,7 +73,7 @@ class SuratTugas(Document):
 		karyawan_data = frappe.get_all(
 			"Karyawan",
 			filters={"name": ["in", employee_ids]},
-			fields=["name", "nama_lengkap", "nrp", "jabatan", "foto_ktp", "foto_vaksin", "status_kontrak", "posisi_site"],
+			fields=["name", "nama_lengkap", "nrp", "jabatan", "foto_ktp", "foto_vaksin", "status_kontrak", "posisi_site", "user_id"],
 		)
 
 		karyawan_map = {row["name"]: row for row in karyawan_data}
