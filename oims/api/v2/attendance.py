@@ -156,7 +156,71 @@ def get_self_today_absen():
         frappe.log_error(frappe.get_traceback(), "get_self_today_absen error")
         return response_error("Terjadi kesalahan saat mengambil data absensi.", http_status_code=500)
 
+@frappe.whitelist(methods=["GET"])
+def get_attendance_calendar_events(from_date, to_date):
+    try:
+        user_id = frappe.session.user
+
+        karyawan = frappe.db.get_value(
+            'Karyawan',
+            {'user_id': user_id},
+            'name',
+            as_dict=True
+        )
+
+        if not karyawan:
+            return response_error("Data karyawan tidak ditemukan untuk user ini.", http_status_code=404)
+
+        events = frappe.get_all(
+            "Absensi",
+            filters={
+                "karyawan": karyawan.name,
+                "waktu_absen": ["between", [from_date, to_date]]
+            },
+            fields=["tipe", "telat", "ambil_jatah_makan", "waktu_absen"],
+            order_by="waktu_absen desc"
+        )
+
+        count = {
+            "in": 0,
+            "out": 0,
+            "dinas_luar": 0,
+            "izin_sakit": 0,
+            "izin_lainnya": 0,
+            "telat": 0,
+            "ambil_jatah_makan": 0
+        }
+
+        for event in events:
+            if event.tipe == "In":
+                count["in"] += 1
+            elif event.tipe == "Out":
+                count["out"] += 1
+            elif event.tipe == "Dinas Luar":
+                count["dinas_luar"] += 1
+            elif event.tipe == "Sakit":
+                count["sakit"] += 1
+            elif event.tipe == "Izin":
+                count["izin"] += 1
+
+            if event.telat:
+                count["telat"] += 1
+            if event.ambil_jatah_makan:
+                count["ambil_jatah_makan"] += 1
+
+        data = {
+			"events": events,
+			"count": count
+		}
+
+        return response_success("Berhasil mengambil data absensi.", data)
+
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "get_attendance_calendar_events error")
+        return response_error("Terjadi kesalahan saat mengambil data absensi.", http_status_code=500)
+
 __all__ = [
     "absensi_process",
-    "get_self_today_absen"
+    "get_self_today_absen",
+    "get_attendance_calendar_events"
 ]
