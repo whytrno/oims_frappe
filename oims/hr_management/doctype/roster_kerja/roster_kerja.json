@@ -1,0 +1,75 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-05-20 07:41:21.590480",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "projek",
+  "karyawan",
+  "tanggal_mulai",
+  "tanggal_berakhir",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "projek",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Projek",
+   "options": "Projek",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "karyawan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Karyawan",
+   "options": "Karyawan",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "tanggal_mulai",
+   "fieldtype": "Date",
+   "label": "Tanggal Mulai",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tanggal_berakhir",
+   "fieldtype": "Date",
+   "label": "Tanggal Berakhir"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Kerja\nCuti"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-01 13:09:05.606624",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "Roster Kerja",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
