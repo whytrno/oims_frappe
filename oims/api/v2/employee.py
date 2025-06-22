@@ -22,17 +22,37 @@ def get_current_employee_info() -> dict:
         frappe.log_error(f"Error retrieving current employee info: {str(e)}")
         return response_error("Failed to retrieve employee info", http_status_code=500)
 
+@frappe.whitelist(methods=["GET"], allow_guest=True)
+def get_active_employee() -> dict:
+    try:
+        employee = frappe.db.get_all(
+            "Karyawan",
+            {"status": "Aktif"},
+            [
+                "name",
+                "nrp",
+                "nama_lengkap",
+                "jabatan",
+                "user_id",
+            ],
+        )
+        return response_success("Current employee info retrieved successfully", data=employee)
+    except Exception as e:
+        frappe.log_error(f"Error retrieving current employee info: {str(e)}")
+        return response_error("Failed to retrieve employee info", http_status_code=500)
+
 @frappe.whitelist(methods=["GET"])
 def get_user_roles() -> dict:
-	try:
-		current_user = frappe.session.user
-		roles = frappe.get_roles(current_user)
-		return response_success("User roles retrieved successfully", data=roles)
-	except Exception as e:
-		frappe.log_error(f"Error retrieving user roles: {str(e)}")
-		return response_error("Failed to retrieve user roles", http_status_code=500)
+    try:
+        current_user = frappe.session.user
+        roles = frappe.get_roles(current_user)
+        return response_success("User roles retrieved successfully", data=roles)
+    except Exception as e:
+        frappe.log_error(f"Error retrieving user roles: {str(e)}")
+        return response_error("Failed to retrieve user roles", http_status_code=500)
 
 __all__ = [
     "get_current_employee_info",
+    "get_active_employee",
     "get_user_roles",
 ]
