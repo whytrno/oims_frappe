@@ -50,12 +50,14 @@ def create_push_notification_subscription(endpoint, p256dh, auth, device=None):
 def count_unread_notifications():
     try:
         user = frappe.session.user
-        unread_notifications = frappe.db.count(
-            "OIMS Notification",
+
+        unread_count = frappe.db.count(
+            "OIMS Notification User",
             filters={"user": user, "is_read": 0}
         )
 
-        return response_success("Unread notifications count retrieved successfully", data={"unread_count": unread_notifications})
+        return response_success("Unread notifications count retrieved successfully", data={"unread_count": unread_count})
+
     except Exception as e:
         frappe.log_error(f"Error counting unread notifications: {str(e)}")
         return response_error("Failed to count unread notifications", http_status_code=500)
@@ -69,28 +71,43 @@ def get_user_notifications(is_read_filter: bool | None = None) -> dict:
         if is_read_filter is not None:
             filters["is_read"] = int(is_read_filter)
 
-        notifications = frappe.get_all(
-            "OIMS Notification",
+        # Ambil OIMS Notification User, lalu join ke OIMS Notification
+        notif_users = frappe.get_all(
+            "OIMS Notification User",
             filters=filters,
-            fields=["name", "title", "is_read", "type", "description", "link_to", "link_to_label", "creation"],
-            limit=9999,
+            fields=["name", "notification", "is_read", "creation"],
             order_by="creation desc",
+            limit=9999
         )
 
-        for notification in notifications:
-            notification["creation"] = notification["creation"].strftime("%Y-%m-%d %H:%M:%S")
+        notifications = []
+        for n in notif_users:
+            notif = frappe.get_doc("OIMS Notification", n.notification)
+            notifications.append({
+                "notification_user_id": n.name,
+                "name": notif.name,
+                "title": notif.title,
+                "description": notif.description,
+                "type": notif.type,
+                "link_to": notif.link_to,
+                "link_to_label": notif.link_to_label,
+                "is_read": n.is_read,
+                "creation": n.creation.strftime("%Y-%m-%d %H:%M:%S")
+            })
 
         return response_success("Notifications retrieved successfully", data=notifications)
+
     except Exception as e:
         frappe.log_error(f"Error retrieving notifications: {str(e)}")
         return response_error("Failed to retrieve notifications", http_status_code=500)
 
+
 @frappe.whitelist(methods=["POST"])
 def mark_notification_as_read(name: str):
     try:
-        notification = frappe.get_doc("OIMS Notification", name)
+        notification = frappe.get_doc("OIMS Notification User", name)
         notification.is_read = 1
-        notification.save()
+        notification.save(ignore_permissions=True)
 
         return response_success("Notification marked as read successfully")
     except Exception as e:
@@ -119,9 +136,9 @@ def get_notification_detail(name: str):
         return response_error("Failed to retrieve notification detail", http_status_code=500)
 
 __all__ = [
-	"create_push_notification_subscription",
-	"count_unread_notifications",
-	"get_user_notifications",
-	"mark_notification_as_read",
-	"get_notification_detail",
+    "create_push_notification_subscription",
+    "count_unread_notifications",
+    "get_user_notifications",
+    "mark_notification_as_read",
+    "get_notification_detail",
 ]

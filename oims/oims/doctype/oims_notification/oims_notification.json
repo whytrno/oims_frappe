@@ -5,10 +5,13 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "target_section",
   "user",
+  "jabatan",
+  "semua_pengguna",
+  "section_break_lvzt",
   "title",
   "type",
-  "is_read",
   "link_to_label",
   "link_to",
   "column_break_atjq",
@@ -21,7 +24,6 @@
    "in_list_view": 1,
    "label": "User",
    "options": "User",
-   "reqd": 1,
    "search_index": 1
   },
   {
@@ -37,12 +39,6 @@
    "in_list_view": 1,
    "label": "Type",
    "reqd": 1
-  },
-  {
-   "default": "0",
-   "fieldname": "is_read",
-   "fieldtype": "Check",
-   "label": "Is Read"
   },
   {
    "fieldname": "link_to_label",
@@ -62,11 +58,34 @@
    "fieldname": "description",
    "fieldtype": "Text",
    "label": "Description"
+  },
+  {
+   "fieldname": "target_section",
+   "fieldtype": "Section Break",
+   "label": "Target"
+  },
+  {
+   "default": "0",
+   "fieldname": "semua_pengguna",
+   "fieldtype": "Check",
+   "label": "Semua Pengguna"
+  },
+  {
+   "fieldname": "section_break_lvzt",
+   "fieldtype": "Section Break",
+   "label": "Notification"
+  },
+  {
+   "fieldname": "jabatan",
+   "fieldtype": "Link",
+   "label": "Jabatan",
+   "options": "Jabatan",
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-01 01:40:52.150204",
+ "modified": "2025-06-23 13:08:12.042775",
  "modified_by": "Administrator",
  "module": "Oims",
  "name": "OIMS Notification",

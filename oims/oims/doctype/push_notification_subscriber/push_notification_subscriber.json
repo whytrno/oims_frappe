@@ -34,7 +34,7 @@
   },
   {
    "fieldname": "p256dh",
-   "fieldtype": "Data",
+   "fieldtype": "Text",
    "in_list_view": 1,
    "label": "P256dh",
    "reqd": 1
@@ -71,7 +71,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-01 01:35:39.128050",
+ "modified": "2025-06-23 14:00:13.333697",
  "modified_by": "Administrator",
  "module": "Oims",
  "name": "Push Notification Subscriber",

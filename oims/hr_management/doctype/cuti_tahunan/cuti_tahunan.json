@@ -1,0 +1,124 @@
+{
+ "actions": [],
+ "autoname": "format:CT-{#}",
+ "creation": "2025-06-23 11:56:44.254944",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "form_cuti_section",
+  "karyawan_pemohon",
+  "keperluan",
+  "karyawan_penerima_job_pending",
+  "column_break_pxjw",
+  "tanggal_mulai_cuti",
+  "tanggal_selesai_cuti",
+  "selama_hari",
+  "tanda_tangan_section",
+  "ttd_pemohon",
+  "column_break_aqcp",
+  "ttd_penerima_job_pending"
+ ],
+ "fields": [
+  {
+   "fieldname": "form_cuti_section",
+   "fieldtype": "Section Break",
+   "label": "Form Cuti"
+  },
+  {
+   "fieldname": "karyawan_pemohon",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Karyawan Pemohon",
+   "options": "Karyawan",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "keperluan",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Keperluan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "karyawan_penerima_job_pending",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Karyawan Penerima Job Pending",
+   "options": "Karyawan",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_pxjw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tanggal_mulai_cuti",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Tanggal Mulai Cuti",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tanggal_selesai_cuti",
+   "fieldtype": "Date",
+   "label": "Tanggal Selesai Cuti",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tanda_tangan_section",
+   "fieldtype": "Section Break",
+   "label": "Tanda Tangan"
+  },
+  {
+   "fieldname": "column_break_aqcp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "selama_hari",
+   "fieldtype": "Int",
+   "label": "Selama (hari)",
+   "non_negative": 1,
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "ttd_pemohon",
+   "fieldtype": "Signature",
+   "label": "Pemohon",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ttd_penerima_job_pending",
+   "fieldtype": "Signature",
+   "label": "Penerima Job Pending"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-06-23 12:32:51.469142",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "Cuti Tahunan",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
