@@ -13,6 +13,7 @@ app_home = "/app/hr"
 vapid_public_key = "BAVonb1d58S74dq6aa4_5YtJx3cqDK5Z2-ZwFYsNlGaIDLgC7-5fPwnhdYs1Hw5KIf99-9sG2hymEFcOd5bPhiE"
 vapid_private_key = "ZZ0hnbjxXWFb2c15REO4zukMVJrHR-pWxmfUu5WaZv8"
 vapid_email = "mailto:whytrno@gmail.com"
+website_url = "https://oims.orecon.co.id"
 
 # required_apps = []
 
