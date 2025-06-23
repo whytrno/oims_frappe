@@ -50,7 +50,7 @@ class CutiTahunan(Document):
                 "description": description_hr.strip(),
                 "jabatan": jabatan_hr,
                 "type": "Cuti",
-                "link_to": f"{frappe.get_hooks("website_url")[0]}/form-cuti-tahunan/{self.name}",
+                "link_to": f"{frappe.get_hooks('website_url')[0]}/form-cuti-tahunan/{self.name}",
                 "link_to_label": "Lihat Pengajuan Cuti"
             }).insert(ignore_permissions=True)
 
@@ -70,7 +70,7 @@ Anda ditunjuk oleh {nama_karyawan} untuk menerima tugas selama masa cuti:
                     "description": description_penerima.strip(),
                     "user": user_penerima,
                     "type": "Cuti",
-                    "link_to": f"{frappe.get_hooks("website_url")[0]}/form-cuti-tahunan/{self.name}/edit",
+                    "link_to": f"{frappe.get_hooks('website_url')[0]}/form-cuti-tahunan/{self.name}/edit",
                     "link_to_label": "Tandatangani Formulir"
                 }).insert(ignore_permissions=True)
 
