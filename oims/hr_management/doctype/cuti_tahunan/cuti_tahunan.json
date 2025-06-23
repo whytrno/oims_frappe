@@ -98,7 +98,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-23 12:32:51.469142",
+ "modified": "2025-06-23 21:34:24.984033",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Cuti Tahunan",
@@ -120,5 +120,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }
