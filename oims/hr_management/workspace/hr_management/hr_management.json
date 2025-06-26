@@ -51,7 +51,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Quick Links",
-   "link_count": 6,
+   "link_count": 7,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -72,6 +72,16 @@
    "label": "Surat Tugas",
    "link_count": 0,
    "link_to": "Surat Tugas",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Surat Mutasi",
+   "link_count": 0,
+   "link_to": "Surat Mutasi",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -117,7 +127,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-05-13 08:41:02.780856",
+ "modified": "2025-06-26 10:42:57.756301",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "HR Management",
