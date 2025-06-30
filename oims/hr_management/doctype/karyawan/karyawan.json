@@ -35,6 +35,8 @@
   "kecamatan_ktp",
   "kelurahan_ktp",
   "alamat_ktp",
+  "section_break_btzt",
+  "ttd",
   "data_karyawan_tab",
   "nrp",
   "no_kontrak",
@@ -385,8 +387,18 @@
    "in_standard_filter": 1,
    "label": "Posisi (Site)",
    "options": "Projek"
+  },
+  {
+   "fieldname": "section_break_btzt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "ttd",
+   "fieldtype": "Signature",
+   "label": "Tanda Tangan"
   }
  ],
+ "grid_page_length": 50,
  "image_field": "foto",
  "index_web_pages_for_search": 1,
  "links": [
@@ -400,7 +412,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2025-05-13 08:37:56.401648",
+ "modified": "2025-06-27 19:48:22.894704",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",
@@ -421,6 +433,7 @@
   }
  ],
  "quick_entry": 1,
+ "row_format": "Dynamic",
  "show_title_field_in_link": 1,
  "sort_field": "creation",
  "sort_order": "DESC",

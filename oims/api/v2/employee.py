@@ -42,6 +42,45 @@ def get_active_employee() -> dict:
         return response_error("Failed to retrieve employee info", http_status_code=500)
 
 @frappe.whitelist(methods=["GET"])
+def is_employee_is_make_signature() -> dict:
+    try:
+        current_user = frappe.session.user
+        employee = frappe.db.get_value(
+            "Karyawan",
+            {"user_id": current_user, "status": "Aktif"},
+            ["ttd"],
+            as_dict=True,
+        )
+
+        is_make_signature = bool(employee and employee.get("ttd"))
+
+        return response_success("Current employee info retrieved successfully",data=is_make_signature)
+    except Exception as e:
+        frappe.log_error(f"Error retrieving current employee info: {str(e)}")
+        return response_error("Failed to retrieve employee info", http_status_code=500)
+
+@frappe.whitelist(methods=["POST"])
+def update_self_signature(ttd: str) -> dict:
+    try:
+        current_user = frappe.session.user
+        employee = frappe.db.get_value(
+            "Karyawan",
+            {"user_id": current_user, "status": "Aktif"},
+            "name",
+        )
+        if not employee:
+            return response_error("User saat ini tidak terdaftar sebagai Karyawan Aktif", http_status_code=404)
+
+        frappe.db.set_value("Karyawan", employee, "ttd", ttd)
+        frappe.db.commit()
+
+        return response_success("TTD berhasil diperbarui")
+    except Exception as e:
+        frappe.log_error(f"Error updating TTD: {str(e)}")
+        return response_error("Gagal memperbarui TTD", http_status_code=500)
+
+
+@frappe.whitelist(methods=["GET"])
 def get_user_roles() -> dict:
     try:
         current_user = frappe.session.user
@@ -54,5 +93,7 @@ def get_user_roles() -> dict:
 __all__ = [
     "get_current_employee_info",
     "get_active_employee",
+    "is_employee_is_make_signature",
+    "update_self_signature",
     "get_user_roles",
 ]

@@ -33,12 +33,18 @@ frappe.ready(function () {
 
 				if (currentKaryawan == pemohon) {
 					frappe.web_form.set_df_property("ttd_penerima_job_pending", "read_only", 1);
+					frappe.web_form.set_df_property("ttd_manager", "read_only", 1);
+					frappe.web_form.set_df_property("ttd_general_manager", "read_only", 1);
+					frappe.web_form.set_df_property("ttd_direktur_operasional", "read_only", 1);
 				} else if (currentKaryawan == penerima) {
 					frappe.web_form.fields.forEach(field => {
 						if (!["ttd_penerima_job_pending", "karyawan_pemohon", "karyawan_penerima_job_pending"].includes(field.fieldname)) {
 							frappe.web_form.set_df_property("ttd_pemohon", "read_only", 1);
 							frappe.web_form.set_df_property("tanggal_mulai_cuti", "read_only", 1);
 							frappe.web_form.set_df_property("tanggal_selesai_cuti", "read_only", 1);
+							frappe.web_form.set_df_property("ttd_manager", "read_only", 1);
+							frappe.web_form.set_df_property("ttd_general_manager", "read_only", 1);
+							frappe.web_form.set_df_property("ttd_direktur_operasional", "read_only", 1);
 							frappe.web_form.set_df_property(field.fieldname, "read_only", 1);
 						} else {
 							frappe.web_form.set_df_property("ttd_penerima_job_pending", "read_only", 0);

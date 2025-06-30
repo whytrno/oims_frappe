@@ -1,0 +1,83 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-06-24 00:39:06.238112",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "urutan",
+  "jabatan",
+  "divisi",
+  "karyawan",
+  "status_tanda_tangan",
+  "waktu_status_dirubah",
+  "note"
+ ],
+ "fields": [
+  {
+   "fieldname": "urutan",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Urutan",
+   "non_negative": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "jabatan",
+   "fieldtype": "Link",
+   "label": "Jabatan",
+   "options": "Jabatan",
+   "search_index": 1
+  },
+  {
+   "fieldname": "divisi",
+   "fieldtype": "Link",
+   "label": "Divisi",
+   "options": "Divisi",
+   "search_index": 1
+  },
+  {
+   "fieldname": "karyawan",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Karyawan",
+   "options": "Karyawan",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "default": "Menunggu",
+   "fieldname": "status_tanda_tangan",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status Tanda Tangan",
+   "options": "Menunggu\nDisetujui\nDitolak",
+   "reqd": 1
+  },
+  {
+   "fieldname": "waktu_status_dirubah",
+   "fieldtype": "Datetime",
+   "label": "Waktu Status Dirubah",
+   "reqd": 1
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "label": "Note"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-06-29 02:14:29.758828",
+ "modified_by": "Administrator",
+ "module": "Hr Management",
+ "name": "Cuti Tahunan Approval",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
