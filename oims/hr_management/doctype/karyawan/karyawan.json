@@ -41,6 +41,7 @@
   "nrp",
   "no_kontrak",
   "jabatan",
+  "projek",
   "jabatan_detail",
   "divisi",
   "posisi_site",
@@ -396,6 +397,13 @@
    "fieldname": "ttd",
    "fieldtype": "Signature",
    "label": "Tanda Tangan"
+  },
+  {
+   "description": "Detail site/projek dari jabatan, misalnya Jabatan Site Manager untuk projek X",
+   "fieldname": "projek",
+   "fieldtype": "Link",
+   "label": "Projek",
+   "options": "Projek"
   }
  ],
  "grid_page_length": 50,
@@ -412,7 +420,7 @@
    "table_fieldname": "Karyawan.user_id"
   }
  ],
- "modified": "2025-06-27 19:48:22.894704",
+ "modified": "2025-07-07 10:07:37.070624",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Karyawan",

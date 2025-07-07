@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestCutiTahunan(FrappeTestCase):
+class TestPengajuanCuti(FrappeTestCase):
 	pass

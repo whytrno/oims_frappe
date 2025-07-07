@@ -5,3 +5,4 @@ from oims.api.v2.lokasi_absen import *
 from oims.api.v2.employee import *
 from oims.api.v2.roster import *
 from oims.api.v2.cuti import *
+from oims.api.v2.projek import *

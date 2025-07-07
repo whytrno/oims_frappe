@@ -14,6 +14,7 @@ def get_current_employee_info() -> dict:
                 "nama_lengkap",
                 "jabatan",
                 "user_id",
+                "posisi_site"
             ],
             as_dict=True,
         )
@@ -27,7 +28,7 @@ def get_active_employee() -> dict:
     try:
         employee = frappe.db.get_all(
             "Karyawan",
-            {"status": "Aktif"},
+            {"status": "Aktif", "beri_akses_untuk_login_oims_app": 1},
             [
                 "name",
                 "nrp",
@@ -90,10 +91,31 @@ def get_user_roles() -> dict:
         frappe.log_error(f"Error retrieving user roles: {str(e)}")
         return response_error("Failed to retrieve user roles", http_status_code=500)
 
+@frappe.whitelist(methods=["POST"])
+def update_self_profile(posisi_site: str) -> dict:
+    try:
+        current_user = frappe.session.user
+        employee = frappe.db.get_value(
+            "Karyawan",
+            {"user_id": current_user, "status": "Aktif"},
+            "name",
+        )
+        if not employee:
+            return response_error("User saat ini tidak terdaftar sebagai Karyawan Aktif", http_status_code=404)
+
+        frappe.db.set_value("Karyawan", employee, "posisi_site", posisi_site)
+        frappe.db.commit()
+
+        return response_success("Profile berhasil diperbarui")
+    except Exception as e:
+        frappe.log_error(f"Error updating Profile: {str(e)}")
+        return response_error("Gagal memperbarui Profile", http_status_code=500)
+
 __all__ = [
     "get_current_employee_info",
     "get_active_employee",
     "is_employee_is_make_signature",
     "update_self_signature",
+    "update_self_profile",
     "get_user_roles",
 ]

@@ -5,7 +5,12 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "surat_section",
+  "no_surat",
+  "column_break_nqht",
+  "doc_url",
   "form_cuti_section",
+  "jenis_cuti",
   "karyawan_pemohon",
   "keperluan",
   "karyawan_penerima_job_pending",
@@ -13,9 +18,14 @@
   "tanggal_mulai_cuti",
   "tanggal_selesai_cuti",
   "selama_hari",
+  "khusus_untuk_cuti_staff_lapangan_section",
+  "projek",
+  "rute_cuti",
+  "column_break_ptkg",
+  "tanggal_tiket_cuti",
+  "tanggal_tiket_on_site",
   "section_break_vqcb",
-  "approval",
-  "doc_url"
+  "approval"
  ],
  "fields": [
   {
@@ -82,20 +92,75 @@
    "fieldname": "approval",
    "fieldtype": "Table",
    "label": "Approval",
-   "options": "Cuti Tahunan Approval"
+   "options": "Pengajuan Cuti Approval"
   },
   {
    "fieldname": "doc_url",
    "fieldtype": "Data",
-   "label": "Doc URL"
+   "label": "Doc URL",
+   "read_only": 1
+  },
+  {
+   "fieldname": "surat_section",
+   "fieldtype": "Section Break",
+   "label": "Surat"
+  },
+  {
+   "fieldname": "no_surat",
+   "fieldtype": "Data",
+   "label": "No. Surat",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_nqht",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Cuti Pulang Staff Lapangan",
+   "fieldname": "jenis_cuti",
+   "fieldtype": "Select",
+   "label": "Jenis Cuti",
+   "options": "Cuti Tahunan (HO)\nCuti Pulang Staff Lapangan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "khusus_untuk_cuti_staff_lapangan_section",
+   "fieldtype": "Section Break",
+   "label": "Khusus Untuk Cuti Staff Lapangan"
+  },
+  {
+   "fieldname": "projek",
+   "fieldtype": "Link",
+   "label": "Projek",
+   "options": "Projek",
+   "search_index": 1
+  },
+  {
+   "fieldname": "rute_cuti",
+   "fieldtype": "Data",
+   "label": "Rute Cuti"
+  },
+  {
+   "fieldname": "column_break_ptkg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tanggal_tiket_cuti",
+   "fieldtype": "Date",
+   "label": "Tanggal Tiket Cuti"
+  },
+  {
+   "fieldname": "tanggal_tiket_on_site",
+   "fieldtype": "Date",
+   "label": "Tanggal Tiket On Site"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-06-30 12:07:37.660188",
+ "modified": "2025-07-07 23:05:09.076644",
  "modified_by": "Administrator",
  "module": "Hr Management",
- "name": "Cuti Tahunan",
+ "name": "Pengajuan Cuti",
  "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
