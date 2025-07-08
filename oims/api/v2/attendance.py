@@ -78,7 +78,7 @@ def absensi_process(lokasi_absen, foto, tipe, keterangan, latitude, longitude, a
         })
         file_doc.insert(ignore_permissions=True)
 
-        waktu_absen = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        waktu_absen = frappe.utils.now_datetime()
 
         lokasi_absen_final = "Ho - HO" if tipe == "Dinas Luar" else lokasi_absen
 
