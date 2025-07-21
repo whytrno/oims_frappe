@@ -46,8 +46,7 @@
    "fieldname": "keperluan",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Keperluan",
-   "reqd": 1
+   "label": "Keperluan"
   },
   {
    "fieldname": "karyawan_penerima_job_pending",
@@ -157,7 +156,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-07-07 23:05:09.076644",
+ "modified": "2025-07-15 10:42:20.344304",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Pengajuan Cuti",

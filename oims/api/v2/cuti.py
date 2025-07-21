@@ -19,7 +19,7 @@ def get_all_self_cuti() -> list[dict]:
 
         data = frappe.get_all(
             "Pengajuan Cuti",
-            fields=["name", "karyawan_pemohon", "keperluan", "karyawan_penerima_job_pending", "tanggal_mulai_cuti", "tanggal_selesai_cuti", "selama_hari"],
+            fields=["name", "karyawan_pemohon", "keperluan", "karyawan_penerima_job_pending", "tanggal_mulai_cuti", "tanggal_selesai_cuti", "selama_hari", "jenis_cuti", "projek", "rute_cuti", "tanggal_tiket_cuti", "tanggal_tiket_on_site"],
             filters={
                 "karyawan_pemohon": karyawan.name,
             },
@@ -59,7 +59,7 @@ def get_all_self_cuti() -> list[dict]:
         return response_error("Terjadi kesalahan saat mengambil data pengajuan cuti.", http_status_code=500)
 
 @frappe.whitelist(methods=["POST"])
-def create_cuti_tahunan(keperluan, karyawan_penerima_job_pending, tanggal_mulai_cuti, tanggal_selesai_cuti, rute_cuti=None, tanggal_tiket_cuti=None, tanggal_tiket_on_site=None):
+def create_cuti_tahunan(karyawan_penerima_job_pending, tanggal_mulai_cuti, tanggal_selesai_cuti, keperluan=None, rute_cuti=None, tanggal_tiket_cuti=None, tanggal_tiket_on_site=None):
     try:
         user_id = frappe.session.user
 
@@ -130,7 +130,7 @@ def get_cuti_tahunan_detail(name) -> dict:
         cuti = frappe.get_value(
             "Pengajuan Cuti",
             name,
-            ["no_surat", "doc_url", "name", "karyawan_pemohon", "keperluan", "karyawan_penerima_job_pending", "tanggal_mulai_cuti", "tanggal_selesai_cuti", "selama_hari", "creation"],
+            ["no_surat", "doc_url", "name", "karyawan_pemohon", "keperluan", "karyawan_penerima_job_pending", "tanggal_mulai_cuti", "tanggal_selesai_cuti", "selama_hari", "jenis_cuti", "projek", "rute_cuti", "tanggal_tiket_cuti", "tanggal_tiket_on_site", "creation"],
             as_dict=True
         )
 

@@ -114,6 +114,7 @@ class PengajuanCuti(Document):
                     self.no_surat = no_surat
 
                 doc_file = generate_cuti_document(self)
+
                 if doc_file:
                     file_name = f"Cuti_{self.no_surat.replace('/', '_')}.docx"
                     file_url = upload_to_file_manager(doc_file, file_name, 'Cuti Tahunan')
@@ -215,16 +216,24 @@ def send_notification(name, nama_pemohon, user_id_penerima, nama_penerima, keper
 
 def generate_cuti_document(self):
     # Ambil docx template lebih awal
-    template_path = frappe.get_app_path('oims', 'templates', 'docs', 'form_cuti.docx')
+    if self.jenis_cuti == "Cuti Tahunan (HO)":
+        template_path = frappe.get_app_path('oims', 'templates', 'docs', 'form_cuti_ho.docx')
+    elif self.jenis_cuti == "Cuti Pulang Staff Lapangan":
+        template_path = frappe.get_app_path('oims', 'templates', 'docs', 'form_cuti_lapangan.docx')
+    else:
+        frappe.throw(f"Template tidak ditemukan untuk jenis cuti: {self.jenis_cuti}")
+
     output_name = f"Cuti_{self.no_surat}.docx"
     doc = DocxTemplate(template_path)
 
-    # Siapkan variable default kosong
+    # Inisialisasi tanda tangan
     ttd_pemohon_img = ''
     ttd_penerima_img = ''
     ttd_manager_img = ''
     ttd_gm_img = ''
     ttd_do_img = ''
+    ttd_site_manager_img = ''
+    ttd_project_manager_img = ''
 
     # Pemohon
     karyawan_pemohon = frappe.get_doc("Karyawan", self.karyawan_pemohon)
@@ -235,41 +244,65 @@ def generate_cuti_document(self):
     approval_list = sorted(self.approval, key=lambda appr: appr.urutan)
     karyawan_penerima = None
 
-    for i, appr in enumerate(approval_list):
+    for appr in approval_list:
         if not appr.karyawan:
             continue
+
         karyawan = frappe.get_doc("Karyawan", appr.karyawan)
         ttd_img = build_inline_image(doc, save_base64_signature_to_file(getattr(karyawan, "ttd", ""), prefix=f"ttd_urutan_{appr.urutan}"), width=60, height=40) if getattr(karyawan, "ttd", "") else ''
 
         if appr.urutan == 1:
             karyawan_penerima = karyawan
             ttd_penerima_img = ttd_img
-        elif appr.urutan == 2:
+        elif appr.urutan == 2 and self.jenis_cuti == "Cuti Tahunan (HO)":
             ttd_manager_img = ttd_img
-        elif appr.urutan == 3:
+        elif appr.urutan == 3 and self.jenis_cuti == "Cuti Tahunan (HO)":
             ttd_gm_img = ttd_img
         elif appr.urutan == 4:
             ttd_do_img = ttd_img
+        elif appr.urutan == 2 and self.jenis_cuti == "Cuti Pulang Staff Lapangan":
+            ttd_site_manager_img = ttd_img
+        elif appr.urutan == 3 and self.jenis_cuti == "Cuti Pulang Staff Lapangan":
+            ttd_project_manager_img = ttd_img
 
     context = {
-        'tanggal_surat_dibuat': formatdate_indonesia(frappe.utils.nowdate()),
         'nama_pemohon': karyawan_pemohon.nama_lengkap,
         'jabatan_pemohon': karyawan_pemohon.jabatan,
-        'nrp_pemohon': karyawan_pemohon.nrp,
         'selama_hari': self.selama_hari,
         'tanggal_mulai_cuti': formatdate_indonesia(self.tanggal_mulai_cuti),
         'tanggal_selesai_cuti': formatdate_indonesia(self.tanggal_selesai_cuti),
-        'keperluan': self.keperluan,
         'nama_penerima': getattr(karyawan_penerima, "nama_lengkap", ""),
         'jabatan_penerima': getattr(karyawan_penerima, "jabatan", ""),
-        'nrp_penerima': getattr(karyawan_penerima, "nrp", ""),
-        'no_surat': self.no_surat,
         'ttd_pemohon': ttd_pemohon_img,
         'ttd_penerima': ttd_penerima_img,
-        'ttd_manager': ttd_manager_img,
-        'ttd_gm': ttd_gm_img,
-        'ttd_do': ttd_do_img,
     }
+
+    # Tambahan context berdasarkan jenis cuti
+    if self.jenis_cuti == "Cuti Tahunan (HO)":
+        context.update({
+            'nrp_pemohon': karyawan_pemohon.nrp,
+            'keperluan': self.keperluan,
+            'tanggal_surat_dibuat': formatdate_indonesia(frappe.utils.nowdate()),
+            'nrp_penerima': getattr(karyawan_penerima, "nrp", ""),
+            'no_surat': self.no_surat,
+            'ttd_manager': ttd_manager_img,
+            'ttd_gm': ttd_gm_img,
+            'ttd_do': ttd_do_img,
+        })
+
+    elif self.jenis_cuti == "Cuti Pulang Staff Lapangan":
+        projek = frappe.get_doc("Projek", self.projek)
+        nama_kode_projek = f'{getattr(projek, 'nama_projek', '')} - self.projek'
+
+        context.update({
+            'nama_kode_projek': nama_kode_projek,
+            'tanggal_tiket_cuti': formatdate_indonesia(self.tanggal_tiket_cuti),
+            'tanggal_tiket_on_site': formatdate_indonesia(self.tanggal_tiket_on_site),
+            'rute_cuti': self.rute_cuti,
+            'ttd_site_manager': ttd_site_manager_img,
+            'ttd_project_manager': ttd_project_manager_img,
+            'ttd_do': ttd_do_img,
+        })
 
     doc.render(context)
     output_path = frappe.utils.get_site_path('private', 'files', output_name)

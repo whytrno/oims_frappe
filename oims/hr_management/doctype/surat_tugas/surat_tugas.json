@@ -20,8 +20,6 @@
   "perjalanan_via",
   "section_break_igmd",
   "penanda_tangan",
-  "column_break_isry",
-  "nama_penanda_tangan",
   "section_break_glmr",
   "karyawan",
   "ticket",
@@ -92,7 +90,7 @@
   {
    "fieldname": "penanda_tangan",
    "fieldtype": "Link",
-   "label": "ID Penanda Tangan",
+   "label": "Penanda Tangan",
    "options": "Karyawan",
    "reqd": 1
   },
@@ -100,19 +98,6 @@
    "fieldname": "section_break_igmd",
    "fieldtype": "Section Break",
    "label": "Penanda Tangan"
-  },
-  {
-   "fieldname": "column_break_isry",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "-",
-   "fetch_from": "penanda_tangan.nama_lengkap",
-   "fieldname": "nama_penanda_tangan",
-   "fieldtype": "Data",
-   "label": "Nama Penanda Tangan",
-   "read_only": 1,
-   "reqd": 1
   },
   {
    "fieldname": "section_break_cwlg",
@@ -171,9 +156,10 @@
    "permlevel": 1
   }
  ],
+ "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-19 09:30:51.783008",
+ "modified": "2025-07-17 20:52:05.750632",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Surat Tugas",
@@ -193,6 +179,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

@@ -40,7 +40,6 @@
    "in_standard_filter": 1,
    "label": "Site/Projek Asal",
    "options": "Projek",
-   "reqd": 1,
    "search_index": 1
   },
   {
@@ -80,9 +79,10 @@
    "fieldtype": "Column Break"
   }
  ],
+ "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-12 18:27:32.118734",
+ "modified": "2025-07-15 10:19:23.433132",
  "modified_by": "Administrator",
  "module": "Hr Management",
  "name": "Riwayat Penempatan Site",
@@ -102,6 +102,7 @@
    "write": 1
   }
  ],
+ "row_format": "Dynamic",
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []
