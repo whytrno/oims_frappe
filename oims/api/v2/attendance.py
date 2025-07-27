@@ -1,10 +1,12 @@
+import pytz
 import frappe
 from datetime import datetime
 import base64
 from oims.api.responseHelper import response_success, response_error
+from dateutil.parser import parse as parse_datetime
 
 @frappe.whitelist(methods=["POST"])
-def absensi_process(lokasi_absen, foto, tipe, keterangan, latitude, longitude, ambil_jatah_makan=False):
+def absensi_process(lokasi_absen, foto, tipe, keterangan, latitude, longitude, waktu_absen, ambil_jatah_makan=False):
     if not foto:
         return response_error("Foto tidak boleh kosong.", http_status_code=400)
 
@@ -12,6 +14,7 @@ def absensi_process(lokasi_absen, foto, tipe, keterangan, latitude, longitude, a
         foto = foto.split(",")[1]
 
     file_doc = None
+    tz = pytz.timezone("Asia/Jakarta")
 
     try:
         try:
@@ -19,6 +22,20 @@ def absensi_process(lokasi_absen, foto, tipe, keterangan, latitude, longitude, a
         except Exception as e:
             frappe.log_error(f"Error decoding base64 image: {str(e)}")
             return response_error("Format foto tidak valid.", http_status_code=400)
+
+        try:
+            waktu_absen_dt = parse_datetime(waktu_absen)
+            if waktu_absen_dt.tzinfo is None:
+                # Jika waktu dari frontend tidak ada timezone, asumsikan Asia/Jakarta
+                waktu_absen_dt = tz.localize(waktu_absen_dt)
+            else:
+                # Konversi ke Asia/Jakarta jika punya timezone
+                waktu_absen_dt = waktu_absen_dt.astimezone(tz)
+
+            waktu_absen_dt = waktu_absen_dt.replace(tzinfo=None)
+        except Exception as e:
+            frappe.log_error(f"Invalid waktu_absen format: {waktu_absen}")
+            return response_error("Format waktu absen tidak valid.", http_status_code=400)
 
         # Ambil tanggal hari ini
         today = datetime.now()
@@ -78,8 +95,6 @@ def absensi_process(lokasi_absen, foto, tipe, keterangan, latitude, longitude, a
         })
         file_doc.insert(ignore_permissions=True)
 
-        waktu_absen = frappe.utils.now_datetime()
-
         lokasi_absen_final = "Ho - HO" if tipe == "Dinas Luar" else lokasi_absen
 
         # Simpan dokumen absensi
@@ -90,7 +105,7 @@ def absensi_process(lokasi_absen, foto, tipe, keterangan, latitude, longitude, a
             "foto": file_doc.file_url,
             "tipe": tipe,
             "keterangan": keterangan,
-            "waktu_absen": waktu_absen,
+            "waktu_absen": waktu_absen_dt,
             "latitude": latitude,
             "longitude": longitude,
             "ambil_jatah_makan": ambil_jatah_makan,
@@ -209,9 +224,9 @@ def get_attendance_calendar_events(from_date, to_date):
                 count["ambil_jatah_makan"] += 1
 
         data = {
-			"events": events,
-			"count": count
-		}
+            "events": events,
+            "count": count
+        }
 
         return response_success("Berhasil mengambil data absensi.", data)
 
