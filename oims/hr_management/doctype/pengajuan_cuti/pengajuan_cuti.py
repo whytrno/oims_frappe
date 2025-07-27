@@ -292,7 +292,7 @@ def generate_cuti_document(self):
 
     elif self.jenis_cuti == "Cuti Pulang Staff Lapangan":
         projek = frappe.get_doc("Projek", self.projek)
-        nama_kode_projek = f'{getattr(projek, 'nama_projek', '')} - self.projek'
+        nama_kode_projek = f'{getattr(projek, "nama_projek", "")} - self.projek'
 
         context.update({
             'nama_kode_projek': nama_kode_projek,
