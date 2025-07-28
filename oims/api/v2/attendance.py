@@ -151,7 +151,19 @@ def get_self_today_absen():
             "Absensi",
             filters={
                 "karyawan": karyawan.name,
-                "waktu_absen": ["between", [start, end]]
+                "waktu_absen": ["between", [start, end]],
+				"tipe": ["!=", "Out"]
+            },
+            fields=["tipe", "waktu_absen", "ambil_jatah_makan"],
+            order_by="waktu_absen desc",
+            limit=1
+        )
+        self_today_attendance_out = frappe.get_all(
+            "Absensi",
+            filters={
+                "karyawan": karyawan.name,
+                "waktu_absen": ["between", [start, end]],
+                "tipe": "Out"
             },
             fields=["tipe", "waktu_absen", "ambil_jatah_makan"],
             order_by="waktu_absen desc",
@@ -162,8 +174,9 @@ def get_self_today_absen():
             return response_error("Anda belum absen hari ini.", http_status_code=404)
 
 
-        attendance_hour = self_today_attendance[0].waktu_absen.strftime("%H:%M:%S")
-        self_today_attendance[0].waktu_absen = attendance_hour
+        attendance_hour = self_today_attendance[0].waktu_absen.strftime("%H:%M")
+        self_today_attendance[0].waktu_masuk = attendance_hour
+        self_today_attendance[0].waktu_keluar = self_today_attendance_out[0].waktu_absen.strftime("%H:%M") if self_today_attendance_out else None
 
         return response_success("Berhasil mengambil data absensi.", self_today_attendance[0])
 
